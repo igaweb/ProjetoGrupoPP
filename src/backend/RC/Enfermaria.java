@@ -10,14 +10,14 @@ public class Enfermaria {
     private String codigo;
     private int tipo;
     private Boolean camas[];
-    private Equipamentos[] equipamentos;
-    private Profissional[] profissionais;
+    private Equipamento[] equipamentos;
+    private ProfissionalSaude[] profissionais;
     private Paciente[] pacientes;
 
     public Enfermaria() {
     }
 
-    public Enfermaria(String codigo, int tipo, Boolean[] camas, Equipamentos[] equipamentos, Profissional[] profissionais, Paciente[] pacientes) {
+    public Enfermaria(String codigo, int tipo, Boolean[] camas, Equipamento[] equipamentos, ProfissionalSaude[] profissionais, Paciente[] pacientes) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.camas = camas;
@@ -50,19 +50,19 @@ public class Enfermaria {
         this.camas = camas;
     }
 
-    public Equipamentos[] getEquipamentos() {
+    public Equipamento[] getEquipamentos() {
         return equipamentos;
     }
 
-    public void setEquipamentos(Equipamentos[] equipamentos) {
+    public void setEquipamentos(Equipamento[] equipamentos) {
         this.equipamentos = equipamentos;
     }
 
-    public Profissional[] getProfissionais() {
+    public ProfissionalSaude[] getProfissionais() {
         return profissionais;
     }
 
-    public void setProfissionais(Profissional[] profissionais) {
+    public void setProfissionais(ProfissionalSaude[] profissionais) {
         this.profissionais = profissionais;
     }
 
