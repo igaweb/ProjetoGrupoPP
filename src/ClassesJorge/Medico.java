@@ -1,6 +1,6 @@
 package ClassesJorge;
 
-public class Medico extends ProfissionaisSaude {
+public class Medico extends ProfissionalSaude {
     private String especialidade;
 
     public Medico() {

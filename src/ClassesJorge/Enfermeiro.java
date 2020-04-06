@@ -1,6 +1,6 @@
 package ClassesJorge;
 
-public class Enfermeiro extends ProfissionaisSaude {
+public class Enfermeiro extends ProfissionalSaude {
 
     public Enfermeiro() {
     }

@@ -1,13 +1,13 @@
 package ClassesJorge;
 
-public class ProfissionaisSaude {
+public class ProfissionalSaude {
     private String codigo;
     private String nome;
 
-    public ProfissionaisSaude() {
+    public ProfissionalSaude() {
     }
 
-    public ProfissionaisSaude(String codigo, String nome) {
+    public ProfissionalSaude(String codigo, String nome) {
         this.codigo = codigo;
         this.nome = nome;
     }
