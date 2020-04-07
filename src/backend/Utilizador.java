@@ -39,4 +39,9 @@ public class Utilizador {
         this.autenticado = autenticado;
     }
 
+    @Override
+    public String toString() {
+        return "Utilizador{" + "nome=" + nome + ", password=" + password + ", autenticado=" + autenticado + '}';
+    }
+
 }

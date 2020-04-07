@@ -59,5 +59,10 @@ public class Enfermaria {
         this.pacientes = pacientes;
     }
 
+    @Override
+    public String toString() {
+        return "Enfermaria{" + "codigo=" + codigo + ", tipo=" + tipo + ", camas=" + camas + ", equipamentos=" + equipamentos + ", pacientes=" + pacientes + '}';
+    }
+
     
 }

@@ -23,4 +23,10 @@ public class Administrador extends Utilizador {
     public void setIsAdminitrador(boolean isAdminitrador) {
         this.isAdministrador = isAdminitrador;
     }
+
+    @Override
+    public String toString() {
+        return "Administrador{" + "isAdministrador=" + isAdministrador + '}';
+    }
+    
 }

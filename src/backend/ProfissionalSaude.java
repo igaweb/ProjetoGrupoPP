@@ -27,6 +27,11 @@ public abstract class ProfissionalSaude {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    @Override
+    public String toString() {
+        return "ProfissionalSaude{" + "codigo=" + codigo + ", nome=" + nome + '}';
+    }
     
     
     

@@ -36,4 +36,10 @@ public class Medico extends ProfissionalSaude {
     public void removePaciente(Paciente paciente) {
 
     }
+
+    @Override
+    public String toString() {
+        return "Medico{" + "especialidade=" + especialidade + ", pacientes=" + pacientes + '}';
+    }
+    
 }

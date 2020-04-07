@@ -49,4 +49,9 @@ public class Equipamento {
         this.paciente = paciente;
     }
 
+    @Override
+    public String toString() {
+        return "Equipamento{" + "codigo=" + codigo + ", tipo=" + tipo + ", livre=" + livre + ", paciente=" + paciente + '}';
+    }
+
 }
