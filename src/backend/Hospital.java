@@ -49,4 +49,9 @@ public class Hospital {
         this.enfermarias = enfermarias;
     }
 
+    @Override
+    public String toString() {
+        return "Hospital{" + "codigo=" + codigo + ", nome=" + nome + ", localidade=" + localidade + ", enfermarias=" + enfermarias + '}';
+    }
+
 }

@@ -79,4 +79,9 @@ public class Paciente {
         this.dataSaida = dataSaida;
     }
 
+    @Override
+    public String toString() {
+        return "Paciente{" + "codigo=" + codigo + ", nome=" + nome + ", localidade=" + localidade + ", cama=" + cama + ", estado=" + estado + ", dataEntrada=" + dataEntrada + ", dataSaida=" + dataSaida + '}';
+    }
+
 }
