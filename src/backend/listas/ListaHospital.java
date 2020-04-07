@@ -1,21 +1,12 @@
-package backend;
+package backend.listas;
 
+import backend.entidades.Hospital;
 import java.util.ArrayList;
 
-public class ListaHospital {
-
-    private ArrayList<Hospital> lista;
+public class ListaHospital extends ListaBase {
 
     public ListaHospital(ArrayList<Hospital> lista) {
         this.lista = lista;
-    }
-
-    public ArrayList<Hospital> getLista() {
-        return lista;
-    }
-
-    public ArrayList<Hospital> setLista() {
-        return lista;
     }
 
     public void adicionar(Hospital hospital) {
@@ -40,9 +31,9 @@ public class ListaHospital {
     /*
      * Método para validar se os campos da classe estão bem preenchidos
      */
-    private boolean validarCampos(Enfermaria enfermaria) {
-
-        boolean isValid = true;
+    private boolean validarCampos(Hospital hospital) {
+        // validações para todas as operaçoes na base
+        boolean isValid = super.validarCampos(hospital);
 
         // validações....... (campos obrigatorios, tipos de dados, etc...)
         return isValid;

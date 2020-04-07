@@ -1,12 +1,7 @@
+package backend.entidades;
 
-package backend.RC;
+public class Medico extends ProfissionalSaude {
 
-/**
- *
- * @author rcoelho
- */
-public class Medico extends ProfissionalSaude  {
-    
     private String especialidade;
     private Paciente[] pacientes;
 
@@ -33,12 +28,18 @@ public class Medico extends ProfissionalSaude  {
     public void setPacientes(Paciente[] pacientes) {
         this.pacientes = pacientes;
     }
+
+    public void addPaciente(Paciente paciente) {
+
+    }
+
+    public void removePaciente(Paciente paciente) {
+
+    }
+
+    @Override
+    public String toString() {
+        return "Medico{" + "especialidade=" + especialidade + ", pacientes=" + pacientes + '}';
+    }
     
-    public void addPaciente(Paciente paciente){
-    
-}
-    
-    public void removePaciente(Paciente paciente){
-    
-}
 }

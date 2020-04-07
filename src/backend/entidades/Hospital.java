@@ -1,4 +1,6 @@
-package backend;
+package backend.entidades;
+
+import backend.listas.ListaEnfermaria;
 
 public class Hospital {
 

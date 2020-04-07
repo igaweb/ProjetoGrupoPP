@@ -1,12 +1,6 @@
+package backend.entidades;
 
-package backend.RC;
-
-/**
- *
- * @author rcoelho
- */
-public class ProfissionalSaude {
-    
+public abstract class ProfissionalSaude {
     private String codigo;
     private String nome;
 
@@ -34,4 +28,12 @@ public class ProfissionalSaude {
         this.nome = nome;
     }
 
+    @Override
+    public String toString() {
+        return "ProfissionalSaude{" + "codigo=" + codigo + ", nome=" + nome + '}';
+    }
+    
+    
+    
+    
 }

@@ -1,21 +1,12 @@
-package backend;
+package backend.listas;
 
+import backend.entidades.ProfissionalSaude;
 import java.util.ArrayList;
 
-public class ListaProfissionalSaude {
-
-    private ArrayList<ProfissionalSaude> lista;
+public class ListaProfissionalSaude extends ListaBase {
 
     public ListaProfissionalSaude(ArrayList<ProfissionalSaude> lista) {
         this.lista = lista;
-    }
-
-    public ArrayList<ProfissionalSaude> getLista() {
-        return lista;
-    }
-
-    public ArrayList<ProfissionalSaude> setLista() {
-        return lista;
     }
 
     public void adicionar(ProfissionalSaude profissionalSaude) {
@@ -34,8 +25,8 @@ public class ListaProfissionalSaude {
      * Método para validar se os campos da classe estão bem preenchidos
      */
     private boolean validarCampos(ProfissionalSaude profissional) {
-
-        boolean isValid = true;
+        // validações para todas as operaçoes na base
+        boolean isValid = super.validarCampos(profissional);
 
         // validações....... (campos obrigatorios, tipos de dados, etc...)
         // se for medico, tem de ter especialidade: profissional instanceOf Medico

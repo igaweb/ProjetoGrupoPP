@@ -1,21 +1,12 @@
-package backend;
+package backend.listas;
 
+import backend.entidades.Equipamento;
 import java.util.ArrayList;
 
-public class ListaEquipamento {
-
-    private ArrayList<Equipamento> lista;
+public class ListaEquipamento extends ListaBase {
 
     public ListaEquipamento(ArrayList<Equipamento> lista) {
         this.lista = lista;
-    }
-
-    public ArrayList<Equipamento> getLista() {
-        return lista;
-    }
-
-    public ArrayList<Equipamento> setLista() {
-        return lista;
     }
 
     public void adicionar(Equipamento equipamentos) {
@@ -34,8 +25,8 @@ public class ListaEquipamento {
      * Método para validar se os campos da classe estão bem preenchidos
      */
     private boolean validarCampos(Equipamento equipamento) {
-
-        boolean isValid = true;
+        // validações para todas as operaçoes na base
+        boolean isValid = super.validarCampos(equipamento);
 
         // validações....... (campos obrigatorios, tipos de dados, etc...)
         return isValid;
