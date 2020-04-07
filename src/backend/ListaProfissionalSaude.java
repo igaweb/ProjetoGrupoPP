@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ListaProfissionalSaude {
 
-    private final ArrayList<ProfissionalSaude> lista;
+    private ArrayList<ProfissionalSaude> lista;
 
     public ListaProfissionalSaude(ArrayList<ProfissionalSaude> lista) {
         this.lista = lista;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class ListaEquipamento {
 
-    private final ArrayList<Equipamento> lista;
+    private ArrayList<Equipamento> lista;
 
     public ListaEquipamento(ArrayList<Equipamento> lista) {
         this.lista = lista;

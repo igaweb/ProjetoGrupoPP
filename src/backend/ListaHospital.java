@@ -2,34 +2,34 @@ package backend;
 
 import java.util.ArrayList;
 
-public class ListaEnfermaria {
+public class ListaHospital {
 
-    private ArrayList<Enfermaria> lista;
+    private ArrayList<Hospital> lista;
 
-    public ListaEnfermaria(ArrayList<Enfermaria> lista) {
+    public ListaHospital(ArrayList<Hospital> lista) {
         this.lista = lista;
     }
 
-    public ArrayList<Enfermaria> getLista() {
+    public ArrayList<Hospital> getLista() {
         return lista;
     }
 
-    public ArrayList<Enfermaria> setLista() {
+    public ArrayList<Hospital> setLista() {
         return lista;
     }
 
-    public void adicionar(Enfermaria enfermaria) {
+    public void adicionar(Hospital hospital) {
         // validar se os campos vêm todos bem preenchidos
         // validarCampos(enfermaria) <- se estiver bem preenchido,
         // avança para a adição -> this.lista.add(enfermaria);
         // senão, retorna erro -> new EnfermariaException("Erro a adicionar enfermaria");
     }
 
-    public void remover(ArrayList<Enfermaria> enfermarias) {
-        this.lista.removeAll(enfermarias);
+    public void remover(ArrayList<Hospital> enfermarias) {
+        this.lista.remove(enfermarias);
     }
 
-    public void editar(Enfermaria enfermaria) {
+    public void editar(Hospital hospital) {
         // procurar a enfermaria na lista pelo codigo
         // validar se os campos estao bem preenchidos:
         // validarCampos(enfermaria) <- se estiver bem preenchido,
