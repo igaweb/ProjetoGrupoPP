@@ -1,6 +1,6 @@
 package ClassesJorge;
 
-public class ProfissionalSaude {
+public abstract class ProfissionalSaude {
     private String codigo;
     private String nome;
 

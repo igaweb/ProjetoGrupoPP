@@ -1,6 +1,7 @@
 package ClassesJorge;
 
-public class Enfermaria extends Hospital {
+public class Enfermaria {
+
     private String condigo;
     private int tipo;
     private boolean camas[];
@@ -9,13 +10,6 @@ public class Enfermaria extends Hospital {
     }
 
     public Enfermaria(String condigo, int tipo, boolean[] camas) {
-        this.condigo = condigo;
-        this.tipo = tipo;
-        this.camas = camas;
-    }
-
-    public Enfermaria(String condigo, int tipo, boolean[] camas, String codigo, String nome, String localidade) {
-        super(codigo, nome, localidade);
         this.condigo = condigo;
         this.tipo = tipo;
         this.camas = camas;
@@ -44,8 +38,5 @@ public class Enfermaria extends Hospital {
     public void setCamas(boolean[] camas) {
         this.camas = camas;
     }
-    
-    
-    
-    
+
 }

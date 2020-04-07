@@ -37,10 +37,11 @@ public class Hospital {
     public void setLocalidade(String localidade) {
         this.localidade = localidade;
     }
+
+    @Override
+    public String toString() {
+        return "Hospital{" + "codigo=" + codigo + ", nome=" + nome + ", localidade=" + localidade + '}';
+    }
    
-   
-   
-   
-   
-   
+      
 }

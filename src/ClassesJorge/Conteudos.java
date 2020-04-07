@@ -5,6 +5,25 @@ public class Conteudos {
     private String tiposEnfermarias[];
     private String tiposEquipamentos[];
 
+    
+    enum EstadoPaciente
+    {
+        MODERADO, GRAVE, MUITOGRAVE;
+    }
+    
+    enum TipoEnfermaria
+    {
+        Normal, UCI;
+    }
+    
+    enum TipoEquipamento
+    {
+        Ventilador, desfibrilhador;
+    }
+    
+    
+    
+    /*
     public Conteudos() {
     }
 
@@ -38,5 +57,5 @@ public class Conteudos {
         this.tiposEquipamentos = tiposEquipamentos;
     }
     
-    
+    */
 }
