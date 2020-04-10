@@ -7,12 +7,12 @@ public class Hospital {
     private String codigo;
     private String nome;
     private String localidade;
-    private ManagerEnfermaria enfermarias;
+    private Enfermaria[] enfermarias;
 
     public Hospital() {
     }
 
-    public Hospital(String codigo, String nome, String localidade, ManagerEnfermaria enfermarias) {
+    public Hospital(String codigo, String nome, String localidade, Enfermaria[] enfermarias) {
         this.codigo = codigo;
         this.nome = nome;
         this.localidade = localidade;
@@ -43,11 +43,11 @@ public class Hospital {
         this.localidade = localidade;
     }
 
-    public ManagerEnfermaria getEnfermarias() {
+    public Enfermaria[] getEnfermarias() {
         return enfermarias;
     }
 
-    public void setEnfermarias(ManagerEnfermaria enfermarias) {
+    public void setEnfermarias(Enfermaria[] enfermarias) {
         this.enfermarias = enfermarias;
     }
 
