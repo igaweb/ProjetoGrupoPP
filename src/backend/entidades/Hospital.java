@@ -1,7 +1,5 @@
 package backend.entidades;
 
-import backend.listas.ManagerEnfermaria;
-
 public class Hospital {
 
     private String codigo;
