@@ -4,15 +4,15 @@ import backend.Conteudos;
 import backend.entidades.Enfermaria;
 import java.util.ArrayList;
 
-public class ListaEnfermaria extends ListaBase {
-    
+public class ManagerEnfermaria extends ManagerBase {
+
     private static final String ERRO_TIPO_INVALIDO = "ERRO_TIPO_INVALIDO";
     private static final String ERRO_FALTA_CODIGO = "ERRO_FALTA_CODIGO";
 
-    public ListaEnfermaria() {
+    public ManagerEnfermaria() {
     }
 
-    public ListaEnfermaria(ArrayList <Enfermaria>lista) {
+    public ManagerEnfermaria(ArrayList<Enfermaria> lista) {
         this.lista = lista;
     }
 
@@ -29,7 +29,7 @@ public class ListaEnfermaria extends ListaBase {
             // gerar o codigo para a nova enfermaria
             String novoCodigo = gerarCodigo();
             enfermaria.setCodigo(novoCodigo);
-            
+
             lista.add(enfermaria);
         } else {
             // senão, retorna erro

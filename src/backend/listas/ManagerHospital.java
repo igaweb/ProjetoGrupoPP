@@ -3,12 +3,12 @@ package backend.listas;
 import backend.entidades.Hospital;
 import java.util.ArrayList;
 
-public class ListaHospital extends ListaBase {
+public class ManagerHospital extends ManagerBase {
 
-    public ListaHospital() {
+    public ManagerHospital() {
     }
        
-    public ListaHospital(ArrayList<Hospital> lista) {
+    public ManagerHospital(ArrayList<Hospital> lista) {
         this.lista = lista;
     }
 

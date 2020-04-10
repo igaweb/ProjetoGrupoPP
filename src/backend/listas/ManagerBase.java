@@ -2,7 +2,7 @@ package backend.listas;
 
 import java.util.ArrayList;
 
-public abstract class ListaBase {
+public abstract class ManagerBase {
 
     protected static final String OPERACAO_ADICIONAR = "A";
     protected static final String OPERACAO_EDITAR = "E";
@@ -17,7 +17,7 @@ public abstract class ListaBase {
     protected ArrayList lista = new ArrayList();
     protected String operacao = null;
 
-    public ListaBase() {
+    public ManagerBase() {
     
     }
     

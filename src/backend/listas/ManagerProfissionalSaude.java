@@ -3,9 +3,9 @@ package backend.listas;
 import backend.entidades.ProfissionalSaude;
 import java.util.ArrayList;
 
-public class ListaProfissionalSaude extends ListaBase {
+public class ManagerProfissionalSaude extends ManagerBase {
 
-    public ListaProfissionalSaude(ArrayList<ProfissionalSaude> lista) {
+    public ManagerProfissionalSaude(ArrayList<ProfissionalSaude> lista) {
         this.lista = lista;
     }
 

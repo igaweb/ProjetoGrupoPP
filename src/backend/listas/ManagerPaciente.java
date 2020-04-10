@@ -4,15 +4,15 @@ import backend.Conteudos;
 import backend.entidades.Paciente;
 import java.util.ArrayList;
 
-public class ListaPaciente extends ListaBase {
+public class ManagerPaciente extends ManagerBase {
   
     private static final String ERRO_TIPO_INVALIDO = "ERRO_TIPO_INVALIDO";
     private static final String ERRO_FALTA_CODIGO = "ERRO_FALTA_CODIGO";
 
-    public ListaPaciente() {
+    public ManagerPaciente() {
     }
 
-    public ListaPaciente(ArrayList <Paciente>lista) {
+    public ManagerPaciente(ArrayList <Paciente>lista) {
         this.lista = lista;
     }
 

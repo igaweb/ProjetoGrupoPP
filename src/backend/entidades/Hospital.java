@@ -1,18 +1,18 @@
 package backend.entidades;
 
-import backend.listas.ListaEnfermaria;
+import backend.listas.ManagerEnfermaria;
 
 public class Hospital {
 
     private String codigo;
     private String nome;
     private String localidade;
-    private ListaEnfermaria enfermarias;
+    private ManagerEnfermaria enfermarias;
 
     public Hospital() {
     }
 
-    public Hospital(String codigo, String nome, String localidade, ListaEnfermaria enfermarias) {
+    public Hospital(String codigo, String nome, String localidade, ManagerEnfermaria enfermarias) {
         this.codigo = codigo;
         this.nome = nome;
         this.localidade = localidade;
@@ -43,11 +43,11 @@ public class Hospital {
         this.localidade = localidade;
     }
 
-    public ListaEnfermaria getEnfermarias() {
+    public ManagerEnfermaria getEnfermarias() {
         return enfermarias;
     }
 
-    public void setEnfermarias(ListaEnfermaria enfermarias) {
+    public void setEnfermarias(ManagerEnfermaria enfermarias) {
         this.enfermarias = enfermarias;
     }
 
