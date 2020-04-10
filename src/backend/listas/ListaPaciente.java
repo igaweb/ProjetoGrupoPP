@@ -79,10 +79,10 @@ public class ListaPaciente extends ListaBase {
 
         // tem de ter um tipo definido (int nao permite nulls)
         // neste caso, o tipo indica o indice do array definido em Conteudos.getTiposPaciente(), por isso, terá de ser maior de 0 e menor que o comprimento do array
-        /*if (paciente.getEstado() < 0 paciente.getEstado()) {
+        if (paciente.getEstado() < 0){
             throw new Exception(ERRO_TIPO_INVALIDO);
         }
-*/
+
         return isValid;
     }
 

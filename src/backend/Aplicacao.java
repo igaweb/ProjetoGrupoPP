@@ -1,4 +1,4 @@
-package backend;
+/* package backend;
 
 import backend.listas.ListaEnfermaria;
 import backend.entidades.Enfermaria;
@@ -78,3 +78,4 @@ public class Aplicacao {
     }
 
 }
+*/

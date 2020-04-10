@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 public class ListaHospital extends ListaBase {
 
+    public ListaHospital() {
+    }
+       
     public ListaHospital(ArrayList<Hospital> lista) {
         this.lista = lista;
     }
@@ -38,4 +41,11 @@ public class ListaHospital extends ListaBase {
         // validações....... (campos obrigatorios, tipos de dados, etc...)
         return isValid;
     }
+
+    @Override
+    public String toString() {
+        return "ListaHospital{" + "lista=" + lista + '}';
+    }
+    
+    
 }
