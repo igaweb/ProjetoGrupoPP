@@ -2,9 +2,12 @@ package backend.listas;
 
 import backend.Conteudos;
 import backend.entidades.Enfermaria;
+import backend.entidades.Equipamento;
+import backend.entidades.Paciente;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ManagerEnfermaria extends ManagerBase {
+public class ManagerEnfermaria extends ManagerBase implements Serializable {
 
     private static final String ERRO_TIPO_INVALIDO = "ERRO_TIPO_INVALIDO";
     private static final String ERRO_FALTA_CODIGO = "ERRO_FALTA_CODIGO";
@@ -16,6 +19,11 @@ public class ManagerEnfermaria extends ManagerBase {
         this.lista = lista;
     }
 
+    public void adicionar(String codigo, int tipo, ArrayList<Boolean> camas, ArrayList<Equipamento> equipamentos, ArrayList<Paciente> pacientes) throws Exception {
+        Enfermaria enfermaria = new Enfermaria(codigo, tipo, camas, equipamentos, pacientes);
+        
+        adicionar(enfermaria);
+    }
     public void adicionar(Enfermaria enfermaria) throws Exception {
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_ADICIONAR);

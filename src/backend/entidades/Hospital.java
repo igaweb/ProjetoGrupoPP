@@ -1,16 +1,18 @@
 package backend.entidades;
 
+import java.util.ArrayList;
+
 public class Hospital {
 
     private String codigo;
     private String nome;
     private String localidade;
-    private Enfermaria[] enfermarias;
+    private ArrayList<Enfermaria> enfermarias;
 
     public Hospital() {
     }
 
-    public Hospital(String codigo, String nome, String localidade, Enfermaria[] enfermarias) {
+    public Hospital(String codigo, String nome, String localidade, ArrayList<Enfermaria> enfermarias) {
         this.codigo = codigo;
         this.nome = nome;
         this.localidade = localidade;
@@ -41,11 +43,11 @@ public class Hospital {
         this.localidade = localidade;
     }
 
-    public Enfermaria[] getEnfermarias() {
+    public ArrayList<Enfermaria> getEnfermarias() {
         return enfermarias;
     }
 
-    public void setEnfermarias(Enfermaria[] enfermarias) {
+    public void setEnfermarias(ArrayList<Enfermaria> enfermarias) {
         this.enfermarias = enfermarias;
     }
 

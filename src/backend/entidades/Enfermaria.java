@@ -1,17 +1,20 @@
 package backend.entidades;
 
-public class Enfermaria {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Enfermaria implements Serializable{
 
     private String codigo;
     private int tipo;
-    private boolean[] camas;
-    private Equipamento[] equipamentos;
-    private Paciente[] pacientes;
+    private ArrayList<Boolean> camas;
+    private ArrayList<Equipamento> equipamentos;
+    private ArrayList<Paciente> pacientes;
 
     public Enfermaria() {
     }
 
-    public Enfermaria(String codigo, int tipo, boolean[] camas, Equipamento[] equipamentos, Paciente[] pacientes) {
+    public Enfermaria(String codigo, int tipo, ArrayList<Boolean> camas, ArrayList<Equipamento> equipamentos, ArrayList<Paciente> pacientes) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.camas = camas;
@@ -35,27 +38,31 @@ public class Enfermaria {
         this.tipo = tipo;
     }
 
-    public boolean[] getCamas() {
+    public ArrayList<Boolean> getCamas() {
         return camas;
     }
 
-    public void setCamas(boolean[] camas) {
+    /**
+     *
+     * @param camas
+     */
+    public void setCamas(ArrayList<Boolean> camas) {
         this.camas = camas;
     }
 
-    public Equipamento[] getEquipamentos() {
+    public ArrayList<Equipamento> getEquipamentos() {
         return equipamentos;
     }
 
-    public void setEquipamentos(Equipamento[] equipamentos) {
+    public void setEquipamentos(ArrayList<Equipamento> equipamentos) {
         this.equipamentos = equipamentos;
     }
 
-    public Paciente[] getPacientes() {
+    public ArrayList<Paciente> getPacientes() {
         return pacientes;
     }
 
-    public void setPacientes(Paciente[] pacientes) {
+    public void setPacientes(ArrayList<Paciente> pacientes) {
         this.pacientes = pacientes;
     }
 

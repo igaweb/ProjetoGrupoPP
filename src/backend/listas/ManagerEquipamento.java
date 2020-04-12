@@ -9,6 +9,10 @@ public class ManagerEquipamento extends ManagerBase {
         this.lista = lista;
     }
 
+    public ManagerEquipamento() {
+        
+    }
+
     public void adicionar(Equipamento equipamentos) {
         // ver ListaEnfermaria ( procedimento igual)
     }

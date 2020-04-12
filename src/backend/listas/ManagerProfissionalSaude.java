@@ -9,6 +9,10 @@ public class ManagerProfissionalSaude extends ManagerBase {
         this.lista = lista;
     }
 
+    public ManagerProfissionalSaude() {
+        
+    }
+
     public void adicionar(ProfissionalSaude profissionalSaude) {
         // ver ListaEnfermaria ( procedimento igual)
     }
