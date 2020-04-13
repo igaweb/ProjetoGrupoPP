@@ -36,15 +36,23 @@ public class Aplicacao {
 
     private void inicializarDados() {
         try {
-            managerEnfermaria.adicionar(null, 0, new ArrayList(), new ArrayList(), new ArrayList());
-            managerEnfermaria.adicionar(null, 0, new ArrayList(), new ArrayList(), new ArrayList());
-            managerEnfermaria.adicionar(null, 0, new ArrayList(), new ArrayList(), new ArrayList());
+            ArrayList listaEnfermaria = new ArrayList();
+            listaEnfermaria.add(new Enfermaria("COD0", 0, new ArrayList(), new ArrayList(), new ArrayList()));
+            listaEnfermaria.add(new Enfermaria("COD1", 0, new ArrayList(), new ArrayList(), new ArrayList()));
+            listaEnfermaria.add(new Enfermaria("COD2", 0, new ArrayList(), new ArrayList(), new ArrayList()));
+            listaEnfermaria.add(new Enfermaria("COD3", 0, new ArrayList(), new ArrayList(), new ArrayList()));
+            
+            managerEnfermaria.setLista(listaEnfermaria);
         } catch (Exception e) {
             
         }
         
         ArrayList listaHospital = new ArrayList();
-        listaHospital.add(new Hospital("COD0", "HSM", "Porto", new ArrayList()));
+        listaHospital.add(new Hospital("COD0", "HWSNA", "Porto", new ArrayList()));
+        listaHospital.add(new Hospital("COD1", "HSM", "Porto", new ArrayList()));
+        listaHospital.add(new Hospital("COD2", "Hospital 1", "Porto", new ArrayList()));
+        listaHospital.add(new Hospital("COD3", "Hospital 2", "Porto", new ArrayList()));
+        listaHospital.add(new Hospital("COD4", "Hospital X", "Porto", new ArrayList()));
         managerHospital.setLista(listaHospital);
         
     }

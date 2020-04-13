@@ -6,10 +6,8 @@ public class JanelaEnfermaria extends JanelaBase {
 
     public JanelaEnfermaria(Aplicacao app) {
         super(app);
+        
+        setFiltrosVisible(true, true);
+        setOperacoes(true, true, true);
     }
-    
-    private boolean canCreate() {
-        return true;
-    }
-    
 }

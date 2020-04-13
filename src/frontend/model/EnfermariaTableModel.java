@@ -2,14 +2,12 @@ package frontend.model;
 
 import backend.Conteudos;
 import backend.entidades.Enfermaria;
+import backend.listas.ManagerEnfermaria;
 import java.util.ArrayList;
-import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-public class EnfermariaTableModel implements TableModel {
-
-    // dados da tabela
-    private ArrayList<Enfermaria> lista;
+public class EnfermariaTableModel extends DefaultTableModel implements TableModel {
     
     // numero de colunas
     private final int COLUMN_COUNT = 4;
@@ -19,16 +17,27 @@ public class EnfermariaTableModel implements TableModel {
     private final int COLUNA_TIPO = 1;
     private final int COLUNA_EQUIPAMENTOS = 2;
     private final int COLUNA_CAMAS = 3;
+    
+    private final ManagerEnfermaria manager;
+    // dados da tabela
+    private ArrayList<Enfermaria> lista;
 
-    public EnfermariaTableModel(ArrayList<Enfermaria>lista) {
-        this.lista = lista;
-    }
-    
-    
-    
-    @Override
-    public int getRowCount() {
-       return lista.size();
+    public EnfermariaTableModel(ManagerEnfermaria manager) {
+        this.manager = manager;
+        this.lista = manager.getLista();
+        
+        Object[][] data = new Object[lista.size()][COLUMN_COUNT];
+        for (int i = 0; i < lista.size(); i++) {
+            Enfermaria enf = lista.get(i);
+                data[i] = new Object[] {
+                enf.getCodigo(),
+                Conteudos.getTiposEnfermarias()[enf.getTipo()],
+                enf.getEquipamentos().size(),
+                enf.getCamas().size()
+            };
+        }
+        
+        setDataVector(data, new String[] {"Código", "Tipo", "Equipamentos", "Camas"});
     }
 
     @Override
@@ -83,51 +92,4 @@ public class EnfermariaTableModel implements TableModel {
                 return false;
         }
     }
-
-    @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        Enfermaria obj = lista.get(rowIndex);
-        
-        switch(columnIndex) {
-            case COLUNA_CODIGO:
-                return obj.getCodigo();
-            case COLUNA_TIPO:
-                return Conteudos.getTiposEnfermarias()[obj.getTipo()];
-            case COLUNA_EQUIPAMENTOS:
-                return obj.getEquipamentos().size();
-            case COLUNA_CAMAS:
-                return obj.getCamas().size();
-            default:
-                return null;
-        }
-    }
-
-    @Override
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        switch(columnIndex) {
-            case COLUNA_CODIGO:
-                // TODO: aviso
-                break;
-            case COLUNA_TIPO:
-                lista.get(rowIndex).setTipo((int) aValue);
-                break;
-            case COLUNA_EQUIPAMENTOS:
-                // TODO: aviso
-                break;
-            case COLUNA_CAMAS:
-                // TODO: 
-                break;
-        }
-    }
-
-    @Override
-    public void addTableModelListener(TableModelListener l) {
-        System.out.println("addTableModelListener");
-    }
-
-    @Override
-    public void removeTableModelListener(TableModelListener l) {
-        System.out.println("removeTableModelListener");
-    }
-
 }

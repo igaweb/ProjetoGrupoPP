@@ -1,27 +1,26 @@
 package frontend.janelas;
 
 import backend.Conteudos;
+import backend.entidades.Enfermaria;
 import frontend.Aplicacao;
 import frontend.model.EnfermariaTableModel;
 import frontend.model.filtros.HospitalComboModel;
-import javax.swing.DefaultComboBoxModel;
+import frontend.model.filtros.TipoEnfermariaComboModel;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 public class JanelaBase extends javax.swing.JInternalFrame {
 
-    private final Aplicacao app;
-    private DefaultComboBoxModel comboEnfermariaTipoModel;
-    private String[] comboEnfermariaTipoValores;
+    protected Aplicacao app;
+    protected DefaultTableModel tableModel;
 
     /**
      * Creates new form JanelaBase
      */
     public JanelaBase(Aplicacao app) {
         this.app = app;
+        
         initComponents();
-
-        inicializarCombos();
-
-        comboEnfermariaTipo.setModel(comboEnfermariaTipoModel);
     }
 
     /**
@@ -39,14 +38,14 @@ public class JanelaBase extends javax.swing.JInternalFrame {
         filtroHospital = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         comboHospital = new javax.swing.JComboBox<>();
-        filtroEnfermariaTipo = new javax.swing.JPanel();
+        filtroTipoEnfermaria = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         comboEnfermariaTipo = new javax.swing.JComboBox<>();
         enfermariaContentor = new javax.swing.JPanel();
         botoes = new javax.swing.JPanel();
         botaoCriar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        botaoEditar = new javax.swing.JButton();
+        botaoRemover = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaEnfermaria = new javax.swing.JTable();
@@ -93,33 +92,33 @@ public class JanelaBase extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)))
         );
 
-        filtroEnfermariaTipo.setBounds(new java.awt.Rectangle(-32744, -33735, 100, 100));
+        filtroTipoEnfermaria.setBounds(new java.awt.Rectangle(-32744, -33735, 100, 100));
 
         jLabel4.setText("Tipo");
 
-        comboEnfermariaTipo.setModel(comboEnfermariaTipo.getModel());
+        comboEnfermariaTipo.setModel(new TipoEnfermariaComboModel());
         comboEnfermariaTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboEnfermariaTipoActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout filtroEnfermariaTipoLayout = new javax.swing.GroupLayout(filtroEnfermariaTipo);
-        filtroEnfermariaTipo.setLayout(filtroEnfermariaTipoLayout);
-        filtroEnfermariaTipoLayout.setHorizontalGroup(
-            filtroEnfermariaTipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(filtroEnfermariaTipoLayout.createSequentialGroup()
+        javax.swing.GroupLayout filtroTipoEnfermariaLayout = new javax.swing.GroupLayout(filtroTipoEnfermaria);
+        filtroTipoEnfermaria.setLayout(filtroTipoEnfermariaLayout);
+        filtroTipoEnfermariaLayout.setHorizontalGroup(
+            filtroTipoEnfermariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(filtroTipoEnfermariaLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(comboEnfermariaTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        filtroEnfermariaTipoLayout.setVerticalGroup(
-            filtroEnfermariaTipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(filtroEnfermariaTipoLayout.createSequentialGroup()
+        filtroTipoEnfermariaLayout.setVerticalGroup(
+            filtroTipoEnfermariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(filtroTipoEnfermariaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(filtroEnfermariaTipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(filtroTipoEnfermariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboEnfermariaTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)))
         );
@@ -133,7 +132,7 @@ public class JanelaBase extends javax.swing.JInternalFrame {
                 .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelFiltros)
                     .addComponent(filtroHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filtroEnfermariaTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(filtroTipoEnfermaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         filtrosLayout.setVerticalGroup(
@@ -144,22 +143,27 @@ public class JanelaBase extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(filtroHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(filtroEnfermariaTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(filtroTipoEnfermaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         enfermariaContentor.setBounds(new java.awt.Rectangle(-32720, -3221, 100, 100));
 
         botaoCriar.setText("Criar");
-
-        jButton1.setText("Editar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botaoCriar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botaoCriarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Remover linha");
+        botaoEditar.setText("Editar");
+        botaoEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoEditarActionPerformed(evt);
+            }
+        });
+
+        botaoRemover.setText("Remover linha");
 
         javax.swing.GroupLayout botoesLayout = new javax.swing.GroupLayout(botoes);
         botoes.setLayout(botoesLayout);
@@ -169,9 +173,9 @@ public class JanelaBase extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(botaoCriar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(botaoEditar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(botaoRemover)
                 .addContainerGap(302, Short.MAX_VALUE))
         );
         botoesLayout.setVerticalGroup(
@@ -179,12 +183,12 @@ public class JanelaBase extends javax.swing.JInternalFrame {
             .addGroup(botoesLayout.createSequentialGroup()
                 .addGroup(botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoCriar)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(botaoEditar)
+                    .addComponent(botaoRemover))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        tabelaEnfermaria.setModel(new EnfermariaTableModel(app.getManagerEnfermaria().getLista()));
+        tabelaEnfermaria.setModel(new EnfermariaTableModel(app.getManagerEnfermaria()));
         tabelaEnfermaria.setColumnSelectionAllowed(true);
         tabelaEnfermaria.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -264,9 +268,9 @@ public class JanelaBase extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboEnfermariaTipoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void botaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarActionPerformed
+        int selectedRow = tabelaEnfermaria.getSelectedRow();
+    }//GEN-LAST:event_botaoEditarActionPerformed
 
     private void tabelaEnfermariaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaEnfermariaMouseClicked
         System.out.println("evt.getSource() " + evt.getSource());
@@ -275,19 +279,23 @@ public class JanelaBase extends javax.swing.JInternalFrame {
 //        }
     }//GEN-LAST:event_tabelaEnfermariaMouseClicked
 
+    private void botaoCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarActionPerformed
+        ((DefaultTableModel) tabelaEnfermaria.getModel()).addRow(new Object[] {"", Conteudos.getTiposEnfermarias(), new ArrayList<Enfermaria>(), ""});
+    }//GEN-LAST:event_botaoCriarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCriar;
+    private javax.swing.JButton botaoEditar;
+    private javax.swing.JButton botaoRemover;
     private javax.swing.JPanel botoes;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> comboEnfermariaTipo;
     private javax.swing.JComboBox<String> comboHospital;
     private javax.swing.JPanel enfermariaContentor;
-    private javax.swing.JPanel filtroEnfermariaTipo;
     private javax.swing.JPanel filtroHospital;
+    private javax.swing.JPanel filtroTipoEnfermaria;
     private javax.swing.JPanel filtros;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
@@ -299,14 +307,15 @@ public class JanelaBase extends javax.swing.JInternalFrame {
     private boolean isJanelaEnabled() {
         return false;
     }
-
-    public DefaultComboBoxModel getEnfermariaTipoValues() {
-        return comboEnfermariaTipoModel;
+    
+    protected void setFiltrosVisible(boolean hospital, boolean tipoFenfermaria) {
+        filtroHospital.setVisible(hospital);
+        filtroTipoEnfermaria.setVisible(tipoFenfermaria);
     }
-
-    private void inicializarCombos() {
-
-        comboEnfermariaTipoValores = Conteudos.getTiposEnfermarias();
-        comboEnfermariaTipoModel = new DefaultComboBoxModel<>(comboEnfermariaTipoValores);
+    
+    protected void setOperacoes(boolean criar, boolean editar, boolean remover) {
+        botaoCriar.setVisible(criar);
+        botaoEditar.setVisible(editar);
+        botaoRemover.setVisible(remover);
     }
 }
