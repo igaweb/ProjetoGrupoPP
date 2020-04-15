@@ -1,81 +1,86 @@
-/* package backend;
+package backend;
 
-import backend.listas.ListaEnfermaria;
-import backend.entidades.Enfermaria;
-
+import backend.listas.ManagerHospital;
+import backend.entidades.Hospital;
 
 public class Aplicacao {
 
     public Aplicacao() {
-        
 
     }
 
     public static void main(String[] args) {
-        ListaEnfermaria lista = new ListaEnfermaria();
+        ManagerHospital lista = new ManagerHospital();
 
-        Enfermaria enfermaria1 = new Enfermaria();
-        enfermaria1.setCamas(new boolean[10]);
-        enfermaria1.setTipo(1);
+        Hospital hospital1 = new Hospital();
+        hospital1.setNome("Hospital de Guimarães");
+        hospital1.setLocalidade("Guimarães");
+        hospital1.setCodigo("h1");
         try {
-            lista.adicionar(enfermaria1);
-            
-            System.out.println("Enfermaria1 adicionada com sucesso!");
+            lista.adicionar(hospital1);
+
+            System.out.println("Hospital1 adicionado com sucesso!");
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
         }
 
-        Enfermaria enfermaria2 = new Enfermaria();
-        enfermaria2.setCamas(new boolean[10]);
-        enfermaria2.setTipo(1);
+        System.out.println("lista: " + lista);
+
+        Hospital hospital2 = new Hospital();
+        hospital2.setNome("Hospital de Braga");
+        hospital2.setLocalidade("Braga");
+        hospital2.setCodigo("h2");
         try {
-            lista.adicionar(enfermaria2);
-            
-            System.err.println("Enfermaria2 adicionada com sucesso!");
+            lista.adicionar(hospital2);
+
+            System.err.println("Hospital2 adicionado com sucesso!");
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
         }
 
-        Enfermaria enfermaria3 = new Enfermaria();
-        enfermaria3.setTipo(5);
+        System.out.println("lista: " + lista);
+
+        Hospital hospital3 = new Hospital();
+        hospital3.setNome("Hospital do Porto");
+        hospital3.setLocalidade("Porto");
+        hospital3.setCodigo("h3");
         try {
-            lista.adicionar(enfermaria3);
-            
-            System.err.println("Enfermaria3 adicionada com sucesso!");
+            lista.adicionar(hospital3);
+
+            System.err.println("Hospital3 adicionado com sucesso!");
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
         }
-        
-        enfermaria2.setTipo(0);
+
+        System.out.println("lista: " + lista);
+
+        hospital2.setNome("HB");
         try {
-            lista.editar(enfermaria2);
-            System.out.println("Enfermaria2 editadfa com sucesso!");
+            lista.editar(hospital2);
+            System.out.println("Hospital editado com sucesso!");
         } catch (Exception ex) {
             //Logger.getLogger(Aplicacao.class.getName()).log(Level.SEVERE, null, ex);
-            
+
             System.err.println("Hein?2");
         }
-        
-        
-        enfermaria2.setTipo(-1);
+
+        hospital1.setLocalidade("Cidade de Guimarães");
         try {
-            lista.editar(enfermaria2);
-            System.out.println("Enfermaria editadfa com sucesso!");
+            lista.editar(hospital1);
+            System.out.println("Hospital editado com sucesso!");
         } catch (Exception ex) {
             //Logger.getLogger(Aplicacao.class.getName()).log(Level.SEVERE, null, ex);
-            
-            System.err.println("Hein?2...2");
+
+            System.out.println("Hein?1...1");
         }
         System.out.println("lista: " + lista);
-        
-        
+
         try {
-            lista.remover(enfermaria2);
+            lista.remover(hospital3);
         } catch (Exception ex) {
-            System.err.println("rem?2...2");
+            System.out.println("rem?3...3");
         }
         System.out.println("lista: " + lista);
     }
 
 }
-*/
