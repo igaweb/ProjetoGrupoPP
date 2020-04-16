@@ -57,11 +57,7 @@ public class JanelaBase extends javax.swing.JInternalFrame {
         setToolTipText("Lista de Enfermarias");
         setEnabled(isJanelaEnabled());
 
-        filtros.setBounds(new java.awt.Rectangle(-32720, -3221, 100, 100));
-
         labelFiltros.setText("Filtros");
-
-        filtroHospital.setBounds(new java.awt.Rectangle(-32744, -33735, 100, 100));
 
         jLabel2.setText("Hospital: ");
 
@@ -91,8 +87,6 @@ public class JanelaBase extends javax.swing.JInternalFrame {
                     .addComponent(comboHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)))
         );
-
-        filtroTipoEnfermaria.setBounds(new java.awt.Rectangle(-32744, -33735, 100, 100));
 
         jLabel4.setText("Tipo");
 
@@ -146,8 +140,6 @@ public class JanelaBase extends javax.swing.JInternalFrame {
                 .addComponent(filtroTipoEnfermaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        enfermariaContentor.setBounds(new java.awt.Rectangle(-32720, -3221, 100, 100));
 
         botaoCriar.setText("Criar");
         botaoCriar.addActionListener(new java.awt.event.ActionListener() {
@@ -209,9 +201,8 @@ public class JanelaBase extends javax.swing.JInternalFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
