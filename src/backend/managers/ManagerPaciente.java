@@ -8,6 +8,12 @@ public class ManagerPaciente extends ManagerBase {
   
     private static final String ERRO_TIPO_INVALIDO = "ERRO_TIPO_INVALIDO";
     private static final String ERRO_FALTA_CODIGO = "ERRO_FALTA_CODIGO";
+    private static final String ERRO_FALTA_NOME = "ERRO_FALTA_NOME";
+    private static final String ERRO_FALTA_LOCALIDADE = "ERRO_FALTA_LOCALIDADE";
+    private static final String ERRO_FALTA_CAMA = "ERRO_FALTA_CAMA";
+    private static final String ERRO_FALTA_ESTADO = "ERRO_FALTA_ESTADO";
+    private static final String ERRO_FALTA_DATAENTRADA = "ERRO_FALTA_DATAENTRADA";
+    private static final String ERRO_FALTA_DATASAIDA = "ERRO_FALTA_DATASAIDA";
 
     public ManagerPaciente() {
     }
@@ -73,16 +79,31 @@ public class ManagerPaciente extends ManagerBase {
         boolean isValid = super.validarCampos(paciente);
 
         // se nao for a operacao adicionar, tem de existir um codigo
-        if (!operacao.equals(OPERACAO_ADICIONAR) && paciente.getCodigo() == null) {
+        if (paciente.getCodigo() == null || paciente.getCodigo().isEmpty()) {
             throw new Exception(ERRO_FALTA_CODIGO);
+        }
+        if (paciente.getNome() == null || paciente.getNome().isEmpty()) {
+            throw new Exception(ERRO_FALTA_NOME);
+        }
+        if (paciente.getLocalidade() == null || paciente.getLocalidade().isEmpty()) {
+            throw new Exception(ERRO_FALTA_LOCALIDADE);
+        }
+        if (paciente.getCama() < 0 ) {
+            throw new Exception(ERRO_FALTA_CAMA);
+        }
+         if (paciente.getEstado() == null || paciente.getEstado().isEmpty()) {
+            throw new Exception(ERRO_FALTA_ESTADO);
+        }
+        if (paciente.getDataEntrada() < 0 ) {
+            throw new Exception(ERRO_FALTA_DATAENTRADA);
+        }
+        if (paciente.getDataSaida() < 0) {
+            throw new Exception(ERRO_FALTA_DATASAIDA);
         }
 
         // tem de ter um tipo definido (int nao permite nulls)
         // neste caso, o tipo indica o indice do array definido em Conteudos.getTiposPaciente(), por isso, terá de ser maior de 0 e menor que o comprimento do array
-        if (paciente.getEstado() < 0){
-            throw new Exception(ERRO_TIPO_INVALIDO);
-        }
-
+            
         return isValid;
     }
 
