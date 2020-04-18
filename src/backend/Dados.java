@@ -1,7 +1,7 @@
 package backend;
 
 import backend.entidades.Enfermaria;
-import backend.listas.ManagerEnfermaria;
+import backend.managers.ManagerEnfermaria;
 import java.io.Serializable;
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
 package backend;
 
-import backend.listas.ManagerHospital;
+import backend.managers.ManagerHospital;
 import backend.entidades.Hospital;
 
 public class Aplicacao {
