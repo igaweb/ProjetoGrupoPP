@@ -1,4 +1,4 @@
-package backend.listas;
+package backend.managers;
 
 import backend.entidades.Hospital;
 import java.util.ArrayList;
