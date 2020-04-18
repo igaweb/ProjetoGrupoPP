@@ -18,9 +18,9 @@ public class ManagerHospital extends ManagerBase {
 
     public void adicionar(Hospital hospital) throws Exception {
         // validar se os campos vêm todos bem preenchidos
-        // validarCampos(enfermaria) <- se estiver bem preenchido,
-        // avança para a adição -> this.lista.add(enfermaria);
-        // senão, retorna erro -> new EnfermariaException("Erro a adicionar enfermaria");
+        // validarCampos(hospital) <- se estiver bem preenchido,
+        // avança para a adição -> this.lista.add(hospital);
+        // senão, retorna erro -> new EnfermariaException("Erro a adicionar hospital");
     // set da operacao que estamos a fazer
         setOperacao(OPERACAO_ADICIONAR);
 
@@ -30,7 +30,7 @@ public class ManagerHospital extends ManagerBase {
         // se estiver bem preenchido,
         // avança para a adição
         if (isValido) {
-            // gerar o codigo para a nova enfermaria
+            // gerar o codigo para o novo hospital
             String novoCodigo = gerarCodigo();
             hospital.setCodigo(novoCodigo);
 
