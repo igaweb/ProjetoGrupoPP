@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Enfermaria implements Serializable{
 
     private String codigo;
-    private int tipo;
+    private Integer tipo;
     private ArrayList<Boolean> camas;
     private ArrayList<Equipamento> equipamentos;
     private ArrayList<Paciente> pacientes;
@@ -30,11 +30,11 @@ public class Enfermaria implements Serializable{
         this.codigo = codigo;
     }
 
-    public int getTipo() {
+    public Integer getTipo() {
         return tipo;
     }
 
-    public void setTipo(int tipo) {
+    public void setTipo(Integer tipo) {
         this.tipo = tipo;
     }
 
