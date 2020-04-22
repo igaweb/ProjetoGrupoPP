@@ -1,1 +1,5 @@
+.gitignore
 /nbproject/private/
+/project.properties
+/build/
+/build.xml
