@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 public class PacienteTeste {
 
-    private static final String[] menuPrincipal = new String[]{"LISTAR", "ADICIONAR", "EDITAR", "REMOVER"};
+    private static final String[] menuPrincipal = new String[]{"LISTAR", "ADICIONAR", "EDITAR", "REMOVER", "SAIR"};
     /*private static final String[] menuTipoPaciente = Conteudos.getTiposPacientes();*/
 
     private static Scanner scanner;
@@ -44,6 +44,10 @@ public class PacienteTeste {
 
             case 3: // REMOVER
                 remover();
+                break;
+                
+            case 4: // SAIR
+                sair();
                 break;
         }
 
@@ -174,5 +178,9 @@ public class PacienteTeste {
             System.out.println("ex " + ex);
             Logger.getLogger(PacienteTeste.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private static void sair(){
+        System.exit(0);
     }
 }

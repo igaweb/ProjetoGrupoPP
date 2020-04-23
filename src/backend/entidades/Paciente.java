@@ -6,14 +6,14 @@ public class Paciente {
     private String nome;
     private String localidade;
     private int cama;
-    private String estado;
+    private Integer estado;
     private int dataEntrada;
     private int dataSaida;
 
     public Paciente() {
     }
 
-    public Paciente(String codigo, String nome, String localidade, int cama, String estado, int dataEntrada, int dataSaida) {
+    public Paciente(String codigo, String nome, String localidade, int cama, Integer estado, int dataEntrada, int dataSaida) {
         this.codigo = codigo;
         this.nome = nome;
         this.localidade = localidade;
@@ -55,11 +55,11 @@ public class Paciente {
         this.cama = cama;
     }
 
-    public String getEstado() {
+    public Integer getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Integer estado) {
         this.estado = estado;
     }
 

@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 public class EnfermariaTeste {
 
-    private static final String[] menuPrincipal = new String[]{"LISTAR", "ADICIONAR", "EDITAR", "REMOVER"};
+    private static final String[] menuPrincipal = new String[]{"LISTAR", "ADICIONAR", "EDITAR", "REMOVER", "SAIR"};
     private static final String[] menuTipoEnfermaria = Conteudos.getTiposEnfermarias();
 
     private static Scanner scanner;
@@ -44,6 +44,10 @@ public class EnfermariaTeste {
 
             case 3: // REMOVER
                 remover();
+                break;
+            
+            case 4: // SAIR
+                sair();
                 break;
         }
 
@@ -175,5 +179,9 @@ public class EnfermariaTeste {
             System.out.println("ex " + ex);
             Logger.getLogger(EnfermariaTeste.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private static void sair(){
+        System.exit(0);
     }
 }

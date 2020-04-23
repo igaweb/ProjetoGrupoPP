@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class ManagerPaciente extends ManagerBase {
   
-    private static final String ERRO_TIPO_INVALIDO = "ERRO_TIPO_INVALIDO";
     private static final String ERRO_FALTA_CODIGO = "ERRO_FALTA_CODIGO";
     private static final String ERRO_FALTA_NOME = "ERRO_FALTA_NOME";
     private static final String ERRO_FALTA_LOCALIDADE = "ERRO_FALTA_LOCALIDADE";
@@ -91,7 +90,7 @@ public class ManagerPaciente extends ManagerBase {
         if (paciente.getCama() < 0 ) {
             throw new Exception(ERRO_FALTA_CAMA);
         }
-         if (paciente.getEstado() == null || paciente.getEstado().isEmpty()) {
+          if (paciente.getEstado() < 0 || paciente.getEstado() >= Conteudos.getEstadosPaciente().length) {
             throw new Exception(ERRO_FALTA_ESTADO);
         }
         if (paciente.getDataEntrada() < 0 ) {
