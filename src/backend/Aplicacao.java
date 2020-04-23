@@ -33,7 +33,7 @@ public class Aplicacao {
         try {
             lista.adicionar(hospital2);
 
-            System.err.println("Hospital2 adicionado com sucesso!");
+            System.out.println("Hospital2 adicionado com sucesso!");
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
         }
@@ -47,7 +47,7 @@ public class Aplicacao {
         try {
             lista.adicionar(hospital3);
 
-            System.err.println("Hospital3 adicionado com sucesso!");
+            System.out.println("Hospital3 adicionado com sucesso!");
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
         }
@@ -61,7 +61,7 @@ public class Aplicacao {
         } catch (Exception ex) {
             //Logger.getLogger(Aplicacao.class.getName()).log(Level.SEVERE, null, ex);
 
-            System.err.println("Hein?2");
+            System.out.println("Hein?2");
         }
 
         hospital1.setLocalidade("Cidade de Guimarães");
