@@ -9,9 +9,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class PacienteTeste {
-
+   
     private static final String[] menuPrincipal = new String[]{"LISTAR", "ADICIONAR", "EDITAR", "REMOVER", "SAIR"};
-    /*private static final String[] menuTipoPaciente = Conteudos.getTiposPacientes();*/
+    private static final String[] menuTipoPaciente = Conteudos.getEstadosPaciente();
 
     private static Scanner scanner;
 
@@ -79,48 +79,86 @@ public class PacienteTeste {
     private static void listar() {
         System.out.println("Pacientes: ");
         System.out.println("| Codigo | Nome | Localidade | Cama | Estado | Data Entrada | Data Saida |");
-        /* for (int i = 0; i < manager.getLista().size(); i++) {
+        for (int i = 0; i < manager.getLista().size(); i++) {
             Paciente paciente = (Paciente) manager.getLista().get(i);
 
-            System.out.print(" | " + paciente.getCodigo());
-           System.out.print(" | " + Conteudos.getTiposEnfermarias()[paciente.getTipo()]);
+           System.out.print(" | " + paciente.getCodigo());
 
             try {
-                System.out.print(" | " + paciente.getEquipamentos().size());
+                System.out.print(" | " + paciente.getNome());
             } catch (Exception e) {
                 System.out.print(" | 0");
             }
 
             try {
-                System.out.print(" | " + paciente.getCamas().size());
+                System.out.print(" | " + paciente.getLocalidade());
             } catch (Exception e) {
                 System.out.print(" | 0");
             }
 
             try {
-                System.out.println(" | " + paciente.getPacientes().size());
+                System.out.print(" | " + paciente.getCama());
             } catch (Exception e) {
                 System.out.print(" | 0");
             }
-            System.out.println(" |");
-    }*/
+             System.out.print(" | " + Conteudos.getEstadosPaciente()[paciente.getEstado()]);
+             try {
+                System.out.print(" | " + paciente.getDataEntrada());
+            } catch (Exception e) {
+                System.out.print(" | 0");
+            }
+              try {
+                System.out.print(" | " + paciente.getDataSaida());
+            } catch (Exception e) {
+                System.out.print(" | 0");
+            }
+             System.out.println(" |");
+    }
 }
     private static void adicionar() {
-        String pergunta = "Selecione o tipo de paciente:";
-        /*Integer tipo = getOpcaoMenu(pergunta, menuTipoPaciente);
+        Scanner input = new Scanner(System.in);
+        Paciente paciente = new Paciente();
+        
+        String perguntaNome = "Introduza o nome do paciente:";
+        String perguntaLocalidade = "Introduza a Localidade:";
+        String perguntaCama = "Introduza o numero de Cama:";
+        String perguntaDataEntrada = "Introduza a Data de Entrada:";
+        String perguntaDataSaida = "Introduza a Data de Saida:";
+        
+        System.out.println("codigo");
+        paciente.setCodigo(input.nextLine());
+        
+        System.out.println(perguntaNome);
+        paciente.setNome(input.nextLine());
 
-        if(tipo == -1) {
+        System.out.println(perguntaLocalidade);
+        paciente.setLocalidade(input.nextLine());
+
+        System.out.println(perguntaCama);
+        paciente.setCama(input.nextInt());
+        
+        String pergunta = "Selecione o estado do paciente:";
+        Integer estado = getOpcaoMenu(pergunta, menuTipoPaciente);
+
+        if(estado == -1) {
             return;
         }
-        */
-        Paciente paciente = new Paciente();
-        /*paciente.setTipo(tipo);*/
+        
+        
+        paciente.setEstado(estado);
+        
+         System.out.println(perguntaDataEntrada);
+         paciente.setDataEntrada(input.nextInt());
+         
+         System.out.println(perguntaDataSaida);
+         paciente.setDataSaida(input.nextInt()); 
+         
         try {
             manager.adicionar(paciente);
         } catch (Exception ex) {
             Logger.getLogger(PacienteTeste.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        }  
+          
     }
 
     private static void editar() {
