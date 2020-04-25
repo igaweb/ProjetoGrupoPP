@@ -123,6 +123,7 @@ public class HospitalTeste {
     }
 
     private static void editar() {
+        Scanner input = new Scanner(System.in);
         String pergunta = "Escolher o hospital a alterar: ";
         listar();
 
@@ -137,22 +138,22 @@ public class HospitalTeste {
             return;
         }
 
-        Hospital hsopitalAEditar = (Hospital) manager.getLista().get(hospitalAEditarIndex);
+        Hospital hospitalAEditar = (Hospital) manager.getLista().get(hospitalAEditarIndex);
 
         String perguntaNovoNome = "Introduza o novo nome do hospital:";
         String perguntaNovaLocalidade = "Introduza a nova localidade do hospital:";
 
-     /*   System.out.println(perguntaNovoNome);
-        hospital.setNome(input.nextLine());
+        System.out.println(perguntaNovoNome);
+        hospitalAEditar.setNome(input.nextLine());
 
         System.out.println(perguntaNovaLocalidade);
-        hospital.setLocalidade(input.nextLine());
+        hospitalAEditar.setLocalidade(input.nextLine());
 
         try {
             manager.editar(hospitalAEditar);
         } catch (Exception ex) {
             System.out.println("ex " + ex);
-        }*/
+        }
     }
 
     private static void remover() {
