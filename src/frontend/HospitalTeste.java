@@ -5,11 +5,12 @@ import backend.entidades.Hospital;
 import backend.managers.ManagerHospital;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class HospitalTeste {
 
     private static final String[] menuPrincipal = new String[]{"LISTAR", "ADICIONAR", "EDITAR", "REMOVER", "SAIR"};
+    private static final String[] menuEditar = new String[]{"Nome", "Localidade"};
 
     private static Scanner scanner;
     private static ManagerHospital manager;
@@ -124,7 +125,8 @@ public class HospitalTeste {
 
     private static void editar() {
         Scanner input = new Scanner(System.in);
-        String pergunta = "Escolher o hospital a alterar: ";
+        String editar;
+        String pergunta = "Escolher o paciente a alterar: ";
         listar();
 
         String[] menuEscolherHospital = new String[manager.getLista().size()];
@@ -140,20 +142,42 @@ public class HospitalTeste {
 
         Hospital hospitalAEditar = (Hospital) manager.getLista().get(hospitalAEditarIndex);
 
-        String perguntaNovoNome = "Introduza o novo nome do hospital:";
-        String perguntaNovaLocalidade = "Introduza a nova localidade do hospital:";
+        String pergunta2 = "Escolha o dado que quer editar:";
+        Integer opcaoEscolhida = getOpcaoMenu(pergunta2, menuEditar);
 
-        System.out.println(perguntaNovoNome);
-        hospitalAEditar.setNome(input.nextLine());
+        switch (opcaoEscolhida) {
+            case 0:// Nome
+                System.out.print("Novo Nome: ");
+                hospitalAEditar.setNome(input.nextLine());
+                try {
+                    manager.editar(hospitalAEditar);
+                } catch (Exception ex) {
+                    System.out.println("ex " + ex);
+                }
+                System.out.println("Quer Continuar a editar(Y/N)?: ");
 
-        System.out.println(perguntaNovaLocalidade);
-        hospitalAEditar.setLocalidade(input.nextLine());
+                editar = input.nextLine();
+                if (editar.contains("Y") || editar.contains("y")) {
+                    editar();
+                }
+                break;
+            case 1: // Localidade
+                System.out.print("Nova Localidade: ");
+                hospitalAEditar.setLocalidade(input.nextLine());
+                try {
+                    manager.editar(hospitalAEditar);
+                } catch (Exception ex) {
+                    System.out.println("ex " + ex);
+                }
+                System.out.println("Quer Continuar a editar(Y/N)? ");
 
-        try {
-            manager.editar(hospitalAEditar);
-        } catch (Exception ex) {
-            System.out.println("ex " + ex);
+                editar = input.nextLine();
+                if (editar.contains("Y") || editar.contains("y")) {
+                    editar();
+                }
+                break;
         }
+
     }
 
     private static void remover() {
