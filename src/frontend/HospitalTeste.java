@@ -82,6 +82,18 @@ public class HospitalTeste {
             System.out.print(" | " + hospital.getCodigo());
 
             try {
+                System.out.print(" | " + hospital.getNome());
+            } catch (Exception e) {
+                System.out.print(" | 0");
+            }
+
+            try {
+                System.out.print(" | " + hospital.getLocalidade());
+            } catch (Exception e) {
+                System.out.print(" | 0");
+            }
+
+            try {
                 System.out.print(" | " + hospital.getEnfermarias().size());
             } catch (Exception e) {
                 System.out.print(" | 0");
@@ -92,8 +104,18 @@ public class HospitalTeste {
     }
 
     private static void adicionar() {
-
+        Scanner input = new Scanner(System.in);
         Hospital hospital = new Hospital();
+
+        String perguntaNome = "Introduza o nome do hospital:";
+        String perguntaLocalidade = "Introduza a localidade do hospital:";
+
+        System.out.println(perguntaNome);
+        hospital.setNome(input.nextLine());
+
+        System.out.println(perguntaLocalidade);
+        hospital.setLocalidade(input.nextLine());
+
         try {
             manager.adicionar(hospital);
         } catch (Exception ex) {
@@ -117,11 +139,14 @@ public class HospitalTeste {
 
         Hospital hsopitalAEditar = (Hospital) manager.getLista().get(hospitalAEditarIndex);
 
-        pergunta = "Alterar o nome do hospital ";
-       /* String nome = getOpcaoMenu(pergunta, menuNomeHospital);
-        if (nome == -1) {
-            return;
-        }
+        String perguntaNovoNome = "Introduza o novo nome do hospital:";
+        String perguntaNovaLocalidade = "Introduza a nova localidade do hospital:";
+
+     /*   System.out.println(perguntaNovoNome);
+        hospital.setNome(input.nextLine());
+
+        System.out.println(perguntaNovaLocalidade);
+        hospital.setLocalidade(input.nextLine());
 
         try {
             manager.editar(hospitalAEditar);
