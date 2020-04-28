@@ -78,7 +78,7 @@ public class ManagerPaciente extends ManagerBase {
         boolean isValid = super.validarCampos(paciente);
 
         // se nao for a operacao adicionar, tem de existir um codigo
-        if (paciente.getCodigo() == null || paciente.getCodigo().isEmpty()) {
+        if (!operacao.equals(OPERACAO_ADICIONAR) && (paciente.getCodigo() == null || paciente.getCodigo().isEmpty())) {
             throw new Exception(ERRO_FALTA_CODIGO);
         }
         if (paciente.getNome() == null || paciente.getNome().isEmpty()) {

@@ -81,7 +81,7 @@ public class ManagerHospital extends ManagerBase {
         // validações para todas as operaçoes na base
         boolean isValid = super.validarCampos(hospital);
         // se nao for a operacao adicionar, tem de existir um codigo
-        if (hospital.getCodigo() == null || hospital.getCodigo().isEmpty()) {
+        if (!operacao.equals(OPERACAO_ADICIONAR) && (hospital.getCodigo() == null || hospital.getCodigo().isEmpty())) {
             throw new Exception(ERRO_FALTA_CODIGO);
         }
         if (hospital.getNome() == null || hospital.getNome().isEmpty()) {
