@@ -126,7 +126,7 @@ public class HospitalTeste {
     private static void editar() {
         Scanner input = new Scanner(System.in);
         String editar;
-        String pergunta = "Escolher o paciente a alterar: ";
+        String pergunta = "Escolher o hospital a alterar: ";
         listar();
 
         String[] menuEscolherHospital = new String[manager.getLista().size()];
