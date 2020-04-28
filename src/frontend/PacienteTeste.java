@@ -118,7 +118,7 @@ public class PacienteTeste {
               try {
                 System.out.print(" | " + paciente.getDataSaida());
             } catch (Exception e) {
-                System.out.print(" | 0");
+                System.out.print(" | - ");
             }
              System.out.println(" |");
     }
@@ -132,9 +132,6 @@ public class PacienteTeste {
         String perguntaCama = "Introduza o numero de Cama: ";
         String perguntaDataEntrada = "Introduza a Data de Entrada: ";
         String perguntaDataSaida = "Introduza a Data de Saida: ";
-        
-        System.out.print("codigo: ");
-        paciente.setCodigo(input.nextLine());
         
         System.out.print(perguntaNome);
         paciente.setNome(input.nextLine());
