@@ -201,7 +201,7 @@ public class PacienteTeste {
                     System.out.println("Quer Continuar a editar(Y/N)?: ");
                     
                     editar = input.nextLine();
-                    if (editar.contains("Y")||editar.contains("y")){
+                    if (editar.toUpperCase().contains("Y")){
                         editar();
                     }
                 break;
@@ -217,7 +217,7 @@ public class PacienteTeste {
                     System.out.println("Quer Continuar a editar(Y/N)? ");
                     
                     editar = input.nextLine();
-                    if (editar.contains("Y")||editar.contains("y")){
+                    if (editar.toUpperCase().contains("Y")){
                         editar();
                     }
                 break;
@@ -232,7 +232,7 @@ public class PacienteTeste {
                     }
                     System.out.println("Quer Continuar a editar(Y/N)? ");
                     editar = input.nextLine();
-                    if (editar.contains("Y")||editar.contains("y")){
+                    if (editar.toUpperCase().contains("Y")){
                         editar();
                     }
                 break;
@@ -254,7 +254,7 @@ public class PacienteTeste {
                     System.out.println("Quer Continuar a editar(Y/N)? ");
                     
                     editar = input.nextLine();
-                    if (editar.contains("Y")||editar.contains("y")){
+                    if (editar.toUpperCase().contains("Y")){
                         editar();
                     }
                 break;
@@ -262,6 +262,7 @@ public class PacienteTeste {
             case 4: // Data de Entrada
                 System.out.print("Nova Data de Entrada: ");
                     pacienteAEditar.setDataEntrada(input.nextInt());
+                    input.nextLine();
                     try {
                         manager.editar(pacienteAEditar);
                     } catch (Exception ex) {
@@ -271,7 +272,7 @@ public class PacienteTeste {
                     System.out.println("Quer Continuar a editar(Y/N)? ");
                     
                     editar = input.nextLine();
-                    if (editar.contains("Y")||editar.contains("y")){
+                    if (editar.toUpperCase().contains("Y")){
                         editar();
                     }
                 break;
@@ -288,7 +289,7 @@ public class PacienteTeste {
                     System.out.println("Quer Continuar a editar(Y/N)? ");
                     
                     editar = input.nextLine();
-                    if (editar.contains("Y")||editar.contains("y")){
+                    if (editar.toUpperCase().contains("Y")){
                         editar();
                     }
                 break;
