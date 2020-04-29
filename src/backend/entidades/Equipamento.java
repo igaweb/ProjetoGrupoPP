@@ -1,20 +1,22 @@
 package backend.entidades;
 
+import java.util.ArrayList;
+
 public class Equipamento {
 
     private String codigo;
-    private int tipo;
+    private Integer tipo;
     private boolean livre;
-    private Paciente paciente;
+    private ArrayList<Paciente> pacientes;
 
     public Equipamento() {
     }
 
-    public Equipamento(String codigo, int tipo, boolean livre, Paciente paciente) {
+    public Equipamento(String codigo, Integer tipo, boolean livre, ArrayList<Paciente> pacientes) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.livre = livre;
-        this.paciente = paciente;
+        this.pacientes = pacientes;
     }
 
     public String getCodigo() {
@@ -25,11 +27,11 @@ public class Equipamento {
         this.codigo = codigo;
     }
 
-    public int getTipo() {
+    public Integer getTipo() {
         return tipo;
     }
 
-    public void setTipo(int tipo) {
+    public void setTipo(Integer tipo) {
         this.tipo = tipo;
     }
 
@@ -41,17 +43,20 @@ public class Equipamento {
         this.livre = livre;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public ArrayList<Paciente> getPacientes() {
+        return pacientes;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public void setPacientes(ArrayList<Paciente> pacientes) {
+        this.pacientes = pacientes;
     }
 
     @Override
     public String toString() {
-        return "Equipamento{" + "codigo=" + codigo + ", tipo=" + tipo + ", livre=" + livre + ", paciente=" + paciente + '}';
+        return "Equipamento{" + "codigo=" + codigo + ", tipo=" + tipo + ", livre=" + livre + ", pacientes=" + pacientes + '}';
     }
 
+   
+   
+    
 }
