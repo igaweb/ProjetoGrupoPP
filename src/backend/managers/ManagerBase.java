@@ -1,8 +1,9 @@
 package backend.managers;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class ManagerBase {
+public abstract class ManagerBase implements Serializable {
 
     protected static final String OPERACAO_ADICIONAR = "A";
     protected static final String OPERACAO_EDITAR = "E";
