@@ -21,9 +21,9 @@ public class ManagerEquipamento extends ManagerBase {
 
      
      
-    public void adicionar(String codigo, Integer tipo, boolean livre, ArrayList<Paciente> pacientes)throws Exception {
+    public void adicionar(String codigo, Integer tipo, boolean livre, Paciente paciente)throws Exception {
         
-        Equipamento equipamentos = new Equipamento(codigo, tipo, livre, pacientes);
+        Equipamento equipamentos = new Equipamento(codigo, tipo, livre, paciente);
         adicionar(equipamentos);
         
     }
