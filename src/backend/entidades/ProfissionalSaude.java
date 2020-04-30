@@ -1,6 +1,8 @@
 package backend.entidades;
 
-public abstract class ProfissionalSaude {
+import java.io.Serializable;
+
+public abstract class ProfissionalSaude implements Serializable{
     private String codigo;
     private String nome;
 

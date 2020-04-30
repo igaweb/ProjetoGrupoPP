@@ -1,22 +1,23 @@
 package backend.entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Equipamento {
+public class Equipamento implements Serializable{
 
     private String codigo;
     private Integer tipo;
     private boolean livre;
-    private ArrayList<Paciente> pacientes;
+    private Paciente paciente;
 
     public Equipamento() {
     }
 
-    public Equipamento(String codigo, Integer tipo, boolean livre, ArrayList<Paciente> pacientes) {
+    public Equipamento(String codigo, Integer tipo, boolean livre, Paciente paciente) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.livre = livre;
-        this.pacientes = pacientes;
+        this.paciente = paciente;
     }
 
     public String getCodigo() {
@@ -43,17 +44,17 @@ public class Equipamento {
         this.livre = livre;
     }
 
-    public ArrayList<Paciente> getPacientes() {
-        return pacientes;
+    public Paciente getPaciente() {
+        return paciente;
     }
 
-    public void setPacientes(ArrayList<Paciente> pacientes) {
-        this.pacientes = pacientes;
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
 
     @Override
     public String toString() {
-        return "Equipamento{" + "codigo=" + codigo + ", tipo=" + tipo + ", livre=" + livre + ", pacientes=" + pacientes + '}';
+        return "Equipamento{" + "codigo=" + codigo + ", tipo=" + tipo + ", livre=" + livre + ", paciente=" + paciente + '}';
     }
 
    
