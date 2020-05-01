@@ -1,16 +1,19 @@
 package backend.entidades;
 
-public class Equipamento {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Equipamento implements Serializable{
 
     private String codigo;
-    private int tipo;
+    private Integer tipo;
     private boolean livre;
     private Paciente paciente;
 
     public Equipamento() {
     }
 
-    public Equipamento(String codigo, int tipo, boolean livre, Paciente paciente) {
+    public Equipamento(String codigo, Integer tipo, boolean livre, Paciente paciente) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.livre = livre;
@@ -25,11 +28,11 @@ public class Equipamento {
         this.codigo = codigo;
     }
 
-    public int getTipo() {
+    public Integer getTipo() {
         return tipo;
     }
 
-    public void setTipo(int tipo) {
+    public void setTipo(Integer tipo) {
         this.tipo = tipo;
     }
 
@@ -54,4 +57,7 @@ public class Equipamento {
         return "Equipamento{" + "codigo=" + codigo + ", tipo=" + tipo + ", livre=" + livre + ", paciente=" + paciente + '}';
     }
 
+   
+   
+    
 }

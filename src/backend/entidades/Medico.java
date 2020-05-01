@@ -1,14 +1,16 @@
 package backend.entidades;
 
+import java.util.ArrayList;
+
 public class Medico extends ProfissionalSaude {
 
     private String especialidade;
-    private Paciente[] pacientes;
+    private ArrayList<Paciente> pacientes = new ArrayList();
 
     public Medico() {
     }
 
-    public Medico(String especialidade, Paciente[] pacientes) {
+    public Medico(String especialidade, ArrayList<Paciente> pacientes) {
         this.especialidade = especialidade;
         this.pacientes = pacientes;
     }
@@ -21,11 +23,11 @@ public class Medico extends ProfissionalSaude {
         this.especialidade = especialidade;
     }
 
-    public Paciente[] getPacientes() {
+    public ArrayList<Paciente> getPacientes() {
         return pacientes;
     }
 
-    public void setPacientes(Paciente[] pacientes) {
+    public void setPacientes(ArrayList<Paciente> pacientes) {
         this.pacientes = pacientes;
     }
 

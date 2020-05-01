@@ -1,6 +1,8 @@
 package backend.entidades;
 
-public class Paciente {
+import java.io.Serializable;
+
+public class Paciente implements Serializable{
 
     private String codigo;
     private String nome;

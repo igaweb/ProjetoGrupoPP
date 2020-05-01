@@ -1,6 +1,8 @@
 package backend.entidades;
 
-public class Utilizador {
+import java.io.Serializable;
+
+public class Utilizador implements Serializable{
 
     private String nome;
     private String password;

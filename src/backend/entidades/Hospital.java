@@ -1,13 +1,14 @@
 package backend.entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Hospital {
+public class Hospital implements Serializable {
 
     private String codigo;
     private String nome;
     private String localidade;
-    private ArrayList<Enfermaria> enfermarias;
+    private ArrayList<Enfermaria> enfermarias = new ArrayList<Enfermaria>();
 
     public Hospital() {
     }
