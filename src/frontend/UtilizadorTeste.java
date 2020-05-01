@@ -1,26 +1,26 @@
 package frontend;
 
 import backend.Conteudos;
-import backend.entidades.Hospital;
-import backend.managers.ManagerHospital;
+import backend.entidades.Utilizador;
+import backend.managers.ManagerUtilizador;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 
-public class HospitalTeste {
+public class UtilizadorTeste {
 
     private static final String[] menuPrincipal = new String[]{"LISTAR", "ADICIONAR", "EDITAR", "REMOVER", "SAIR"};
-    private static final String[] menuEditar = new String[]{"Nome", "Localidade"};
+    private static final String[] menuEditar = new String[]{"Nome", "Password"};
 
     private static Scanner scanner;
-    private static ManagerHospital manager;
+    private static ManagerUtilizador manager;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         scanner = new Scanner(System.in);
-        manager = new ManagerHospital();
+        manager = new ManagerUtilizador();
 
         start();
     }
@@ -57,7 +57,7 @@ public class HospitalTeste {
         Integer opcaoEscolhida;
         do {
             System.out.println(pergunta);
-            System.out.println("Menu Hospital: ");
+            System.out.println("Menu Utilizador: ");
             for (int i = 0; i < menu.length; i++) {
                 String menuItemStr = menu[i];
                 System.out.print(menuItemStr + " (" + i + "); ");
@@ -75,27 +75,13 @@ public class HospitalTeste {
     }
 
     private static void listar() {
-        System.out.println("Hospitais: ");
-        System.out.println("| Codigo | Nome | Localidade | Qtd Enfermairas |");
+        System.out.println("Utilizador: ");
+        System.out.println("| Nome |");
         for (int i = 0; i < manager.getLista().size(); i++) {
-            Hospital hospital = (Hospital) manager.getLista().get(i);
-
-            System.out.print(" | " + hospital.getCodigo());
+            Utilizador utilizador = (Utilizador) manager.getLista().get(i);
 
             try {
-                System.out.print(" | " + hospital.getNome());
-            } catch (Exception e) {
-                System.out.print(" | -");
-            }
-
-            try {
-                System.out.print(" | " + hospital.getLocalidade());
-            } catch (Exception e) {
-                System.out.print(" | -");
-            }
-
-            try {
-                System.out.print(" | " + hospital.getEnfermarias().size());
+                System.out.print(" | " + utilizador.getNome());
             } catch (Exception e) {
                 System.out.print(" | -");
             }
@@ -106,19 +92,19 @@ public class HospitalTeste {
 
     private static void adicionar() {
         Scanner input = new Scanner(System.in);
-        Hospital hospital = new Hospital();
+        Utilizador utilizador = new Utilizador();
 
-        String perguntaNome = "Introduza o nome do hospital:";
-        String perguntaLocalidade = "Introduza a localidade do hospital:";
+        String perguntaNome = "Introduza o nome do Utilizador:";
+        String perguntaPassword = "Introduza a Password:";
 
         System.out.println(perguntaNome);
-        hospital.setNome(input.nextLine());
+        utilizador.setNome(input.nextLine());
 
-        System.out.println(perguntaLocalidade);
-        hospital.setLocalidade(input.nextLine());
+        System.out.println(perguntaPassword);
+        utilizador.setPassword(input.nextLine());
 
         try {
-            manager.adicionar(hospital);
+            manager.adicionar(utilizador);
         } catch (Exception ex) {
         }
     }
@@ -126,21 +112,21 @@ public class HospitalTeste {
     private static void editar() {
         Scanner input = new Scanner(System.in);
         String editar;
-        String pergunta = "Escolher o hospital a alterar: ";
+        String pergunta = "Escolher o utilizador a alterar: ";
         listar();
 
-        String[] menuEscolherHospital = new String[manager.getLista().size()];
+        String[] menuEscolherUtilizador = new String[manager.getLista().size()];
         for (int i = 0; i < manager.getLista().size(); i++) {
-            Hospital hospital = (Hospital) manager.getLista().get(i);
-            menuEscolherHospital[i] = hospital.getCodigo();
+            Utilizador utilizador = (Utilizador) manager.getLista().get(i);
+            menuEscolherUtilizador[i] = utilizador.getNome();
         }
 
-        Integer hospitalAEditarIndex = getOpcaoMenu(pergunta, menuEscolherHospital);
-        if (hospitalAEditarIndex == -1) {
+        Integer utilizadorAEditarIndex = getOpcaoMenu(pergunta, menuEscolherUtilizador);
+        if (utilizadorAEditarIndex == -1) {
             return;
         }
 
-        Hospital hospitalAEditar = (Hospital) manager.getLista().get(hospitalAEditarIndex);
+        Utilizador utilizadorAEditar = (Utilizador) manager.getLista().get(utilizadorAEditarIndex);
 
         String pergunta2 = "Escolha o dado que quer editar:";
         Integer opcaoEscolhida = getOpcaoMenu(pergunta2, menuEditar);
@@ -148,9 +134,9 @@ public class HospitalTeste {
         switch (opcaoEscolhida) {
             case 0:// Nome
                 System.out.print("Novo Nome: ");
-                hospitalAEditar.setNome(input.nextLine());
+                utilizadorAEditar.setNome(input.nextLine());
                 try {
-                    manager.editar(hospitalAEditar);
+                    manager.editar(utilizadorAEditar);
                 } catch (Exception ex) {
                     System.out.println("ex " + ex);
                 }
@@ -161,11 +147,11 @@ public class HospitalTeste {
                     editar();
                 }
                 break;
-            case 1: // Localidade
-                System.out.print("Nova Localidade: ");
-                hospitalAEditar.setLocalidade(input.nextLine());
+            case 1: // Password
+                System.out.print("Nova Password: ");
+                utilizadorAEditar.setPassword(input.nextLine());
                 try {
-                    manager.editar(hospitalAEditar);
+                    manager.editar(utilizadorAEditar);
                 } catch (Exception ex) {
                     System.out.println("ex " + ex);
                 }
@@ -182,29 +168,29 @@ public class HospitalTeste {
 
     private static void remover() {
         if (manager.getLista().size() > 0) {
-            String pergunta = "Escolher o hospital a remover: ";
+            String pergunta = "Escolher o utilizador a remover: ";
             listar();
 
-            String[] menuEscolherHospital = new String[manager.getLista().size()];
+            String[] menuEscolherUtilizador = new String[manager.getLista().size()];
             for (int i = 0; i < manager.getLista().size(); i++) {
-                Hospital hospital = (Hospital) manager.getLista().get(i);
-                menuEscolherHospital[i] = hospital.getCodigo();
+                Utilizador utilizador = (Utilizador) manager.getLista().get(i);
+                menuEscolherUtilizador[i] = utilizador.getNome();
             }
 
-            Integer hospitalIndex = getOpcaoMenu(pergunta, menuEscolherHospital);
-            if (hospitalIndex == -1) {
+            Integer utilizadorIndex = getOpcaoMenu(pergunta, menuEscolherUtilizador);
+            if (utilizadorIndex == -1) {
                 return;
             }
 
-            Hospital hospital = (Hospital) manager.getLista().get(hospitalIndex);
+            Utilizador utilizador = (Utilizador) manager.getLista().get(utilizadorIndex);
 
             try {
-                manager.remover(hospital);
+                manager.remover(utilizador);
             } catch (Exception ex) {
                 System.out.println("ex " + ex);
             }
         } else {
-            System.out.println("Nao existem pacientes");
+            System.out.println("Nao existem utilizadores");
             start();
         }
     }

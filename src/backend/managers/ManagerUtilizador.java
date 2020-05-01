@@ -5,18 +5,53 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ManagerUtilizador extends ManagerBase implements Serializable {
-    
+
     private static final String ERRO_FALTA_NOME = "ERRO_FALTA_NOME";
     private static final String ERRO_FALTA_PASSWORD = "ERRO_FALTA_PASSWORD";
 
     public ManagerUtilizador() {
-    }   
-    
+    }
+
     public ManagerUtilizador(ArrayList<Utilizador> lista) {
         this.lista = lista;
     }
-    
-        /*
+
+    public void adicionar(Utilizador utilizador) throws Exception {
+        setOperacao(OPERACAO_ADICIONAR);
+        boolean isValido = validarCampos(utilizador);
+
+        if (isValido) {
+
+            lista.add(utilizador);
+        } else {
+            throw new Exception(ERRO_ADICIONAR);
+        }
+    }
+
+    public void remover(Utilizador utilizador) throws Exception {
+        setOperacao(OPERACAO_REMOVER);
+
+        lista.remove(utilizador);
+    }
+
+    public void editar(Utilizador utilizador) throws Exception {
+        setOperacao(OPERACAO_EDITAR);
+
+        boolean isValido = validarCampos(utilizador);
+
+        if (isValido) {
+            int index = lista.indexOf(utilizador);
+
+            if (index >= 0) {
+                lista.set(index, utilizador);
+            }
+        } else {
+
+            throw new Exception(ERRO_EDITAR);
+        }
+    }
+
+    /*
      * Método para validar se os campos da classe estão bem preenchidos
      */
     private boolean validarCampos(Utilizador utilizador) throws Exception {
@@ -30,6 +65,11 @@ public class ManagerUtilizador extends ManagerBase implements Serializable {
         }
         // validações....... (campos obrigatorios, tipos de dados, etc...)
         return isValid;
+    }
+
+    @Override
+    public String toString() {
+        return "ListaUtilizador{" + "lista=" + lista + '}';
     }
 
 }
