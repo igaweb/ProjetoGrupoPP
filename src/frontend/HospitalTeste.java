@@ -56,12 +56,17 @@ public class HospitalTeste {
         boolean isOpcaoEscolhida = false;
         Integer opcaoEscolhida;
         do {
-            System.out.println(pergunta);
-            System.out.println("Menu: ");
+            System.out.println("Menu Hospital: ");
             for (int i = 0; i < menu.length; i++) {
-                String menuItemStr = menu[i];
-                System.out.print(menuItemStr + " (" + i + "); ");
+                if (i == menu.length - 1) {
+                    String menuItemStr = menu[i];
+                    System.out.print(menuItemStr + " (" + i + "); ");
+                } else {
+                    String menuItemStr = menu[i];
+                    System.out.print(menuItemStr + " (" + i + "); ");
+                }
             }
+            System.out.print(pergunta);
 
             opcaoEscolhida = scanner.nextInt();
 
@@ -85,19 +90,19 @@ public class HospitalTeste {
             try {
                 System.out.print(" | " + hospital.getNome());
             } catch (Exception e) {
-                System.out.print(" | 0");
+                System.out.print(" | -");
             }
 
             try {
                 System.out.print(" | " + hospital.getLocalidade());
             } catch (Exception e) {
-                System.out.print(" | 0");
+                System.out.print(" | -");
             }
 
             try {
                 System.out.print(" | " + hospital.getEnfermarias().size());
             } catch (Exception e) {
-                System.out.print(" | 0");
+                System.out.print(" | -");
             }
 
             System.out.println(" |");
@@ -181,26 +186,31 @@ public class HospitalTeste {
     }
 
     private static void remover() {
-        String pergunta = "Escolher o hospital a remover: ";
-        listar();
+        if (manager.getLista().size() > 0) {
+            String pergunta = "Escolher o hospital a remover: ";
+            listar();
 
-        String[] menuEscolherHospital = new String[manager.getLista().size()];
-        for (int i = 0; i < manager.getLista().size(); i++) {
-            Hospital hospital = (Hospital) manager.getLista().get(i);
-            menuEscolherHospital[i] = hospital.getCodigo();
-        }
+            String[] menuEscolherHospital = new String[manager.getLista().size()];
+            for (int i = 0; i < manager.getLista().size(); i++) {
+                Hospital hospital = (Hospital) manager.getLista().get(i);
+                menuEscolherHospital[i] = hospital.getCodigo();
+            }
 
-        Integer hospitalIndex = getOpcaoMenu(pergunta, menuEscolherHospital);
-        if (hospitalIndex == -1) {
-            return;
-        }
+            Integer hospitalIndex = getOpcaoMenu(pergunta, menuEscolherHospital);
+            if (hospitalIndex == -1) {
+                return;
+            }
 
-        Hospital hospital = (Hospital) manager.getLista().get(hospitalIndex);
+            Hospital hospital = (Hospital) manager.getLista().get(hospitalIndex);
 
-        try {
-            manager.remover(hospital);
-        } catch (Exception ex) {
-            System.out.println("ex " + ex);
+            try {
+                manager.remover(hospital);
+            } catch (Exception ex) {
+                System.out.println("ex " + ex);
+            }
+        } else {
+            System.out.println("Nao existem pacientes");
+            start();
         }
     }
 
