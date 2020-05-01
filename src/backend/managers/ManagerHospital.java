@@ -20,7 +20,7 @@ public class ManagerHospital extends ManagerBase {
         // validar se os campos vêm todos bem preenchidos
         // validarCampos(hospital) <- se estiver bem preenchido,
         // avança para a adição -> this.lista.add(hospital);
-        // senão, retorna erro -> new EnfermariaException("Erro a adicionar hospital");
+        // senão, retorna erro -> new HospitalException("Erro a adicionar hospital");
     // set da operacao que estamos a fazer
         setOperacao(OPERACAO_ADICIONAR);
 
