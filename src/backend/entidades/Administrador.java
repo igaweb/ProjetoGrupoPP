@@ -12,7 +12,7 @@ public class Administrador extends Utilizador {
     }
 
     public Administrador(boolean isAdminitrador, String nome, String password, boolean autenticado) {
-        super(nome, password, autenticado);
+        super(nome, password);
         this.isAdministrador = isAdminitrador;
     }
 
