@@ -69,7 +69,7 @@ public abstract class MenuBase {
 
     protected void sair() {
         // guarda os ficheiros
-        serializacao.guardar(aplicacao);
+        guardar();
 
         // termina o programa
         System.exit(0);

@@ -122,8 +122,8 @@ public class MenuEnfermaria extends MenuBase {
         enfermaria.setTipo(tipo);
         enfermaria.setCamas(new Boolean[nCamas]);
         try {
-            Hospital hospitalAInserirEnfermaria = getListaHospital().get(hospitalAInserirEnfermariaIndex);
             manager.adicionar(enfermaria);
+            Hospital hospitalAInserirEnfermaria = getListaHospital().get(hospitalAInserirEnfermariaIndex);
             hospitalAInserirEnfermaria.getEnfermarias().add(enfermaria);
             
             guardar();
