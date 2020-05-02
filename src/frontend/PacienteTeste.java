@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 
 public class PacienteTeste extends MenuBase {
    
-    private static final String[] menuPrincipal = new String[]{"LISTAR", "ADICIONAR", "EDITAR", "REMOVER", "SAIR"};
     private static final String[] menuEditar = new String[]{"Nome", "Localidade", "Cama", "Estado", "Data de Entrada", "Data de Saida"};
     private static final String[] menuEstadoPaciente = Conteudos.getEstadosPaciente();
 
@@ -22,7 +21,7 @@ public class PacienteTeste extends MenuBase {
 
     public void start() {
         String pergunta = "Escolha uma opcao:";
-        Integer opcaoEscolhida = getOpcaoMenu(pergunta, menuPrincipal);
+        Integer opcaoEscolhida = getOpcaoMenu(pergunta, MENU_PRINCIPAL);
 
         switch (opcaoEscolhida) {
             case 0:// LISTAR
