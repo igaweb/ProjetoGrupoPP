@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 public class HospitalTeste extends MenuBase {
 
-    private static final String[] menuPrincipal = new String[]{"LISTAR", "ADICIONAR", "EDITAR", "REMOVER", "SAIR"};
     private static final String[] menuEditar = new String[]{"Nome", "Localidade"};
 
     private static ManagerHospital manager;
@@ -15,6 +14,34 @@ public class HospitalTeste extends MenuBase {
         super(menus);
         
         this.manager = menus.getAplicacao().getManagerHospital();
+    }
+    
+    public void start(){
+        
+        String pergunta = "Escolha uma opcao:";
+        Integer opcaoEscolhida = getOpcaoMenu(pergunta, MENU_PRINCIPAL);
+
+        switch (opcaoEscolhida) {
+            case 0:// LISTAR
+                listar();
+                break;
+            case 1: // ADICIONAR
+                adicionar();
+                break;
+            case 2: // EDITAR
+                editar();
+                break;
+
+            case 3: // REMOVER
+                remover();
+                break;
+            
+            case 4: // SAIR
+                sair();
+                break;
+        }
+
+        start();
     }
 
     public void listar() {

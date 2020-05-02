@@ -16,7 +16,7 @@ public abstract class MenuBase {
     
     protected Menus menus;
 
-    private static final String[] MENU_PRINCIPAL = new String[]{"LISTAR", "ADICIONAR", "EDITAR", "REMOVER", "SAIR"};
+    protected static final String[] MENU_PRINCIPAL = new String[]{"LISTAR", "ADICIONAR", "EDITAR", "REMOVER", "SAIR"};
 
     public MenuBase(Menus menus) {
         this.menus = menus;
@@ -39,34 +39,6 @@ public abstract class MenuBase {
         if(aplicacao == null) {
             System.out.println("A aplicacao nao foi inicializada!");
         }
-    }
-    
-    public void start(){
-        
-        String pergunta = "Escolha uma opcao:";
-        Integer opcaoEscolhida = getOpcaoMenu(pergunta, MENU_PRINCIPAL);
-
-        switch (opcaoEscolhida) {
-            case 0:// LISTAR
-                listar();
-                break;
-            case 1: // ADICIONAR
-                adicionar();
-                break;
-            case 2: // EDITAR
-                editar();
-                break;
-
-            case 3: // REMOVER
-                remover();
-                break;
-            
-            case 4: // SAIR
-                sair();
-                break;
-        }
-
-        start();
     }
     
     protected Integer getOpcaoMenu(String pergunta, String[] menu) {
@@ -101,22 +73,6 @@ public abstract class MenuBase {
 
         // termina o programa
         System.exit(0);
-    }
-
-    private void listar() {
-        throw new UnsupportedOperationException("Chamada no MenuBase");
-    }
-
-    private void adicionar() {
-        throw new UnsupportedOperationException("Chamada no MenuBase");
-    }
-
-    private void editar() {
-        throw new UnsupportedOperationException("Chamada no MenuBase");
-    }
-
-    private void remover() {
-        throw new UnsupportedOperationException("Chamada no MenuBase");
     }
     
     protected void guardar() {

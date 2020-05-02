@@ -21,6 +21,34 @@ public class MenuEnfermaria extends MenuBase {
         this.manager = menus.getAplicacao().getManagerEnfermaria();
     }
 
+    public void start(){
+        
+        String pergunta = "Escolha uma opcao:";
+        Integer opcaoEscolhida = getOpcaoMenu(pergunta, MENU_PRINCIPAL);
+
+        switch (opcaoEscolhida) {
+            case 0:// LISTAR
+                listar();
+                break;
+            case 1: // ADICIONAR
+                adicionar();
+                break;
+            case 2: // EDITAR
+                editar();
+                break;
+
+            case 3: // REMOVER
+                remover();
+                break;
+            
+            case 4: // SAIR
+                sair();
+                break;
+        }
+
+        start();
+    }
+
     private void listar() {
         System.out.println("Enfermarias: ");
         System.out.println("| Codigo | Nome | Qtd Equipamentos | Qtd Camas | Qtd Pacientes |");
@@ -134,10 +162,10 @@ public class MenuEnfermaria extends MenuBase {
                 break;
             
             case 1: // n camas
-                pergunta = "Redefinir numero de camas ";
+                System.out.println("Redefinir numero de camas:");
                 Integer nCamas = scanner.nextInt();
                 
-                if(nCamas == null || nCamas instanceof Integer || nCamas >= 0) {
+                if(nCamas == null || !(nCamas instanceof Integer) || nCamas < 0) {
                     return;
                 }
 
