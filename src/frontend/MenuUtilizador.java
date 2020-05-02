@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 
-public class UtilizadorTeste {
+public class MenuUtilizador {
 
     private static final String[] menuPrincipal = new String[]{"LISTAR", "ADICIONAR", "EDITAR", "REMOVER", "SAIR"};
     private static final String[] menuEditar = new String[]{"Nome", "Password"};

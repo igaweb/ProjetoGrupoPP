@@ -4,13 +4,13 @@ import backend.entidades.Hospital;
 import backend.managers.ManagerHospital;
 import java.util.Scanner;
 
-public class HospitalTeste extends MenuBase {
+public class MenuHospital extends MenuBase {
 
     private static final String[] menuEditar = new String[]{"Nome", "Localidade"};
 
     private static ManagerHospital manager;
 
-    public HospitalTeste(Menus menus) {
+    public MenuHospital(Menus menus) {
         super(menus);
         
         this.manager = menus.getAplicacao().getManagerHospital();

@@ -81,7 +81,7 @@ public class MenuEnfermaria extends MenuBase {
 
     private void adicionar() {
         String pergunta1 = "Selecione o Hospital:";
-        HospitalTeste hospitalMenu = menus.getMenuHospital();
+        MenuHospital hospitalMenu = menus.getMenuHospital();
         hospitalMenu.listar();
 
         ArrayList<Hospital> listaHospital = getListaHospital();

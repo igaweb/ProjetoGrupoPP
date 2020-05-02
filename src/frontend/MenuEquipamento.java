@@ -9,6 +9,6 @@ package frontend;
  *
  * @author SERALIVE
  */
-public class EquipamentoTeste {
+public class MenuEquipamento {
     
 }

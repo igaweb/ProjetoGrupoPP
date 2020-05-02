@@ -16,9 +16,9 @@ public class Menus {
     private Serializacao serializacao;
     
     private MenuEnfermaria menuEnfermaria;
-    private HospitalTeste menuHospital;
-    private EquipamentoTeste menuEquipamento;
-    private PacienteTeste menuPaciente;
+    private MenuHospital menuHospital;
+    private MenuEquipamento menuEquipamento;
+    private MenuPaciente menuPaciente;
     // private MenuUtilizador menuUtilizador;
     // private MenuProfissionalSaude menuProfissionalSaude;
     
@@ -37,8 +37,8 @@ public class Menus {
         
         System.out.println("Inicializar menus...");
         this.menuEnfermaria = new MenuEnfermaria(this);
-        this.menuHospital = new HospitalTeste(this);
-        this.menuPaciente = new PacienteTeste(this);
+        this.menuHospital = new MenuHospital(this);
+        this.menuPaciente = new MenuPaciente(this);
     }
 
     public Scanner getScanner() {
@@ -73,27 +73,27 @@ public class Menus {
         this.menuEnfermaria = menuEnfermaria;
     }
 
-    public HospitalTeste getMenuHospital() {
+    public MenuHospital getMenuHospital() {
         return menuHospital;
     }
 
-    public void setMenuHospital(HospitalTeste menuHospital) {
+    public void setMenuHospital(MenuHospital menuHospital) {
         this.menuHospital = menuHospital;
     }
     
-    public EquipamentoTeste getMenuEquipamento() {
+    public MenuEquipamento getMenuEquipamento() {
         return menuEquipamento;
     }
 
-    public void setMenuEquipamento(EquipamentoTeste menuEquipamento) {
+    public void setMenuEquipamento(MenuEquipamento menuEquipamento) {
         this.menuEquipamento = menuEquipamento;
     }
     
-    public PacienteTeste getMenuPaciente() {
+    public MenuPaciente getMenuPaciente() {
         return menuPaciente;
     }
 
-    public void setMenuPaciente(PacienteTeste menuPaciente) {
+    public void setMenuPaciente(MenuPaciente menuPaciente) {
         this.menuPaciente = menuPaciente;
     }
 

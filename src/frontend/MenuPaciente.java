@@ -6,14 +6,14 @@ import backend.managers.ManagerPaciente;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PacienteTeste extends MenuBase {
+public class MenuPaciente extends MenuBase {
    
     private static final String[] menuEditar = new String[]{"Nome", "Localidade", "Cama", "Estado", "Data de Entrada", "Data de Saida"};
     private static final String[] menuEstadoPaciente = Conteudos.getEstadosPaciente();
 
     private ManagerPaciente manager;
 
-    public PacienteTeste(Menus menus) {
+    public MenuPaciente(Menus menus) {
         super(menus);
         
         this.manager = menus.getAplicacao().getManagerPaciente();
@@ -122,7 +122,7 @@ public class PacienteTeste extends MenuBase {
         try {
             manager.adicionar(paciente);
         } catch (Exception ex) {
-            Logger.getLogger(PacienteTeste.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }  
           
     }
@@ -156,7 +156,7 @@ public class PacienteTeste extends MenuBase {
                         manager.editar(pacienteAEditar);
                     } catch (Exception ex) {
                         System.out.println("ex " + ex);
-                        Logger.getLogger(PacienteTeste.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(MenuPaciente.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     System.out.println("Quer Continuar a editar(Y/N)?: ");
                     
@@ -172,7 +172,7 @@ public class PacienteTeste extends MenuBase {
                         manager.editar(pacienteAEditar);
                     } catch (Exception ex) {
                         System.out.println("ex " + ex);
-                        Logger.getLogger(PacienteTeste.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(MenuPaciente.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     System.out.println("Quer Continuar a editar(Y/N)? ");
                     
@@ -188,7 +188,7 @@ public class PacienteTeste extends MenuBase {
                         manager.editar(pacienteAEditar);
                     } catch (Exception ex) {
                         System.out.println("ex " + ex);
-                        Logger.getLogger(PacienteTeste.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(MenuPaciente.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     System.out.println("Quer Continuar a editar(Y/N)? ");
                     editar = scanner.nextLine();
@@ -209,7 +209,7 @@ public class PacienteTeste extends MenuBase {
                         manager.editar(pacienteAEditar);
                     } catch (Exception ex) {
                         System.out.println("ex " + ex);
-                        Logger.getLogger(PacienteTeste.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(MenuPaciente.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     System.out.println("Quer Continuar a editar(Y/N)? ");
                     
@@ -227,7 +227,7 @@ public class PacienteTeste extends MenuBase {
                         manager.editar(pacienteAEditar);
                     } catch (Exception ex) {
                         System.out.println("ex " + ex);
-                        Logger.getLogger(PacienteTeste.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(MenuPaciente.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     System.out.println("Quer Continuar a editar(Y/N)? ");
                     
@@ -244,7 +244,7 @@ public class PacienteTeste extends MenuBase {
                         manager.editar(pacienteAEditar);
                     } catch (Exception ex) {
                         System.out.println("ex " + ex);
-                        Logger.getLogger(PacienteTeste.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(MenuPaciente.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     System.out.println("Quer Continuar a editar(Y/N)? ");
                     
@@ -280,7 +280,7 @@ public class PacienteTeste extends MenuBase {
             manager.remover(paciente);
         } catch (Exception ex) {
             System.out.println("ex " + ex);
-            Logger.getLogger(PacienteTeste.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MenuPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
         else{
