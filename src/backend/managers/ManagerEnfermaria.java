@@ -19,7 +19,7 @@ public class ManagerEnfermaria extends ManagerBase implements Serializable {
         this.lista = lista;
     }
 
-    public void adicionar(String codigo, int tipo, ArrayList<Boolean> camas, ArrayList<Equipamento> equipamentos, ArrayList<Paciente> pacientes) throws Exception {
+    public void adicionar(String codigo, int tipo, Boolean[] camas, ArrayList<Equipamento> equipamentos, ArrayList<Paciente> pacientes) throws Exception {
         Enfermaria enfermaria = new Enfermaria(codigo, tipo, camas, equipamentos, pacientes);
         
         adicionar(enfermaria);

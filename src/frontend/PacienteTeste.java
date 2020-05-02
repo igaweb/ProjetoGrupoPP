@@ -3,32 +3,24 @@ package frontend;
 import backend.Conteudos;
 import backend.entidades.Paciente;
 import backend.managers.ManagerPaciente;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PacienteTeste {
+public class PacienteTeste extends MenuBase {
    
     private static final String[] menuPrincipal = new String[]{"LISTAR", "ADICIONAR", "EDITAR", "REMOVER", "SAIR"};
     private static final String[] menuEditar = new String[]{"Nome", "Localidade", "Cama", "Estado", "Data de Entrada", "Data de Saida"};
     private static final String[] menuEstadoPaciente = Conteudos.getEstadosPaciente();
 
-    private static Scanner scanner;
+    private ManagerPaciente manager;
 
-    private static ManagerPaciente manager;
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        scanner = new Scanner(System.in);
-        manager = new ManagerPaciente();
-
-        start();
+    public PacienteTeste(Menus menus) {
+        super(menus);
+        
+        this.manager = menus.getAplicacao().getManagerPaciente();
     }
 
-    private static void start() {
+    public void start() {
         String pergunta = "Escolha uma opcao:";
         Integer opcaoEscolhida = getOpcaoMenu(pergunta, menuPrincipal);
 
@@ -55,36 +47,7 @@ public class PacienteTeste {
         start();
     }
     
-    private static Integer getOpcaoMenu(String pergunta, String[] menu) {
-        boolean isOpcaoEscolhida = false;
-        Integer opcaoEscolhida;
-        do {
-            System.out.println("Menu Paciente: ");
-            for (int i = 0; i < menu.length; i++) {
-                if(i == menu.length - 1){
-                    String menuItemStr = menu[i];
-                System.out.println(menuItemStr + " (" + i + "); ");
-                }
-                else
-                {
-                String menuItemStr = menu[i];
-                System.out.print(menuItemStr + " (" + i + "); ");
-                }
-            }
-            System.out.print(pergunta);
-
-            opcaoEscolhida = scanner.nextInt();
-
-            isOpcaoEscolhida = (opcaoEscolhida != null && opcaoEscolhida >= 0 && opcaoEscolhida < menu.length) ||
-                    opcaoEscolhida == -1;
-
-            pergunta = "Opcao invalida, escolha uma das opcoes:";
-        } while (!isOpcaoEscolhida);
-
-        return opcaoEscolhida;
-    }
-    
-    private static void listar() {
+    public void listar() {
         System.out.println("Pacientes: ");
         System.out.println("| Codigo | Nome | Localidade | Cama | Estado | Data Entrada | Data Saida |");
         for (int i = 0; i < manager.getLista().size(); i++) {
@@ -123,8 +86,7 @@ public class PacienteTeste {
              System.out.println(" |");
     }
 }
-    private static void adicionar() {
-        Scanner input = new Scanner(System.in);
+    public void adicionar() {
         Paciente paciente = new Paciente();
         
         String perguntaNome = "Introduza o nome do paciente: ";
@@ -134,13 +96,13 @@ public class PacienteTeste {
         String perguntaDataSaida = "Introduza a Data de Saida: ";
         
         System.out.print(perguntaNome);
-        paciente.setNome(input.nextLine());
+        paciente.setNome(scanner.nextLine());
 
         System.out.print(perguntaLocalidade);
-        paciente.setLocalidade(input.nextLine());
+        paciente.setLocalidade(scanner.nextLine());
 
         System.out.print(perguntaCama);
-        paciente.setCama(input.nextInt());
+        paciente.setCama(scanner.nextInt());
         
         String pergunta = "Selecione o estado do paciente: ";
         Integer estado = getOpcaoMenu(pergunta, menuEstadoPaciente);
@@ -153,10 +115,10 @@ public class PacienteTeste {
         paciente.setEstado(estado);
         
          System.out.print(perguntaDataEntrada);
-         paciente.setDataEntrada(input.nextInt());
+         paciente.setDataEntrada(scanner.nextInt());
          
          System.out.print(perguntaDataSaida);
-         paciente.setDataSaida(input.nextInt()); 
+         paciente.setDataSaida(scanner.nextInt()); 
          
         try {
             manager.adicionar(paciente);
@@ -166,8 +128,7 @@ public class PacienteTeste {
           
     }
 
-    private static void editar() {
-        Scanner input = new Scanner(System.in);
+    public void editar() {
         String editar;
         String pergunta = "Escolher o paciente a alterar: ";
         listar();
@@ -191,7 +152,7 @@ public class PacienteTeste {
         switch (opcaoEscolhida) {
             case 0:// Nome
                     System.out.print("Novo Nome: ");
-                    pacienteAEditar.setNome(input.nextLine());
+                    pacienteAEditar.setNome(scanner.nextLine());
                     try {
                         manager.editar(pacienteAEditar);
                     } catch (Exception ex) {
@@ -200,14 +161,14 @@ public class PacienteTeste {
                     }
                     System.out.println("Quer Continuar a editar(Y/N)?: ");
                     
-                    editar = input.nextLine();
+                    editar = scanner.nextLine();
                     if (editar.toUpperCase().contains("Y")){
                         editar();
                     }
                 break;
             case 1: // Localidade
                 System.out.print("Nova Localidade: ");
-                    pacienteAEditar.setLocalidade(input.nextLine());
+                    pacienteAEditar.setLocalidade(scanner.nextLine());
                     try {
                         manager.editar(pacienteAEditar);
                     } catch (Exception ex) {
@@ -216,14 +177,14 @@ public class PacienteTeste {
                     }
                     System.out.println("Quer Continuar a editar(Y/N)? ");
                     
-                    editar = input.nextLine();
+                    editar = scanner.nextLine();
                     if (editar.toUpperCase().contains("Y")){
                         editar();
                     }
                 break;
             case 2: // Cama
                 System.out.print("Nova Cama: ");
-                    pacienteAEditar.setCama(input.nextInt());
+                    pacienteAEditar.setCama(scanner.nextInt());
                     try {
                         manager.editar(pacienteAEditar);
                     } catch (Exception ex) {
@@ -231,7 +192,7 @@ public class PacienteTeste {
                         Logger.getLogger(PacienteTeste.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     System.out.println("Quer Continuar a editar(Y/N)? ");
-                    editar = input.nextLine();
+                    editar = scanner.nextLine();
                     if (editar.toUpperCase().contains("Y")){
                         editar();
                     }
@@ -253,7 +214,7 @@ public class PacienteTeste {
                     }
                     System.out.println("Quer Continuar a editar(Y/N)? ");
                     
-                    editar = input.nextLine();
+                    editar = scanner.nextLine();
                     if (editar.toUpperCase().contains("Y")){
                         editar();
                     }
@@ -261,8 +222,8 @@ public class PacienteTeste {
                 
             case 4: // Data de Entrada
                 System.out.print("Nova Data de Entrada: ");
-                    pacienteAEditar.setDataEntrada(input.nextInt());
-                    input.nextLine();
+                    pacienteAEditar.setDataEntrada(scanner.nextInt());
+                    scanner.nextLine();
                     try {
                         manager.editar(pacienteAEditar);
                     } catch (Exception ex) {
@@ -271,7 +232,7 @@ public class PacienteTeste {
                     }
                     System.out.println("Quer Continuar a editar(Y/N)? ");
                     
-                    editar = input.nextLine();
+                    editar = scanner.nextLine();
                     if (editar.toUpperCase().contains("Y")){
                         editar();
                     }
@@ -279,7 +240,7 @@ public class PacienteTeste {
                 
             case 5: // Data de saida
                 System.out.print("Nova Data de Saida: ");
-                    pacienteAEditar.setDataSaida(input.nextInt());
+                    pacienteAEditar.setDataSaida(scanner.nextInt());
                     try {
                         manager.editar(pacienteAEditar);
                     } catch (Exception ex) {
@@ -288,7 +249,7 @@ public class PacienteTeste {
                     }
                     System.out.println("Quer Continuar a editar(Y/N)? ");
                     
-                    editar = input.nextLine();
+                    editar = scanner.nextLine();
                     if (editar.toUpperCase().contains("Y")){
                         editar();
                     }
@@ -298,7 +259,7 @@ public class PacienteTeste {
 
     }
 
-    private static void remover() {
+    public void remover() {
         if(manager.getLista().size() > 0){
             String pergunta = "Escolher o paciente a remover: ";
         listar();
@@ -329,8 +290,5 @@ public class PacienteTeste {
         }
         
     }
-    
-    private static void sair(){
-        System.exit(0);
-    }
 }
+

@@ -7,14 +7,14 @@ public class Enfermaria implements Serializable{
 
     private String codigo;
     private Integer tipo;
-    private ArrayList<Boolean> camas;
+    private Boolean[] camas;
     private ArrayList<Equipamento> equipamentos;
     private ArrayList<Paciente> pacientes;
 
     public Enfermaria() {
     }
 
-    public Enfermaria(String codigo, int tipo, ArrayList<Boolean> camas, ArrayList<Equipamento> equipamentos, ArrayList<Paciente> pacientes) {
+    public Enfermaria(String codigo, int tipo, Boolean[] camas, ArrayList<Equipamento> equipamentos, ArrayList<Paciente> pacientes) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.camas = camas;
@@ -38,15 +38,11 @@ public class Enfermaria implements Serializable{
         this.tipo = tipo;
     }
 
-    public ArrayList<Boolean> getCamas() {
+    public Boolean[] getCamas() {
         return camas;
     }
 
-    /**
-     *
-     * @param camas
-     */
-    public void setCamas(ArrayList<Boolean> camas) {
+    public void setCamas(Boolean[] camas) {
         this.camas = camas;
     }
 

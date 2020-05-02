@@ -1,80 +1,23 @@
 package frontend;
 
-import backend.Conteudos;
 import backend.entidades.Hospital;
 import backend.managers.ManagerHospital;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Level;
 
-public class HospitalTeste {
+public class HospitalTeste extends MenuBase {
 
     private static final String[] menuPrincipal = new String[]{"LISTAR", "ADICIONAR", "EDITAR", "REMOVER", "SAIR"};
     private static final String[] menuEditar = new String[]{"Nome", "Localidade"};
 
-    private static Scanner scanner;
     private static ManagerHospital manager;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        scanner = new Scanner(System.in);
-        manager = new ManagerHospital();
-
-        start();
+    public HospitalTeste(Menus menus) {
+        super(menus);
+        
+        this.manager = menus.getAplicacao().getManagerHospital();
     }
 
-    private static void start() {
-        String pergunta = "Escolha uma opcao:";
-        Integer opcaoEscolhida = getOpcaoMenu(pergunta, menuPrincipal);
-
-        switch (opcaoEscolhida) {
-            case 0:// LISTAR
-                listar();
-                break;
-            case 1: // ADICIONAR
-                adicionar();
-                break;
-            case 2: // EDITAR
-                editar();
-                break;
-
-            case 3: // REMOVER
-                remover();
-                break;
-
-            case 4: // SAIR
-                sair();
-                break;
-        }
-
-        start();
-    }
-
-    private static Integer getOpcaoMenu(String pergunta, String[] menu) {
-        boolean isOpcaoEscolhida = false;
-        Integer opcaoEscolhida;
-        do {
-            System.out.println(pergunta);
-            System.out.println("Menu Hospital: ");
-            for (int i = 0; i < menu.length; i++) {
-                String menuItemStr = menu[i];
-                System.out.print(menuItemStr + " (" + i + "); ");
-            }
-
-            opcaoEscolhida = scanner.nextInt();
-
-            isOpcaoEscolhida = (opcaoEscolhida != null && opcaoEscolhida >= 0 && opcaoEscolhida < menu.length)
-                    || opcaoEscolhida == -1;
-
-            pergunta = "Opcao invalida, escolha uma das opcoes:";
-        } while (!isOpcaoEscolhida);
-
-        return opcaoEscolhida;
-    }
-
-    private static void listar() {
+    public void listar() {
         System.out.println("Hospitais: ");
         System.out.println("| Codigo | Nome | Localidade | Qtd Enfermairas |");
         for (int i = 0; i < manager.getLista().size(); i++) {
@@ -104,7 +47,7 @@ public class HospitalTeste {
         }
     }
 
-    private static void adicionar() {
+    public void adicionar() {
         Scanner input = new Scanner(System.in);
         Hospital hospital = new Hospital();
 
@@ -123,17 +66,13 @@ public class HospitalTeste {
         }
     }
 
-    private static void editar() {
+    public void editar() {
         Scanner input = new Scanner(System.in);
         String editar;
-        String pergunta = "Escolher o hospital a alterar: ";
+        String pergunta = "Escolher o paciente a alterar: ";
         listar();
 
-        String[] menuEscolherHospital = new String[manager.getLista().size()];
-        for (int i = 0; i < manager.getLista().size(); i++) {
-            Hospital hospital = (Hospital) manager.getLista().get(i);
-            menuEscolherHospital[i] = hospital.getCodigo();
-        }
+        String[] menuEscolherHospital = getMenuEscolherHospital();
 
         Integer hospitalAEditarIndex = getOpcaoMenu(pergunta, menuEscolherHospital);
         if (hospitalAEditarIndex == -1) {
@@ -180,7 +119,7 @@ public class HospitalTeste {
 
     }
 
-    private static void remover() {
+    public void remover() {
         if (manager.getLista().size() > 0) {
             String pergunta = "Escolher o hospital a remover: ";
             listar();
@@ -207,9 +146,5 @@ public class HospitalTeste {
             System.out.println("Nao existem pacientes");
             start();
         }
-    }
-
-    private static void sair() {
-        System.exit(0);
     }
 }
