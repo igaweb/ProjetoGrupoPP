@@ -2,6 +2,7 @@ package backend.managers;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public abstract class ManagerBase implements Serializable {
 
@@ -16,6 +17,7 @@ public abstract class ManagerBase implements Serializable {
     protected static final String ERRO_ADICIONAR = "ERRO_ADICIONAR";
     
     protected ArrayList lista = new ArrayList();
+    protected TreeMap listaTreeMap = new TreeMap();
     protected String operacao = null;
 
     public ManagerBase() {
@@ -48,9 +50,17 @@ public abstract class ManagerBase implements Serializable {
     public ArrayList getLista() {
         return lista;
     }
-
+    
     public void setLista(ArrayList lista) {
         this.lista = lista;
+    }
+    
+    public TreeMap getListaTreeMap() {
+        return listaTreeMap;
+    }
+
+    public void setListaTreeMap(TreeMap listaTreeMap) {
+        this.listaTreeMap = listaTreeMap;
     }
     
 }

@@ -6,7 +6,9 @@ import backend.Serializacao;
 import backend.entidades.Enfermaria;
 import backend.entidades.Hospital;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public abstract class MenuBase {
 
@@ -67,6 +69,30 @@ public abstract class MenuBase {
         return opcaoEscolhida;
     }
 
+    protected String getOpcaoMenu(String pergunta, TreeMap<String, String> menu) {
+        boolean isOpcaoEscolhida = false;
+        String opcaoEscolhida;
+        do {
+            System.out.println(pergunta);
+            for (Map.Entry<String, String> entry : menu.entrySet()) {
+                String menuItemStr = entry.getValue();
+                System.out.print(menuItemStr + " (" + entry.getKey() + "); ");
+            }
+
+            try {
+                opcaoEscolhida = scanner.nextLine();
+            } catch (Exception e) {
+                opcaoEscolhida = null;
+            }
+
+            isOpcaoEscolhida = opcaoEscolhida != null && menu.get(opcaoEscolhida.toUpperCase()) != null;
+
+            pergunta = "Opcao invalida, escolha uma das opcoes:";
+        } while (!isOpcaoEscolhida);
+
+        return opcaoEscolhida.toUpperCase();
+    }
+
     protected void sair() {
         // guarda os ficheiros
         guardar();
@@ -84,8 +110,8 @@ public abstract class MenuBase {
         return menus.getAplicacao().getManagerHospital().getLista();
     }
     
-    protected ArrayList<Enfermaria> getListaEnfermaria() {
-        return menus.getAplicacao().getManagerEnfermaria().getLista();
+    protected TreeMap<String, Enfermaria> getListaEnfermaria() {
+        return menus.getAplicacao().getManagerEnfermaria().getListaTreeMap();
     }
     
     protected String[] getMenuEscolherHospital() {
@@ -99,12 +125,15 @@ public abstract class MenuBase {
         return menuEscolherHospital;
     }
     
-    protected String[] getMenuEscolherEnfermaria() {
-        ArrayList<Enfermaria> listaEnfermaria = menus.getAplicacao().getManagerEnfermaria().getLista();
-        String[] menuEscolherEnfermaria = new String[listaEnfermaria.size()];
-        for (int i = 0; i < listaEnfermaria.size(); i++) {
-            Enfermaria enfermaria = (Enfermaria) listaEnfermaria.get(i);
-            menuEscolherEnfermaria[i] = enfermaria.getCodigo() + " (" + Conteudos.getTiposEnfermarias()[enfermaria.getTipo()] + ")";
+    protected TreeMap<String, String> getMenuEscolherEnfermaria() {
+        TreeMap<String, Enfermaria> listaEnfermaria = menus.getAplicacao().getManagerEnfermaria().getListaTreeMap();
+        TreeMap<String, String> menuEscolherEnfermaria = new TreeMap<String, String>();
+        int i = 0;
+        for (Map.Entry<String, Enfermaria> entry : listaEnfermaria.entrySet()) {
+            Enfermaria enfermaria = (Enfermaria) entry.getValue();
+            menuEscolherEnfermaria.put(enfermaria.getCodigo(), enfermaria.getCodigo() + " (" + Conteudos.getTiposEnfermarias()[enfermaria.getTipo()] + ")");
+            
+            i++;
         }
       
         return menuEscolherEnfermaria;

@@ -5,6 +5,8 @@ import backend.entidades.Enfermaria;
 import backend.entidades.Hospital;
 import backend.managers.ManagerEnfermaria;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -52,8 +54,8 @@ public class MenuEnfermaria extends MenuBase {
     private void listar() {
         System.out.println("Enfermarias: ");
         System.out.println("| Codigo | Nome | Qtd Equipamentos | Qtd Camas | Qtd Pacientes |");
-        for (int i = 0; i < getListaEnfermaria().size(); i++) {
-            Enfermaria enfermaria = (Enfermaria) getListaEnfermaria().get(i);
+        for (Map.Entry<String, Enfermaria> entry : getListaEnfermaria().entrySet()) {
+            Enfermaria enfermaria = (Enfermaria) entry.getValue();
 
             System.out.print(" | " + enfermaria.getCodigo());
             System.out.print(" | " + Conteudos.getTiposEnfermarias()[enfermaria.getTipo()]);
@@ -138,15 +140,14 @@ public class MenuEnfermaria extends MenuBase {
         String pergunta = "Escolher a enfermaria a alterar: ";
         listar();
         
-        String[] menuEscolherEnfermaria = getMenuEscolherEnfermaria();
+        TreeMap<String, String> menuEscolherEnfermaria = getMenuEscolherEnfermaria();
 
-        Integer enfermariaAEditarIndex = getOpcaoMenu(pergunta, menuEscolherEnfermaria);
-        if(enfermariaAEditarIndex == -1) {
+        String enfermariaAEditarCode = getOpcaoMenu(pergunta, menuEscolherEnfermaria);
+        Enfermaria enfermariaAEditar = (Enfermaria) getListaEnfermaria().get(enfermariaAEditarCode);
+        if(enfermariaAEditar == null) {
             return;
         }
         
-        Enfermaria enfermariaAEditar = (Enfermaria) getListaEnfermaria().get(enfermariaAEditarIndex);
-
         String pergunta2 = "Escolha o dado que quer editar:";
         Integer opcaoEscolhida = getOpcaoMenu(pergunta2, MENU_ESCOLHER_CAMPO_EDITAR);
 
@@ -192,13 +193,10 @@ public class MenuEnfermaria extends MenuBase {
         String pergunta = "Escolher a enfermaria a remover: ";
         listar();
         
-        String[] menuEscolherEnfermaria = getMenuEscolherEnfermaria();
-        Integer enfermariaIndex = getOpcaoMenu(pergunta, menuEscolherEnfermaria);
-        if(enfermariaIndex == -1) {
-            return;
-        }
+        TreeMap<String, String> menuEscolherEnfermaria = getMenuEscolherEnfermaria();
+        String enfermariaCode = getOpcaoMenu(pergunta, menuEscolherEnfermaria);
         
-        Enfermaria enfermaria = (Enfermaria) getListaEnfermaria().get(enfermariaIndex);
+        Enfermaria enfermaria = (Enfermaria) getListaEnfermaria().get(enfermariaCode);
 
         try {
             manager.remover(enfermaria);

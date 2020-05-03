@@ -6,6 +6,7 @@ import backend.entidades.Equipamento;
 import backend.entidades.Paciente;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class ManagerEnfermaria extends ManagerBase implements Serializable {
 
@@ -19,7 +20,7 @@ public class ManagerEnfermaria extends ManagerBase implements Serializable {
         this.lista = lista;
     }
 
-    public void adicionar(String codigo, int tipo, Boolean[] camas, ArrayList<Equipamento> equipamentos, ArrayList<Paciente> pacientes) throws Exception {
+    public void adicionar(String codigo, int tipo, Boolean[] camas, TreeMap<String, Equipamento> equipamentos, TreeMap<String, Paciente> pacientes) throws Exception {
         Enfermaria enfermaria = new Enfermaria(codigo, tipo, camas, equipamentos, pacientes);
         
         adicionar(enfermaria);
@@ -38,7 +39,7 @@ public class ManagerEnfermaria extends ManagerBase implements Serializable {
             String novoCodigo = gerarCodigo();
             enfermaria.setCodigo(novoCodigo);
 
-            lista.add(enfermaria);
+            listaTreeMap.put(novoCodigo, enfermaria);
         } else {
             // senão, retorna erro
             throw new Exception(ERRO_ADICIONAR);
@@ -49,7 +50,7 @@ public class ManagerEnfermaria extends ManagerBase implements Serializable {
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_REMOVER);
 
-        lista.remove(enfermaria);
+        listaTreeMap.remove(enfermaria.getCodigo());
     }
 
     public void editar(Enfermaria enfermaria) throws Exception {
@@ -60,7 +61,7 @@ public class ManagerEnfermaria extends ManagerBase implements Serializable {
         boolean isValido = validarCampos(enfermaria);
 
         // se estiver bem preenchido,
-        // avança para a adição
+        // avança para a edição
         if (isValido) {
             int index = lista.indexOf(enfermaria);
 
