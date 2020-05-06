@@ -1,23 +1,26 @@
 package frontend;
 
 import backend.entidades.Hospital;
+import backend.entidades.Enfermaria;
 import backend.managers.ManagerHospital;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class MenuHospital extends MenuBase {
 
-    private static final String[] menuEditar = new String[]{"Nome", "Localidade"};
+    private static final String[] MENU_ESCOLHER_CAMPO_EDITAR = new String[]{"NOME", "LOCALIDADE"};
 
     private static ManagerHospital manager;
 
     public MenuHospital(Menus menus) {
         super(menus);
-        
+
         this.manager = menus.getAplicacao().getManagerHospital();
     }
-    
-    public void start(){
-        
+
+    public void start() {
+
         String pergunta = "Escolha uma opcao:";
         Integer opcaoEscolhida = getOpcaoMenu(pergunta, MENU_PRINCIPAL);
 
@@ -35,7 +38,7 @@ public class MenuHospital extends MenuBase {
             case 3: // REMOVER
                 remover();
                 break;
-            
+
             case 4: // SAIR
                 sair();
                 break;
@@ -47,8 +50,8 @@ public class MenuHospital extends MenuBase {
     public void listar() {
         System.out.println("Hospitais: ");
         System.out.println("| Codigo | Nome | Localidade | Qtd Enfermairas |");
-        for (int i = 0; i < manager.getLista().size(); i++) {
-            Hospital hospital = (Hospital) manager.getLista().get(i);
+        for (Map.Entry<String, Hospital> entry : getListaHospital().entrySet()) {
+            Hospital hospital = (Hospital) entry.getValue();
 
             System.out.print(" | " + hospital.getCodigo());
 
@@ -95,21 +98,19 @@ public class MenuHospital extends MenuBase {
 
     public void editar() {
         Scanner input = new Scanner(System.in);
-        String editar;
-        String pergunta = "Escolher o paciente a alterar: ";
+        String pergunta = "Escolher o hospital a alterar: ";
         listar();
 
-        String[] menuEscolherHospital = getMenuEscolherHospital();
+        TreeMap<String, String> menuEscolherHospital = getMenuEscolherHospital();
 
-        Integer hospitalAEditarIndex = getOpcaoMenu(pergunta, menuEscolherHospital);
-        if (hospitalAEditarIndex == -1) {
+        String hospitalAEditarCode = getOpcaoMenu(pergunta, menuEscolherHospital);
+        Hospital hospitalAEditar = (Hospital) getListaHospital().get(hospitalAEditarCode);
+        if (hospitalAEditar == null) {
             return;
         }
 
-        Hospital hospitalAEditar = (Hospital) manager.getLista().get(hospitalAEditarIndex);
-
         String pergunta2 = "Escolha o dado que quer editar:";
-        Integer opcaoEscolhida = getOpcaoMenu(pergunta2, menuEditar);
+        Integer opcaoEscolhida = getOpcaoMenu(pergunta2, MENU_ESCOLHER_CAMPO_EDITAR);
 
         switch (opcaoEscolhida) {
             case 0:// Nome
@@ -122,7 +123,7 @@ public class MenuHospital extends MenuBase {
                 }
                 System.out.println("Quer Continuar a editar(Y/N)?: ");
 
-                editar = input.nextLine();
+               String editar = input.nextLine();
                 if (editar.contains("Y") || editar.contains("y")) {
                     editar();
                 }
@@ -147,31 +148,18 @@ public class MenuHospital extends MenuBase {
     }
 
     public void remover() {
-        if (manager.getLista().size() > 0) {
-            String pergunta = "Escolher o hospital a remover: ";
-            listar();
+        String pergunta = "Escolher o hospital a remover: ";
+        listar();
 
-            String[] menuEscolherHospital = new String[manager.getLista().size()];
-            for (int i = 0; i < manager.getLista().size(); i++) {
-                Hospital hospital = (Hospital) manager.getLista().get(i);
-                menuEscolherHospital[i] = hospital.getCodigo();
-            }
+        TreeMap<String, String> menuEscolherHospital = getMenuEscolherHospital();
+        String hospitalCode = getOpcaoMenu(pergunta, menuEscolherHospital);
 
-            Integer hospitalIndex = getOpcaoMenu(pergunta, menuEscolherHospital);
-            if (hospitalIndex == -1) {
-                return;
-            }
+        Hospital hospital = (Hospital) getListaHospital().get(hospitalCode);
 
-            Hospital hospital = (Hospital) manager.getLista().get(hospitalIndex);
-
-            try {
-                manager.remover(hospital);
-            } catch (Exception ex) {
-                System.out.println("ex " + ex);
-            }
-        } else {
-            System.out.println("Nao existem pacientes");
-            start();
+        try {
+            manager.remover(hospital);
+        } catch (Exception ex) {
+            System.out.println("ex " + ex);
         }
     }
 }

@@ -106,20 +106,23 @@ public abstract class MenuBase {
         serializacao.guardar(aplicacao);
     }
     
-    protected ArrayList<Hospital> getListaHospital() {
-        return menus.getAplicacao().getManagerHospital().getLista();
+    protected TreeMap<String, Hospital> getListaHospital() {
+        return menus.getAplicacao().getManagerHospital().getListaTreeMap();
     }
     
     protected TreeMap<String, Enfermaria> getListaEnfermaria() {
         return menus.getAplicacao().getManagerEnfermaria().getListaTreeMap();
     }
     
-    protected String[] getMenuEscolherHospital() {
-        ArrayList<Hospital> listaHospital = menus.getAplicacao().getManagerHospital().getLista();
-        String[] menuEscolherHospital = new String[listaHospital.size()];
-        for (int i = 0; i < listaHospital.size(); i++) {
-            Hospital hospital = (Hospital) listaHospital.get(i);
-            menuEscolherHospital[i] = hospital.getCodigo() + " - " + hospital.getNome();
+    protected TreeMap<String, String> getMenuEscolherHospital() {
+        TreeMap<String, Hospital> listaHospital = menus.getAplicacao().getManagerHospital().getListaTreeMap();
+        TreeMap<String, String> menuEscolherHospital = new TreeMap<String, String>();
+        int i = 0;
+        for (Map.Entry<String, Hospital> entry : listaHospital.entrySet()) {
+            Hospital hospital = (Hospital) entry.getValue();
+            menuEscolherHospital.put(hospital.getCodigo(), hospital.getCodigo());
+            
+            i++;
         }
         
         return menuEscolherHospital;
