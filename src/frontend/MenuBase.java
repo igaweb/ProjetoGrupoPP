@@ -5,6 +5,7 @@ import backend.Conteudos;
 import backend.Serializacao;
 import backend.entidades.Enfermaria;
 import backend.entidades.Hospital;
+import backend.entidades.Equipamento;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
@@ -113,6 +114,10 @@ public abstract class MenuBase {
     protected TreeMap<String, Enfermaria> getListaEnfermaria() {
         return menus.getAplicacao().getManagerEnfermaria().getListaTreeMap();
     }
+    
+    protected TreeMap<String, Equipamento> getListaEquipamento() {
+        return menus.getAplicacao().getManagerEquipamento().getListaTreeMap();
+    }    
     
     protected String[] getMenuEscolherHospital() {
         ArrayList<Hospital> listaHospital = menus.getAplicacao().getManagerHospital().getLista();

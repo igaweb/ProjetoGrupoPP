@@ -1,7 +1,6 @@
 package backend.entidades;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Equipamento implements Serializable{
 
