@@ -2,7 +2,7 @@ package backend.managers;
 
 import backend.Conteudos;
 import backend.entidades.Paciente;
-import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class ManagerPaciente extends ManagerBase {
   
@@ -17,8 +17,8 @@ public class ManagerPaciente extends ManagerBase {
     public ManagerPaciente() {
     }
 
-    public ManagerPaciente(ArrayList <Paciente>lista) {
-        this.lista = lista;
+    public ManagerPaciente(TreeMap<String,Paciente>lista) {
+        this.listaTreeMap = lista;
     }
 
     public void adicionar(Paciente paciente) throws Exception {

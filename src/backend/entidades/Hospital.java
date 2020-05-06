@@ -2,18 +2,19 @@ package backend.entidades;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class Hospital implements Serializable {
 
     private String codigo;
     private String nome;
     private String localidade;
-    private ArrayList<Enfermaria> enfermarias = new ArrayList<Enfermaria>();
+    private TreeMap<String, Enfermaria> enfermarias;
 
     public Hospital() {
     }
 
-    public Hospital(String codigo, String nome, String localidade, ArrayList<Enfermaria> enfermarias) {
+    public Hospital(String codigo, String nome, String localidade, TreeMap<String, Enfermaria> enfermarias) {
         this.codigo = codigo;
         this.nome = nome;
         this.localidade = localidade;
@@ -44,11 +45,11 @@ public class Hospital implements Serializable {
         this.localidade = localidade;
     }
 
-    public ArrayList<Enfermaria> getEnfermarias() {
+    public TreeMap<String, Enfermaria> getEnfermarias() {
         return enfermarias;
     }
 
-    public void setEnfermarias(ArrayList<Enfermaria> enfermarias) {
+    public void setEnfermarias(TreeMap<String, Enfermaria> enfermarias) {
         this.enfermarias = enfermarias;
     }
 

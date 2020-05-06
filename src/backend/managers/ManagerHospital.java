@@ -1,27 +1,31 @@
 package backend.managers;
 
+import backend.entidades.Enfermaria;
 import backend.entidades.Hospital;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class ManagerHospital extends ManagerBase {
 
     private static final String ERRO_FALTA_CODIGO = "ERRO_FALTA_CODIGO";
     private static final String ERRO_FALTA_NOME = "ERRO_FALTA_NOME";
     private static final String ERRO_FALTA_LOCALIDADE = "ERRO_FALTA_LOCALIDADE";
-    
+
     public ManagerHospital() {
     }
-       
+
     public ManagerHospital(ArrayList<Hospital> lista) {
         this.lista = lista;
     }
 
+        public void adicionar(String codigo, String nome, String localidade, TreeMap<String, Enfermaria> enfermarias) throws Exception {
+        Hospital hospital = new Hospital(codigo, nome, localidade, enfermarias);
+        
+        adicionar(hospital);
+    }
+    
     public void adicionar(Hospital hospital) throws Exception {
-        // validar se os campos vêm todos bem preenchidos
-        // validarCampos(hospital) <- se estiver bem preenchido,
-        // avança para a adição -> this.lista.add(hospital);
-        // senão, retorna erro -> new HospitalException("Erro a adicionar hospital");
-    // set da operacao que estamos a fazer
+        // set da operacao que estamos a fazer
         setOperacao(OPERACAO_ADICIONAR);
 
         // validar se os campos vêm todos bem preenchidos
@@ -34,7 +38,7 @@ public class ManagerHospital extends ManagerBase {
             String novoCodigo = gerarCodigo();
             hospital.setCodigo(novoCodigo);
 
-            lista.add(hospital);
+            listaTreeMap.put(novoCodigo, hospital);
         } else {
             // senão, retorna erro
             throw new Exception(ERRO_ADICIONAR);
@@ -45,15 +49,10 @@ public class ManagerHospital extends ManagerBase {
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_REMOVER);
 
-        lista.remove(hospital);
+        listaTreeMap.remove(hospital.getCodigo());
     }
 
     public void editar(Hospital hospital) throws Exception {
-        // procurar o hospital na lista pelo codigo
-        // validar se os campos estao bem preenchidos:
-        // validarCampos(hsopital) <- se estiver bem preenchido,
-        // avança para a edição -> substitui o hospital na lista pela nova
-        // senão, retorna erro -> new HospitalException("Erro a editar hospital");
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_EDITAR);
 
@@ -61,7 +60,7 @@ public class ManagerHospital extends ManagerBase {
         boolean isValido = validarCampos(hospital);
 
         // se estiver bem preenchido,
-        // avança para a adição
+        // avança para a edição
         if (isValido) {
             int index = lista.indexOf(hospital);
 
@@ -71,7 +70,7 @@ public class ManagerHospital extends ManagerBase {
         } else {
             // senão, retorna erro
             throw new Exception(ERRO_EDITAR);
-        }    
+        }
     }
 
     /*
@@ -98,6 +97,5 @@ public class ManagerHospital extends ManagerBase {
     public String toString() {
         return "ListaHospital{" + "lista=" + lista + '}';
     }
-    
-    
+
 }

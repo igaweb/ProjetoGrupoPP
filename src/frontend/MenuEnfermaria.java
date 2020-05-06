@@ -19,12 +19,12 @@ public class MenuEnfermaria extends MenuBase {
 
     public MenuEnfermaria(Menus menus) {
         super(menus);
-        
+
         this.manager = menus.getAplicacao().getManagerEnfermaria();
     }
 
-    public void start(){
-        
+    public void start() {
+
         String pergunta = "Escolha uma opcao:";
         Integer opcaoEscolhida = getOpcaoMenu(pergunta, MENU_PRINCIPAL);
 
@@ -42,7 +42,7 @@ public class MenuEnfermaria extends MenuBase {
             case 3: // REMOVER
                 remover();
                 break;
-            
+
             case 4: // SAIR
                 sair();
                 break;
@@ -86,68 +86,72 @@ public class MenuEnfermaria extends MenuBase {
         MenuHospital hospitalMenu = menus.getMenuHospital();
         hospitalMenu.listar();
 
-        ArrayList<Hospital> listaHospital = getListaHospital();
-        if(listaHospital.isEmpty()) {
+        TreeMap<String, Hospital> listaHospital = getListaHospital();
+        if (listaHospital.isEmpty()) {
             System.out.println("Nao existem hospitais criados. Deseja criar? (Y/N)");
             String criarHospital = menus.getScanner().nextLine();
-            if (criarHospital.toUpperCase().contains("Y")){
+            if (criarHospital.toUpperCase().contains("Y")) {
                 hospitalMenu.adicionar();
             } else {
                 System.out.println("Operação cancelada");
                 return;
             }
         }
-        
-        String[] menuEscolherHospital = getMenuEscolherHospital();
 
-        Integer hospitalAInserirEnfermariaIndex = getOpcaoMenu(pergunta1, menuEscolherHospital);
-        if(hospitalAInserirEnfermariaIndex == -1) {
+        TreeMap<String, String> menuEscolherHospital = getMenuEscolherHospital();
+        /*String[] menuEscolherHospital = getMenuEscolherHospital();*/
+
+        TreeMap<String, String> menuEscolherEnfermaria = getMenuEscolherEnfermaria();
+
+        String hospitalAInserirEnfermariaIndex = getOpcaoMenu(pergunta1, menuEscolherHospital);
+        Hospital hospitalAEditar = (Hospital) getListaHospital().get(hospitalAInserirEnfermariaIndex);
+        if (hospitalAEditar == null) {
             return;
         }
-        
+
         String pergunta2 = "Selecione o tipo de enfermaria:";
         Integer tipo = getOpcaoMenu(pergunta2, MENU_TIPO_ENFERMARIA);
 
-        if(tipo == -1) {
+        if (tipo == -1) {
             return;
         }
-        
+
         String pergunta3 = "Numero de camas: ";
         System.out.println(pergunta3);
         Integer nCamas = scanner.nextInt();
-        
-        if(nCamas == null || !(nCamas instanceof Integer) || nCamas < 0) {
+
+        if (nCamas == null || !(nCamas instanceof Integer) || nCamas < 0) {
             return;
         }
-        
+
         Enfermaria enfermaria = new Enfermaria();
         enfermaria.setTipo(tipo);
         enfermaria.setCamas(new Boolean[nCamas]);
         try {
             manager.adicionar(enfermaria);
             Hospital hospitalAInserirEnfermaria = getListaHospital().get(hospitalAInserirEnfermariaIndex);
-            hospitalAInserirEnfermaria.getEnfermarias().add(enfermaria);
-            
+            hospitalAInserirEnfermaria.getEnfermarias().put(enfermaria.getCodigo(), enfermaria);
+
             guardar();
             System.out.println("Enfermaria guardada com sucesso!");
         } catch (Exception ex) {
             Logger.getLogger(MenuEnfermaria.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     private void editar() {
         String pergunta = "Escolher a enfermaria a alterar: ";
         listar();
-        
+
         TreeMap<String, String> menuEscolherEnfermaria = getMenuEscolherEnfermaria();
 
         String enfermariaAEditarCode = getOpcaoMenu(pergunta, menuEscolherEnfermaria);
         Enfermaria enfermariaAEditar = (Enfermaria) getListaEnfermaria().get(enfermariaAEditarCode);
-        if(enfermariaAEditar == null) {
+        if (enfermariaAEditar == null) {
             return;
         }
-        
+
         String pergunta2 = "Escolha o dado que quer editar:";
         Integer opcaoEscolhida = getOpcaoMenu(pergunta2, MENU_ESCOLHER_CAMPO_EDITAR);
 
@@ -155,32 +159,32 @@ public class MenuEnfermaria extends MenuBase {
             case 0: // tipo
                 pergunta = "Alterar o tipo de enfermaria ";
                 Integer tipo = getOpcaoMenu(pergunta, MENU_TIPO_ENFERMARIA);
-                if(tipo == -1) {
+                if (tipo == -1) {
                     return;
                 }
 
                 enfermariaAEditar.setTipo(tipo);
                 break;
-            
+
             case 1: // n camas
                 System.out.println("Redefinir numero de camas:");
                 Integer nCamas = scanner.nextInt();
-                
-                if(nCamas == null || !(nCamas instanceof Integer) || nCamas < 0) {
+
+                if (nCamas == null || !(nCamas instanceof Integer) || nCamas < 0) {
                     return;
                 }
 
                 enfermariaAEditar.setCamas(new Boolean[nCamas]);
                 break;
-                
+
             case 2: // menu equipamentos
                 // menus.getMenuEquipamento().start();
                 break;
-               
+
             case 3: // menu pacientes
                 menus.getMenuPaciente().start();
         }
-        
+
         try {
             manager.editar(enfermariaAEditar);
         } catch (Exception ex) {
@@ -192,10 +196,10 @@ public class MenuEnfermaria extends MenuBase {
     private void remover() {
         String pergunta = "Escolher a enfermaria a remover: ";
         listar();
-        
+
         TreeMap<String, String> menuEscolherEnfermaria = getMenuEscolherEnfermaria();
         String enfermariaCode = getOpcaoMenu(pergunta, menuEscolherEnfermaria);
-        
+
         Enfermaria enfermaria = (Enfermaria) getListaEnfermaria().get(enfermariaCode);
 
         try {
