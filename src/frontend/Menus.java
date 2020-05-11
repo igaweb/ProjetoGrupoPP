@@ -7,6 +7,7 @@ import backend.entidades.Equipamento;
 import backend.entidades.Hospital;
 import backend.entidades.Paciente;
 import backend.entidades.ProfissionalSaude;
+import backend.entidades.Utilizador;
 import java.util.Scanner;
 
 public class Menus {
@@ -19,7 +20,7 @@ public class Menus {
     private MenuHospital menuHospital;
     private MenuEquipamento menuEquipamento;
     private MenuPaciente menuPaciente;
-    // private MenuUtilizador menuUtilizador;
+    private MenuUtilizador menuUtilizador;
     // private MenuProfissionalSaude menuProfissionalSaude;
     
     private Hospital hospitalSelecionado;
@@ -27,7 +28,8 @@ public class Menus {
     private Equipamento equipamentoSelecionado;
     private Paciente pacienteSelecionado;
     private ProfissionalSaude profissionalSelecionado;
-
+    private Utilizador utilizadorSelecionado;
+    
     public Menus(Aplicacao aplicacao, Serializacao serializacao, Scanner scanner) {
         
         System.out.println("Inicializar aplicacao...");
@@ -39,6 +41,7 @@ public class Menus {
         this.menuEnfermaria = new MenuEnfermaria(this);
         this.menuHospital = new MenuHospital(this);
         this.menuPaciente = new MenuPaciente(this);
+        this.menuUtilizador = new MenuUtilizador(this);
     }
 
     public Scanner getScanner() {
@@ -79,6 +82,14 @@ public class Menus {
 
     public void setMenuHospital(MenuHospital menuHospital) {
         this.menuHospital = menuHospital;
+    }
+    
+    public MenuUtilizador getMenuUtilizador() {
+        return menuUtilizador;
+    }
+
+    public void setMenuUtilizador(MenuUtilizador menuUtilizador) {
+        this.menuUtilizador = menuUtilizador;
     }
     
     public MenuEquipamento getMenuEquipamento() {

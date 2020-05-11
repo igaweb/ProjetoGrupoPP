@@ -3,6 +3,7 @@ package backend.managers;
 import backend.entidades.Utilizador;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class ManagerUtilizador extends ManagerBase implements Serializable {
 
@@ -12,8 +13,8 @@ public class ManagerUtilizador extends ManagerBase implements Serializable {
     public ManagerUtilizador() {
     }
 
-    public ManagerUtilizador(ArrayList<Utilizador> lista) {
-        this.lista = lista;
+    public ManagerUtilizador(TreeMap<String, Utilizador> lista) {
+        this.listaTreeMap = lista;
     }
 
     public void adicionar(Utilizador utilizador) throws Exception {
@@ -22,7 +23,7 @@ public class ManagerUtilizador extends ManagerBase implements Serializable {
 
         if (isValido) {
 
-            lista.add(utilizador);
+            listaTreeMap.put(utilizador.getNome(), utilizador);
         } else {
             throw new Exception(ERRO_ADICIONAR);
         }
@@ -31,7 +32,7 @@ public class ManagerUtilizador extends ManagerBase implements Serializable {
     public void remover(Utilizador utilizador) throws Exception {
         setOperacao(OPERACAO_REMOVER);
 
-        lista.remove(utilizador);
+        listaTreeMap.remove(utilizador);
     }
 
     public void editar(Utilizador utilizador) throws Exception {
