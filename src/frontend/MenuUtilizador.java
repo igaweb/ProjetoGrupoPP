@@ -3,11 +3,11 @@ package frontend;
 import backend.Conteudos;
 import backend.entidades.Utilizador;
 import backend.managers.ManagerUtilizador;
-import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
-import java.util.logging.Level;
+import java.util.TreeMap;
 
-public class MenuUtilizador {
+public class MenuUtilizador extends MenuBase {
 
     private static final String[] menuPrincipal = new String[]{"LISTAR", "ADICIONAR", "EDITAR", "REMOVER", "SAIR"};
     private static final String[] menuEditar = new String[]{"Nome", "Password"};
@@ -15,17 +15,13 @@ public class MenuUtilizador {
     private static Scanner scanner;
     private static ManagerUtilizador manager;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        scanner = new Scanner(System.in);
-        manager = new ManagerUtilizador();
+    public MenuUtilizador(Menus menus) {
+        super(menus);
 
-        start();
+        this.manager = menus.getAplicacao().getManagerUtilizador();
     }
 
-    private static void start() {
+    private void start() {
         String pergunta = "Escolha uma opcao:";
         Integer opcaoEscolhida = getOpcaoMenu(pergunta, menuPrincipal);
 
@@ -52,33 +48,11 @@ public class MenuUtilizador {
         start();
     }
 
-    private static Integer getOpcaoMenu(String pergunta, String[] menu) {
-        boolean isOpcaoEscolhida = false;
-        Integer opcaoEscolhida;
-        do {
-            System.out.println(pergunta);
-            System.out.println("Menu Utilizador: ");
-            for (int i = 0; i < menu.length; i++) {
-                String menuItemStr = menu[i];
-                System.out.print(menuItemStr + " (" + i + "); ");
-            }
-
-            opcaoEscolhida = scanner.nextInt();
-
-            isOpcaoEscolhida = (opcaoEscolhida != null && opcaoEscolhida >= 0 && opcaoEscolhida < menu.length)
-                    || opcaoEscolhida == -1;
-
-            pergunta = "Opcao invalida, escolha uma das opcoes:";
-        } while (!isOpcaoEscolhida);
-
-        return opcaoEscolhida;
-    }
-
-    private static void listar() {
+    private void listar() {
         System.out.println("Utilizador: ");
         System.out.println("| Nome |");
-        for (int i = 0; i < manager.getLista().size(); i++) {
-            Utilizador utilizador = (Utilizador) manager.getLista().get(i);
+        for (Map.Entry<String, Utilizador> entry : getListaUtilizador().entrySet()) {
+            Utilizador utilizador = (Utilizador) entry.getValue();
 
             try {
                 System.out.print(" | " + utilizador.getNome());
@@ -90,7 +64,7 @@ public class MenuUtilizador {
         }
     }
 
-    private static void adicionar() {
+    private void adicionar() {
         Scanner input = new Scanner(System.in);
         Utilizador utilizador = new Utilizador();
 
@@ -109,7 +83,7 @@ public class MenuUtilizador {
         }
     }
 
-    private static void editar() {
+    private void editar() {
         Scanner input = new Scanner(System.in);
         String editar;
         String pergunta = "Escolher o utilizador a alterar: ";
@@ -166,7 +140,7 @@ public class MenuUtilizador {
 
     }
 
-    private static void remover() {
+    private void remover() {
         if (manager.getLista().size() > 0) {
             String pergunta = "Escolher o utilizador a remover: ";
             listar();
@@ -193,9 +167,5 @@ public class MenuUtilizador {
             System.out.println("Nao existem utilizadores");
             start();
         }
-    }
-
-    private static void sair() {
-        System.exit(0);
     }
 }

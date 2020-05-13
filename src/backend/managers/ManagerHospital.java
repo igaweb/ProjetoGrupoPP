@@ -14,8 +14,8 @@ public class ManagerHospital extends ManagerBase {
     public ManagerHospital() {
     }
 
-    public ManagerHospital(ArrayList<Hospital> lista) {
-        this.lista = lista;
+    public ManagerHospital(TreeMap<String,Hospital> lista) {
+        this.listaTreeMap = lista;
     }
 
         public void adicionar(String codigo, String nome, String localidade, TreeMap<String, Enfermaria> enfermarias) throws Exception {
