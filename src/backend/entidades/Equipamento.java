@@ -1,6 +1,7 @@
 package backend.entidades;
 
 import java.io.Serializable;
+import java.util.TreeMap;
 
 public class Equipamento implements Serializable{
 
@@ -56,6 +57,7 @@ public class Equipamento implements Serializable{
         return "Equipamento{" + "codigo=" + codigo + ", tipo=" + tipo + ", livre=" + livre + ", paciente=" + paciente + '}';
     }
 
+    
    
    
     

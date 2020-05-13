@@ -2,8 +2,8 @@ package backend.managers;
 
 import backend.entidades.Equipamento;
 import backend.entidades.Paciente;
-import java.util.ArrayList;
 import backend.Conteudos;
+import java.util.TreeMap;
 
 public class ManagerEquipamento extends ManagerBase {
 
@@ -15,8 +15,8 @@ public class ManagerEquipamento extends ManagerBase {
         
     }
     
-     public ManagerEquipamento(ArrayList<Equipamento> lista) {
-        this.lista = lista;
+     public ManagerEquipamento(TreeMap<String,Equipamento> lista) {
+        this.listaTreeMap = lista;
     }
 
      

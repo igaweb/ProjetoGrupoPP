@@ -4,7 +4,6 @@ import backend.Conteudos;
 import backend.entidades.Enfermaria;
 import backend.entidades.Hospital;
 import backend.managers.ManagerEnfermaria;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Level;
