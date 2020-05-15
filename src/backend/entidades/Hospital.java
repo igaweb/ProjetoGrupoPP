@@ -9,7 +9,7 @@ public class Hospital implements Serializable {
     private String codigo;
     private String nome;
     private String localidade;
-    private TreeMap<String, Enfermaria> enfermarias;
+    private TreeMap<String, Enfermaria> enfermarias = new TreeMap();
 
     public Hospital() {
     }
