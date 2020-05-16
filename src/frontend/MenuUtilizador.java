@@ -9,10 +9,9 @@ import java.util.TreeMap;
 
 public class MenuUtilizador extends MenuBase {
 
-    private static final String[] menuPrincipal = new String[]{"LISTAR", "ADICIONAR", "EDITAR", "REMOVER", "SAIR"};
-    private static final String[] menuEditar = new String[]{"Nome", "Password"};
+    private static final String[] MENU_PRINCIPAL = new String[]{"LISTAR", "ADICIONAR", "EDITAR", "REMOVER", "SAIR"};
+    private static final String[] MENU_EDITAR = new String[]{"Nome", "Password"};
 
-    private static Scanner scanner;
     private static ManagerUtilizador manager;
 
     public MenuUtilizador(Menus menus) {
@@ -23,7 +22,7 @@ public class MenuUtilizador extends MenuBase {
 
     private void start() {
         String pergunta = "Escolha uma opcao:";
-        Integer opcaoEscolhida = getOpcaoMenu(pergunta, menuPrincipal);
+        Integer opcaoEscolhida = getOpcaoMenu(pergunta, MENU_PRINCIPAL);
 
         switch (opcaoEscolhida) {
             case 0:// LISTAR
@@ -103,7 +102,7 @@ public class MenuUtilizador extends MenuBase {
         Utilizador utilizadorAEditar = (Utilizador) manager.getLista().get(utilizadorAEditarIndex);
 
         String pergunta2 = "Escolha o dado que quer editar:";
-        Integer opcaoEscolhida = getOpcaoMenu(pergunta2, menuEditar);
+        Integer opcaoEscolhida = getOpcaoMenu(pergunta2, MENU_EDITAR);
 
         switch (opcaoEscolhida) {
             case 0:// Nome
