@@ -2,7 +2,7 @@ package frontend;
 
 import backend.entidades.ProfissionalSaude;
 import backend.managers.ManagerProfissionalSaude;
-import static frontend.MenuBase.MENU_PRINCIPAL;
+import static frontend.MenuBase.MENU_PROFISSIONALSAUDE;
 
 
 public class MenuProfissionalSaude extends MenuBase {
@@ -16,15 +16,16 @@ public class MenuProfissionalSaude extends MenuBase {
     }
 
     public void start() {
+        System.out.println(" Menu Profissional Saude ");
         String pergunta = "Escolha uma opcao:";
-        Integer opcaoEscolhida = getOpcaoMenu(pergunta, MENU_PRINCIPAL);
+        Integer opcaoEscolhida = getOpcaoMenu(pergunta, MENU_PROFISSIONALSAUDE);
 
         switch (opcaoEscolhida) {
             case 0:// LISTAR
                 listar();
                 break;
                  
-            case 2: // SAIR
+            case 1: // SAIR
                 sair();
                 break;
         }

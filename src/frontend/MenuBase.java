@@ -7,7 +7,6 @@ import backend.entidades.Enfermaria;
 import backend.entidades.Hospital;
 import backend.entidades.Equipamento;
 import backend.entidades.Utilizador;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
@@ -21,7 +20,8 @@ public abstract class MenuBase {
     protected Menus menus;
 
     protected static final String[] MENU_PRINCIPAL = new String[]{"LISTAR", "ADICIONAR", "EDITAR", "REMOVER", "SAIR"};
-
+    protected static final String[] MENU_PROFISSIONALSAUDE = new String[]{"LISTAR","SAIR"};
+    
     public MenuBase(Menus menus) {
         this.menus = menus;
 

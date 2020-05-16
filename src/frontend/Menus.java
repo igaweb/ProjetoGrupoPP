@@ -21,7 +21,7 @@ public class Menus {
     private MenuEquipamento menuEquipamento;
     private MenuPaciente menuPaciente;
     private MenuUtilizador menuUtilizador;
-    // private MenuProfissionalSaude menuProfissionalSaude;
+    private MenuProfissionalSaude menuProfissionalSaude;
     
     private Hospital hospitalSelecionado;
     private Enfermaria enfermariaSelecionado;
@@ -42,6 +42,7 @@ public class Menus {
         this.menuHospital = new MenuHospital(this);
         this.menuPaciente = new MenuPaciente(this);
         this.menuUtilizador = new MenuUtilizador(this);
+        this.menuProfissionalSaude = new MenuProfissionalSaude(this);
     }
 
     public Scanner getScanner() {
@@ -107,5 +108,12 @@ public class Menus {
     public void setMenuPaciente(MenuPaciente menuPaciente) {
         this.menuPaciente = menuPaciente;
     }
-
+    
+   public MenuProfissionalSaude getMenuProfissionalSaude() {
+        return menuProfissionalSaude;
+    }
+   
+    public void setMenuProfissionalSaude(MenuProfissionalSaude menuProfissionalSaude) {
+        this.menuProfissionalSaude = menuProfissionalSaude;
+    }
 }
