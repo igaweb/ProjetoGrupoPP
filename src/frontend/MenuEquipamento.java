@@ -2,17 +2,20 @@ package frontend;
 
 import backend.Conteudos;
 import backend.entidades.Equipamento;
+import backend.entidades.Paciente;
 import backend.managers.ManagerEquipamento;
 import static frontend.MenuBase.MENU_PRINCIPAL;
 import java.util.Map;
+import java.util.Scanner;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MenuEquipamento extends MenuBase {
 
-    private static final String[] MENU_EDITAR = new String[]{"TIPO", "MENU PACIENTES"};
+    private static final String[] MENU_EDITAR = new String[]{"TIPO"};
     private static final String[] MENU_TIPO_EQUIPAMENTOS = Conteudos.getTiposEquipamentos();
-
+    private String[] MENU_EDITAR_EQUIPAMENTOS = new String[]{"LISTAR", "ADICIONAR EQUIPAMENTO", "REMOVER EQUIPAMENTO","EDITAR", "ADICIONAR TIPO EQUIPAMENTO", "REMOVER TIPO EQUIPAMENTO", "SAIR"};
     private ManagerEquipamento manager;
 
     public MenuEquipamento(Menus menus) {
@@ -24,7 +27,7 @@ public class MenuEquipamento extends MenuBase {
     public void start() {
 
         String pergunta = "Escolha uma opcao:";
-        Integer opcaoEscolhida = getOpcaoMenu(pergunta, MENU_PRINCIPAL);
+        Integer opcaoEscolhida = getOpcaoMenu(pergunta, MENU_EDITAR_EQUIPAMENTOS);
 
         switch (opcaoEscolhida) {
             case 0:// LISTAR
@@ -33,15 +36,19 @@ public class MenuEquipamento extends MenuBase {
             case 1: // ADICIONAR
                 adicionar();
                 break;
-            case 2: // EDITAR
-                editar();
-                break;
-
-            case 3: // REMOVER
+            case 2: // REMOVER
                 remover();
                 break;
-
-            case 4: // SAIR
+            case 3: // REMOVER
+                editar();
+                break;    
+            case 4: // ADICIONAR TIPO EQUIPAMENTO
+                adicionarTipoEquipamento();
+                break;                
+             case 5: // REMOVER TIPO EQUIPAMENTO
+                removerTipoEquipamento();
+                break; 
+            case 6: // SAIR
                 sair();
                 break;
         }
@@ -49,122 +56,139 @@ public class MenuEquipamento extends MenuBase {
         start();
     }
 
-    private void listar() {
+    public void listar() {
         System.out.println("Equipamentos: ");
         System.out.println("| Codigo | Tipo | Livre | Paciente");
         for (Map.Entry<String, Equipamento> entry : getListaEquipamento().entrySet()) {
             Equipamento equipamento = (Equipamento) entry.getValue();
 
-            System.out.print(" | " + equipamento.getCodigo());
-            System.out.print(" | " + Conteudos.getTiposEquipamentos()[equipamento.getTipo()]);
-            
+            System.out.print("|  " + equipamento.getCodigo());
+                       
                                            
             try {
-                System.out.print(" | " + equipamento.getTipo());
+                System.out.print("  |  " + equipamento.getTipo());
             } catch  (Exception e) {   
                 System.out.print(" | 0");
             }
             
              try {
-                System.out.print(" | " + equipamento.isLivre());
+                System.out.print("  |  " + equipamento.isLivre());
             } catch  (Exception e) {   
                 System.out.print(" | 0");
             }
             
              try {
-                System.out.print(" | " + equipamento.getPaciente());
+                if (equipamento.getPaciente() == null) {
+                   System.out.println("  | Não tem |");
+                } else 
+                System.out.print("  |  " + equipamento.getPaciente() + "  |");
             } catch (Exception e) {
                 System.out.print(" | 0");
-            }
-            
-            System.out.println(" |");
+            } 
         }
     }
 
-    private void adicionar() {
+    public void adicionar() {
         Equipamento equipamento = new Equipamento();
 
         equipamento.setLivre(true);
-
-        //String perguntaTipo = "Selecione o tipo do equipamento a adicionar: ";
-       // String perguntaEnfermaria = "Selecione a enfermaria: ";
-        String perguntaPaciente = "Selecione o paciente";
-        
-        System.out.print(perguntaPaciente);
-        //paciente.setCodigo(scanner.nextLine());
-        
-        //System.out.print(perguntaEnfermaria);
-        
+      
         String pergunta = "Selecione o tipo do equipamento a adicionar: ";
         Integer tipo = getOpcaoMenu(pergunta, MENU_TIPO_EQUIPAMENTOS);
         if (tipo == -1) {
             return;
         }
         equipamento.setTipo(tipo);
-
-        // Como saber qual o paciente a adicionar. Peciso de ver a lista de pacientes?
-        // Estou a adicionar sem paciente
-        // equipamento.setPaciente(paciente);        
+                
         try {
             manager.adicionar(equipamento);
+            guardar();
         } catch (Exception ex) {
             Logger.getLogger(MenuPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    private void editar() {
-        // e preciso editar? preciso da lista para selecionar o equipamento a editar?
-        String pergunta = "Escolher o equipamento a alterar: ";
+    public void editar() {
+        Scanner input = new Scanner(System.in);
+        String pergunta = "Escolher o equipamento a editar: ";
         listar();
 
-        /* TreeMap<String, String> menuEscolherEquipamento = getMenuEscolherEquipamento();
+         TreeMap<String, String> menuEscolherEquipamento = getMenuEscolherEquipamento();
 
-        String equipamentoEditar = getOpcaoMenu(pergunta, menuEscolherEquipamento);
-        Equipamento equipamentoEditar = (Equipamento) getListaEquipamento().get(equipamentoEditar);
-        if (equipamentoEditar == null) {
+        String equipamentoAEditarCode = getOpcaoMenu(pergunta, menuEscolherEquipamento);
+        Equipamento equipamentoAEditar = (Equipamento) getListaEquipamento().get(equipamentoAEditarCode);        
+        if (equipamentoAEditar == null) {
             return;
-        }*/
+        }
+        
         String pergunta2 = "Escolha o dado que quer editar:";
         Integer opcaoEscolhida = getOpcaoMenu(pergunta2, MENU_EDITAR);
 
         switch (opcaoEscolhida) {
             case 0: // tipo
-                pergunta = "Alterar o nome do equipamento ";
-                Integer tipo = getOpcaoMenu(pergunta, MENU_EDITAR);
-                if (tipo == -1) {
-                    return;
-                }
+                 pergunta = "Alterar o tipo de equipamento ";
+                Integer tipo = getOpcaoMenu(pergunta, MENU_TIPO_EQUIPAMENTOS);
+                    if(tipo == -1) {
+                        return;
+                    }        
+                    equipamentoAEditar.setTipo(tipo);
+                    
+                 System.out.println("Quer Continuar a editar(Y/N)?: ");
 
-                // equipamentoEditar.setTipo(tipo);
+               String editar = input.nextLine();
+                if (editar.contains("Y") || editar.contains("y")) {
+                    editar();
+                }  
+                    
                 break;
 
-        }
-
-        /*try {
-              manager.editar(equipamentoEditar);
-        } catch (Exception ex) {
-            System.out.println("ex " + ex);
-            Logger.getLogger(MenuEquipamento.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-
+        
+            case 1: // Paciente
+                pergunta = "Alterar se está livre ou não o equipamento  ";
+                System.out.println(pergunta);
+                System.out.print("Estado: " + equipamentoAEditar.isLivre());
+                equipamentoAEditar.setLivre(input.nextBoolean());
+                try {
+                    manager.editar(equipamentoAEditar);
+                } catch (Exception ex) {
+                    System.out.print("ex " + ex);
+                }
+                System.out.println("Quer Continuar a editar(Y/N)?: ");
+                
+               
+                break;  
+        }                 
     }
 
-    private void remover() {
+    public void remover() {
 
         String pergunta = "Escolher o equipamento a remover: ";
         listar();
 
-       /* TreeMap<String, String> menuEscolherEquipamento = getMenuEscolherEquipamento();
+        TreeMap<String, String> menuEscolherEquipamento = getMenuEscolherEquipamento();
         String equipamentoCodigo = getOpcaoMenu(pergunta, menuEscolherEquipamento);
 
         Equipamento equipamento = (Equipamento) getListaEquipamento().get(equipamentoCodigo);
 
         try {
             manager.remover(equipamento);
+            guardar();
         } catch (Exception ex) {
             System.out.println("ex " + ex);
             Logger.getLogger(MenuEquipamento.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
         
     }
+    
+    public void adicionarTipoEquipamento(){
+//        System.out.println("Diga o nome do novo tipo de equipamento:");
+//        Scanner input = new Scanner(System.in);
+//        String nome = input.nextLine();
+//        MENU_TIPO_EQUIPAMENTOS.add(nome);        
+    }
+    
+        public void removerTipoEquipamento() {
+            
+        }
+    
 }

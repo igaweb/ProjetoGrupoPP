@@ -47,6 +47,10 @@ public abstract class ManagerBase implements Serializable {
     protected String gerarCodigo() {
         return "COD" + lista.size();
     }
+    
+    protected String gerarCodigoTreeMap() {
+        return "COD" + listaTreeMap.size();
+    }
 
     public ArrayList getLista() {
         return lista;

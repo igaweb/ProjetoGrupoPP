@@ -166,6 +166,20 @@ public abstract class MenuBase {
         return menuEscolherUtilizador;
     }
 
+     protected TreeMap<String, String> getMenuEscolherEquipamento() {
+        TreeMap<String, Equipamento> listaEquipamento = menus.getAplicacao().getManagerEquipamento().getListaTreeMap();
+        TreeMap<String, String> menuEscolherEquipamento = new TreeMap<String, String>();
+        int i = 0;
+        for (Map.Entry<String, Equipamento> entry : listaEquipamento.entrySet()) {
+            Equipamento equipamento = (Equipamento) entry.getValue();
+            menuEscolherEquipamento.put(equipamento.getCodigo(), equipamento.getCodigo());
+
+            i++;
+        }
+
+        return menuEscolherEquipamento;
+    }
+     
     private String[] getEscolherPaciente() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

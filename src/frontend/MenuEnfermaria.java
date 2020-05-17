@@ -177,7 +177,7 @@ public class MenuEnfermaria extends MenuBase {
                 break;
 
             case 2: // menu equipamentos
-                // menus.getMenuEquipamento().start();
+                 menus.getMenuEquipamento().start();
                 break;
 
             case 3: // menu pacientes

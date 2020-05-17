@@ -39,6 +39,7 @@ public class Menus {
         
         System.out.println("Inicializar menus...");
         this.menuEnfermaria = new MenuEnfermaria(this);
+        this.menuEquipamento = new MenuEquipamento(this);
         this.menuHospital = new MenuHospital(this);
         this.menuPaciente = new MenuPaciente(this);
         this.menuUtilizador = new MenuUtilizador(this);

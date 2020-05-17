@@ -29,50 +29,48 @@ public class ManagerEquipamento extends ManagerBase {
     }
     
     
-    public void adicionar(Equipamento equipamentos) throws Exception {
+    public void adicionar(Equipamento equipamento) throws Exception {
         
         // set da operacao que estamos a fazer)
         setOperacao(OPERACAO_ADICIONAR);
         
         // validar se os campos vêm todos bem preenchidos
-        boolean isValido = validarCampos(equipamentos);
+        boolean isValido = validarCampos(equipamento);
         
          // avança para a adição
         if (isValido) {
             // gerar o codigo para o novo equipamento
-            String novoCodigo = gerarCodigo();
-            equipamentos.setCodigo(novoCodigo);
+            String novoCodigo = gerarCodigoTreeMap();
+            equipamento.setCodigo(novoCodigo);
 
-            lista.add(equipamentos);
+            listaTreeMap.put(novoCodigo, equipamento);
         } else {
             // senão, retorna erro
             throw new Exception(ERRO_ADICIONAR);
         }
     }
 
-    public void remover(Equipamento equipamentos) throws Exception {
+    public void remover(Equipamento equipamento) throws Exception {
         
         // set da operacao que estamos a fazer)
         setOperacao(OPERACAO_REMOVER);
-        lista.remove(equipamentos);
+        listaTreeMap.remove(equipamento.getCodigo());
     }
 
-    public void editar(Equipamento equipamentos) throws Exception {
+    public void editar(Equipamento equipamento) throws Exception {
         
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_EDITAR);
 
         // validar se os campos vêm todos bem preenchidos
-        boolean isValido = validarCampos(equipamentos);
+        boolean isValido = validarCampos(equipamento);
 
         // se estiver bem preenchido,
         // avança para a adição
         if (isValido) {
-            int index = lista.indexOf(equipamentos);
+            Equipamento equipamentoAEditar = (Equipamento) listaTreeMap.get(equipamento.getCodigo());
 
-            if (index >= 0) {
-                lista.set(index, equipamentos);
-            }
+            listaTreeMap.put(equipamentoAEditar.getCodigo(), equipamentoAEditar);
         } else {
             // senão, retorna erro
             throw new Exception(ERRO_EDITAR);
@@ -82,16 +80,13 @@ public class ManagerEquipamento extends ManagerBase {
     /*
      * Método para validar se os campos da classe estão bem preenchidos
      */
-    private boolean validarCampos(Equipamento equipamentos) throws Exception {
+    private boolean validarCampos(Equipamento equipamento) throws Exception {
         // validações para todas as operaçoes na base
-        boolean isValid = super.validarCampos(equipamentos);
+        boolean isValid = super.validarCampos(equipamento);
         
-          if (equipamentos.getCodigo() == null || equipamentos.getCodigo().isEmpty()) {
-            throw new Exception(ERRO_FALTA_CODIGO);
-        }
           
          // Se a opção que o utilizador escolher for menor que 0 || "OU" || se o número que o utilizador escolher for maior que as que existem
-         if (equipamentos.getTipo() < 0 || equipamentos.getTipo() >= Conteudos.getTiposEquipamentos().length) {
+         if (equipamento.getTipo() < 0 || equipamento.getTipo() >= Conteudos.getTiposEquipamentos().length) {
             throw new Exception(ERRO_TIPO_INVALIDO); 
          }
        

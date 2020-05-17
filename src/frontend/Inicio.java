@@ -35,7 +35,7 @@ public class Inicio {
         
         // carregar menus
         Menus menus = new Menus(aplicacao, serializacao, scanner);
-        menus.getMenuHospital().start();
+        menus.getMenuEquipamento().start();
     }
     
 }
