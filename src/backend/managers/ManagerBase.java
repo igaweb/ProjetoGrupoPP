@@ -2,11 +2,12 @@ package backend.managers;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.TreeMap;
 
 public abstract class ManagerBase implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
     protected static final String OPERACAO_ADICIONAR = "A";
     protected static final String OPERACAO_EDITAR = "E";
     protected static final String OPERACAO_REMOVER = "R";

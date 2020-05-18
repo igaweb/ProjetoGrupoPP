@@ -2,11 +2,12 @@ package backend.managers;
 
 import backend.entidades.Utilizador;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.TreeMap;
 
 public class ManagerUtilizador extends ManagerBase implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
     private static final String ERRO_FALTA_NOME = "ERRO_FALTA_NOME";
     private static final String ERRO_FALTA_PASSWORD = "ERRO_FALTA_PASSWORD";
 

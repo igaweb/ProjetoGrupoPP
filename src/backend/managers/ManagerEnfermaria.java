@@ -10,6 +10,8 @@ import java.util.TreeMap;
 
 public class ManagerEnfermaria extends ManagerBase implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
     private static final String ERRO_TIPO_INVALIDO = "ERRO_TIPO_INVALIDO";
     private static final String ERRO_FALTA_CODIGO = "ERRO_FALTA_CODIGO";
 

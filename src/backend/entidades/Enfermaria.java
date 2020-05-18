@@ -6,6 +6,8 @@ import java.util.TreeMap;
 
 public class Enfermaria implements Serializable{
 
+    private static final long serialVersionUID = 1L;
+    
     private String codigo;
     private Integer tipo;
     private Boolean[] camas;

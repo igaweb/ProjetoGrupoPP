@@ -5,6 +5,8 @@ import java.util.TreeMap;
 
 public class Equipamento implements Serializable{
 
+    private static final long serialVersionUID = 1L;
+    
     private String codigo;
     private Integer tipo;
     private boolean livre;

@@ -11,6 +11,8 @@ import java.util.TreeMap;
 
 public class ManagerProfissionalSaude extends ManagerBase implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
     private static final String ERRO_FALTA_NOME = "ERRO_FALTA_NOME";
 
     public ManagerProfissionalSaude() {
