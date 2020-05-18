@@ -2,22 +2,15 @@ package backend;
 
 import backend.entidades.Utilizador;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Login {
     
     private Aplicacao aplicacao;
     private Utilizador utilizador;
     
-    public Login(Scanner scanner, Aplicacao aplicacao) {
+    public Login(Aplicacao aplicacao, String user, String password) {
         this.aplicacao = aplicacao;
         this.utilizador = new Utilizador();
-        
-        System.out.println("Insira o user:");
-        String user = scanner.nextLine();
-        
-        System.out.println("Insira a password:");
-        String password = scanner.nextLine();
         
         try {
             validarLogin(user, password);

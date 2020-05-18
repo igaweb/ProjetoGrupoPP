@@ -10,6 +10,8 @@ import java.io.Serializable;
 
 public class Aplicacao implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
     private ManagerUtilizador managerUtilizador;
     private ManagerEnfermaria managerEnfermaria;
     private ManagerEquipamento managerEquipamento;
