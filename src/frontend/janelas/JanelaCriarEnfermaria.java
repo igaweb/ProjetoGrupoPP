@@ -234,7 +234,7 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
             Integer nCamas = new Integer(campoNCamas.getText());
             Boolean[] camas = new Boolean[nCamas];
             String codigoHospital = campoHospital.getModel().getElementAt(campoHospital.getSelectedIndex());
-            Hospital hospital = (Hospital) app.getManagerHospital().getListaTreeMap().get(codigoHospital);
+            Hospital hospital = (Hospital) app.getManagerHospital().getLista().get(codigoHospital);
             TreeMap<String, Enfermaria> listaEnfermarias = (TreeMap<String, Enfermaria>) hospital.getEnfermarias();
             
             ManagerEnfermaria managerEnfermaria = new ManagerEnfermaria(listaEnfermarias);

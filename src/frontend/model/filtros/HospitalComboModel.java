@@ -16,7 +16,7 @@ public class HospitalComboModel implements ComboBoxModel<String> {
     private String selectedItem;
 
     public HospitalComboModel(Aplicacao app) {
-        this.lista = app.getManagerHospital().getListaTreeMap();
+        this.lista = app.getManagerHospital().getLista();
         
         inicializar();
     }

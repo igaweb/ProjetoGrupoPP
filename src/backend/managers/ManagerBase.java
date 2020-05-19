@@ -17,7 +17,7 @@ public abstract class ManagerBase implements Serializable {
     protected static final String ERRO_EDITAR = "ERRO_EDITAR";
     protected static final String ERRO_ADICIONAR = "ERRO_ADICIONAR";
 
-    protected TreeMap listaTreeMap = new TreeMap();
+    protected TreeMap lista = new TreeMap();
     protected String operacao = null;
 
     public ManagerBase() {
@@ -44,19 +44,15 @@ public abstract class ManagerBase implements Serializable {
     }
 
     protected String gerarCodigo() {
-        return "COD" + listaTreeMap.size();
+        return "COD" + lista.size();
     }
     
-    protected String gerarCodigoTreeMap() {
-        return "COD" + listaTreeMap.size();
+    public TreeMap getLista() {
+        return lista;
     }
 
-    public TreeMap getListaTreeMap() {
-        return listaTreeMap;
-    }
-
-    public void setListaTreeMap(TreeMap listaTreeMap) {
-        this.listaTreeMap = listaTreeMap;
+    public void setLista(TreeMap listaTreeMap) {
+        this.lista = listaTreeMap;
     }
 
 }

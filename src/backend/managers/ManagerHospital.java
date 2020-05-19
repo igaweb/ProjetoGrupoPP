@@ -14,7 +14,7 @@ public class ManagerHospital extends ManagerBase {
     }
 
     public ManagerHospital(TreeMap<String,Hospital> lista) {
-        this.listaTreeMap = lista;
+        this.lista = lista;
     }
 
         public void adicionar(String codigo, String nome, String localidade, TreeMap<String, Enfermaria> enfermarias) throws Exception {
@@ -40,7 +40,7 @@ public class ManagerHospital extends ManagerBase {
             // inicializar manager de Enfermaria
             hospital.setEnfermarias(new TreeMap<String, Enfermaria>());
             
-            listaTreeMap.put(novoCodigo, hospital);
+            lista.put(novoCodigo, hospital);
         } else {
             // senão, retorna erro
             throw new Exception(ERRO_ADICIONAR);
@@ -51,7 +51,7 @@ public class ManagerHospital extends ManagerBase {
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_REMOVER);
 
-        listaTreeMap.remove(hospital.getCodigo());
+        lista.remove(hospital.getCodigo());
     }
 
     public void editar(Hospital hospital) throws Exception {
@@ -64,7 +64,7 @@ public class ManagerHospital extends ManagerBase {
         // se estiver bem preenchido,
         // avança para a edição
         if (isValido) {
-            listaTreeMap.put(hospital.getCodigo(), hospital);
+            lista.put(hospital.getCodigo(), hospital);
         } else {
             // senão, retorna erro
             throw new Exception(ERRO_EDITAR);
@@ -93,7 +93,7 @@ public class ManagerHospital extends ManagerBase {
 
     @Override
     public String toString() {
-        return "ListaHospital{" + "lista=" + listaTreeMap + '}';
+        return "ListaHospital{" + "lista=" + lista + '}';
     }
 
 }

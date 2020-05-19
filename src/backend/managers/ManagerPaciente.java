@@ -18,7 +18,7 @@ public class ManagerPaciente extends ManagerBase {
     }
 
     public ManagerPaciente(TreeMap<String,Paciente>lista) {
-        this.listaTreeMap = lista;
+        this.lista = lista;
     }
 
     public void adicionar(Paciente paciente) throws Exception {
@@ -35,7 +35,7 @@ public class ManagerPaciente extends ManagerBase {
             String novoCodigo = gerarCodigo();
             paciente.setCodigo(novoCodigo);
             
-            listaTreeMap.put(paciente.getCodigo(), paciente);
+            lista.put(paciente.getCodigo(), paciente);
         } else {
             // senão, retorna erro
             throw new Exception(ERRO_ADICIONAR);
@@ -46,7 +46,7 @@ public class ManagerPaciente extends ManagerBase {
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_REMOVER);
 
-        listaTreeMap.remove(paciente);
+        lista.remove(paciente);
     }
 
     public void editar(Paciente paciente) throws Exception {
@@ -59,7 +59,7 @@ public class ManagerPaciente extends ManagerBase {
         // se estiver bem preenchido,
         // avança para a adição
         if (isValido) {
-            listaTreeMap.put(paciente.getCodigo(), paciente);
+            lista.put(paciente.getCodigo(), paciente);
         } else {
             // senão, retorna erro
             throw new Exception(ERRO_EDITAR);
@@ -104,6 +104,6 @@ public class ManagerPaciente extends ManagerBase {
 
     @Override
     public String toString() {
-        return "ListaPaciente{" + "lista=" + listaTreeMap + '}';
+        return "ListaPaciente{" + "lista=" + lista + '}';
     } 
 }

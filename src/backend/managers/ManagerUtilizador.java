@@ -15,7 +15,7 @@ public class ManagerUtilizador extends ManagerBase implements Serializable {
     }
 
     public ManagerUtilizador(TreeMap<String, Utilizador> lista) {
-        this.listaTreeMap = lista;
+        this.lista = lista;
     }
 
     public void adicionar(Utilizador utilizador) throws Exception {
@@ -24,7 +24,7 @@ public class ManagerUtilizador extends ManagerBase implements Serializable {
 
         if (isValido) {
 
-            listaTreeMap.put(utilizador.getNome(), utilizador);
+            lista.put(utilizador.getNome(), utilizador);
         } else {
             throw new Exception(ERRO_ADICIONAR);
         }
@@ -33,7 +33,7 @@ public class ManagerUtilizador extends ManagerBase implements Serializable {
     public void remover(Utilizador utilizador) throws Exception {
         setOperacao(OPERACAO_REMOVER);
 
-        listaTreeMap.remove(utilizador);
+        lista.remove(utilizador);
     }
 
     public void editar(Utilizador utilizador) throws Exception {
@@ -42,7 +42,7 @@ public class ManagerUtilizador extends ManagerBase implements Serializable {
         boolean isValido = validarCampos(utilizador);
 
         if (isValido) {
-            listaTreeMap.put(utilizador.getNome(), utilizador);
+            lista.put(utilizador.getNome(), utilizador);
         } else {
 
             throw new Exception(ERRO_EDITAR);
@@ -67,7 +67,7 @@ public class ManagerUtilizador extends ManagerBase implements Serializable {
 
     @Override
     public String toString() {
-        return "ListaUtilizador{" + "lista=" + listaTreeMap + '}';
+        return "ListaUtilizador{" + "lista=" + lista + '}';
     }
 
 }

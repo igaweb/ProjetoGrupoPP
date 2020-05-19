@@ -35,7 +35,7 @@ public class Login {
             throw new PasswordVaziaException();
         }
         
-        TreeMap<String, Utilizador> lista = aplicacao.getManagerUtilizador().getListaTreeMap();
+        TreeMap<String, Utilizador> lista = aplicacao.getManagerUtilizador().getLista();
         boolean loginExists = false;
         boolean userExists = false;
         Utilizador utilizadorValidado = null;

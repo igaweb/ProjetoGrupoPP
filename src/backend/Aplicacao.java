@@ -44,7 +44,7 @@ public class Aplicacao implements Serializable {
         managerEquipamento = null;
         
         if(codigoHospital != null && !codigoHospital.isEmpty() && codigoEnfermaria != null && !codigoEnfermaria.isEmpty()) {
-            Hospital hospital = (Hospital) getManagerHospital().getListaTreeMap().get(codigoHospital);
+            Hospital hospital = (Hospital) getManagerHospital().getLista().get(codigoHospital);
             Enfermaria enfermaria = hospital.getEnfermarias().get(codigoEnfermaria);
             
             managerEquipamento = new ManagerEquipamento(enfermaria.getEquipamentos());
@@ -69,7 +69,7 @@ public class Aplicacao implements Serializable {
         managerPaciente = null;
         
         if(codigoHospital != null && !codigoHospital.isEmpty() && codigoEnfermaria != null && !codigoEnfermaria.isEmpty()) {
-            Hospital hospital = (Hospital) getManagerHospital().getListaTreeMap().get(codigoHospital);
+            Hospital hospital = (Hospital) getManagerHospital().getLista().get(codigoHospital);
             Enfermaria enfermaria = hospital.getEnfermarias().get(codigoEnfermaria);
             
             managerPaciente = new ManagerPaciente(enfermaria.getPacientes());
@@ -86,7 +86,7 @@ public class Aplicacao implements Serializable {
         managerPaciente = null;
         
         if(codigoHospital != null && !codigoHospital.isEmpty() && codigoEnfermaria != null && !codigoEnfermaria.isEmpty()) {
-            Hospital hospital = (Hospital) getManagerHospital().getListaTreeMap().get(codigoHospital);
+            Hospital hospital = (Hospital) getManagerHospital().getLista().get(codigoHospital);
             Enfermaria enfermaria = hospital.getEnfermarias().get(codigoEnfermaria);
             
             managerProfissionalSaude = new ManagerProfissionalSaude(enfermaria.getProfissionalSaude());

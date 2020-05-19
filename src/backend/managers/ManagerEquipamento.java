@@ -11,7 +11,7 @@ public class ManagerEquipamento extends ManagerBase {
     private static final String ERRO_TIPO_INVALIDO = "ERRO_TIPO_INVALIDO";
     
      public ManagerEquipamento(TreeMap<String,Equipamento> lista) {
-        this.listaTreeMap = lista;
+        this.lista = lista;
     }
      
     public void adicionar(String codigo, Integer tipo, boolean livre, Paciente paciente)throws Exception {
@@ -31,10 +31,10 @@ public class ManagerEquipamento extends ManagerBase {
          // avança para a adição
         if (isValido) {
             // gerar o codigo para o novo equipamento
-            String novoCodigo = gerarCodigoTreeMap();
+            String novoCodigo = gerarCodigo();
             equipamento.setCodigo(novoCodigo);
 
-            listaTreeMap.put(novoCodigo, equipamento);
+            lista.put(novoCodigo, equipamento);
         } else {
             // senão, retorna erro
             throw new Exception(ERRO_ADICIONAR);
@@ -45,7 +45,7 @@ public class ManagerEquipamento extends ManagerBase {
         
         // set da operacao que estamos a fazer)
         setOperacao(OPERACAO_REMOVER);
-        listaTreeMap.remove(equipamento.getCodigo());
+        lista.remove(equipamento.getCodigo());
     }
 
     public void editar(Equipamento equipamento) throws Exception {
@@ -59,9 +59,9 @@ public class ManagerEquipamento extends ManagerBase {
         // se estiver bem preenchido,
         // avança para a adição
         if (isValido) {
-            Equipamento equipamentoAEditar = (Equipamento) listaTreeMap.get(equipamento.getCodigo());
+            Equipamento equipamentoAEditar = (Equipamento) lista.get(equipamento.getCodigo());
 
-            listaTreeMap.put(equipamentoAEditar.getCodigo(), equipamentoAEditar);
+            lista.put(equipamentoAEditar.getCodigo(), equipamentoAEditar);
         } else {
             // senão, retorna erro
             throw new Exception(ERRO_EDITAR);
@@ -88,6 +88,6 @@ public class ManagerEquipamento extends ManagerBase {
 
     @Override
     public String toString() {
-        return "ListaEquipamentos{" + "lista=" + listaTreeMap + '}';
+        return "ListaEquipamentos{" + "lista=" + lista + '}';
     }
 }

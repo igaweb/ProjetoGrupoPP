@@ -322,7 +322,7 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
             int option = JOptionPane.showConfirmDialog(null, "Tem a certeza que quer eliminar a linha selecionada?");
 
             if(option == JOptionPane.OK_OPTION) {
-                Hospital hospital = (Hospital) app.getManagerHospital().getListaTreeMap().get(hospitalSelecionado);
+                Hospital hospital = (Hospital) app.getManagerHospital().getLista().get(hospitalSelecionado);
                 ManagerEnfermaria managerEnfermaria = new ManagerEnfermaria(hospital.getEnfermarias());
                 for (int i = 0; i < tabela.getSelectedRows().length; i++) {
                     try {

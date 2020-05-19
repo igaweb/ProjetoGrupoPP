@@ -15,7 +15,7 @@ public class ManagerEnfermaria extends ManagerBase implements Serializable {
     private static final String ERRO_FALTA_CODIGO = "ERRO_FALTA_CODIGO";
 
     public ManagerEnfermaria(TreeMap<String, Enfermaria> listaTreeMap) {
-        this.listaTreeMap = listaTreeMap;
+        this.lista = listaTreeMap;
     }
 
     public void adicionar(int tipo, Boolean[] camas) throws Exception {
@@ -35,7 +35,7 @@ public class ManagerEnfermaria extends ManagerBase implements Serializable {
             enfermaria.setCodigo(novoCodigo);
 
             
-            listaTreeMap.put(novoCodigo, enfermaria);
+            lista.put(novoCodigo, enfermaria);
         } else {
             // senão, retorna erro
             throw new Exception(ERRO_ADICIONAR);
@@ -46,7 +46,7 @@ public class ManagerEnfermaria extends ManagerBase implements Serializable {
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_REMOVER);
 
-        listaTreeMap.remove(enfermaria.getCodigo());
+        lista.remove(enfermaria.getCodigo());
     }
 
     public void editar(Enfermaria enfermaria) throws Exception {
@@ -59,7 +59,7 @@ public class ManagerEnfermaria extends ManagerBase implements Serializable {
         // se estiver bem preenchido,
         // avança para a edição
         if (isValido) {
-            listaTreeMap.put(enfermaria.getCodigo(), enfermaria);
+            lista.put(enfermaria.getCodigo(), enfermaria);
         } else {
             // senão, retorna erro
             throw new Exception(ERRO_EDITAR);
@@ -89,6 +89,6 @@ public class ManagerEnfermaria extends ManagerBase implements Serializable {
 
     @Override
     public String toString() {
-        return "ListaEnfermaria{" + "lista=" + listaTreeMap + '}';
+        return "ListaEnfermaria{" + "lista=" + lista + '}';
     }
 }

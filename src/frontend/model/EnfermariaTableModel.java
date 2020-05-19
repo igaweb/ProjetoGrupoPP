@@ -31,10 +31,10 @@ public class EnfermariaTableModel extends DefaultTableModel implements TableMode
         // inicializar manager da enfermaria que está no respetivo hospital
         Object[][] data;
         if(codigoHospital != null && !codigoHospital.isEmpty()) {
-           Hospital hospital = (Hospital) app.getManagerHospital().getListaTreeMap().get(codigoHospital);
+           Hospital hospital = (Hospital) app.getManagerHospital().getLista().get(codigoHospital);
             this.manager = new ManagerEnfermaria(hospital.getEnfermarias());
             
-            this.lista = manager.getListaTreeMap();
+            this.lista = manager.getLista();
 
             data = new Object[lista.size()][COLUMN_COUNT];
             int i = 0;

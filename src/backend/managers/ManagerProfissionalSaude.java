@@ -19,7 +19,7 @@ public class ManagerProfissionalSaude extends ManagerBase implements Serializabl
     }
 
     public ManagerProfissionalSaude(TreeMap<String,ProfissionalSaude> lista) {
-        this.listaTreeMap = lista;
+        this.lista = lista;
     }
 
     public void adicionar(ProfissionalSaude profissionalSaude) throws Exception {
@@ -31,7 +31,7 @@ public class ManagerProfissionalSaude extends ManagerBase implements Serializabl
             String novoCodigo = gerarCodigo();
             profissionalSaude.setCodigo(novoCodigo);
 
-            listaTreeMap.put(profissionalSaude.getCodigo(), profissionalSaude);
+            lista.put(profissionalSaude.getCodigo(), profissionalSaude);
         } else {
             throw new Exception(ERRO_ADICIONAR);
         }
@@ -40,7 +40,7 @@ public class ManagerProfissionalSaude extends ManagerBase implements Serializabl
     public void remover(ProfissionalSaude profissionalSaude) throws Exception {
         setOperacao(OPERACAO_REMOVER);
 
-        listaTreeMap.remove(profissionalSaude);
+        lista.remove(profissionalSaude);
     }
 
     public void editar(ProfissionalSaude profissionalSaude) throws Exception {
@@ -49,7 +49,7 @@ public class ManagerProfissionalSaude extends ManagerBase implements Serializabl
         boolean isValido = validarCampos(profissionalSaude);
 
         if (isValido) {
-            listaTreeMap.put(profissionalSaude.getCodigo(), profissionalSaude);
+            lista.put(profissionalSaude.getCodigo(), profissionalSaude);
         } else {
 
             throw new Exception(ERRO_EDITAR);
@@ -70,7 +70,7 @@ public class ManagerProfissionalSaude extends ManagerBase implements Serializabl
 
     @Override
     public String toString() {
-        return "ListaUtilizador{" + "lista=" + listaTreeMap + '}';
+        return "ListaUtilizador{" + "lista=" + lista + '}';
     }
 
 }

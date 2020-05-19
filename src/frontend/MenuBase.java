@@ -116,36 +116,36 @@ public abstract class MenuBase {
     }
 
     protected TreeMap<String, Hospital> getListaHospital() {
-        return menus.getAplicacao().getManagerHospital().getListaTreeMap();
+        return menus.getAplicacao().getManagerHospital().getLista();
     }
 
     protected TreeMap<String, Paciente> getListaPaciente(String codigoHospital, String codigoEnfermaria) {
-        Hospital hospital = (Hospital) menus.getAplicacao().getManagerHospital().getListaTreeMap().get(codigoHospital);
+        Hospital hospital = (Hospital) menus.getAplicacao().getManagerHospital().getLista().get(codigoHospital);
         Enfermaria enfermaria = hospital.getEnfermarias().get(codigoEnfermaria);
         return enfermaria.getPacientes();
     }
     
     protected TreeMap<String, ProfissionalSaude> getListaProfissionalSaude(String codigoHospital, String codigoEnfermaria) {
-        Hospital hospital = (Hospital) menus.getAplicacao().getManagerHospital().getListaTreeMap().get(codigoHospital);
+        Hospital hospital = (Hospital) menus.getAplicacao().getManagerHospital().getLista().get(codigoHospital);
         Enfermaria enfermaria = hospital.getEnfermarias().get(codigoEnfermaria);
         return enfermaria.getProfissionalSaude();
     }
 
     protected TreeMap<String, Utilizador> getListaUtilizador() {
-        return menus.getAplicacao().getManagerUtilizador().getListaTreeMap();
+        return menus.getAplicacao().getManagerUtilizador().getLista();
     }
 
     protected TreeMap<String, Enfermaria> getListaEnfermaria(String codigoHospital) {
-        Hospital hospital = (Hospital) menus.getAplicacao().getManagerHospital().getListaTreeMap().get(codigoHospital);
+        Hospital hospital = (Hospital) menus.getAplicacao().getManagerHospital().getLista().get(codigoHospital);
         return hospital.getEnfermarias();
     }
 
     protected TreeMap<String, Equipamento> getListaEquipamento(String codigoHospital, String codigoEnfermaria) {
-        return menus.getAplicacao().getManagerEquipamento(codigoHospital, codigoEnfermaria).getListaTreeMap();
+        return menus.getAplicacao().getManagerEquipamento(codigoHospital, codigoEnfermaria).getLista();
     }
 
     protected TreeMap<String, String> getMenuEscolherHospital() {
-        TreeMap<String, Hospital> listaHospital = menus.getAplicacao().getManagerHospital().getListaTreeMap();
+        TreeMap<String, Hospital> listaHospital = menus.getAplicacao().getManagerHospital().getLista();
         TreeMap<String, String> menuEscolherHospital = new TreeMap<String, String>();
         for (Map.Entry<String, Hospital> entry : listaHospital.entrySet()) {
             Hospital hospital = (Hospital) entry.getValue();
@@ -156,7 +156,7 @@ public abstract class MenuBase {
     }
 
     protected TreeMap<String, String> getMenuEscolherEnfermaria(String codigoHospital) {
-        TreeMap<String, Enfermaria> listaEnfermaria = new ManagerEnfermaria(getListaEnfermaria(codigoHospital)).getListaTreeMap();
+        TreeMap<String, Enfermaria> listaEnfermaria = new ManagerEnfermaria(getListaEnfermaria(codigoHospital)).getLista();
         TreeMap<String, String> menuEscolherEnfermaria = new TreeMap<String, String>();
         for (Map.Entry<String, Enfermaria> entry : listaEnfermaria.entrySet()) {
             Enfermaria enfermaria = (Enfermaria) entry.getValue();
@@ -167,7 +167,7 @@ public abstract class MenuBase {
     }
 
     protected TreeMap<String, String> getMenuEscolherUtilizador() {
-        TreeMap<String, Utilizador> listaUtilizador = menus.getAplicacao().getManagerUtilizador().getListaTreeMap();
+        TreeMap<String, Utilizador> listaUtilizador = menus.getAplicacao().getManagerUtilizador().getLista();
         TreeMap<String, String> menuEscolherUtilizador = new TreeMap<String, String>();
         int i = 0;
         for (Map.Entry<String, Utilizador> entry : listaUtilizador.entrySet()) {
@@ -181,7 +181,7 @@ public abstract class MenuBase {
     }
 
      protected TreeMap<String, String> getMenuEscolherEquipamento(String codigoHospital, String codigoEnfermaria) {
-        TreeMap<String, Equipamento> listaEquipamento = menus.getAplicacao().getManagerEquipamento(codigoHospital, codigoEnfermaria).getListaTreeMap();
+        TreeMap<String, Equipamento> listaEquipamento = menus.getAplicacao().getManagerEquipamento(codigoHospital, codigoEnfermaria).getLista();
         TreeMap<String, String> menuEscolherEquipamento = new TreeMap<String, String>();
         int i = 0;
         for (Map.Entry<String, Equipamento> entry : listaEquipamento.entrySet()) {
@@ -195,7 +195,7 @@ public abstract class MenuBase {
     }
      
     protected TreeMap<String, String> getMenuEscolherPaciente(String codigoHospital, String codigoEnfermaria) {
-        TreeMap<String, Paciente> listaPaciente = new ManagerPaciente(getListaPaciente(codigoHospital, codigoEnfermaria)).getListaTreeMap();
+        TreeMap<String, Paciente> listaPaciente = new ManagerPaciente(getListaPaciente(codigoHospital, codigoEnfermaria)).getLista();
         TreeMap<String, String> menuEscolherPaciente = new TreeMap<String, String>();
         int i = 0;
         for (Map.Entry<String, Paciente> entry : listaPaciente.entrySet()) {
