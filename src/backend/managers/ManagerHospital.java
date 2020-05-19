@@ -2,7 +2,6 @@ package backend.managers;
 
 import backend.entidades.Enfermaria;
 import backend.entidades.Hospital;
-import java.util.ArrayList;
 import java.util.TreeMap;
 
 public class ManagerHospital extends ManagerBase {
@@ -38,6 +37,9 @@ public class ManagerHospital extends ManagerBase {
             String novoCodigo = gerarCodigo();
             hospital.setCodigo(novoCodigo);
 
+            // inicializar manager de Enfermaria
+            hospital.setEnfermarias(new TreeMap<String, Enfermaria>());
+            
             listaTreeMap.put(novoCodigo, hospital);
         } else {
             // senão, retorna erro
@@ -62,11 +64,7 @@ public class ManagerHospital extends ManagerBase {
         // se estiver bem preenchido,
         // avança para a edição
         if (isValido) {
-            int index = lista.indexOf(hospital);
-
-            if (index >= 0) {
-                lista.set(index, hospital);
-            }
+            listaTreeMap.put(hospital.getCodigo(), hospital);
         } else {
             // senão, retorna erro
             throw new Exception(ERRO_EDITAR);
@@ -95,7 +93,7 @@ public class ManagerHospital extends ManagerBase {
 
     @Override
     public String toString() {
-        return "ListaHospital{" + "lista=" + lista + '}';
+        return "ListaHospital{" + "lista=" + listaTreeMap + '}';
     }
 
 }

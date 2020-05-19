@@ -13,6 +13,7 @@ public class Enfermaria implements Serializable{
     private Boolean[] camas;
     private TreeMap<String, Equipamento> equipamentos;
     private TreeMap<String, Paciente> pacientes;
+    private TreeMap<String, ProfissionalSaude> profissionalSaude;
 
     public Enfermaria() {
     }
@@ -65,6 +66,14 @@ public class Enfermaria implements Serializable{
         this.pacientes = pacientes;
     }
 
+    public TreeMap<String, ProfissionalSaude> getProfissionalSaude() {
+        return profissionalSaude;
+    }
+
+    public void setProfissionalSaude(TreeMap<String, ProfissionalSaude> profissionalSaude) {
+        this.profissionalSaude = profissionalSaude;
+    }
+    
     @Override
     public String toString() {
         return "Enfermaria{" + "codigo=" + codigo + ", tipo=" + tipo + ", camas=" + camas + ", equipamentos=" + equipamentos + ", pacientes=" + pacientes + '}';

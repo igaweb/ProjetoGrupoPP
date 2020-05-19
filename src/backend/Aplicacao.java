@@ -1,7 +1,8 @@
 package backend;
 
+import backend.entidades.Enfermaria;
+import backend.entidades.Hospital;
 import backend.managers.ManagerUtilizador;
-import backend.managers.ManagerEnfermaria;
 import backend.managers.ManagerEquipamento;
 import backend.managers.ManagerHospital;
 import backend.managers.ManagerPaciente;
@@ -13,7 +14,6 @@ public class Aplicacao implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private ManagerUtilizador managerUtilizador;
-    private ManagerEnfermaria managerEnfermaria;
     private ManagerEquipamento managerEquipamento;
     private ManagerHospital managerHospital;
     private ManagerPaciente managerPaciente;
@@ -27,8 +27,7 @@ public class Aplicacao implements Serializable {
     private void inicializarManagers() {
         managerUtilizador = new ManagerUtilizador();
         managerHospital = new ManagerHospital();
-        managerEnfermaria = new ManagerEnfermaria();
-        managerEquipamento = new ManagerEquipamento();
+        
         managerPaciente = new ManagerPaciente();
         managerProfissionalSaude = new ManagerProfissionalSaude();
     }
@@ -41,15 +40,16 @@ public class Aplicacao implements Serializable {
         this.managerUtilizador = managerUtilizador;
     }
 
-    public ManagerEnfermaria getManagerEnfermaria() {
-        return managerEnfermaria;
-    }
-
-    public void setManagerEnfermaria(ManagerEnfermaria managerEnfermaria) {
-        this.managerEnfermaria = managerEnfermaria;
-    }
-
-    public ManagerEquipamento getManagerEquipamento() {
+    public ManagerEquipamento getManagerEquipamento(String codigoHospital, String codigoEnfermaria) {
+        managerEquipamento = null;
+        
+        if(codigoHospital != null && !codigoHospital.isEmpty() && codigoEnfermaria != null && !codigoEnfermaria.isEmpty()) {
+            Hospital hospital = (Hospital) getManagerHospital().getListaTreeMap().get(codigoHospital);
+            Enfermaria enfermaria = hospital.getEnfermarias().get(codigoEnfermaria);
+            
+            managerEquipamento = new ManagerEquipamento(enfermaria.getEquipamentos());
+        }
+        
         return managerEquipamento;
     }
 
@@ -65,7 +65,16 @@ public class Aplicacao implements Serializable {
         this.managerHospital = managerHospital;
     }
 
-    public ManagerPaciente getManagerPaciente() {
+    public ManagerPaciente getManagerPaciente(String codigoHospital, String codigoEnfermaria) {
+        managerPaciente = null;
+        
+        if(codigoHospital != null && !codigoHospital.isEmpty() && codigoEnfermaria != null && !codigoEnfermaria.isEmpty()) {
+            Hospital hospital = (Hospital) getManagerHospital().getListaTreeMap().get(codigoHospital);
+            Enfermaria enfermaria = hospital.getEnfermarias().get(codigoEnfermaria);
+            
+            managerPaciente = new ManagerPaciente(enfermaria.getPacientes());
+        }
+        
         return managerPaciente;
     }
 
@@ -73,7 +82,15 @@ public class Aplicacao implements Serializable {
         this.managerPaciente = managerPaciente;
     }
 
-    public ManagerProfissionalSaude getManagerProfissionalSaude() {
+    public ManagerProfissionalSaude getManagerProfissionalSaude(String codigoHospital, String codigoEnfermaria) {
+        managerPaciente = null;
+        
+        if(codigoHospital != null && !codigoHospital.isEmpty() && codigoEnfermaria != null && !codigoEnfermaria.isEmpty()) {
+            Hospital hospital = (Hospital) getManagerHospital().getListaTreeMap().get(codigoHospital);
+            Enfermaria enfermaria = hospital.getEnfermarias().get(codigoEnfermaria);
+            
+            managerProfissionalSaude = new ManagerProfissionalSaude(enfermaria.getProfissionalSaude());
+        }
         return managerProfissionalSaude;
     }
 

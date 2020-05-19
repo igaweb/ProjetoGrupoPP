@@ -1,6 +1,6 @@
 package frontend;
 
-import backend.Conteudos;
+import backend.entidades.Enfermaria;
 import backend.entidades.Utilizador;
 import backend.managers.ManagerUtilizador;
 import java.util.Map;
@@ -20,7 +20,7 @@ public class MenuUtilizador extends MenuBase {
         this.manager = menus.getAplicacao().getManagerUtilizador();
     }
 
-    private void start() {
+    public void start() {
         String pergunta = "Escolha uma opcao:";
         Integer opcaoEscolhida = getOpcaoMenu(pergunta, MENU_PRINCIPAL);
 
@@ -47,7 +47,7 @@ public class MenuUtilizador extends MenuBase {
         start();
     }
 
-    private void listar() {
+    public void listar() {
         System.out.println("Utilizador: ");
         System.out.println("| Nome |");
         for (Map.Entry<String, Utilizador> entry : getListaUtilizador().entrySet()) {
@@ -63,7 +63,7 @@ public class MenuUtilizador extends MenuBase {
         }
     }
 
-    private void adicionar() {
+    public void adicionar() {
         Scanner input = new Scanner(System.in);
         Utilizador utilizador = new Utilizador();
 
@@ -82,80 +82,70 @@ public class MenuUtilizador extends MenuBase {
         }
     }
 
-    private void editar() {
-        Scanner input = new Scanner(System.in);
-        String editar;
-        String pergunta = "Escolher o utilizador a alterar: ";
-        listar();
+    public void editar() {
+        if (getListaUtilizador().size() > 0) {
+            String editar;
+            String pergunta = "Escolher o utilizador a alterar: ";
+            listar();
 
-        String[] menuEscolherUtilizador = new String[manager.getLista().size()];
-        for (int i = 0; i < manager.getLista().size(); i++) {
-            Utilizador utilizador = (Utilizador) manager.getLista().get(i);
-            menuEscolherUtilizador[i] = utilizador.getNome();
+            TreeMap<String, String> menuEscolherUtilizador = getMenuEscolherUtilizador();
+
+            String codigoUtilizador = getOpcaoMenu(pergunta, menuEscolherUtilizador);
+
+            Utilizador utilizadorAEditar = (Utilizador) getListaUtilizador().get(codigoUtilizador);
+
+            String pergunta2 = "Escolha o dado que quer editar:";
+            Integer opcaoEscolhida = getOpcaoMenu(pergunta2, MENU_EDITAR);
+
+            switch (opcaoEscolhida) {
+                case 0:// Nome
+                    System.out.print("Novo Nome: ");
+                    utilizadorAEditar.setNome(scanner.nextLine());
+                    try {
+                        manager.editar(utilizadorAEditar);
+                    } catch (Exception ex) {
+                        System.out.println("ex " + ex);
+                    }
+                    System.out.println("Quer Continuar a editar(Y/N)?: ");
+
+                    editar = scanner.nextLine();
+                    if (editar.contains("Y") || editar.contains("y")) {
+                        editar();
+                    }
+                    break;
+                case 1: // Password
+                    System.out.print("Nova Password: ");
+                    utilizadorAEditar.setPassword(scanner.nextLine());
+                    try {
+                        manager.editar(utilizadorAEditar);
+                    } catch (Exception ex) {
+                        System.out.println("ex " + ex);
+                    }
+                    System.out.println("Quer Continuar a editar(Y/N)? ");
+
+                    editar = scanner.nextLine();
+                    if (editar.contains("Y") || editar.contains("y")) {
+                        editar();
+                    }
+                    break;
+            }
+        } else {
+            System.out.println("Nao existem utilizadores");
+            start();
         }
-
-        Integer utilizadorAEditarIndex = getOpcaoMenu(pergunta, menuEscolherUtilizador);
-        if (utilizadorAEditarIndex == -1) {
-            return;
-        }
-
-        Utilizador utilizadorAEditar = (Utilizador) manager.getLista().get(utilizadorAEditarIndex);
-
-        String pergunta2 = "Escolha o dado que quer editar:";
-        Integer opcaoEscolhida = getOpcaoMenu(pergunta2, MENU_EDITAR);
-
-        switch (opcaoEscolhida) {
-            case 0:// Nome
-                System.out.print("Novo Nome: ");
-                utilizadorAEditar.setNome(input.nextLine());
-                try {
-                    manager.editar(utilizadorAEditar);
-                } catch (Exception ex) {
-                    System.out.println("ex " + ex);
-                }
-                System.out.println("Quer Continuar a editar(Y/N)?: ");
-
-                editar = input.nextLine();
-                if (editar.contains("Y") || editar.contains("y")) {
-                    editar();
-                }
-                break;
-            case 1: // Password
-                System.out.print("Nova Password: ");
-                utilizadorAEditar.setPassword(input.nextLine());
-                try {
-                    manager.editar(utilizadorAEditar);
-                } catch (Exception ex) {
-                    System.out.println("ex " + ex);
-                }
-                System.out.println("Quer Continuar a editar(Y/N)? ");
-
-                editar = input.nextLine();
-                if (editar.contains("Y") || editar.contains("y")) {
-                    editar();
-                }
-                break;
-        }
-
     }
 
-    private void remover() {
-        if (manager.getLista().size() > 0) {
+    public void remover() {
+
+        if (getListaUtilizador().size() > 0) {
             String pergunta = "Escolher o utilizador a remover: ";
             listar();
 
-            String[] menuEscolherUtilizador = new String[manager.getLista().size()];
-            for (int i = 0; i < manager.getLista().size(); i++) {
-                Utilizador utilizador = (Utilizador) manager.getLista().get(i);
-                menuEscolherUtilizador[i] = utilizador.getNome();
-            }
+            TreeMap<String, String> menuEscolherUtilizador = getMenuEscolherUtilizador();
 
-            Integer utilizadorIndex = getOpcaoMenu(pergunta, menuEscolherUtilizador);
-            if (utilizadorIndex == -1) {
-                return;
-            }
+            String codigoUtilizador = getOpcaoMenu(pergunta, menuEscolherUtilizador);
 
-            Utilizador utilizador = (Utilizador) manager.getLista().get(utilizadorIndex);
+            Utilizador utilizador = (Utilizador) getListaUtilizador().get(codigoUtilizador);
 
             try {
                 manager.remover(utilizador);

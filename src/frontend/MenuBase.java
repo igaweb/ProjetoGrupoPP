@@ -6,7 +6,11 @@ import backend.Serializacao;
 import backend.entidades.Enfermaria;
 import backend.entidades.Hospital;
 import backend.entidades.Equipamento;
+import backend.entidades.Paciente;
+import backend.entidades.ProfissionalSaude;
 import backend.entidades.Utilizador;
+import backend.managers.ManagerEnfermaria;
+import backend.managers.ManagerPaciente;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
@@ -22,6 +26,9 @@ public abstract class MenuBase {
     protected static final String[] MENU_PRINCIPAL = new String[]{"LISTAR", "ADICIONAR", "EDITAR", "REMOVER", "SAIR"};
     protected static final String[] MENU_PROFISSIONALSAUDE = new String[]{"LISTAR","SAIR"};
     
+    protected String hospitalSelecionado;
+    protected String enfermariaSelecionada;
+
     public MenuBase(Menus menus) {
         this.menus = menus;
 
@@ -112,41 +119,48 @@ public abstract class MenuBase {
         return menus.getAplicacao().getManagerHospital().getListaTreeMap();
     }
 
+    protected TreeMap<String, Paciente> getListaPaciente(String codigoHospital, String codigoEnfermaria) {
+        Hospital hospital = (Hospital) menus.getAplicacao().getManagerHospital().getListaTreeMap().get(codigoHospital);
+        Enfermaria enfermaria = hospital.getEnfermarias().get(codigoEnfermaria);
+        return enfermaria.getPacientes();
+    }
+    
+    protected TreeMap<String, ProfissionalSaude> getListaProfissionalSaude(String codigoHospital, String codigoEnfermaria) {
+        Hospital hospital = (Hospital) menus.getAplicacao().getManagerHospital().getListaTreeMap().get(codigoHospital);
+        Enfermaria enfermaria = hospital.getEnfermarias().get(codigoEnfermaria);
+        return enfermaria.getProfissionalSaude();
+    }
+
     protected TreeMap<String, Utilizador> getListaUtilizador() {
         return menus.getAplicacao().getManagerUtilizador().getListaTreeMap();
     }
 
-    protected TreeMap<String, Enfermaria> getListaEnfermaria() {
-        return menus.getAplicacao().getManagerEnfermaria().getListaTreeMap();
+    protected TreeMap<String, Enfermaria> getListaEnfermaria(String codigoHospital) {
+        Hospital hospital = (Hospital) menus.getAplicacao().getManagerHospital().getListaTreeMap().get(codigoHospital);
+        return hospital.getEnfermarias();
     }
 
-    protected TreeMap<String, Equipamento> getListaEquipamento() {
-        return menus.getAplicacao().getManagerEquipamento().getListaTreeMap();
+    protected TreeMap<String, Equipamento> getListaEquipamento(String codigoHospital, String codigoEnfermaria) {
+        return menus.getAplicacao().getManagerEquipamento(codigoHospital, codigoEnfermaria).getListaTreeMap();
     }
 
     protected TreeMap<String, String> getMenuEscolherHospital() {
         TreeMap<String, Hospital> listaHospital = menus.getAplicacao().getManagerHospital().getListaTreeMap();
         TreeMap<String, String> menuEscolherHospital = new TreeMap<String, String>();
-        int i = 0;
         for (Map.Entry<String, Hospital> entry : listaHospital.entrySet()) {
             Hospital hospital = (Hospital) entry.getValue();
-            menuEscolherHospital.put(hospital.getCodigo(), hospital.getCodigo());
-
-            i++;
+            menuEscolherHospital.put(hospital.getCodigo(), hospital.getCodigo() + " (" + hospital.getLocalidade() + ")");
         }
 
         return menuEscolherHospital;
     }
 
-    protected TreeMap<String, String> getMenuEscolherEnfermaria() {
-        TreeMap<String, Enfermaria> listaEnfermaria = menus.getAplicacao().getManagerEnfermaria().getListaTreeMap();
+    protected TreeMap<String, String> getMenuEscolherEnfermaria(String codigoHospital) {
+        TreeMap<String, Enfermaria> listaEnfermaria = new ManagerEnfermaria(getListaEnfermaria(codigoHospital)).getListaTreeMap();
         TreeMap<String, String> menuEscolherEnfermaria = new TreeMap<String, String>();
-        int i = 0;
         for (Map.Entry<String, Enfermaria> entry : listaEnfermaria.entrySet()) {
             Enfermaria enfermaria = (Enfermaria) entry.getValue();
             menuEscolherEnfermaria.put(enfermaria.getCodigo(), enfermaria.getCodigo() + " (" + Conteudos.getTiposEnfermarias()[enfermaria.getTipo()] + ")");
-
-            i++;
         }
 
         return menuEscolherEnfermaria;
@@ -166,8 +180,8 @@ public abstract class MenuBase {
         return menuEscolherUtilizador;
     }
 
-     protected TreeMap<String, String> getMenuEscolherEquipamento() {
-        TreeMap<String, Equipamento> listaEquipamento = menus.getAplicacao().getManagerEquipamento().getListaTreeMap();
+     protected TreeMap<String, String> getMenuEscolherEquipamento(String codigoHospital, String codigoEnfermaria) {
+        TreeMap<String, Equipamento> listaEquipamento = menus.getAplicacao().getManagerEquipamento(codigoHospital, codigoEnfermaria).getListaTreeMap();
         TreeMap<String, String> menuEscolherEquipamento = new TreeMap<String, String>();
         int i = 0;
         for (Map.Entry<String, Equipamento> entry : listaEquipamento.entrySet()) {
@@ -179,6 +193,21 @@ public abstract class MenuBase {
 
         return menuEscolherEquipamento;
     }
+     
+    protected TreeMap<String, String> getMenuEscolherPaciente(String codigoHospital, String codigoEnfermaria) {
+        TreeMap<String, Paciente> listaPaciente = new ManagerPaciente(getListaPaciente(codigoHospital, codigoEnfermaria)).getListaTreeMap();
+        TreeMap<String, String> menuEscolherPaciente = new TreeMap<String, String>();
+        int i = 0;
+        for (Map.Entry<String, Paciente> entry : listaPaciente.entrySet()) {
+            Paciente paciente = (Paciente) entry.getValue();
+            menuEscolherPaciente.put(paciente.getCodigo(), paciente.getNome());
+
+            i++;
+        }
+
+        return menuEscolherPaciente;
+    }
+
      
     private String[] getEscolherPaciente() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -194,5 +223,55 @@ public abstract class MenuBase {
 
     private String[] getEscolherProfissionalSaude() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public String getHospitalSelecionado() {
+        return hospitalSelecionado;
+    }
+
+    public void setHospitalSelecionado(String hospitalSelecionado) {
+        this.hospitalSelecionado = hospitalSelecionado;
+    }
+
+    public String getEnfermariaSelecionada() {
+        return enfermariaSelecionada;
+    }
+
+    public void setEnfermariaSelecionada(String enfermariaSelecionada) {
+        this.enfermariaSelecionada = enfermariaSelecionada;
+    }
+    
+    protected void selecionarHospital() {
+        if(hospitalSelecionado == null) {
+            String pergunta1 = "Selecione o Hospital:";
+            MenuHospital hospitalMenu = menus.getMenuHospital();
+            hospitalMenu.listar();
+            TreeMap<String, String> menuEscolherHospital = getMenuEscolherHospital();
+            hospitalSelecionado = getOpcaoMenu(pergunta1, menuEscolherHospital);
+            
+            menus.getMenuHospital().setHospitalSelecionado(hospitalSelecionado);
+            menus.getMenuEnfermaria().setHospitalSelecionado(hospitalSelecionado);
+            menus.getMenuEquipamento().setHospitalSelecionado(hospitalSelecionado);
+            menus.getMenuPaciente().setHospitalSelecionado(hospitalSelecionado);
+            menus.getMenuProfissionalSaude().setHospitalSelecionado(hospitalSelecionado);
+            menus.getMenuUtilizador().setHospitalSelecionado(hospitalSelecionado);
+        }
+    }
+    
+    protected void selecionarEnfermaria() {
+        if(enfermariaSelecionada == null) {
+            String pergunta2 = "Selecione a Enfermaria:";
+            MenuEnfermaria enfermariaMenu = menus.getMenuEnfermaria();
+            enfermariaMenu.listar();
+            TreeMap<String, String> menuEscolherEnfermaria = getMenuEscolherEnfermaria(hospitalSelecionado);
+            enfermariaSelecionada = getOpcaoMenu(pergunta2, menuEscolherEnfermaria);
+            
+            menus.getMenuHospital().setHospitalSelecionado(enfermariaSelecionada);
+            menus.getMenuEnfermaria().setHospitalSelecionado(enfermariaSelecionada);
+            menus.getMenuEquipamento().setHospitalSelecionado(enfermariaSelecionada);
+            menus.getMenuPaciente().setHospitalSelecionado(enfermariaSelecionada);
+            menus.getMenuProfissionalSaude().setHospitalSelecionado(enfermariaSelecionada);
+            menus.getMenuUtilizador().setHospitalSelecionado(enfermariaSelecionada);
+        }
     }
 }

@@ -27,8 +27,11 @@ public class ManagerProfissionalSaude extends ManagerBase implements Serializabl
         boolean isValido = validarCampos(profissionalSaude);
       
         if (isValido) {
+            // gerar o codigo para a nova enfermaria
+            String novoCodigo = gerarCodigo();
+            profissionalSaude.setCodigo(novoCodigo);
 
-            lista.add(profissionalSaude);
+            listaTreeMap.put(profissionalSaude.getCodigo(), profissionalSaude);
         } else {
             throw new Exception(ERRO_ADICIONAR);
         }
@@ -37,7 +40,7 @@ public class ManagerProfissionalSaude extends ManagerBase implements Serializabl
     public void remover(ProfissionalSaude profissionalSaude) throws Exception {
         setOperacao(OPERACAO_REMOVER);
 
-        lista.remove(profissionalSaude);
+        listaTreeMap.remove(profissionalSaude);
     }
 
     public void editar(ProfissionalSaude profissionalSaude) throws Exception {
@@ -46,11 +49,7 @@ public class ManagerProfissionalSaude extends ManagerBase implements Serializabl
         boolean isValido = validarCampos(profissionalSaude);
 
         if (isValido) {
-            int index = lista.indexOf(profissionalSaude);
-
-            if (index >= 0) {
-                lista.set(index, profissionalSaude);
-            }
+            listaTreeMap.put(profissionalSaude.getCodigo(), profissionalSaude);
         } else {
 
             throw new Exception(ERRO_EDITAR);
@@ -61,19 +60,17 @@ public class ManagerProfissionalSaude extends ManagerBase implements Serializabl
      * Método para validar se os campos da classe estão bem preenchidos
      */
     private boolean validarCampos(ProfissionalSaude profissionalSaude) throws Exception {
-  //condicao se é enfermeiro ou medico(se e medico), tem que ter especialidade, se nao, nao faz nada        
-// validações para todas as operaçoes na base
         boolean isValid = super.validarCampos(profissionalSaude);
         if (!operacao.equals(OPERACAO_ADICIONAR) && profissionalSaude.getNome() == null) {
             throw new Exception(ERRO_FALTA_NOME);
         }
-        // validações....... (campos obrigatorios, tipos de dados, etc...)
+
         return isValid;
     }
 
     @Override
     public String toString() {
-        return "ListaUtilizador{" + "lista=" + lista + '}';
+        return "ListaUtilizador{" + "lista=" + listaTreeMap + '}';
     }
 
 }

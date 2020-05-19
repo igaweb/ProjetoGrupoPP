@@ -5,7 +5,6 @@ import backend.entidades.Enfermaria;
 import backend.entidades.Equipamento;
 import backend.entidades.Paciente;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.TreeMap;
 
 public class ManagerEnfermaria extends ManagerBase implements Serializable {
@@ -15,19 +14,13 @@ public class ManagerEnfermaria extends ManagerBase implements Serializable {
     private static final String ERRO_TIPO_INVALIDO = "ERRO_TIPO_INVALIDO";
     private static final String ERRO_FALTA_CODIGO = "ERRO_FALTA_CODIGO";
 
-    public ManagerEnfermaria() {
+    public ManagerEnfermaria(TreeMap<String, Enfermaria> listaTreeMap) {
+        this.listaTreeMap = listaTreeMap;
     }
 
-    public ManagerEnfermaria(ArrayList<Enfermaria> lista) {
-        this.lista = lista;
-    }
-
-    public void adicionar(String codigo, int tipo, Boolean[] camas, TreeMap<String, Equipamento> equipamentos, TreeMap<String, Paciente> pacientes) throws Exception {
-        Enfermaria enfermaria = new Enfermaria(codigo, tipo, camas, equipamentos, pacientes);
+    public void adicionar(int tipo, Boolean[] camas) throws Exception {
+        Enfermaria enfermaria = new Enfermaria(null, tipo, camas, new TreeMap<String, Equipamento>(), new TreeMap<String, Paciente>());
         
-        adicionar(enfermaria);
-    }
-    public void adicionar(Enfermaria enfermaria) throws Exception {
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_ADICIONAR);
 
@@ -41,6 +34,7 @@ public class ManagerEnfermaria extends ManagerBase implements Serializable {
             String novoCodigo = gerarCodigo();
             enfermaria.setCodigo(novoCodigo);
 
+            
             listaTreeMap.put(novoCodigo, enfermaria);
         } else {
             // senão, retorna erro
@@ -65,11 +59,7 @@ public class ManagerEnfermaria extends ManagerBase implements Serializable {
         // se estiver bem preenchido,
         // avança para a edição
         if (isValido) {
-            int index = lista.indexOf(enfermaria);
-
-            if (index >= 0) {
-                lista.set(index, enfermaria);
-            }
+            listaTreeMap.put(enfermaria.getCodigo(), enfermaria);
         } else {
             // senão, retorna erro
             throw new Exception(ERRO_EDITAR);
@@ -99,6 +89,6 @@ public class ManagerEnfermaria extends ManagerBase implements Serializable {
 
     @Override
     public String toString() {
-        return "ListaEnfermaria{" + "lista=" + lista + '}';
+        return "ListaEnfermaria{" + "lista=" + listaTreeMap + '}';
     }
 }

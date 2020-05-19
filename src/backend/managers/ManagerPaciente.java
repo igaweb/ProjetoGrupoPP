@@ -35,7 +35,7 @@ public class ManagerPaciente extends ManagerBase {
             String novoCodigo = gerarCodigo();
             paciente.setCodigo(novoCodigo);
             
-            lista.add(paciente);
+            listaTreeMap.put(paciente.getCodigo(), paciente);
         } else {
             // senão, retorna erro
             throw new Exception(ERRO_ADICIONAR);
@@ -46,7 +46,7 @@ public class ManagerPaciente extends ManagerBase {
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_REMOVER);
 
-        lista.remove(paciente);
+        listaTreeMap.remove(paciente);
     }
 
     public void editar(Paciente paciente) throws Exception {
@@ -59,11 +59,7 @@ public class ManagerPaciente extends ManagerBase {
         // se estiver bem preenchido,
         // avança para a adição
         if (isValido) {
-            int index = lista.indexOf(paciente);
-
-            if (index >= 0) {
-                lista.set(index, paciente);
-            }
+            listaTreeMap.put(paciente.getCodigo(), paciente);
         } else {
             // senão, retorna erro
             throw new Exception(ERRO_EDITAR);
@@ -108,6 +104,6 @@ public class ManagerPaciente extends ManagerBase {
 
     @Override
     public String toString() {
-        return "ListaPaciente{" + "lista=" + lista + '}';
+        return "ListaPaciente{" + "lista=" + listaTreeMap + '}';
     } 
 }

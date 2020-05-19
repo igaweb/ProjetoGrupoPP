@@ -1,7 +1,8 @@
 package backend;
 
 import backend.entidades.Utilizador;
-import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Login {
     
@@ -34,13 +35,13 @@ public class Login {
             throw new PasswordVaziaException();
         }
         
-        ArrayList<Utilizador> lista = aplicacao.getManagerUtilizador().getLista();
+        TreeMap<String, Utilizador> lista = aplicacao.getManagerUtilizador().getListaTreeMap();
         boolean loginExists = false;
         boolean userExists = false;
         Utilizador utilizadorValidado = null;
-        for (int i = 0; i < lista.size(); i++) {
-            Utilizador utilizador = lista.get(i);
-            
+        for (Map.Entry<String, Utilizador> entry : lista.entrySet()) {
+            Utilizador utilizador = (Utilizador) entry.getValue();
+
             // verifica se o user é o que procuramos
             if(utilizador.getNome().toUpperCase().equals(user.trim().toUpperCase())) {
                 userExists = true;

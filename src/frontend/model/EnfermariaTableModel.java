@@ -1,9 +1,12 @@
 package frontend.model;
 
+import backend.Aplicacao;
 import backend.Conteudos;
 import backend.entidades.Enfermaria;
+import backend.entidades.Hospital;
 import backend.managers.ManagerEnfermaria;
-import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -13,30 +16,44 @@ public class EnfermariaTableModel extends DefaultTableModel implements TableMode
     private final int COLUMN_COUNT = 4;
     
     // indices das colunas
-    private final int COLUNA_CODIGO = 0;
-    private final int COLUNA_TIPO = 1;
-    private final int COLUNA_EQUIPAMENTOS = 2;
-    private final int COLUNA_CAMAS = 3;
+    public static final int COLUNA_CODIGO = 0;
+    public static final int COLUNA_TIPO = 1;
+    public static final int COLUNA_EQUIPAMENTOS = 2;
+    public static final int COLUNA_CAMAS = 3;
     
-    private final ManagerEnfermaria manager;
+    private Aplicacao app;
+    private ManagerEnfermaria manager;
     // dados da tabela
-    private ArrayList<Enfermaria> lista;
+    private TreeMap<String, Enfermaria> lista;
 
-    public EnfermariaTableModel(ManagerEnfermaria manager) {
-        this.manager = manager;
-        this.lista = manager.getLista();
-        
-        Object[][] data = new Object[lista.size()][COLUMN_COUNT];
-        for (int i = 0; i < lista.size(); i++) {
-            Enfermaria enf = lista.get(i);
+    public EnfermariaTableModel(Aplicacao app, String codigoHospital) {
+        this.app = app;
+        // inicializar manager da enfermaria que está no respetivo hospital
+        Object[][] data;
+        if(codigoHospital != null && !codigoHospital.isEmpty()) {
+           Hospital hospital = (Hospital) app.getManagerHospital().getListaTreeMap().get(codigoHospital);
+            this.manager = new ManagerEnfermaria(hospital.getEnfermarias());
+            
+            this.lista = manager.getListaTreeMap();
+
+            data = new Object[lista.size()][COLUMN_COUNT];
+            int i = 0;
+            for (Map.Entry<String, Enfermaria> entry : lista.entrySet()) {
+                Enfermaria enf = (Enfermaria) entry.getValue();
+
                 data[i] = new Object[] {
-                enf.getCodigo(),
-                Conteudos.getTiposEnfermarias()[enf.getTipo()],
-                enf.getEquipamentos().size(),
-                enf.getCamas().length
-            };
+                    enf.getCodigo(),
+                    Conteudos.getTiposEnfermarias()[enf.getTipo()],
+                    enf.getEquipamentos().size(),
+                    enf.getCamas().length
+                };
+
+                i++;
+            } 
+        } else {
+            data = new Object[0][COLUMN_COUNT];
         }
-        
+
         setDataVector(data, new String[] {"Código", "Tipo", "Equipamentos", "Camas"});
     }
 
@@ -45,25 +62,6 @@ public class EnfermariaTableModel extends DefaultTableModel implements TableMode
         return COLUMN_COUNT;
     }
 
-    @Override
-    public String getColumnName(int columnIndex) {
-        switch(columnIndex) {
-            case COLUNA_CODIGO:
-                return "Código";
-                
-            case COLUNA_TIPO:
-                return "Tipo";
-                
-            case COLUNA_EQUIPAMENTOS:
-                return "Equipamentos";
-                
-            case COLUNA_CAMAS:
-                return "Camas";
-                
-            default:
-                return "";
-        }
-    }
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {

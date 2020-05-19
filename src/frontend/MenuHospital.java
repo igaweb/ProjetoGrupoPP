@@ -97,14 +97,8 @@ public class MenuHospital extends MenuBase {
     }
 
     public void editar() {
-        Scanner input = new Scanner(System.in);
-        String pergunta = "Escolher o hospital a alterar: ";
-        listar();
-
-        TreeMap<String, String> menuEscolherHospital = getMenuEscolherHospital();
-
-        String hospitalAEditarCode = getOpcaoMenu(pergunta, menuEscolherHospital);
-        Hospital hospitalAEditar = (Hospital) getListaHospital().get(hospitalAEditarCode);
+        selecionarHospital();
+        Hospital hospitalAEditar = (Hospital) getListaHospital().get(hospitalSelecionado);
         if (hospitalAEditar == null) {
             return;
         }
@@ -115,46 +109,31 @@ public class MenuHospital extends MenuBase {
         switch (opcaoEscolhida) {
             case 0:// Nome
                 System.out.print("Novo Nome: ");
-                hospitalAEditar.setNome(input.nextLine());
-                try {
-                    manager.editar(hospitalAEditar);
-                } catch (Exception ex) {
-                    System.out.println("ex " + ex);
-                }
-                System.out.println("Quer Continuar a editar(Y/N)?: ");
-
-               String editar = input.nextLine();
-                if (editar.contains("Y") || editar.contains("y")) {
-                    editar();
-                }
+                hospitalAEditar.setNome(scanner.nextLine());
                 break;
             case 1: // Localidade
                 System.out.print("Nova Localidade: ");
-                hospitalAEditar.setLocalidade(input.nextLine());
-                try {
-                    manager.editar(hospitalAEditar);
-                } catch (Exception ex) {
-                    System.out.println("ex " + ex);
-                }
-                System.out.println("Quer Continuar a editar(Y/N)? ");
-
-                editar = input.nextLine();
-                if (editar.contains("Y") || editar.contains("y")) {
-                    editar();
-                }
+                hospitalAEditar.setLocalidade(scanner.nextLine());
                 break;
         }
 
+        try {
+            manager.editar(hospitalAEditar);
+        } catch (Exception ex) {
+            System.out.println("ex " + ex);
+        }
+        System.out.println("Quer Continuar a editar(Y/N)?: ");
+
+        String editar = scanner.nextLine();
+        if (editar.contains("Y") || editar.contains("y")) {
+            editar();
+        }
     }
 
     public void remover() {
-        String pergunta = "Escolher o hospital a remover: ";
-        listar();
-
-        TreeMap<String, String> menuEscolherHospital = getMenuEscolherHospital();
-        String hospitalCode = getOpcaoMenu(pergunta, menuEscolherHospital);
-
-        Hospital hospital = (Hospital) getListaHospital().get(hospitalCode);
+        selecionarHospital();
+        
+        Hospital hospital = (Hospital) getListaHospital().get(hospitalSelecionado);
 
         try {
             manager.remover(hospital);

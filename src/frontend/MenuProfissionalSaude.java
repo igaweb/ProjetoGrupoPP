@@ -1,18 +1,15 @@
 package frontend;
 
 import backend.entidades.ProfissionalSaude;
-import backend.managers.ManagerProfissionalSaude;
 import static frontend.MenuBase.MENU_PROFISSIONALSAUDE;
+import java.util.Map;
+import java.util.TreeMap;
 
 
 public class MenuProfissionalSaude extends MenuBase {
 
-    private ManagerProfissionalSaude manager;
-
     public MenuProfissionalSaude(Menus menus) {
         super(menus);   
-        
-        this.manager = menus.getAplicacao().getManagerProfissionalSaude();
     }
 
     public void start() {
@@ -33,19 +30,37 @@ public class MenuProfissionalSaude extends MenuBase {
     }
     
     public void listar() {
+        String pergunta1 = "Selecione o Hospital:";
+        MenuHospital hospitalMenu = menus.getMenuHospital();
+        hospitalMenu.listar();
+
+        TreeMap<String, String> menuEscolherHospital = getMenuEscolherHospital();
+
+        String hospitalSelecionado = getOpcaoMenu(pergunta1, menuEscolherHospital);
+
+        String pergunta2 = "Selecione a Enfermaria:";
+        MenuEnfermaria enfermariaMenu = menus.getMenuEnfermaria();
+        enfermariaMenu.listar();
+
+        TreeMap<String, String> menuEscolherEnfermaria = getMenuEscolherEnfermaria(hospitalSelecionado);
+
+        String enfermariaSelecionada = getOpcaoMenu(pergunta2, menuEscolherEnfermaria);
+
         System.out.println("Profissional Saude: ");
         System.out.println("| Codigo | Nome |");
-        for (int i = 0; i < manager.getLista().size(); i++) {
-            ProfissionalSaude profissionalSaude = (ProfissionalSaude) manager.getLista().get(i);
+        if(hospitalSelecionado != null && !hospitalSelecionado.isEmpty() && getListaProfissionalSaude(hospitalSelecionado, enfermariaSelecionada) != null) {
+            for (Map.Entry<String, ProfissionalSaude> entry : getListaProfissionalSaude(hospitalSelecionado, enfermariaSelecionada).entrySet()) {
+                ProfissionalSaude profissionalSaude = (ProfissionalSaude) entry.getValue();
+                
+                System.out.print(" | " + profissionalSaude.getCodigo());
 
-           System.out.print(" | " + profissionalSaude.getCodigo());
-
-            try {
-                System.out.print(" | " + profissionalSaude.getNome());
-            } catch (Exception e) {
-                System.out.print(" | 0");
+                try {
+                    System.out.print(" | " + profissionalSaude.getNome());
+                } catch (Exception e) {
+                    System.out.print(" | ");
+                }
+                System.out.println(" |");
             }
-             System.out.println(" |");
+        }
     }
-}
 }

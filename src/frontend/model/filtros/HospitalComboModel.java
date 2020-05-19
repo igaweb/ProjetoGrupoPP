@@ -2,7 +2,6 @@ package frontend.model.filtros;
 
 import backend.Aplicacao;
 import backend.entidades.Hospital;
-import frontend.Menus;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.swing.ComboBoxModel;
@@ -10,8 +9,10 @@ import javax.swing.event.ListDataListener;
 
 public class HospitalComboModel implements ComboBoxModel<String> {
 
+    private Aplicacao app;
     private TreeMap<String, Hospital> lista;
     private String[] hospitalList;
+    private String[] hospitalCodigosList;
     private String selectedItem;
 
     public HospitalComboModel(Aplicacao app) {
@@ -24,20 +25,24 @@ public class HospitalComboModel implements ComboBoxModel<String> {
     private void inicializar() {
 
         if (lista != null) {
+            int i = 0;
+            hospitalList = new String[lista.size()];
+            hospitalCodigosList = new String[lista.size()];
             for (Map.Entry<String, Hospital> entry : lista.entrySet()) {
                 Hospital hospital = (Hospital) entry.getValue();
             
-                hospitalList = new String[lista.size()];
-                for (int i = 0; i < lista.size(); i++) {
-                    hospitalList[i] = hospital.getNome();
-                }
+                hospitalList[i] = hospital.getNome();
+                hospitalCodigosList[i] = hospital.getCodigo();
+                
+                i++;
             }
         } else {
             hospitalList = new String[] {""};
+            hospitalCodigosList = new String[] {""};
         }
         
         try {
-            selectedItem = hospitalList[0];
+            selectedItem = hospitalCodigosList[0];
         } catch (Exception e) {
             selectedItem = "";
         }
@@ -78,7 +83,7 @@ public class HospitalComboModel implements ComboBoxModel<String> {
 
     @Override
     public String getElementAt(int index) {
-        return hospitalList == null ? null : hospitalList[index];
+        return hospitalCodigosList == null ? null : hospitalCodigosList[index];
 
     }
 
@@ -92,4 +97,15 @@ public class HospitalComboModel implements ComboBoxModel<String> {
         
     }
 
+    public Hospital getHospitalSelecionado() {
+        Hospital hospital;
+        try {
+            String codigoHospital = (String) getSelectedItem();
+            hospital = lista.get(codigoHospital);
+        } catch (Exception e) {
+            hospital = null;
+        }
+        
+        return hospital;
+    }
 }

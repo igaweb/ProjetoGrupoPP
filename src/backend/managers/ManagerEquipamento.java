@@ -10,24 +10,15 @@ public class ManagerEquipamento extends ManagerBase {
     private static final String ERRO_FALTA_CODIGO = "ERRO_FALTA_CODIGO";
     private static final String ERRO_TIPO_INVALIDO = "ERRO_TIPO_INVALIDO";
     
-            
-    public ManagerEquipamento() {
-        
-    }
-    
      public ManagerEquipamento(TreeMap<String,Equipamento> lista) {
         this.listaTreeMap = lista;
     }
-
-     
      
     public void adicionar(String codigo, Integer tipo, boolean livre, Paciente paciente)throws Exception {
         
         Equipamento equipamentos = new Equipamento(codigo, tipo, livre, paciente);
         adicionar(equipamentos);
-        
     }
-    
     
     public void adicionar(Equipamento equipamento) throws Exception {
         
@@ -89,15 +80,14 @@ public class ManagerEquipamento extends ManagerBase {
          if (equipamento.getTipo() < 0 || equipamento.getTipo() >= Conteudos.getTiposEquipamentos().length) {
             throw new Exception(ERRO_TIPO_INVALIDO); 
          }
-       
-        
-        // validações....... (campos obrigatorios, tipos de dados, etc...)
+
+         // validações....... (campos obrigatorios, tipos de dados, etc...)
         return isValid;
    
     }  
 
     @Override
     public String toString() {
-        return "ListaEquipamentos{" + "lista=" + lista + '}';
+        return "ListaEquipamentos{" + "lista=" + listaTreeMap + '}';
     }
 }

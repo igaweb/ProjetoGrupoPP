@@ -1,8 +1,6 @@
 package frontend.model.filtros;
 
 import backend.Conteudos;
-import backend.entidades.Hospital;
-import java.util.ArrayList;
 import javax.swing.ComboBoxModel;
 import javax.swing.event.ListDataListener;
 

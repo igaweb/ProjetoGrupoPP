@@ -1,16 +1,15 @@
 package backend.managers;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.TreeMap;
 
 public abstract class ManagerBase implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    protected static final String OPERACAO_ADICIONAR = "A";
-    protected static final String OPERACAO_EDITAR = "E";
-    protected static final String OPERACAO_REMOVER = "R";
+    public static final String OPERACAO_ADICIONAR = "A";
+    public static final String OPERACAO_EDITAR = "E";
+    public static final String OPERACAO_REMOVER = "R";
 
     protected static final String ERRO_GENERICO = "ERRO_GENERICO";
     protected static final String ERRO_OBJ_NULO = "ERRO_OBJ_NULO";
@@ -18,7 +17,6 @@ public abstract class ManagerBase implements Serializable {
     protected static final String ERRO_EDITAR = "ERRO_EDITAR";
     protected static final String ERRO_ADICIONAR = "ERRO_ADICIONAR";
 
-    protected ArrayList lista = new ArrayList();
     protected TreeMap listaTreeMap = new TreeMap();
     protected String operacao = null;
 
@@ -46,19 +44,11 @@ public abstract class ManagerBase implements Serializable {
     }
 
     protected String gerarCodigo() {
-        return "COD" + lista.size();
+        return "COD" + listaTreeMap.size();
     }
     
     protected String gerarCodigoTreeMap() {
         return "COD" + listaTreeMap.size();
-    }
-
-    public ArrayList getLista() {
-        return lista;
-    }
-
-    public void setLista(ArrayList lista) {
-        this.lista = lista;
     }
 
     public TreeMap getListaTreeMap() {

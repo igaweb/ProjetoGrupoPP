@@ -1,22 +1,18 @@
 package frontend;
 
 import backend.Aplicacao;
-import frontend.janelas.JanelaEnfermaria;
-import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JDesktopPane;
+import backend.Serializacao;
+import backend.managers.ManagerEnfermaria;
+import frontend.janelas.JanelaConsultaEnfermaria;
 
 public class Homepage extends javax.swing.JFrame {
 
     private static Aplicacao app;
-    private JDesktopPane desktop;
+    private static Serializacao serializacao;
 
-    Homepage(Aplicacao app) {
+    Homepage(Aplicacao app, Serializacao serializacao) {
         this.app = app;
-        
-        desktop = new JDesktopPane();
-        setContentPane(desktop);
+        this.serializacao = serializacao;
 
         initComponents();
     }
@@ -171,7 +167,7 @@ public class Homepage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuAcessoLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAcessoLogoutActionPerformed
-        System.out.println("hospitais: " + app.getManagerEnfermaria().getListaTreeMap().toString());
+        
     }//GEN-LAST:event_menuAcessoLogoutActionPerformed
 
     private void menuAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAcessoActionPerformed
@@ -191,14 +187,8 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_menuEditarPerfilActionPerformed
 
     private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
-        try {
-            JanelaEnfermaria janelaEnfermaria = new JanelaEnfermaria(app);
-            desktop.add(janelaEnfermaria);
-            janelaEnfermaria.setVisible(true);
-            janelaEnfermaria.setSelected(true);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(Homepage.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        JanelaConsultaEnfermaria janelaConsulta = new JanelaConsultaEnfermaria(app, serializacao);
+        janelaConsulta.setVisible(true);
     }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
 
     private void menuAbrirPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAbrirPacientesActionPerformed

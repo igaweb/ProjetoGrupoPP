@@ -42,11 +42,7 @@ public class ManagerUtilizador extends ManagerBase implements Serializable {
         boolean isValido = validarCampos(utilizador);
 
         if (isValido) {
-            int index = lista.indexOf(utilizador);
-
-            if (index >= 0) {
-                lista.set(index, utilizador);
-            }
+            listaTreeMap.put(utilizador.getNome(), utilizador);
         } else {
 
             throw new Exception(ERRO_EDITAR);
@@ -71,7 +67,7 @@ public class ManagerUtilizador extends ManagerBase implements Serializable {
 
     @Override
     public String toString() {
-        return "ListaUtilizador{" + "lista=" + lista + '}';
+        return "ListaUtilizador{" + "lista=" + listaTreeMap + '}';
     }
 
 }
