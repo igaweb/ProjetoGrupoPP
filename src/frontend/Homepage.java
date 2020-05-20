@@ -2,7 +2,7 @@ package frontend;
 
 import backend.Aplicacao;
 import backend.Serializacao;
-import backend.managers.ManagerEnfermaria;
+import backend.entidades.Administrador;
 import frontend.janelas.JanelaConsultaEnfermaria;
 
 public class Homepage extends javax.swing.JFrame {
@@ -15,6 +15,17 @@ public class Homepage extends javax.swing.JFrame {
         this.serializacao = serializacao;
 
         initComponents();
+        //Força a maximização da janela
+        this.setExtendedState(Homepage.MAXIMIZED_BOTH);    
+        
+        //O processo de fecho da janela será controlado pelo programa
+        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        
+        //Apenas mostra o menu de administração se o utilizador for um administrador
+        menuAdmin.setVisible(app.getUtilizadorAutenticado() instanceof Administrador);
+        
+        //Mostra o menu Iniciar
+        menuIniciar.setVisible(true); 
     }
 
     /**
@@ -38,18 +49,17 @@ public class Homepage extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        menuAcesso = new javax.swing.JMenu();
+        menuAdmin = new javax.swing.JMenu();
         menuAcessoLogout = new javax.swing.JMenuItem();
         menuAcessoLogin = new javax.swing.JMenuItem();
         menuAcessoGerirUtilizadores = new javax.swing.JMenuItem();
         menuEditarPerfil = new javax.swing.JMenuItem();
-        menuAbrir = new javax.swing.JMenu();
-        menuAbrirHospitais = new javax.swing.JMenuItem();
-        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
-        menuAbrirEquipamentos = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        menuAbrirPacientes = new javax.swing.JMenuItem();
-        menuCamas = new javax.swing.JMenuItem();
+        menuIniciar = new javax.swing.JMenu();
+        menuListarHospitais = new javax.swing.JMenuItem();
+        meniListarEnfermarias = new javax.swing.JCheckBoxMenuItem();
+        meniListarEquipamentos = new javax.swing.JMenuItem();
+        menuListarProfissionaisSaude = new javax.swing.JMenuItem();
+        menuListarPacientes = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -77,10 +87,10 @@ public class Homepage extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        menuAcesso.setText("Acesso");
-        menuAcesso.addActionListener(new java.awt.event.ActionListener() {
+        menuAdmin.setText("Administrador");
+        menuAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuAcessoActionPerformed(evt);
+                menuAdminActionPerformed(evt);
             }
         });
 
@@ -90,7 +100,7 @@ public class Homepage extends javax.swing.JFrame {
                 menuAcessoLogoutActionPerformed(evt);
             }
         });
-        menuAcesso.add(menuAcessoLogout);
+        menuAdmin.add(menuAcessoLogout);
 
         menuAcessoLogin.setText("Logout");
         menuAcessoLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +108,7 @@ public class Homepage extends javax.swing.JFrame {
                 menuAcessoLoginActionPerformed(evt);
             }
         });
-        menuAcesso.add(menuAcessoLogin);
+        menuAdmin.add(menuAcessoLogin);
 
         menuAcessoGerirUtilizadores.setText("Gerir Utilizadores");
         menuAcessoGerirUtilizadores.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +116,7 @@ public class Homepage extends javax.swing.JFrame {
                 menuAcessoGerirUtilizadoresActionPerformed(evt);
             }
         });
-        menuAcesso.add(menuAcessoGerirUtilizadores);
+        menuAdmin.add(menuAcessoGerirUtilizadores);
 
         menuEditarPerfil.setText("Editar Perfil");
         menuEditarPerfil.addActionListener(new java.awt.event.ActionListener() {
@@ -114,41 +124,53 @@ public class Homepage extends javax.swing.JFrame {
                 menuEditarPerfilActionPerformed(evt);
             }
         });
-        menuAcesso.add(menuEditarPerfil);
+        menuAdmin.add(menuEditarPerfil);
 
-        jMenuBar1.add(menuAcesso);
+        jMenuBar1.add(menuAdmin);
 
-        menuAbrir.setText("Abrir");
+        menuIniciar.setText("Iniciar");
 
-        menuAbrirHospitais.setText("Hospitais");
-        menuAbrir.add(menuAbrirHospitais);
-
-        jCheckBoxMenuItem1.setText("Enfermarias");
-        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuListarHospitais.setText("Hospitais");
+        menuListarHospitais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMenuItem1ActionPerformed(evt);
+                menuListarHospitaisActionPerformed(evt);
             }
         });
-        menuAbrir.add(jCheckBoxMenuItem1);
+        menuIniciar.add(menuListarHospitais);
 
-        menuAbrirEquipamentos.setText("Equipamentos");
-        menuAbrir.add(menuAbrirEquipamentos);
-
-        jMenuItem2.setText("Profissionais de Saúde");
-        menuAbrir.add(jMenuItem2);
-
-        menuAbrirPacientes.setText("Pacientes");
-        menuAbrirPacientes.addActionListener(new java.awt.event.ActionListener() {
+        meniListarEnfermarias.setText("Enfermarias");
+        meniListarEnfermarias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuAbrirPacientesActionPerformed(evt);
+                meniListarEnfermariasActionPerformed(evt);
             }
         });
-        menuAbrir.add(menuAbrirPacientes);
+        menuIniciar.add(meniListarEnfermarias);
 
-        menuCamas.setText("Camas");
-        menuAbrir.add(menuCamas);
+        meniListarEquipamentos.setText("Equipamentos");
+        meniListarEquipamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                meniListarEquipamentosActionPerformed(evt);
+            }
+        });
+        menuIniciar.add(meniListarEquipamentos);
 
-        jMenuBar1.add(menuAbrir);
+        menuListarProfissionaisSaude.setText("Profissionais de Saúde");
+        menuListarProfissionaisSaude.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuListarProfissionaisSaudeActionPerformed(evt);
+            }
+        });
+        menuIniciar.add(menuListarProfissionaisSaude);
+
+        menuListarPacientes.setText("Pacientes");
+        menuListarPacientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuListarPacientesActionPerformed(evt);
+            }
+        });
+        menuIniciar.add(menuListarPacientes);
+
+        jMenuBar1.add(menuIniciar);
 
         setJMenuBar(jMenuBar1);
 
@@ -160,7 +182,7 @@ public class Homepage extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
         );
 
         pack();
@@ -170,9 +192,9 @@ public class Homepage extends javax.swing.JFrame {
         
     }//GEN-LAST:event_menuAcessoLogoutActionPerformed
 
-    private void menuAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAcessoActionPerformed
+    private void menuAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAdminActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_menuAcessoActionPerformed
+    }//GEN-LAST:event_menuAdminActionPerformed
 
     private void menuAcessoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAcessoLoginActionPerformed
         // TODO add your handling code here:
@@ -186,14 +208,25 @@ public class Homepage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_menuEditarPerfilActionPerformed
 
-    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
-        JanelaConsultaEnfermaria janelaConsulta = new JanelaConsultaEnfermaria(app, serializacao);
-        janelaConsulta.setVisible(true);
-    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
+    private void menuListarPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarPacientesActionPerformed
+        listarPacientes();
+    }//GEN-LAST:event_menuListarPacientesActionPerformed
 
-    private void menuAbrirPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAbrirPacientesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuAbrirPacientesActionPerformed
+    private void meniListarEnfermariasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meniListarEnfermariasActionPerformed
+        listarEnfermarias();
+    }//GEN-LAST:event_meniListarEnfermariasActionPerformed
+
+    private void menuListarHospitaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarHospitaisActionPerformed
+        listarHospitais();
+    }//GEN-LAST:event_menuListarHospitaisActionPerformed
+
+    private void menuListarProfissionaisSaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarProfissionaisSaudeActionPerformed
+        listarProfissionaisSaude();
+    }//GEN-LAST:event_menuListarProfissionaisSaudeActionPerformed
+
+    private void meniListarEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meniListarEquipamentosActionPerformed
+        listarEquipamentos();
+    }//GEN-LAST:event_meniListarEquipamentosActionPerformed
 
     /**
 //     * @param args the command line arguments
@@ -233,27 +266,47 @@ public class Homepage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private backend.entidades.Hospital hospital1;
     private backend.entidades.Hospital hospital2;
-    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JCheckBoxMenuItem meniListarEnfermarias;
+    private javax.swing.JMenuItem meniListarEquipamentos;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
-    private javax.swing.JMenu menuAbrir;
-    private javax.swing.JMenuItem menuAbrirEquipamentos;
-    private javax.swing.JMenuItem menuAbrirHospitais;
-    private javax.swing.JMenuItem menuAbrirPacientes;
-    private javax.swing.JMenu menuAcesso;
     private javax.swing.JMenuItem menuAcessoGerirUtilizadores;
     private javax.swing.JMenuItem menuAcessoLogin;
     private javax.swing.JMenuItem menuAcessoLogout;
+    private javax.swing.JMenu menuAdmin;
     private java.awt.MenuBar menuBar1;
-    private javax.swing.JMenuItem menuCamas;
     private javax.swing.JMenuItem menuEditarPerfil;
+    private javax.swing.JMenu menuIniciar;
+    private javax.swing.JMenuItem menuListarHospitais;
+    private javax.swing.JMenuItem menuListarPacientes;
+    private javax.swing.JMenuItem menuListarProfissionaisSaude;
     private java.awt.PopupMenu popupMenu1;
     // End of variables declaration//GEN-END:variables
+
+    private void listarHospitais() {
+        // TODO
+    }
+    
+    private void listarEnfermarias() {
+        JanelaConsultaEnfermaria janelaConsulta = new JanelaConsultaEnfermaria(app, serializacao);
+        janelaConsulta.setVisible(true);
+    }
+    
+    private void listarEquipamentos() {
+        // TODO
+    }
+    
+    private void listarProfissionaisSaude() {
+        // TODO
+    }
+    
+    private void listarPacientes() {
+        // TODO
+    }
 }

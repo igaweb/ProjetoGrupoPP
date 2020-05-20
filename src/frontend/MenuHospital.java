@@ -1,18 +1,16 @@
 package frontend;
 
 import backend.entidades.Hospital;
-import backend.entidades.Enfermaria;
 import backend.managers.ManagerHospital;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.TreeMap;
 
 public class MenuHospital extends MenuBase {
 
     private static final String[] MENU_ESCOLHER_CAMPO_EDITAR = new String[]{"NOME", "LOCALIDADE"};
 
-    private static ManagerHospital manager;
-
+    private ManagerHospital manager;
+    
     public MenuHospital(Menus menus) {
         super(menus);
 
@@ -50,30 +48,32 @@ public class MenuHospital extends MenuBase {
     public void listar() {
         System.out.println("Hospitais: ");
         System.out.println("| Codigo | Nome | Localidade | Qtd Enfermairas |");
-        for (Map.Entry<String, Hospital> entry : getListaHospital().entrySet()) {
-            Hospital hospital = (Hospital) entry.getValue();
+        if(getListaHospital() != null && getListaHospital().size() > 0) {
+            for (Map.Entry<String, Hospital> entry : getListaHospital().entrySet()) {
+                Hospital hospital = (Hospital) entry.getValue();
 
-            System.out.print(" | " + hospital.getCodigo());
+                System.out.print(" | " + hospital.getCodigo());
 
-            try {
-                System.out.print(" | " + hospital.getNome());
-            } catch (Exception e) {
-                System.out.print(" | -");
+                try {
+                    System.out.print(" | " + hospital.getNome());
+                } catch (Exception e) {
+                    System.out.print(" | -");
+                }
+
+                try {
+                    System.out.print(" | " + hospital.getLocalidade());
+                } catch (Exception e) {
+                    System.out.print(" | -");
+                }
+
+                try {
+                    System.out.print(" | " + hospital.getEnfermarias().size());
+                } catch (Exception e) {
+                    System.out.print(" | -");
+                }
+
+                System.out.println(" |");
             }
-
-            try {
-                System.out.print(" | " + hospital.getLocalidade());
-            } catch (Exception e) {
-                System.out.print(" | -");
-            }
-
-            try {
-                System.out.print(" | " + hospital.getEnfermarias().size());
-            } catch (Exception e) {
-                System.out.print(" | -");
-            }
-
-            System.out.println(" |");
         }
     }
 
@@ -93,6 +93,7 @@ public class MenuHospital extends MenuBase {
         try {
             manager.adicionar(hospital);
         } catch (Exception ex) {
+            System.out.println("Erro ao adicionar");
         }
     }
 

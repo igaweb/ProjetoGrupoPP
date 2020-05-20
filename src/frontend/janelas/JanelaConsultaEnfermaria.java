@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package frontend.janelas;
 
 import backend.Aplicacao;
+import backend.Conteudos;
 import backend.Serializacao;
 import backend.entidades.Enfermaria;
 import backend.entidades.Hospital;
@@ -14,21 +10,21 @@ import frontend.model.EnfermariaTableModel;
 import frontend.model.filtros.HospitalComboModel;
 import frontend.model.filtros.TipoEnfermariaComboModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.AbstractTableModel;
 
-/**
- *
- * @author iga
- */
 public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
 
-    private Aplicacao app;
-    private Serializacao serializacao;
+    private final Aplicacao app;
+    private final Serializacao serializacao;
+    private AbstractTableModel modeloTabela;
     
     // hospital selecionado onde buscar a lista de enfermarias
     private String hospitalSelecionado;
     
     /**
      * Creates new form JanelaConsultaEnfermaria
+     * @param app
+     * @param serializacao
      */
     public JanelaConsultaEnfermaria(Aplicacao app, Serializacao serializacao) {
         this.app = app;
@@ -36,33 +32,97 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
         
         initComponents();
         
-        //Indica que a janela deve ser modal ou seja,
-        //bloqueia a execução do programa até que a janela seja fechada
-        this.setModal(true);           
+        this.modeloTabela = criarModeloTabela();
+        tabela.setModel(modeloTabela);
         
-        //Não permite o redimensionamento da janela
-        this.setResizable(false);
+//        // inicializar filtros
+//        boolean hospitalFiltroVisible = true;
+//        boolean tipoEnfermariaVisible = true;
+//        setFiltrosVisible(hospitalFiltroVisible, tipoEnfermariaVisible);
         
-        //Mostra a centralização da janela
-        this.setLocationRelativeTo(null);
+//        // inicializar botoes de operaçoes
+//        boolean criar = true;
+//        boolean editar = true;
+//        boolean remover = true;
+//        setOperacoes(criar, editar, remover);
         
-        //O processo de fecho da janela será controlado pelo programa
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);                                
-        
-        // inicializar filtros
-        boolean hospitalFiltroVisible = true;
-        boolean tipoEnfermariaVisible = true;
-        setFiltrosVisible(hospitalFiltroVisible, tipoEnfermariaVisible);
-        
-        // inicializar botoes de operaçoes
-        boolean criar = true;
-        boolean editar = true;
-        boolean remover = true;
-        setOperacoes(criar, editar, remover);
-        
-        HospitalComboModel hospitalComboModel = (HospitalComboModel) campoHospital.getModel();
-        hospitalSelecionado = (String) hospitalComboModel.getSelectedItem();
+        // TEMPORARIO PARA TESTAR:
+        hospitalSelecionado = "COD0";
     }
+    
+    private AbstractTableModel criarModeloTabela() {   
+        String[] nomeColunas = {"Código", "Tipo", "Equipamentos", "Camas"};
+        
+        return new AbstractTableModel() {     
+            @Override
+            public String getColumnName(int column) {
+                return nomeColunas[column];
+            }
+           
+            @Override
+            public int getRowCount() {
+                //Retorna o número de linhas que a tabela deverá ter
+                return app.getManagerEnfermaria(hospitalSelecionado).getLista().size();
+            }
+
+            @Override
+            public int getColumnCount() {
+                //Retorna o número de colunas que a tabela deverá ter
+                return nomeColunas.length;
+            }
+
+            @Override
+            public Object getValueAt(int rowIndex, int columnIndex) {
+            /*
+                Este método é invocado quando se pretende "popular" cada uma das células da tabela
+                Se a tabela tem 3 linhas e 2 colunas existem 6 células (3*2), logo o método será invocado 6 vezes
+                    rowIndex representa a linha da célula (0 a rowCount -1)
+                    columnIndex representa a coluna da célula (0 a ColumnCount -1)
+            */
+                Enfermaria enfermaria = (Enfermaria)app.getManagerEnfermaria(hospitalSelecionado).getListaArray().get(rowIndex);
+                switch (columnIndex) {
+                    case 0: 
+                        return enfermaria.getCodigo();
+                    case 1:
+                        return Conteudos.getTiposEnfermarias()[enfermaria.getTipo()];
+                    case 3:
+                        return enfermaria.getEquipamentos().size();
+                    case 4:
+                        return enfermaria.getEquipamentos().size();
+                    default:
+                        return "";
+                }                              
+            }            
+        };
+    }
+
+    private void adicionar() {
+        JanelaCriarEnfermaria janela = new JanelaCriarEnfermaria(app, serializacao, ManagerEnfermaria.OPERACAO_ADICIONAR);
+        janela.setVisible(true);
+    }
+    
+    private void editar() {
+        int rowIndex = tabela.getSelectedRow();
+        //Se nenhum registo selecionado, nao é possivel editar
+        if (rowIndex == -1) return;
+        
+        int colunaCodigo = 0;
+        String codigo = (String) modeloTabela.getValueAt(rowIndex, colunaCodigo);
+        
+        try {
+            Enfermaria enfermaria = (Enfermaria) app.getEnfermaria(hospitalSelecionado, codigo);
+            JanelaCriarEnfermaria janela = new JanelaCriarEnfermaria(app, serializacao, ManagerEnfermaria.OPERACAO_EDITAR);
+            janela.setVisible(true);
+        } catch (Exception ex) {            
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+        
+    }
+    
+    public void atualizar() {    
+        //Informa o modelo que foram efetuadas alteracoes, o modelo informa a tabela e os dados são redesenhados
+        modeloTabela.fireTableDataChanged();
+    }        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -97,6 +157,11 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
         jLabel2.setText("Hospital: ");
 
         campoHospital.setModel(new HospitalComboModel(app));
+        campoHospital.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                campoHospitalMouseClicked(evt);
+            }
+        });
         campoHospital.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoHospitalActionPerformed(evt);
@@ -225,7 +290,24 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        tabela.setModel(new EnfermariaTableModel(app, hospitalSelecionado));
+        tabela.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabela.setColumnSelectionAllowed(true);
         tabela.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -297,7 +379,7 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void campoHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoHospitalActionPerformed
-        hospitalSelecionado = (String) campoHospital.getModel().getSelectedItem();
+        
     }//GEN-LAST:event_campoHospitalActionPerformed
 
     private void campoEnfermariaTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoEnfermariaTipoActionPerformed
@@ -305,8 +387,7 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
     }//GEN-LAST:event_campoEnfermariaTipoActionPerformed
 
     private void botaoCriarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoCriarMouseClicked
-        JanelaCriarEnfermaria janelaCriar = new JanelaCriarEnfermaria(app, serializacao, ManagerEnfermaria.OPERACAO_ADICIONAR);
-        janelaCriar.setVisible(true);
+        adicionar();
     }//GEN-LAST:event_botaoCriarMouseClicked
 
     private void botaoCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarActionPerformed
@@ -314,7 +395,7 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
     }//GEN-LAST:event_botaoCriarActionPerformed
 
     private void botaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarActionPerformed
-        int selectedRow = tabela.getSelectedRow();
+        editar();
     }//GEN-LAST:event_botaoEditarActionPerformed
 
     private void botaoRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoRemoverMouseClicked
@@ -341,6 +422,10 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
         
     }//GEN-LAST:event_tabelaMouseClicked
+
+    private void campoHospitalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoHospitalMouseClicked
+        hospitalSelecionado = (String) campoHospital.getModel().getSelectedItem();
+    }//GEN-LAST:event_campoHospitalMouseClicked
 
     protected void setFiltrosVisible(boolean hospital, boolean tipoFenfermaria) {
         filtroHospital.setVisible(hospital);

@@ -1,6 +1,7 @@
 package backend.entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 public class Hospital implements Serializable {
@@ -58,5 +59,4 @@ public class Hospital implements Serializable {
     public String toString() {
         return "Hospital{" + "codigo=" + codigo + ", nome=" + nome + ", localidade=" + localidade + ", enfermarias=" + enfermarias + '}';
     }
-
 }

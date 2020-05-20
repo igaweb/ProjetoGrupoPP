@@ -1,6 +1,7 @@
 package backend.managers;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 public abstract class ManagerBase implements Serializable {
@@ -44,15 +45,22 @@ public abstract class ManagerBase implements Serializable {
     }
 
     protected String gerarCodigo() {
-        return "COD" + lista.size();
+        return "COD" + getLista().size();
     }
     
     public TreeMap getLista() {
+        if(lista == null){
+            lista = new TreeMap();
+        }
         return lista;
     }
 
     public void setLista(TreeMap listaTreeMap) {
         this.lista = listaTreeMap;
+    }
+
+    public ArrayList getListaArray() {
+        return new ArrayList<>(lista.values());
     }
 
 }

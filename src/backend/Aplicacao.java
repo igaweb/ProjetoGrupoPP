@@ -1,19 +1,28 @@
 package backend;
 
 import backend.entidades.Enfermaria;
+import backend.entidades.Equipamento;
 import backend.entidades.Hospital;
+import backend.entidades.Paciente;
+import backend.entidades.ProfissionalSaude;
+import backend.entidades.Utilizador;
+import backend.managers.ManagerEnfermaria;
 import backend.managers.ManagerUtilizador;
 import backend.managers.ManagerEquipamento;
 import backend.managers.ManagerHospital;
 import backend.managers.ManagerPaciente;
 import backend.managers.ManagerProfissionalSaude;
 import java.io.Serializable;
+import java.util.TreeMap;
 
 public class Aplicacao implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
+    private Utilizador utilizadorAutenticado;
+    
     private ManagerUtilizador managerUtilizador;
+    private ManagerEnfermaria managerEnfermaria;
     private ManagerEquipamento managerEquipamento;
     private ManagerHospital managerHospital;
     private ManagerPaciente managerPaciente;
@@ -25,11 +34,8 @@ public class Aplicacao implements Serializable {
     }
     
     private void inicializarManagers() {
-        managerUtilizador = new ManagerUtilizador();
-        managerHospital = new ManagerHospital();
-        
-        managerPaciente = new ManagerPaciente();
-        managerProfissionalSaude = new ManagerProfissionalSaude();
+        managerUtilizador = new ManagerUtilizador(new TreeMap<String, Utilizador>());
+        managerHospital = new ManagerHospital(new TreeMap<String, Hospital>());
     }
     
     public ManagerUtilizador getManagerUtilizador() {
@@ -38,6 +44,22 @@ public class Aplicacao implements Serializable {
 
     public void setManagerUtilizador(ManagerUtilizador managerUtilizador) {
         this.managerUtilizador = managerUtilizador;
+    }
+
+    public ManagerEnfermaria getManagerEnfermaria(String codigoHospital) {
+        managerEnfermaria = null;
+        
+        if(codigoHospital != null && !codigoHospital.isEmpty()) {
+            Hospital hospital = (Hospital) getManagerHospital().getLista().get(codigoHospital);
+            
+            managerEnfermaria = new ManagerEnfermaria(hospital.getEnfermarias());
+        }
+        
+        return managerEnfermaria;
+    }
+
+    public void setManagerEnfermaria(ManagerEnfermaria managerEnfermaria) {
+        this.managerEnfermaria = managerEnfermaria;
     }
 
     public ManagerEquipamento getManagerEquipamento(String codigoHospital, String codigoEnfermaria) {
@@ -96,5 +118,89 @@ public class Aplicacao implements Serializable {
 
     public void setManagerProfissionalSaude(ManagerProfissionalSaude managerProfissionalSaude) {
         this.managerProfissionalSaude = managerProfissionalSaude;
+    }
+
+    public Utilizador getUtilizadorAutenticado() {
+        return utilizadorAutenticado;
+    }
+
+    public void setUtilizadorAutenticado(Utilizador utilizadorAutenticado) {
+        this.utilizadorAutenticado = utilizadorAutenticado;
+    }
+    
+    public Hospital getHospital(String codigoHospital) throws HospitalNaoExistenteException {
+        Hospital hospital = (Hospital) getManagerHospital().getLista().get(codigoHospital);
+        if(hospital == null) {
+            throw new HospitalNaoExistenteException();
+        }
+        return hospital;
+    }
+    
+    public Enfermaria getEnfermaria(String codigoHospital, String codigoEnfermaria) throws HospitalNaoExistenteException, EnfermariaNaoExistenteException {
+        Enfermaria enfermaria = getHospital(codigoHospital).getEnfermarias().get(codigoEnfermaria);
+        if(enfermaria == null) {
+            throw new EnfermariaNaoExistenteException();
+        }
+        return enfermaria;
+    }
+    
+    public Equipamento getEquipamento(String codigoHospital, String codigoEnfermaria, String codigoEquipamento) throws HospitalNaoExistenteException, EnfermariaNaoExistenteException, EquipamentoNaoExistenteException {
+        Equipamento equipamento = (Equipamento) getEnfermaria(codigoHospital, codigoEnfermaria).getEquipamentos().get(codigoEquipamento);
+        if(equipamento == null) {
+            throw new EquipamentoNaoExistenteException();
+        }
+        return equipamento;
+    }
+    
+    public Paciente getPaciente(String codigoHospital, String codigoEnfermaria, String codigoPaciente) throws HospitalNaoExistenteException, PacienteNaoExistenteException, EnfermariaNaoExistenteException {
+        Paciente paciente = (Paciente) getEnfermaria(codigoHospital, codigoEnfermaria).getPacientes().get(codigoPaciente);
+        if(paciente == null) {
+            throw new PacienteNaoExistenteException();
+        }
+        return paciente;
+    }
+    
+    public ProfissionalSaude getProfissionalSaude(String codigoHospital, String codigoEnfermaria, String codigoProfissionalSaude) throws HospitalNaoExistenteException, EnfermariaNaoExistenteException, ProfissionalSaudeNaoExistenteException {
+        ProfissionalSaude profissionalSaude =  (ProfissionalSaude) getEnfermaria(codigoHospital, codigoEnfermaria).getProfissionalSaude().get(codigoProfissionalSaude);
+        if(profissionalSaude == null) {
+            throw new ProfissionalSaudeNaoExistenteException();
+        }
+        return profissionalSaude;
+    }
+    
+    
+    public static class HospitalNaoExistenteException extends Exception {
+
+        public HospitalNaoExistenteException() {
+            super("Hospital nao existente");
+        }
+    }
+    
+    public static class EnfermariaNaoExistenteException extends Exception {
+
+        public EnfermariaNaoExistenteException() {
+            super("Enfermaria nao existente");
+        }
+    }
+    
+    public static class EquipamentoNaoExistenteException extends Exception {
+
+        public EquipamentoNaoExistenteException() {
+            super("Equipamento nao existente");
+        }
+    }
+    
+    public static class PacienteNaoExistenteException extends Exception {
+
+        public PacienteNaoExistenteException() {
+            super("Paciente nao existente");
+        }
+    }
+    
+    public static class ProfissionalSaudeNaoExistenteException extends Exception {
+
+        public ProfissionalSaudeNaoExistenteException() {
+            super("ProfissionalSaude nao existente");
+        }
     }
 }

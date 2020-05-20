@@ -2,12 +2,6 @@ package frontend;
 
 import backend.Aplicacao;
 import backend.Serializacao;
-import backend.entidades.Enfermaria;
-import backend.entidades.Equipamento;
-import backend.entidades.Hospital;
-import backend.entidades.Paciente;
-import backend.entidades.ProfissionalSaude;
-import backend.entidades.Utilizador;
 import java.util.Scanner;
 
 public class Menus {
@@ -22,13 +16,6 @@ public class Menus {
     private MenuPaciente menuPaciente;
     private MenuUtilizador menuUtilizador;
     private MenuProfissionalSaude menuProfissionalSaude;
-    
-    private Hospital hospitalSelecionado;
-    private Enfermaria enfermariaSelecionado;
-    private Equipamento equipamentoSelecionado;
-    private Paciente pacienteSelecionado;
-    private ProfissionalSaude profissionalSelecionado;
-    private Utilizador utilizadorSelecionado;
     
     public Menus(Aplicacao aplicacao, Serializacao serializacao, Scanner scanner) {
         

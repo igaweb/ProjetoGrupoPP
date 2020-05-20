@@ -13,8 +13,6 @@ import backend.managers.ManagerEnfermaria;
 import frontend.model.filtros.HospitalComboModel;
 import frontend.model.filtros.TipoEnfermariaComboModel;
 import java.util.TreeMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -195,6 +193,11 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
         );
 
         jButton1.setText("Guardar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -229,6 +232,18 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
 
     private void campoHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoHospitalActionPerformed
         
+    }//GEN-LAST:event_campoHospitalActionPerformed
+
+    private void campoEnfermariaTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoEnfermariaTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoEnfermariaTipoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        
         try {
             int tipo = campoEnfermariaTipo.getSelectedIndex();
             Integer nCamas = new Integer(campoNCamas.getText());
@@ -248,15 +263,7 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
             mostrarAviso("Ocorreu um erro ao tentar guardar os dados");
         }
         
-    }//GEN-LAST:event_campoHospitalActionPerformed
-
-    private void campoEnfermariaTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoEnfermariaTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoEnfermariaTipoActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButton1MouseClicked
 
     private void mostrarAviso(String aviso) {
         JOptionPane.showMessageDialog(rootPane, aviso);

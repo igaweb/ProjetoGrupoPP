@@ -64,6 +64,14 @@ public class Login {
         return utilizadorValidado;
     }
 
+    public Utilizador getUtilizador() {
+        return utilizador;
+    }
+
+    public void setUtilizador(Utilizador utilizador) {
+        this.utilizador = utilizador;
+    }
+    
     private static class UtilizadorVazioException extends Exception {
         public UtilizadorVazioException() {
             super("Utilizador vazio");
@@ -89,13 +97,5 @@ public class Login {
         public UtilizadorNaoExisteException() {
             super("User não existe");
         }
-    }
-    
-    public Utilizador getUtilizador() {
-        return utilizador;
-    }
-
-    public void setUtilizador(Utilizador utilizador) {
-        this.utilizador = utilizador;
     }
 }
