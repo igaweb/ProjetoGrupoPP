@@ -6,7 +6,6 @@ import backend.Serializacao;
 import backend.entidades.Enfermaria;
 import backend.entidades.Hospital;
 import backend.managers.ManagerEnfermaria;
-import frontend.model.EnfermariaTableModel;
 import frontend.model.filtros.HospitalComboModel;
 import frontend.model.filtros.TipoEnfermariaComboModel;
 import javax.swing.JOptionPane;
@@ -85,10 +84,10 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
                         return enfermaria.getCodigo();
                     case 1:
                         return Conteudos.getTiposEnfermarias()[enfermaria.getTipo()];
+                    case 2:
+                        return enfermaria.getEquipamentos().size();
                     case 3:
-                        return enfermaria.getEquipamentos().size();
-                    case 4:
-                        return enfermaria.getEquipamentos().size();
+                        return enfermaria.getCamas().length;
                     default:
                         return "";
                 }                              
@@ -409,8 +408,8 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
                     try {
                         int index = tabela.getSelectedRows()[i];
 
-                        Enfermaria enfermaria = (Enfermaria) hospital.getEnfermarias().get(tabela.getModel().getValueAt(index, EnfermariaTableModel.COLUNA_CODIGO));
-                        managerEnfermaria.remover(enfermaria);
+                     //   Enfermaria enfermaria = (Enfermaria) hospital.getEnfermarias().get(tabela.getModel().getValueAt(index, EnfermariaTableModel.COLUNA_CODIGO));
+                   //     managerEnfermaria.remover(enfermaria);
                     } catch (Exception ex) {
                         mostrarAviso("Ocorreu um erro ao tentar remover a(s) enfermaria(s) selecionada(s).");
                     }
