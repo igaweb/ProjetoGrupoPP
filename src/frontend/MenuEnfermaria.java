@@ -155,7 +155,7 @@ public class MenuEnfermaria extends MenuBase {
 
         try {
             ManagerEnfermaria manager = new ManagerEnfermaria(getListaEnfermaria(hospitalSelecionado));
-            manager.editar(enfermariaAEditar.getCodigo(), enfermariaAEditar.getTipo(), enfermariaAEditar.getCamas());
+            manager.editar(enfermariaAEditar);
             
             guardar();
             System.out.println("Enfermaria guardada com sucesso!");
