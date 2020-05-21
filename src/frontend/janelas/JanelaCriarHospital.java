@@ -53,16 +53,12 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
         //O processo de fecho da janela será controlado pelo programa
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        if (codigoHospital == null || codigoHospital.isEmpty()) {
-            throw new NullPointerException("Falta codigo do hospital.");
-        }
-
         if (codigoHospital == null) {
             operacao = ManagerHospital.OPERACAO_ADICIONAR;
             setTitle("Adicionar Hospital");
         } else {
             operacao = ManagerHospital.OPERACAO_EDITAR;
-            setTitle("Editar Enfermaria");
+            setTitle("Editar Hospital");
         }
     }
 
@@ -97,8 +93,8 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
                 .addGap(2, 2, 2)
                 .addComponent(Localidade)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(campoHospitaLocalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addComponent(campoHospitaLocalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         tipoEnfermariaPaneLayout.setVerticalGroup(
             tipoEnfermariaPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,19 +127,20 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
             .addGroup(filtrosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(filtrosLayout.createSequentialGroup()
-                            .addGap(0, 0, Short.MAX_VALUE)
-                            .addComponent(jLabel1))
-                        .addGroup(filtrosLayout.createSequentialGroup()
-                            .addComponent(Nome)
-                            .addGap(36, 36, 36)
-                            .addComponent(campoHospitalNome, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tipoEnfermariaPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(nCamasPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(159, Short.MAX_VALUE))
+                    .addGroup(filtrosLayout.createSequentialGroup()
+                        .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(filtrosLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(tipoEnfermariaPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(nCamasPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(132, Short.MAX_VALUE))
+                    .addGroup(filtrosLayout.createSequentialGroup()
+                        .addComponent(Nome)
+                        .addGap(36, 36, 36)
+                        .addComponent(campoHospitalNome, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         filtrosLayout.setVerticalGroup(
             filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,7 +225,7 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
 
             if (operacao.equals(ManagerHospital.OPERACAO_ADICIONAR)) {
                 managerHospital.adicionar(nome, localidade);
-            } else if (operacao.equals(ManagerEnfermaria.OPERACAO_EDITAR)) {
+            } else if (operacao.equals(ManagerHospital.OPERACAO_EDITAR)) {
                 hospital.setNome(nome);
                 hospital.setLocalidade(localidade);
                 managerHospital.editar(hospital);
