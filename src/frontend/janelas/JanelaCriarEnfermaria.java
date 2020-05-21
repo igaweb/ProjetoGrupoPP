@@ -53,11 +53,11 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
         //O processo de fecho da janela será controlado pelo programa
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);                                
         
+        TreeMap<String, Enfermaria> listaEnfermarias;
         try {
             hospital = (Hospital) app.getManagerHospital().getLista().get(codigoHospital);
-            TreeMap<String, Enfermaria> listaEnfermarias = hospital.getEnfermarias();
+            listaEnfermarias = hospital.getEnfermarias();
             managerEnfermaria = new ManagerEnfermaria(listaEnfermarias);
-            enfermaria = listaEnfermarias.get(codigoEnfermaria);
         } catch (Exception e) {
             throw  new NullPointerException("Falta codigo do hospital.");
         }
@@ -68,6 +68,7 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
         } else {
             operacao = ManagerEnfermaria.OPERACAO_EDITAR;
             setTitle("Editar Enfermaria");
+            enfermaria = listaEnfermarias.get(codigoEnfermaria);
             campoEnfermariaTipo.setSelectedIndex(enfermaria.getTipo());
             int nCamas = enfermaria.getCamas().length;
             campoNCamas.setText(nCamas + "");
