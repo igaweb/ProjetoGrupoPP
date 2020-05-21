@@ -53,14 +53,14 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
         //O processo de fecho da janela será controlado pelo programa
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);                                
         
-        TreeMap<String, Enfermaria> listaEnfermarias;
         try {
             hospital = (Hospital) app.getManagerHospital().getLista().get(codigoHospital);
-            listaEnfermarias = hospital.getEnfermarias();
-            managerEnfermaria = new ManagerEnfermaria(listaEnfermarias);
         } catch (Exception e) {
             throw  new NullPointerException("Falta codigo do hospital.");
         }
+        
+        TreeMap<String, Enfermaria> listaEnfermarias = hospital.getEnfermarias();
+        managerEnfermaria = app.getManagerEnfermaria(codigoHospital);
         
         if(codigoEnfermaria == null) {
             operacao = ManagerEnfermaria.OPERACAO_ADICIONAR;
