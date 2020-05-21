@@ -27,10 +27,11 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
     private String codigoHospital;
     private ManagerHospital managerHospital;
     private Hospital hospital;
+
     /**
      * Creates new form NewJDialog
      */
-    public JanelaCriarHospital(JanelaConsultaHospital janela, Aplicacao app, Serializacao serializacao) {
+    public JanelaCriarHospital(JanelaConsultaHospital janela, Aplicacao app, Serializacao serializacao, String codigoHospital) {
         this.janela = janela;
         this.app = app;
         this.serializacao = serializacao;
@@ -51,6 +52,8 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
 
         //O processo de fecho da janela será controlado pelo programa
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        managerHospital = app.getManagerHospital();
 
         if (codigoHospital == null) {
             operacao = ManagerHospital.OPERACAO_ADICIONAR;
@@ -201,19 +204,17 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
         try {
             String nome = campoHospitalNome.getText();
             String localidade = campoHospitaLocalidade.getText();
-            Hospital hospital = (Hospital) app.getManagerHospital().getLista().get(codigoHospital);
-            TreeMap<String, Enfermaria> listaEnfermarias = (TreeMap<String, Enfermaria>) hospital.getEnfermarias();
 
             if (operacao.equals(ManagerHospital.OPERACAO_ADICIONAR)) {
                 managerHospital.adicionar(nome, localidade);
             } else if (operacao.equals(ManagerHospital.OPERACAO_EDITAR)) {
+                Hospital hospital = (Hospital) app.getManagerHospital().getLista().get(codigoHospital);
                 hospital.setNome(nome);
                 hospital.setLocalidade(localidade);
                 managerHospital.editar(hospital);
             }
 
-            serializacao.guardar(app);
-            dispose();
+            fechar();
             this.getOwner().firePropertyChange("tabela", 0, 0);
         } catch (Exception ex) {
             mostrarAviso("Ocorreu um erro ao tentar guardar os dados");

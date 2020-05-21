@@ -253,8 +253,7 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
                 managerEnfermaria.editar(enfermaria);
             }
             
-            serializacao.guardar(app);
-            dispose();
+            fechar();
             this.getOwner().firePropertyChange("tabela", 0, 0);
         } catch (Exception ex) {
             mostrarAviso("Ocorreu um erro ao tentar guardar os dados");

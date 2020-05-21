@@ -4,7 +4,6 @@ import backend.Aplicacao;
 import backend.Serializacao;
 import backend.entidades.Administrador;
 import backend.entidades.Utilizador;
-import frontend.janelas.JanelaLogin;
 import java.util.Scanner;
 import java.util.TreeMap;
 
@@ -17,7 +16,7 @@ public class Inicio {
         System.out.println("Carregar dados...");
         String ficheiro = "dados";
         Serializacao serializacao = new Serializacao(ficheiro);
-
+ //       Scanner scanner = new Scanner(System.in);
         Aplicacao aplicacao = serializacao.carregar();
 
         // //////////////////////////dummy object:
@@ -31,8 +30,8 @@ public class Inicio {
 //        janelaLogin.setVisible(true);
         
         // carregar menus
-//       Menus menus = new Menus(aplicacao, serializacao, scanner);
-//       menus.getMenuPaciente().start();
+ //      Menus menus = new Menus(aplicacao, serializacao, scanner);
+ //     menus.getMenuPaciente().start();
 
         Homepage gui = new Homepage(aplicacao, serializacao);
         gui.setVisible(true);

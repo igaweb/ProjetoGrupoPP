@@ -283,7 +283,7 @@ public class JanelaConsultaHospital extends javax.swing.JDialog {
 
     private void adicionar() {
         try {
-            JanelaCriarHospital janela = new JanelaCriarHospital(this, app, serializacao);
+            JanelaCriarHospital janela = new JanelaCriarHospital(this, app, serializacao, null);
             janela.setVisible(true);
         } catch (Exception ex) {            
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -299,7 +299,7 @@ public class JanelaConsultaHospital extends javax.swing.JDialog {
         String codigo = (String) modeloTabela.getValueAt(rowIndex, colunaCodigo);
         
         try {
-            JanelaCriarHospital janela = new JanelaCriarHospital(this, app, serializacao);
+            JanelaCriarHospital janela = new JanelaCriarHospital(this, app, serializacao, codigo);
             janela.setVisible(true);
         } catch (Exception ex) {            
             JOptionPane.showMessageDialog(this, ex.getMessage());
