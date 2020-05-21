@@ -127,12 +127,10 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuListarPacientes">
               <Properties>
-                <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection component="menuListarPacientes" name="getAction" type="method"/>
-                </Property>
                 <Property name="text" type="java.lang.String" value="Pacientes"/>
               </Properties>
               <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuListarPacientesMouseClicked"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuListarPacientesActionPerformed"/>
               </Events>
             </MenuItem>

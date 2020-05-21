@@ -132,14 +132,6 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        filtros = new javax.swing.JPanel();
-        labelFiltros = new javax.swing.JLabel();
-        filtroHospital = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        campoHospital = new javax.swing.JComboBox<>();
-        filtroTipoEnfermaria = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        campoEnfermariaTipo = new javax.swing.JComboBox<>();
         contentor = new javax.swing.JPanel();
         botoes = new javax.swing.JPanel();
         botaoCriar = new javax.swing.JButton();
@@ -150,95 +142,6 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
         tabela = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        labelFiltros.setText("Filtros");
-
-        jLabel2.setText("Hospital: ");
-
-        campoHospital.setModel(new HospitalComboModel(app));
-        campoHospital.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                campoHospitalMouseClicked(evt);
-            }
-        });
-        campoHospital.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoHospitalActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout filtroHospitalLayout = new javax.swing.GroupLayout(filtroHospital);
-        filtroHospital.setLayout(filtroHospitalLayout);
-        filtroHospitalLayout.setHorizontalGroup(
-            filtroHospitalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(filtroHospitalLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campoHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        filtroHospitalLayout.setVerticalGroup(
-            filtroHospitalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(filtroHospitalLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(filtroHospitalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campoHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)))
-        );
-
-        jLabel4.setText("Tipo");
-
-        campoEnfermariaTipo.setModel(new TipoEnfermariaComboModel());
-        campoEnfermariaTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoEnfermariaTipoActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout filtroTipoEnfermariaLayout = new javax.swing.GroupLayout(filtroTipoEnfermaria);
-        filtroTipoEnfermaria.setLayout(filtroTipoEnfermariaLayout);
-        filtroTipoEnfermariaLayout.setHorizontalGroup(
-            filtroTipoEnfermariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(filtroTipoEnfermariaLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campoEnfermariaTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        filtroTipoEnfermariaLayout.setVerticalGroup(
-            filtroTipoEnfermariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(filtroTipoEnfermariaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(filtroTipoEnfermariaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campoEnfermariaTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)))
-        );
-
-        javax.swing.GroupLayout filtrosLayout = new javax.swing.GroupLayout(filtros);
-        filtros.setLayout(filtrosLayout);
-        filtrosLayout.setHorizontalGroup(
-            filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(filtrosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelFiltros)
-                    .addComponent(filtroHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filtroTipoEnfermaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        filtrosLayout.setVerticalGroup(
-            filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(filtrosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelFiltros)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(filtroHospital, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(filtroTipoEnfermaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         botaoCriar.setText("Criar");
         botaoCriar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -359,31 +262,19 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(filtros, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(contentor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(contentor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(filtros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(131, 131, 131)
                 .addComponent(contentor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void campoHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoHospitalActionPerformed
-        
-    }//GEN-LAST:event_campoHospitalActionPerformed
-
-    private void campoEnfermariaTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoEnfermariaTipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoEnfermariaTipoActionPerformed
 
     private void botaoCriarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoCriarMouseClicked
         adicionar();
@@ -422,15 +313,6 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
         
     }//GEN-LAST:event_tabelaMouseClicked
 
-    private void campoHospitalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_campoHospitalMouseClicked
-        hospitalSelecionado = (String) campoHospital.getModel().getSelectedItem();
-    }//GEN-LAST:event_campoHospitalMouseClicked
-
-    protected void setFiltrosVisible(boolean hospital, boolean tipoFenfermaria) {
-        filtroHospital.setVisible(hospital);
-        filtroTipoEnfermaria.setVisible(tipoFenfermaria);
-    }
-    
     protected void setOperacoes(boolean criar, boolean editar, boolean remover) {
         botaoCriar.setVisible(criar);
         botaoEditar.setVisible(editar);
@@ -446,17 +328,9 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
     private javax.swing.JButton botaoEditar;
     private javax.swing.JButton botaoRemover;
     private javax.swing.JPanel botoes;
-    private javax.swing.JComboBox<String> campoEnfermariaTipo;
-    private javax.swing.JComboBox<String> campoHospital;
     private javax.swing.JPanel contentor;
-    private javax.swing.JPanel filtroHospital;
-    private javax.swing.JPanel filtroTipoEnfermaria;
-    private javax.swing.JPanel filtros;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel labelFiltros;
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 }

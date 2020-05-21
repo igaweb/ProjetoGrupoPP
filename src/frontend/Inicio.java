@@ -38,8 +38,8 @@ public class Inicio {
 //        userAutenticado = login.getUtilizador().isAutenticado();
 //
         // carregar menus
-//        Menus menus = new Menus(aplicacao, serializacao, scanner);
-//        menus.getMenuHospital().start();
+//       Menus menus = new Menus(aplicacao, serializacao, scanner);
+//       menus.getMenuPaciente().start();
 
         Homepage gui = new Homepage(aplicacao, serializacao);
         gui.setVisible(true);

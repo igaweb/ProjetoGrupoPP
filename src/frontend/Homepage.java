@@ -17,10 +17,10 @@ public class Homepage extends javax.swing.JFrame {
 
         initComponents();
         //Força a maximização da janela
-        this.setExtendedState(Homepage.MAXIMIZED_BOTH);    
+//        this.setExtendedState(Homepage.MAXIMIZED_BOTH);    
         
         //O processo de fecho da janela será controlado pelo programa
-        this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         //Apenas mostra o menu de administração se o utilizador for um administrador
         menuAdmin.setVisible(app.getUtilizadorAutenticado() instanceof Administrador);
@@ -163,8 +163,12 @@ public class Homepage extends javax.swing.JFrame {
         });
         menuIniciar.add(menuListarProfissionaisSaude);
 
-        menuListarPacientes.setAction(menuListarPacientes.getAction());
         menuListarPacientes.setText("Pacientes");
+        menuListarPacientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuListarPacientesMouseClicked(evt);
+            }
+        });
         menuListarPacientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuListarPacientesActionPerformed(evt);
@@ -229,6 +233,10 @@ public class Homepage extends javax.swing.JFrame {
     private void meniListarEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meniListarEquipamentosActionPerformed
         listarEquipamentos();
     }//GEN-LAST:event_meniListarEquipamentosActionPerformed
+
+    private void menuListarPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuListarPacientesMouseClicked
+        listarPacientes();       
+    }//GEN-LAST:event_menuListarPacientesMouseClicked
 
     /**
 //     * @param args the command line arguments
