@@ -4,6 +4,7 @@ import backend.Aplicacao;
 import backend.Serializacao;
 import backend.entidades.Administrador;
 import frontend.janelas.JanelaConsultaEnfermaria;
+import frontend.janelas.JanelaConsultaPaciente;
 
 public class Homepage extends javax.swing.JFrame {
 
@@ -162,6 +163,7 @@ public class Homepage extends javax.swing.JFrame {
         });
         menuIniciar.add(menuListarProfissionaisSaude);
 
+        menuListarPacientes.setAction(menuListarPacientes.getAction());
         menuListarPacientes.setText("Pacientes");
         menuListarPacientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -307,6 +309,7 @@ public class Homepage extends javax.swing.JFrame {
     }
     
     private void listarPacientes() {
-        // TODO
+        JanelaConsultaPaciente janelaConsulta = new JanelaConsultaPaciente(app, serializacao);
+        janelaConsulta.setVisible(true);
     }
 }
