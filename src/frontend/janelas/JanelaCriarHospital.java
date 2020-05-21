@@ -9,7 +9,6 @@ import backend.Aplicacao;
 import backend.Serializacao;
 import backend.entidades.Enfermaria;
 import backend.entidades.Hospital;
-import backend.managers.ManagerEnfermaria;
 import backend.managers.ManagerHospital;
 import frontend.model.filtros.TipoEnfermariaComboModel;
 import java.util.TreeMap;
@@ -75,7 +74,6 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
         tipoEnfermariaPane = new javax.swing.JPanel();
         Localidade = new javax.swing.JLabel();
         campoHospitaLocalidade = new javax.swing.JTextField();
-        nCamasPane = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         Nome = new javax.swing.JLabel();
         campoHospitalNome = new javax.swing.JTextField();
@@ -105,17 +103,6 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
                     .addComponent(campoHospitaLocalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        javax.swing.GroupLayout nCamasPaneLayout = new javax.swing.GroupLayout(nCamasPane);
-        nCamasPane.setLayout(nCamasPaneLayout);
-        nCamasPaneLayout.setHorizontalGroup(
-            nCamasPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 193, Short.MAX_VALUE)
-        );
-        nCamasPaneLayout.setVerticalGroup(
-            nCamasPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 37, Short.MAX_VALUE)
-        );
-
         jLabel1.setText(getTitle());
 
         Nome.setText("Nome:");
@@ -128,13 +115,10 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(filtrosLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(filtrosLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(tipoEnfermariaPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(nCamasPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tipoEnfermariaPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(132, Short.MAX_VALUE))
                     .addGroup(filtrosLayout.createSequentialGroup()
                         .addComponent(Nome)
@@ -153,9 +137,7 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
                     .addComponent(campoHospitalNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(2, 2, 2)
                 .addComponent(tipoEnfermariaPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nCamasPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(54, 54, 54))
         );
 
         jButton1.setText("Guardar");
@@ -212,7 +194,6 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
     private javax.swing.JPanel filtros;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel nCamasPane;
     private javax.swing.JPanel tipoEnfermariaPane;
     // End of variables declaration//GEN-END:variables
 
