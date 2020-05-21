@@ -156,6 +156,9 @@ public class MenuEnfermaria extends MenuBase {
         try {
             ManagerEnfermaria manager = new ManagerEnfermaria(getListaEnfermaria(hospitalSelecionado));
             manager.editar(enfermariaAEditar);
+            
+            guardar();
+            System.out.println("Enfermaria guardada com sucesso!");
         } catch (Exception ex) {
             System.out.println("ex " + ex);
             Logger.getLogger(MenuEnfermaria.class.getName()).log(Level.SEVERE, null, ex);
@@ -169,6 +172,8 @@ public class MenuEnfermaria extends MenuBase {
         
         Enfermaria enfermaria = (Enfermaria) getListaEnfermaria(hospitalSelecionado).get(enfermariaSelecionada);
 
+        guardar();
+        System.out.println("Enfermaria eliminada com sucesso!");
         try {
             ManagerEnfermaria manager = new ManagerEnfermaria(getListaEnfermaria(hospitalSelecionado));
             manager.remover(enfermaria);

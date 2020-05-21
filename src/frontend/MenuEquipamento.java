@@ -97,7 +97,9 @@ public class MenuEquipamento extends MenuBase {
         try {
             ManagerEquipamento manager = new ManagerEquipamento(getListaEquipamento(hospitalSelecionado, enfermariaSelecionada));
             manager.adicionar(equipamento);
+
             guardar();
+            System.out.println("Equipamento guardado com sucesso!");
         } catch (Exception ex) {
             Logger.getLogger(MenuPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -148,6 +150,9 @@ public class MenuEquipamento extends MenuBase {
                 try {
                     ManagerEquipamento manager = new ManagerEquipamento(getListaEquipamento(hospitalSelecionado, enfermariaSelecionada));
                     manager.editar(equipamentoAEditar);
+
+                    guardar();
+                    System.out.println("Equipamento guardado com sucesso!");
                 } catch (Exception ex) {
                     System.out.print("ex " + ex);
                 }
@@ -173,7 +178,9 @@ public class MenuEquipamento extends MenuBase {
         try {
             ManagerEquipamento manager = new ManagerEquipamento(getListaEquipamento(hospitalSelecionado, enfermariaSelecionada));
             manager.remover(equipamentoARemover);
+            
             guardar();
+            System.out.println("Equipamento eliminado com sucesso!");
         } catch (Exception ex) {
             System.out.println("ex " + ex);
             Logger.getLogger(MenuEquipamento.class.getName()).log(Level.SEVERE, null, ex);
