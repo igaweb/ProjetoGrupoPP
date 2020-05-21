@@ -147,18 +147,19 @@ public class MenuEquipamento extends MenuBase {
                 System.out.println(pergunta);
                 System.out.print("Estado: " + equipamentoAEditar.isLivre());
                 equipamentoAEditar.setLivre(scanner.nextBoolean());
-                try {
-                    ManagerEquipamento manager = new ManagerEquipamento(getListaEquipamento(hospitalSelecionado, enfermariaSelecionada));
-                    manager.editar(equipamentoAEditar);
-
-                    guardar();
-                    System.out.println("Equipamento guardado com sucesso!");
-                } catch (Exception ex) {
-                    System.out.print("ex " + ex);
-                }
+                
                 System.out.println("Quer Continuar a editar(Y/N)?: ");
 
                 break;
+        }
+        try {
+            ManagerEquipamento manager = new ManagerEquipamento(getListaEquipamento(hospitalSelecionado, enfermariaSelecionada));
+            manager.editar(equipamentoAEditar);
+
+            guardar();
+            System.out.println("Equipamento guardado com sucesso!");
+        } catch (Exception ex) {
+            System.out.print("ex " + ex);
         }
     }
 

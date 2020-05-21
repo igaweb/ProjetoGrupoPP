@@ -47,7 +47,7 @@ public class MenuHospital extends MenuBase {
 
     public void listar() {
         System.out.println("Hospitais: ");
-        System.out.println("| Codigo | Nome | Localidade | Qtd Enfermairas |");
+        System.out.println("| Codigo | Nome | Localidade | Qtd Enfermarias |");
         if(getListaHospital() != null && getListaHospital().size() > 0) {
             for (Map.Entry<String, Hospital> entry : getListaHospital().entrySet()) {
                 Hospital hospital = (Hospital) entry.getValue();
@@ -92,6 +92,9 @@ public class MenuHospital extends MenuBase {
 
         try {
             manager.adicionar(hospital);
+
+            guardar();
+            System.out.println("Hospital guardado com sucesso!");
         } catch (Exception ex) {
             System.out.println("Erro ao adicionar");
         }
@@ -120,6 +123,9 @@ public class MenuHospital extends MenuBase {
 
         try {
             manager.editar(hospitalAEditar);
+
+            guardar();
+            System.out.println("Hospital guardado com sucesso!");
         } catch (Exception ex) {
             System.out.println("ex " + ex);
         }
@@ -138,6 +144,9 @@ public class MenuHospital extends MenuBase {
 
         try {
             manager.remover(hospital);
+
+            guardar();
+            System.out.println("Hospital eliminado com sucesso!");
         } catch (Exception ex) {
             System.out.println("ex " + ex);
         }

@@ -78,6 +78,9 @@ public class MenuUtilizador extends MenuBase {
 
         try {
             manager.adicionar(utilizador);
+
+            guardar();
+            System.out.println("Utilizador guardado com sucesso!");
         } catch (Exception ex) {
         }
     }
@@ -101,33 +104,28 @@ public class MenuUtilizador extends MenuBase {
                 case 0:// Nome
                     System.out.print("Novo Nome: ");
                     utilizadorAEditar.setNome(scanner.nextLine());
-                    try {
-                        manager.editar(utilizadorAEditar);
-                    } catch (Exception ex) {
-                        System.out.println("ex " + ex);
-                    }
-                    System.out.println("Quer Continuar a editar(Y/N)?: ");
-
-                    editar = scanner.nextLine();
-                    if (editar.contains("Y") || editar.contains("y")) {
-                        editar();
-                    }
+                    
                     break;
                 case 1: // Password
                     System.out.print("Nova Password: ");
                     utilizadorAEditar.setPassword(scanner.nextLine());
-                    try {
-                        manager.editar(utilizadorAEditar);
-                    } catch (Exception ex) {
-                        System.out.println("ex " + ex);
-                    }
-                    System.out.println("Quer Continuar a editar(Y/N)? ");
-
-                    editar = scanner.nextLine();
-                    if (editar.contains("Y") || editar.contains("y")) {
-                        editar();
-                    }
+                    
                     break;
+            }
+            
+            try {
+                manager.editar(utilizadorAEditar);
+
+                guardar();
+                System.out.println("Utilizador guardado com sucesso!");
+            } catch (Exception ex) {
+                System.out.println("ex " + ex);
+            }
+            System.out.println("Quer Continuar a editar(Y/N)?: ");
+
+            editar = scanner.nextLine();
+            if (editar.contains("Y") || editar.contains("y")) {
+                editar();
             }
         } else {
             System.out.println("Nao existem utilizadores");
@@ -149,6 +147,9 @@ public class MenuUtilizador extends MenuBase {
 
             try {
                 manager.remover(utilizador);
+
+                guardar();
+                System.out.println("Utilizador eliminado com sucesso!");
             } catch (Exception ex) {
                 System.out.println("ex " + ex);
             }

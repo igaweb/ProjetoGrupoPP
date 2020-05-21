@@ -153,6 +153,9 @@ public class MenuPaciente extends MenuBase {
         try {
             ManagerPaciente manager = new ManagerPaciente(getListaPaciente(hospitalSelecionado, enfermariaSelecionada));
             manager.adicionar(paciente);
+
+            guardar();
+            System.out.println("Paciente guardado com sucesso!");
         } catch (Exception ex) {
             Logger.getLogger(MenuPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -229,6 +232,9 @@ public class MenuPaciente extends MenuBase {
         ManagerPaciente manager = new ManagerPaciente(getListaPaciente(hospitalSelecionado, enfermariaSelecionada));
         try {
             manager.editar(pacienteAEditar);
+
+            guardar();
+            System.out.println("Paciente guardado com sucesso!");
         } catch (Exception ex) {
             System.out.println("ex " + ex);
             Logger.getLogger(MenuPaciente.class.getName()).log(Level.SEVERE, null, ex);
@@ -274,6 +280,9 @@ public class MenuPaciente extends MenuBase {
             try {
                 ManagerPaciente manager = new ManagerPaciente(getListaPaciente(hospitalSelecionado, enfermariaSelecionada));
                 manager.remover(pacienteAEditar);
+
+                guardar();
+                System.out.println("Paciente eliminado com sucesso!");
             } catch (Exception ex) {
                 System.out.println("ex " + ex);
                 Logger.getLogger(MenuPaciente.class.getName()).log(Level.SEVERE, null, ex);
