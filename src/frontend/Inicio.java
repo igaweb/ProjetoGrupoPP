@@ -2,7 +2,9 @@ package frontend;
 
 import backend.Aplicacao;
 import backend.Serializacao;
+import backend.entidades.Administrador;
 import backend.entidades.Utilizador;
+import frontend.janelas.JanelaLogin;
 import java.util.Scanner;
 import java.util.TreeMap;
 
@@ -21,22 +23,13 @@ public class Inicio {
         // //////////////////////////dummy object:
         TreeMap<String, Utilizador> users = new TreeMap();
         users.put("user", new Utilizador("user", "1234"));
+        users.put("admin", new Administrador("admin", "admin"));
         aplicacao.getManagerUtilizador().setLista(users);
 
-        boolean userAutenticado = false;
-
-//        // login
-        Scanner scanner = new Scanner(System.in);
-//        System.out.println("Insira o user:");
-//        String user = scanner.nextLine();
-//
-//        System.out.println("Insira a password:");
-//        String password = scanner.nextLine();
-//
-//        Login login = new Login(aplicacao, user, password);
-//
-//        userAutenticado = login.getUtilizador().isAutenticado();
-//
+        // login
+//        JanelaLogin janelaLogin = new JanelaLogin(aplicacao, serializacao);
+//        janelaLogin.setVisible(true);
+        
         // carregar menus
 //       Menus menus = new Menus(aplicacao, serializacao, scanner);
 //       menus.getMenuPaciente().start();

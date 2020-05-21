@@ -2,31 +2,13 @@ package backend.entidades;
 
 public class Administrador extends Utilizador {
 
-    private boolean isAdministrador;
-
-    public Administrador() {
-    }
-
-    public Administrador(boolean isAdminitrador) {
-        this.isAdministrador = isAdminitrador;
-    }
-
-    public Administrador(boolean isAdminitrador, String nome, String password, boolean autenticado) {
+    public Administrador(String nome, String password) {
         super(nome, password);
-        this.isAdministrador = isAdminitrador;
-    }
-
-    public boolean isIsAdminitrador() {
-        return isAdministrador;
-    }
-
-    public void setIsAdminitrador(boolean isAdminitrador) {
-        this.isAdministrador = isAdminitrador;
     }
 
     @Override
     public String toString() {
-        return "Administrador{" + "isAdministrador=" + isAdministrador + '}';
+        return "Administrador{" + "nome=" + nome + ", password=" + password + '}';
     }
     
 }

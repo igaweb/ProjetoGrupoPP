@@ -1,5 +1,6 @@
 package backend;
 
+import backend.entidades.Administrador;
 import backend.entidades.Enfermaria;
 import backend.entidades.Equipamento;
 import backend.entidades.Hospital;
@@ -22,11 +23,7 @@ public class Aplicacao implements Serializable {
     private Utilizador utilizadorAutenticado;
     
     private ManagerUtilizador managerUtilizador;
-    private ManagerEnfermaria managerEnfermaria;
-    private ManagerEquipamento managerEquipamento;
     private ManagerHospital managerHospital;
-    private ManagerPaciente managerPaciente;
-    private ManagerProfissionalSaude managerProfissionalSaude;
 
     public Aplicacao() {
         
@@ -42,12 +39,8 @@ public class Aplicacao implements Serializable {
         return managerUtilizador;
     }
 
-    public void setManagerUtilizador(ManagerUtilizador managerUtilizador) {
-        this.managerUtilizador = managerUtilizador;
-    }
-
     public ManagerEnfermaria getManagerEnfermaria(String codigoHospital) {
-        managerEnfermaria = null;
+        ManagerEnfermaria managerEnfermaria = null;
         
         if(codigoHospital != null && !codigoHospital.isEmpty()) {
             Hospital hospital = (Hospital) getManagerHospital().getLista().get(codigoHospital);
@@ -58,12 +51,8 @@ public class Aplicacao implements Serializable {
         return managerEnfermaria;
     }
 
-    public void setManagerEnfermaria(ManagerEnfermaria managerEnfermaria) {
-        this.managerEnfermaria = managerEnfermaria;
-    }
-
     public ManagerEquipamento getManagerEquipamento(String codigoHospital, String codigoEnfermaria) {
-        managerEquipamento = null;
+        ManagerEquipamento managerEquipamento = null;
         
         if(codigoHospital != null && !codigoHospital.isEmpty() && codigoEnfermaria != null && !codigoEnfermaria.isEmpty()) {
             Hospital hospital = (Hospital) getManagerHospital().getLista().get(codigoHospital);
@@ -75,20 +64,12 @@ public class Aplicacao implements Serializable {
         return managerEquipamento;
     }
 
-    public void setManagerEquipamento(ManagerEquipamento managerEquipamento) {
-        this.managerEquipamento = managerEquipamento;
-    }
-
     public ManagerHospital getManagerHospital() {
         return managerHospital;
     }
 
-    public void setManagerHospital(ManagerHospital managerHospital) {
-        this.managerHospital = managerHospital;
-    }
-
     public ManagerPaciente getManagerPaciente(String codigoHospital, String codigoEnfermaria) {
-        managerPaciente = null;
+        ManagerPaciente managerPaciente = null;
         
         if(codigoHospital != null && !codigoHospital.isEmpty() && codigoEnfermaria != null && !codigoEnfermaria.isEmpty()) {
             Hospital hospital = (Hospital) getManagerHospital().getLista().get(codigoHospital);
@@ -100,12 +81,8 @@ public class Aplicacao implements Serializable {
         return managerPaciente;
     }
 
-    public void setManagerPaciente(ManagerPaciente managerPaciente) {
-        this.managerPaciente = managerPaciente;
-    }
-
     public ManagerProfissionalSaude getManagerProfissionalSaude(String codigoHospital, String codigoEnfermaria) {
-        managerPaciente = null;
+        ManagerProfissionalSaude managerProfissionalSaude = null;
         
         if(codigoHospital != null && !codigoHospital.isEmpty() && codigoEnfermaria != null && !codigoEnfermaria.isEmpty()) {
             Hospital hospital = (Hospital) getManagerHospital().getLista().get(codigoHospital);
@@ -116,16 +93,20 @@ public class Aplicacao implements Serializable {
         return managerProfissionalSaude;
     }
 
-    public void setManagerProfissionalSaude(ManagerProfissionalSaude managerProfissionalSaude) {
-        this.managerProfissionalSaude = managerProfissionalSaude;
-    }
-
     public Utilizador getUtilizadorAutenticado() {
         return utilizadorAutenticado;
     }
 
     public void setUtilizadorAutenticado(Utilizador utilizadorAutenticado) {
         this.utilizadorAutenticado = utilizadorAutenticado;
+    }
+    
+    public boolean isAutenticado(Utilizador user){
+        return user.equals(utilizadorAutenticado);
+    }
+    
+    public boolean isAdministrador(Utilizador user){
+        return user instanceof Administrador;
     }
     
     public Hospital getHospital(String codigoHospital) throws HospitalNaoExistenteException {

@@ -6,9 +6,8 @@ public class Utilizador implements Serializable{
 
     private static final long serialVersionUID = 1L;
     
-    private String nome;
-    private String password;
-    private boolean autenticado;
+    protected String nome;
+    protected String password;
 
     public Utilizador() {
     }
@@ -16,13 +15,6 @@ public class Utilizador implements Serializable{
     public Utilizador(String nome, String password) {
         this.nome = nome;
         this.password = password;
-        this.autenticado = false;
-    }
-
-    public Utilizador(String nome, String password, boolean autenticado) {
-        this.nome = nome;
-        this.password = password;
-        this.autenticado = autenticado;
     }
 
     public String getNome() {
@@ -41,17 +33,9 @@ public class Utilizador implements Serializable{
         this.password = password;
     }
 
-    public boolean isAutenticado() {
-        return autenticado;
-    }
-
-    public void setAutenticado(boolean autenticado) {
-        this.autenticado = autenticado;
-    }
-
     @Override
     public String toString() {
-        return "Utilizador{" + "nome=" + nome + ", password=" + password + ", autenticado=" + autenticado + '}';
+        return "Utilizador{" + "nome=" + nome + ", password=" + password + '}';
     }
 
 }
