@@ -13,16 +13,16 @@ public class ManagerHospital extends ManagerBase {
     public ManagerHospital() {
     }
 
-    public ManagerHospital(TreeMap<String,Hospital> lista) {
+    public ManagerHospital(TreeMap<String, Hospital> lista) {
         this.lista = lista;
     }
 
-        public void adicionar(String codigo, String nome, String localidade, TreeMap<String, Enfermaria> enfermarias) throws Exception {
-        Hospital hospital = new Hospital(codigo, nome, localidade, enfermarias);
-        
+    public void adicionar(String codigo, String nome, String localidade) throws Exception {
+        Hospital hospital = new Hospital(null, nome, localidade, new TreeMap<String, Enfermaria>());
+
         adicionar(hospital);
     }
-    
+
     public void adicionar(Hospital hospital) throws Exception {
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_ADICIONAR);
@@ -39,7 +39,7 @@ public class ManagerHospital extends ManagerBase {
 
             // inicializar manager de Enfermaria
             hospital.setEnfermarias(new TreeMap<String, Enfermaria>());
-            
+
             lista.put(novoCodigo, hospital);
         } else {
             // senão, retorna erro
