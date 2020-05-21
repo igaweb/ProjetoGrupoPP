@@ -227,7 +227,7 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
             TreeMap<String, Enfermaria> listaEnfermarias = (TreeMap<String, Enfermaria>) hospital.getEnfermarias();
 
             if (operacao.equals(ManagerHospital.OPERACAO_ADICIONAR)) {
-                managerHospital.adicionar(codigoHospital, nome, localidade);
+                managerHospital.adicionar(nome, localidade);
             } else if (operacao.equals(ManagerEnfermaria.OPERACAO_EDITAR)) {
                 hospital.setNome(nome);
                 hospital.setLocalidade(localidade);

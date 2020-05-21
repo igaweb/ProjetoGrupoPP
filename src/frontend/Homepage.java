@@ -4,6 +4,7 @@ import backend.Aplicacao;
 import backend.Serializacao;
 import backend.entidades.Administrador;
 import frontend.janelas.JanelaConsultaEnfermaria;
+import frontend.janelas.JanelaConsultaHospital;
 import frontend.janelas.JanelaConsultaPaciente;
 
 public class Homepage extends javax.swing.JFrame {
@@ -300,7 +301,8 @@ public class Homepage extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void listarHospitais() {
-        // TODO
+        JanelaConsultaHospital janelaConsulta = new JanelaConsultaHospital(app, serializacao);
+        janelaConsulta.setVisible(true);
     }
     
     private void listarEnfermarias() {
