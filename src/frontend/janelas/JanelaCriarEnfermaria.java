@@ -24,8 +24,9 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
     private Aplicacao app;
     private Serializacao serializacao;
     private String operacao;
-    private String codigoEnfermaria;
-    private String codigoHospital;
+    private Hospital hospital;
+    private ManagerEnfermaria managerEnfermaria;
+    private Enfermaria enfermaria;
 
     /**
      * Creates new form NewJDialog
@@ -34,8 +35,6 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
         this.janela = janela;
         this.app = app;
         this.serializacao = serializacao;
-        this.codigoEnfermaria = codigoEnfermaria;
-        this.codigoHospital = codigoHospital;
         
         initComponents();
 
@@ -54,7 +53,12 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
         //O processo de fecho da janela será controlado pelo programa
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);                                
         
-        if(codigoHospital == null || codigoHospital.isEmpty()) {
+        try {
+            hospital = (Hospital) app.getManagerHospital().getLista().get(codigoHospital);
+            TreeMap<String, Enfermaria> listaEnfermarias = hospital.getEnfermarias();
+            managerEnfermaria = new ManagerEnfermaria(listaEnfermarias);
+            enfermaria = listaEnfermarias.get(codigoEnfermaria);
+        } catch (Exception e) {
             throw  new NullPointerException("Falta codigo do hospital.");
         }
         
@@ -64,6 +68,9 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
         } else {
             operacao = ManagerEnfermaria.OPERACAO_EDITAR;
             setTitle("Editar Enfermaria");
+            campoEnfermariaTipo.setSelectedIndex(enfermaria.getTipo());
+            int nCamas = enfermaria.getCamas().length;
+            campoNCamas.setText(nCamas + "");
         }
     }
 
@@ -236,14 +243,13 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
             int tipo = campoEnfermariaTipo.getSelectedIndex();
             Integer nCamas = new Integer(campoNCamas.getText());
             Boolean[] camas = new Boolean[nCamas];
-            Hospital hospital = (Hospital) app.getManagerHospital().getLista().get(codigoHospital);
-            TreeMap<String, Enfermaria> listaEnfermarias = (TreeMap<String, Enfermaria>) hospital.getEnfermarias();
             
-            ManagerEnfermaria managerEnfermaria = new ManagerEnfermaria(listaEnfermarias);
             if(operacao.equals(ManagerEnfermaria.OPERACAO_ADICIONAR)){
                 managerEnfermaria.adicionar(tipo, camas);
             } else if(operacao.equals(ManagerEnfermaria.OPERACAO_EDITAR)){
-                managerEnfermaria.editar(codigoEnfermaria, tipo, camas);
+                enfermaria.setTipo(tipo);
+                enfermaria.setCamas(camas);
+                managerEnfermaria.editar(enfermaria);
             }
             
             serializacao.guardar(app);
