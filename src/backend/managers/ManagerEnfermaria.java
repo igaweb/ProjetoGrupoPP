@@ -49,7 +49,12 @@ public class ManagerEnfermaria extends ManagerBase implements Serializable {
         lista.remove(enfermaria.getCodigo());
     }
 
-    public void editar(Enfermaria enfermaria) throws Exception {
+    public void editar(String codigo, int tipo, Boolean[] camas) throws Exception {
+        
+        Enfermaria enfermaria = (Enfermaria) lista.get(codigo);
+        enfermaria.setTipo(tipo);
+        enfermaria.setCamas(camas);
+        
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_EDITAR);
 
