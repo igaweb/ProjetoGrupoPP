@@ -29,7 +29,7 @@ public class MenuEquipamento extends MenuBase {
             case 1: // ADICIONAR
                 adicionar();
                 break;
-            case 2: // REMOVER
+            case 2: // EDITAR
                 editar();
                 break;
             case 3: // REMOVER
@@ -125,24 +125,8 @@ public class MenuEquipamento extends MenuBase {
         Integer opcaoEscolhida = getOpcaoMenu(pergunta3, MENU_EDITAR);
 
         switch (opcaoEscolhida) {
-            case 0: // tipo
-                pergunta = "Alterar o tipo de equipamento ";
-                Integer tipo = getOpcaoMenu(pergunta, MENU_TIPO_EQUIPAMENTOS);
-                if (tipo == -1) {
-                    return;
-                }
-                equipamentoAEditar.setTipo(tipo);
-
-                System.out.println("Quer Continuar a editar(Y/N)?: ");
-
-                String editar = scanner.nextLine();
-                if (editar.contains("Y") || editar.contains("y")) {
-                    editar();
-                }
-
-                break;
-
-            case 1: // Paciente
+           
+            case 0: // Paciente
                 pergunta = "Alterar se está livre ou não o equipamento  ";
                 System.out.println(pergunta);
                 System.out.print("Estado: " + equipamentoAEditar.isLivre());

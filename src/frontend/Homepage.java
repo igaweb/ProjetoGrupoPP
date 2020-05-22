@@ -4,6 +4,7 @@ import backend.Aplicacao;
 import backend.Serializacao;
 import backend.entidades.Administrador;
 import frontend.janelas.JanelaConsultaEnfermaria;
+import frontend.janelas.JanelaConsultaEquipamento;
 import frontend.janelas.JanelaConsultaHospital;
 import frontend.janelas.JanelaConsultaPaciente;
 
@@ -311,7 +312,8 @@ public class Homepage extends javax.swing.JFrame {
     }
     
     private void listarEquipamentos() {
-        // TODO
+        JanelaConsultaEquipamento janelaConsulta = new JanelaConsultaEquipamento(app, serializacao);
+        janelaConsulta.setVisible(true);
     }
     
     private void listarProfissionaisSaude() {
