@@ -152,7 +152,7 @@ public class MenuPaciente extends MenuBase {
 
         try {
             ManagerPaciente manager = new ManagerPaciente(getListaPaciente(hospitalSelecionado, enfermariaSelecionada));
-            manager.adicionar(paciente);
+            manager.adicionar(paciente.getNome(), paciente.getLocalidade(), paciente.getCama(), paciente.getEstado(), paciente.getDataEntrada());
 
             guardar();
             System.out.println("Paciente guardado com sucesso!");

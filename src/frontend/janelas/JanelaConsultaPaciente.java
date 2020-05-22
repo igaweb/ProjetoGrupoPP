@@ -4,6 +4,7 @@ import backend.Aplicacao;
 import backend.Conteudos;
 import backend.Serializacao;
 import backend.entidades.Enfermaria;
+import backend.entidades.Hospital;
 import backend.entidades.Paciente;
 import backend.managers.ManagerPaciente;
 import javax.swing.JOptionPane;
@@ -104,34 +105,6 @@ public class JanelaConsultaPaciente extends javax.swing.JDialog {
             }            
         };
     }
-
-    private void adicionar() {
-        JanelaCriarPaciente janela = new JanelaCriarPaciente(app, serializacao, ManagerPaciente.OPERACAO_ADICIONAR);
-        janela.setVisible(true);
-    }
-    
-    private void editar() {
-        int rowIndex = tabela.getSelectedRow();
-        //Se nenhum registo selecionado, nao é possivel editar
-        if (rowIndex == -1) return;
-        
-        int colunaCodigo = 0;
-        String codigo = (String) modeloTabela.getValueAt(rowIndex, colunaCodigo);
-        
-        try {
-            Paciente paciente = (Paciente) app.getPaciente(hospitalSelecionado, enfermariaSelecionada, codigo);
-            JanelaCriarPaciente janela = new JanelaCriarPaciente(app, serializacao, ManagerPaciente.OPERACAO_EDITAR);
-            janela.setVisible(true);
-        } catch (Exception ex) {            
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-        
-    }
-    
-    public void atualizar() {    
-        //Informa o modelo que foram efetuadas alteracoes, o modelo informa a tabela e os dados são redesenhados
-        modeloTabela.fireTableDataChanged();
-    }        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -299,39 +272,13 @@ public class JanelaConsultaPaciente extends javax.swing.JDialog {
     }//GEN-LAST:event_botaoEditarActionPerformed
 
     private void botaoRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoRemoverMouseClicked
-        if(tabela.getSelectedRows() != null && tabela.getSelectedRows().length > 0) {
-            int option = JOptionPane.showConfirmDialog(null, "Tem a certeza que quer eliminar a linha selecionada?");
-
-            if(option == JOptionPane.OK_OPTION) {
-                ManagerPaciente managerPaciente = app.getManagerPaciente(hospitalSelecionado, enfermariaSelecionada);
-                for (int i = 0; i < tabela.getSelectedRows().length; i++) {
-                    try {
-                        int index = tabela.getSelectedRows()[i];
-                        Enfermaria enfermaria = (Enfermaria) app.getEnfermaria(hospitalSelecionado, enfermariaSelecionada);
-                        Paciente paciente = (Paciente) enfermaria.getPacientes().get(tabela.getModel().getValueAt(index, 0));
-                        managerPaciente.remover(paciente);
-                    } catch (Exception ex) {
-                        mostrarAviso("Ocorreu um erro ao tentar remover o(s) paciente(s) selecionado(s).");
-                    }
-                }
-            }
-        }
+        remover();
     }//GEN-LAST:event_botaoRemoverMouseClicked
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
         
     }//GEN-LAST:event_tabelaMouseClicked
-    
-    protected void setOperacoes(boolean criar, boolean editar, boolean remover) {
-        botaoCriar.setVisible(criar);
-        botaoEditar.setVisible(editar);
-        botaoRemover.setVisible(remover);
-    }
-
-    private void mostrarAviso(String aviso) {
-        JOptionPane.showMessageDialog(rootPane, aviso);
-    }
-    
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCriar;
     private javax.swing.JButton botaoEditar;
@@ -342,4 +289,70 @@ public class JanelaConsultaPaciente extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
+private void adicionar() {
+         try {
+            JanelaCriarPaciente janela = new JanelaCriarPaciente(this, app, serializacao, hospitalSelecionado,enfermariaSelecionada, null);
+            janela.setVisible(true);
+        } catch (Exception ex) {            
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+    
+    private void editar() {
+        int rowIndex = tabela.getSelectedRow();
+        //Se nenhum registo selecionado, nao é possivel editar
+        if (rowIndex == -1) return;
+        
+        int colunaCodigo = 0;
+        String codigo = (String) modeloTabela.getValueAt(rowIndex, colunaCodigo);
+        
+         try {
+            JanelaCriarPaciente janela = new JanelaCriarPaciente(this, app, serializacao, hospitalSelecionado, enfermariaSelecionada, codigo);
+            janela.setVisible(true);
+        } catch (Exception ex) {            
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+        
+    }
+         
+    private void remover() {
+        if(tabela.getSelectedRows() != null && tabela.getSelectedRows().length > 0) {
+            int option = JOptionPane.showConfirmDialog(null, "Tem a certeza que quer eliminar a linha selecionada?");
+
+            if(option == JOptionPane.OK_OPTION) {
+                Hospital hospital = (Hospital) app.getManagerHospital().getLista().get(hospitalSelecionado);
+                Enfermaria enfermaria = (Enfermaria) app.getManagerEnfermaria(hospitalSelecionado).getLista().get(enfermariaSelecionada);
+                ManagerPaciente managerPaciente = new ManagerPaciente(enfermaria.getPacientes());
+                for (int i = 0; i < tabela.getSelectedRows().length; i++) {
+                    try {
+                        int index = tabela.getSelectedRows()[i];
+                       
+                        Paciente paciente = (Paciente) enfermaria.getPacientes().get(tabela.getModel().getValueAt(index, 0));
+                        managerPaciente.remover(paciente);
+                        
+                        serializacao.guardar(app);
+                        JOptionPane.showMessageDialog(this, "Paciente removido com sucesso");
+                    } catch (Exception ex) {
+                        mostrarAviso("Ocorreu um erro ao tentar remover o(s) paciente(s) selecionado(s).");
+                    }
+                }
+            }
+        }
+    }
+    protected void setOperacoes(boolean criar, boolean editar, boolean remover) {
+        botaoCriar.setVisible(criar);
+        botaoEditar.setVisible(editar);
+        botaoRemover.setVisible(remover);
+    }
+
+    private void mostrarAviso(String aviso) {
+        JOptionPane.showMessageDialog(rootPane, aviso);
+    }
+     private void fechar() {
+        dispose();
+    }
+     public void atualizar() {    
+        //Informa o modelo que foram efetuadas alteracoes, o modelo informa a tabela e os dados são redesenhados
+        modeloTabela.fireTableDataChanged();
+    }   
 }

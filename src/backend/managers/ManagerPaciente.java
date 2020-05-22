@@ -21,7 +21,8 @@ public class ManagerPaciente extends ManagerBase {
         this.lista = lista;
     }
 
-    public void adicionar(Paciente paciente) throws Exception {
+    public void adicionar(String nome, String localidade, int cama, Integer estado, int dataEntrada) throws Exception {
+        Paciente paciente = new Paciente(null, nome, localidade, cama, estado, dataEntrada, 0);
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_ADICIONAR);
 
