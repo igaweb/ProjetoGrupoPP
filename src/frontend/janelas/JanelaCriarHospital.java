@@ -61,6 +61,9 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
         } else {
             operacao = ManagerHospital.OPERACAO_EDITAR;
             setTitle("Editar Hospital");
+            hospital = (Hospital) app.getManagerHospital().getLista().get(codigoHospital);
+            campoHospitalNome.getText();
+            campoHospitaLocalidade.getText();
         }
     }
 
@@ -208,7 +211,6 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
             if (operacao.equals(ManagerHospital.OPERACAO_ADICIONAR)) {
                 managerHospital.adicionar(nome, localidade);
             } else if (operacao.equals(ManagerHospital.OPERACAO_EDITAR)) {
-                Hospital hospital = (Hospital) app.getManagerHospital().getLista().get(codigoHospital);
                 hospital.setNome(nome);
                 hospital.setLocalidade(localidade);
                 managerHospital.editar(hospital);

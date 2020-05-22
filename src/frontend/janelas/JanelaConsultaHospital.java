@@ -15,51 +15,52 @@ public class JanelaConsultaHospital extends javax.swing.JDialog {
     private final Aplicacao app;
     private final Serializacao serializacao;
     private AbstractTableModel modeloTabela;
-    
+
     // hospital selecionado onde buscar a lista de enfermarias
     private String hospitalSelecionado;
-    
+    private ManagerHospital managerHospital;
+    private Hospital hospital;
+
     /**
      * Creates new form JanelaConsultaEnfermaria
+     *
      * @param app
      * @param serializacao
      */
     public JanelaConsultaHospital(Aplicacao app, Serializacao serializacao) {
         this.app = app;
         this.serializacao = serializacao;
-        
+
         initComponents();
-        
+
         this.modeloTabela = criarModeloTabela();
         tabela.setModel(modeloTabela);
-        
+
 //        // inicializar filtros
 //        boolean hospitalFiltroVisible = true;
 //        boolean tipoEnfermariaVisible = true;
 //        setFiltrosVisible(hospitalFiltroVisible, tipoEnfermariaVisible);
-        
 //        // inicializar botoes de operaçoes
 //        boolean criar = true;
 //        boolean editar = true;
 //        boolean remover = true;
 //        setOperacoes(criar, editar, remover);
-        
         // TEMPORARIO PARA TESTAR:
         hospitalSelecionado = "COD0";
     }
-    
+
     /*
      * Cria o modelo com os dados necessários para configurar a tabela, tanto na estrutura como o seu conteudo
-    */
-    private AbstractTableModel criarModeloTabela() {   
+     */
+    private AbstractTableModel criarModeloTabela() {
         String[] nomeColunas = {"Código", "Nome", "Localidade", "Enfermarias"};
-        
-        return new AbstractTableModel() {     
+
+        return new AbstractTableModel() {
             @Override
             public String getColumnName(int column) {
                 return nomeColunas[column];
             }
-           
+
             @Override
             public int getRowCount() {
                 //Retorna o número de linhas que a tabela deverá ter
@@ -74,15 +75,15 @@ public class JanelaConsultaHospital extends javax.swing.JDialog {
 
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
-            /*
+                /*
                 Este método é invocado quando se pretende "popular" cada uma das células da tabela
                 Se a tabela tem 3 linhas e 2 colunas existem 6 células (3*2), logo o método será invocado 6 vezes
                     rowIndex representa a linha da célula (0 a rowCount -1)
                     columnIndex representa a coluna da célula (0 a ColumnCount -1)
-            */
-                Hospital hospital = (Hospital)app.getManagerHospital().getListaArray().get(rowIndex);
+                 */
+                Hospital hospital = (Hospital) app.getManagerHospital().getListaArray().get(rowIndex);
                 switch (columnIndex) {
-                    case 0: 
+                    case 0:
                         return hospital.getCodigo();
                     case 1:
                         return hospital.getNome();
@@ -92,8 +93,8 @@ public class JanelaConsultaHospital extends javax.swing.JDialog {
                         return hospital.getEnfermarias().size();
                     default:
                         return "";
-                }                              
-            }            
+                }
+            }
         };
     }
 
@@ -267,7 +268,7 @@ public class JanelaConsultaHospital extends javax.swing.JDialog {
     }//GEN-LAST:event_botaoRemoverMouseClicked
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
-        
+
     }//GEN-LAST:event_tabelaMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -285,54 +286,53 @@ public class JanelaConsultaHospital extends javax.swing.JDialog {
         try {
             JanelaCriarHospital janela = new JanelaCriarHospital(this, app, serializacao, null);
             janela.setVisible(true);
-        } catch (Exception ex) {            
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
-    
+
     private void editar() {
         int rowIndex = tabela.getSelectedRow();
         //Se nenhum registo selecionado, nao é possivel editar
-        if (rowIndex == -1) return;
-        
+        if (rowIndex == -1) {
+            return;
+        }
+
         int colunaCodigo = 0;
         String codigo = (String) modeloTabela.getValueAt(rowIndex, colunaCodigo);
-        
+
         try {
             JanelaCriarHospital janela = new JanelaCriarHospital(this, app, serializacao, codigo);
             janela.setVisible(true);
-        } catch (Exception ex) {            
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
-        
+
     }
-    
+
     private void remover() {
-        if(tabela.getSelectedRows() != null && tabela.getSelectedRows().length > 0) {
+        if (tabela.getSelectedRows() != null && tabela.getSelectedRows().length > 0) {
             int option = JOptionPane.showConfirmDialog(null, "Tem a certeza que quer eliminar a linha selecionada?");
 
-            if(option == JOptionPane.OK_OPTION) {
-                Hospital hospital = (Hospital) app.getManagerHospital().getLista().get(hospitalSelecionado);
-                ManagerEnfermaria managerEnfermaria = new ManagerEnfermaria(hospital.getEnfermarias());
+            if (option == JOptionPane.OK_OPTION) {
+                managerHospital = app.getManagerHospital();
                 for (int i = 0; i < tabela.getSelectedRows().length; i++) {
                     try {
                         int index = tabela.getSelectedRows()[i];
 
-                        Enfermaria enfermaria = (Enfermaria) hospital.getEnfermarias().get(tabela.getModel().getValueAt(index, 0));
-                        managerEnfermaria.remover(enfermaria);
-                        
+                        Hospital hospital = (Hospital) app.getManagerHospital().getLista().get(tabela.getModel().getValueAt(index, 0));
+                        managerHospital.remover(hospital);
+                        atualizar();
                         serializacao.guardar(app);
-                        JOptionPane.showMessageDialog(this, "Enfermaria removida com sucesso");
+                        JOptionPane.showMessageDialog(this, "Hospital removido com sucesso");
                     } catch (Exception ex) {
-                        mostrarAviso("Ocorreu um erro ao tentar remover a(s) enfermaria(s) selecionada(s).");
+                        mostrarAviso("Ocorreu um erro ao tentar remover o(s) hospital(ais) selecionado(s).");
                     }
                 }
             }
         }
     }
-    
-    
-    
+
     protected void setOperacoes(boolean criar, boolean editar, boolean remover) {
         botaoCriar.setVisible(criar);
         botaoEditar.setVisible(editar);
@@ -341,20 +341,20 @@ public class JanelaConsultaHospital extends javax.swing.JDialog {
 
     /*
      * Métodos auxiliares genéricos
-    */
+     */
     private void mostrarAviso(String aviso) {
         JOptionPane.showMessageDialog(rootPane, aviso);
     }
-    
+
     private void fechar() {
         dispose();
     }
-    
-    public void atualizar() {    
+
+    public void atualizar() {
         //Informa o modelo que foram efetuadas alteracoes, o modelo informa a tabela e os dados são redesenhados
         modeloTabela.fireTableDataChanged();
-    }        
+    }
     /*
      * FIM Métodos auxiliares genéricos
-    */
+     */
 }
