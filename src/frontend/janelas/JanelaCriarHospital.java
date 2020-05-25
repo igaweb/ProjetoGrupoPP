@@ -7,11 +7,8 @@ package frontend.janelas;
 
 import backend.Aplicacao;
 import backend.Serializacao;
-import backend.entidades.Enfermaria;
 import backend.entidades.Hospital;
 import backend.managers.ManagerHospital;
-import frontend.model.filtros.TipoEnfermariaComboModel;
-import java.util.TreeMap;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,7 +19,6 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
 
     private JanelaConsultaHospital janela;
     private Aplicacao app;
-    private Serializacao serializacao;
     private String operacao;
     private String codigoHospital;
     private ManagerHospital managerHospital;
@@ -31,10 +27,9 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
     /**
      * Creates new form NewJDialog
      */
-    public JanelaCriarHospital(JanelaConsultaHospital janela, Aplicacao app, Serializacao serializacao, String codigoHospital) {
+    public JanelaCriarHospital(JanelaConsultaHospital janela, Aplicacao app, String codigoHospital) {
         this.janela = janela;
         this.app = app;
-        this.serializacao = serializacao;
 
         initComponents();
 

@@ -8,6 +8,7 @@ public class Enfermaria implements Serializable{
     private static final long serialVersionUID = 1L;
     
     private String codigo;
+    private String nome;
     private Integer tipo;
     private Boolean[] camas;
     private TreeMap<String, Equipamento> equipamentos;
@@ -17,8 +18,9 @@ public class Enfermaria implements Serializable{
     public Enfermaria() {
     }
 
-    public Enfermaria(String codigo, int tipo, Boolean[] camas, TreeMap<String, Equipamento> equipamentos, TreeMap<String, Paciente> pacientes) {
+    public Enfermaria(String codigo, String nome, int tipo, Boolean[] camas, TreeMap<String, Equipamento> equipamentos, TreeMap<String, Paciente> pacientes) {
         this.codigo = codigo;
+        this.nome = nome;
         this.tipo = tipo;
         this.camas = camas;
         this.equipamentos = equipamentos;
@@ -35,6 +37,14 @@ public class Enfermaria implements Serializable{
 
     public Integer getTipo() {
         return tipo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public void setTipo(Integer tipo) {
@@ -77,6 +87,4 @@ public class Enfermaria implements Serializable{
     public String toString() {
         return "Enfermaria{" + "codigo=" + codigo + ", tipo=" + tipo + ", camas=" + camas + ", equipamentos=" + equipamentos + ", pacientes=" + pacientes + '}';
     }
-
-    
 }

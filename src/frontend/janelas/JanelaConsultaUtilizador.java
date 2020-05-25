@@ -30,17 +30,6 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
         this.modeloTabela = criarModeloTabela();
         tabela.setModel(modeloTabela);
 
-//        // inicializar filtros
-//        boolean hospitalFiltroVisible = true;
-//        boolean tipoEnfermariaVisible = true;
-//        setFiltrosVisible(hospitalFiltroVisible, tipoEnfermariaVisible);
-//        // inicializar botoes de operaçoes
-//        boolean criar = true;
-//        boolean editar = true;
-//        boolean remover = true;
-//        setOperacoes(criar, editar, remover);
-        // TEMPORARIO PARA TESTAR:
-        //hospitalSelecionado = "COD0";
     }
 
     /*
@@ -272,7 +261,7 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
 
     private void adicionar() {
         try {
-            JanelaCriarUtilizador janela = new JanelaCriarUtilizador(this, app, serializacao);
+            JanelaCriarUtilizador janela = new JanelaCriarUtilizador(this, app);
             janela.setVisible(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -290,7 +279,7 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
         String codigo = (String) modeloTabela.getValueAt(rowIndex, colunaCodigo);
 
         try {
-            JanelaCriarUtilizador janela = new JanelaCriarUtilizador(this, app, serializacao);
+            JanelaCriarUtilizador janela = new JanelaCriarUtilizador(this, app);
             janela.setVisible(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -339,8 +328,25 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
     }
 
     public void atualizar() {
+        // guarda os dados alterados
+        guardar();
+
         //Informa o modelo que foram efetuadas alteracoes, o modelo informa a tabela e os dados são redesenhados
         modeloTabela.fireTableDataChanged();
+    }
+
+    private boolean validarSeExisteSelecao(boolean isMultipla) {
+        if (tabela.getSelectedRows() == null
+                || (isMultipla && tabela.getSelectedRows().length <= 0)
+                || (!isMultipla && tabela.getSelectedRows().length != 1)) {
+            mostrarAviso("Tem de selecionar uma linha primeiro");
+            return false;
+        }
+        return true;
+    }
+
+    private void guardar() {
+        serializacao.guardar(app);
     }
     /*
      * FIM Métodos auxiliares genéricos

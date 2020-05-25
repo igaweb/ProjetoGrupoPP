@@ -22,7 +22,6 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
     
     private  JanelaConsultaEquipamento janela;
     private  Aplicacao app;
-    private  Serializacao serializacao;
     private String operacao;
     private Hospital hospital;
     private Enfermaria enfermaria;
@@ -32,10 +31,9 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
     /**
      * Creates new form JanelaCriarEquipamento
      */
-    public JanelaCriarEquipamento(JanelaConsultaEquipamento janela, Aplicacao app, Serializacao serializacao, String codigoHospital,String codigoEnfermaria,String codigoEquipamento) {
+    public JanelaCriarEquipamento(JanelaConsultaEquipamento janela, Aplicacao app, String codigoHospital,String codigoEnfermaria,String codigoEquipamento) {
         this.janela = janela;
         this.app = app;
-        this.serializacao = serializacao;
         
         initComponents();
         

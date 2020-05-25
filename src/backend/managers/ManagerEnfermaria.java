@@ -11,15 +11,18 @@ public class ManagerEnfermaria extends ManagerBase implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
+    private static final String PREFIXO_CODIGO = "EN-";
+
     private static final String ERRO_TIPO_INVALIDO = "ERRO_TIPO_INVALIDO";
+    private static final String ERRO_FALTA_NOME = "ERRO_FALTA_NOME";
     private static final String ERRO_FALTA_CODIGO = "ERRO_FALTA_CODIGO";
 
     public ManagerEnfermaria(TreeMap<String, Enfermaria> listaTreeMap) {
         this.lista = listaTreeMap;
     }
 
-    public void adicionar(int tipo, Boolean[] camas) throws Exception {
-        Enfermaria enfermaria = new Enfermaria(null, tipo, camas, new TreeMap<String, Equipamento>(), new TreeMap<String, Paciente>());
+    public void adicionar(String nome, int tipo, Boolean[] camas) throws Exception {
+        Enfermaria enfermaria = new Enfermaria(null, nome, tipo, camas, new TreeMap<String, Equipamento>(), new TreeMap<String, Paciente>());
         
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_ADICIONAR);
@@ -33,7 +36,6 @@ public class ManagerEnfermaria extends ManagerBase implements Serializable {
             // gerar o codigo para a nova enfermaria
             String novoCodigo = gerarCodigo();
             enfermaria.setCodigo(novoCodigo);
-
             
             lista.put(novoCodigo, enfermaria);
         } else {
@@ -78,6 +80,10 @@ public class ManagerEnfermaria extends ManagerBase implements Serializable {
             throw new Exception(ERRO_FALTA_CODIGO);
         }
 
+        if (enfermaria.getNome() == null || enfermaria.getNome().isEmpty()) {
+            throw new Exception(ERRO_FALTA_NOME);
+        }
+        
         // tem de ter um tipo definido (int nao permite nulls)
         // neste caso, o tipo indica o indice do array definido em Conteudos.getTiposEnfermaria(), por isso, terá de ser maior de 0 e menor que o comprimento do array
         if (enfermaria.getTipo() < 0 || enfermaria.getTipo() >= Conteudos.getTiposEnfermarias().length) {

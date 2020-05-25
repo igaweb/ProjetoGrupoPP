@@ -17,13 +17,15 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
     
     // hospital selecionado onde buscar a lista de enfermarias
     private String hospitalSelecionado;
+    private Hospital hospitalSelecionadoObj;
     
     /**
      * Creates new form JanelaConsultaEnfermaria
      * @param app
      * @param serializacao
+     * @param hospitalSelecionado
      */
-    public JanelaConsultaEnfermaria(Aplicacao app, Serializacao serializacao) {
+    public JanelaConsultaEnfermaria(Aplicacao app, Serializacao serializacao, String hospitalSelecionado) {
         this.app = app;
         this.serializacao = serializacao;
         
@@ -43,15 +45,24 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
 //        boolean remover = true;
 //        setOperacoes(criar, editar, remover);
         
-        // TEMPORARIO PARA TESTAR:
-        hospitalSelecionado = "COD0";
+        // aplica a seleçao do hospital onde está esta listagem
+        this.hospitalSelecionado = hospitalSelecionado;
+        try {
+            this.hospitalSelecionadoObj = app.getHospital(hospitalSelecionado);
+        } catch (Aplicacao.HospitalNaoExistenteException ex) {
+            mostrarAviso(ex.getMessage());
+            return;
+        }
+        
+        // titulo da janela
+        setTitle("Listagem Enfermarias (" + hospitalSelecionadoObj.getNome() + ")");
     }
     
     /*
      * Cria o modelo com os dados necessários para configurar a tabela, tanto na estrutura como o seu conteudo
     */
     private AbstractTableModel criarModeloTabela() {   
-        String[] nomeColunas = {"Código", "Tipo", "Equipamentos", "Camas"};
+        String[] nomeColunas = {"Código", "Nome", "Tipo", "Equipamentos", "Camas"};
         
         return new AbstractTableModel() {     
             @Override
@@ -84,10 +95,12 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
                     case 0: 
                         return enfermaria.getCodigo();
                     case 1:
-                        return Conteudos.getTiposEnfermarias()[enfermaria.getTipo()];
+                        return enfermaria.getNome();
                     case 2:
-                        return enfermaria.getEquipamentos().size();
+                        return Conteudos.getTiposEnfermarias()[enfermaria.getTipo()];
                     case 3:
+                        return enfermaria.getEquipamentos().size();
+                    case 4:
                         return enfermaria.getCamas().length;
                     default:
                         return "";
@@ -110,6 +123,9 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
         botaoCriar = new javax.swing.JButton();
         botaoEditar = new javax.swing.JButton();
         botaoRemover = new javax.swing.JButton();
+        botaoVerPacientes = new javax.swing.JButton();
+        botaoVerEquipamentos = new javax.swing.JButton();
+        botaoVerPacientes1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
@@ -142,6 +158,27 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
             }
         });
 
+        botaoVerPacientes.setText("Pacientes");
+        botaoVerPacientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoVerPacientesActionPerformed(evt);
+            }
+        });
+
+        botaoVerEquipamentos.setText("Equipamentos");
+        botaoVerEquipamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoVerEquipamentosActionPerformed(evt);
+            }
+        });
+
+        botaoVerPacientes1.setText("Profissionais de Saúde");
+        botaoVerPacientes1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoVerPacientes1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout botoesLayout = new javax.swing.GroupLayout(botoes);
         botoes.setLayout(botoesLayout);
         botoesLayout.setHorizontalGroup(
@@ -152,8 +189,13 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botaoEditar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoRemover)
-                .addContainerGap(302, Short.MAX_VALUE))
+                .addComponent(botaoVerEquipamentos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botaoVerPacientes)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botaoVerPacientes1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botaoRemover))
         );
         botoesLayout.setVerticalGroup(
             botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,8 +203,11 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
                 .addGroup(botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoCriar)
                     .addComponent(botaoEditar)
-                    .addComponent(botaoRemover))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(botaoRemover)
+                    .addComponent(botaoVerPacientes)
+                    .addComponent(botaoVerEquipamentos)
+                    .addComponent(botaoVerPacientes1))
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
@@ -198,7 +243,7 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -269,10 +314,25 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
         
     }//GEN-LAST:event_tabelaMouseClicked
 
+    private void botaoVerEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVerEquipamentosActionPerformed
+        listarEquipamentos();
+    }//GEN-LAST:event_botaoVerEquipamentosActionPerformed
+
+    private void botaoVerPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVerPacientesActionPerformed
+        listarPacientes();
+    }//GEN-LAST:event_botaoVerPacientesActionPerformed
+
+    private void botaoVerPacientes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVerPacientes1ActionPerformed
+        listarProfissionaisSaude();
+    }//GEN-LAST:event_botaoVerPacientes1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCriar;
     private javax.swing.JButton botaoEditar;
     private javax.swing.JButton botaoRemover;
+    private javax.swing.JButton botaoVerEquipamentos;
+    private javax.swing.JButton botaoVerPacientes;
+    private javax.swing.JButton botaoVerPacientes1;
     private javax.swing.JPanel botoes;
     private javax.swing.JPanel contentor;
     private javax.swing.JPanel jPanel2;
@@ -282,7 +342,7 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
 
     private void adicionar() {
         try {
-            JanelaCriarEnfermaria janela = new JanelaCriarEnfermaria(this, app, serializacao, hospitalSelecionado, null);
+            JanelaCriarEnfermaria janela = new JanelaCriarEnfermaria(this, app, hospitalSelecionado, null);
             janela.setVisible(true);
         } catch (Exception ex) {            
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -290,15 +350,16 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
     }
     
     private void editar() {
+        if(!validarSeExisteSelecao(false)) {
+            return;
+        }
+                
         int rowIndex = tabela.getSelectedRow();
-        //Se nenhum registo selecionado, nao é possivel editar
-        if (rowIndex == -1) return;
-        
         int colunaCodigo = 0;
         String codigo = (String) modeloTabela.getValueAt(rowIndex, colunaCodigo);
         
         try {
-            JanelaCriarEnfermaria janela = new JanelaCriarEnfermaria(this, app, serializacao, hospitalSelecionado, codigo);
+            JanelaCriarEnfermaria janela = new JanelaCriarEnfermaria(this, app, hospitalSelecionado, codigo);
             janela.setVisible(true);
         } catch (Exception ex) {            
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -307,30 +368,62 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
     }
     
     private void remover() {
-        if(tabela.getSelectedRows() != null && tabela.getSelectedRows().length > 0) {
-            int option = JOptionPane.showConfirmDialog(null, "Tem a certeza que quer eliminar a linha selecionada?");
+        if(!validarSeExisteSelecao(true)) {
+            return;
+        }
+        
+        int option = JOptionPane.showConfirmDialog(null, "Tem a certeza que quer eliminar a linha selecionada?");
 
-            if(option == JOptionPane.OK_OPTION) {
-                Hospital hospital = (Hospital) app.getManagerHospital().getLista().get(hospitalSelecionado);
-                ManagerEnfermaria managerEnfermaria = new ManagerEnfermaria(hospital.getEnfermarias());
-                for (int i = 0; i < tabela.getSelectedRows().length; i++) {
-                    try {
-                        int index = tabela.getSelectedRows()[i];
+        if(option == JOptionPane.OK_OPTION) {
+            Hospital hospital = (Hospital) app.getManagerHospital().getLista().get(hospitalSelecionado);
+            ManagerEnfermaria managerEnfermaria = new ManagerEnfermaria(hospital.getEnfermarias());
+            for (int i = 0; i < tabela.getSelectedRows().length; i++) {
+                try {
+                    int index = tabela.getSelectedRows()[i];
 
-                        Enfermaria enfermaria = (Enfermaria) hospital.getEnfermarias().get(tabela.getModel().getValueAt(index, 0));
-                        managerEnfermaria.remover(enfermaria);
-                        
-                        serializacao.guardar(app);
-                        JOptionPane.showMessageDialog(this, "Enfermaria removida com sucesso");
-                    } catch (Exception ex) {
-                        mostrarAviso("Ocorreu um erro ao tentar remover a(s) enfermaria(s) selecionada(s).");
-                    }
+                    Enfermaria enfermaria = (Enfermaria) hospital.getEnfermarias().get(tabela.getModel().getValueAt(index, 0));
+                    managerEnfermaria.remover(enfermaria);
+
+                    guardar();
+                    JOptionPane.showMessageDialog(this, "Enfermaria removida com sucesso");
+                } catch (Exception ex) {
+                    mostrarAviso("Ocorreu um erro ao tentar remover a(s) enfermaria(s) selecionada(s).");
                 }
             }
         }
+            
     }
     
+    private void listarEquipamentos() {
+        if(!validarSeExisteSelecao(false)) {
+            return;
+        }
+                
+        int rowIndex = tabela.getSelectedRow();
+        int colunaCodigo = 0;
+        String codigo = (String) modeloTabela.getValueAt(rowIndex, colunaCodigo);
+        
+        JanelaConsultaEquipamento janelaConsulta = new JanelaConsultaEquipamento(app, serializacao, hospitalSelecionado, codigo);
+        janelaConsulta.setVisible(true);
+    }
+
+    private void listarPacientes() {
+        
+        if(!validarSeExisteSelecao(false)) {
+            return;
+        }
+                
+        int rowIndex = tabela.getSelectedRow();
+        int colunaCodigo = 0;
+        String codigo = (String) modeloTabela.getValueAt(rowIndex, colunaCodigo);
+        
+        JanelaConsultaPaciente janelaConsulta = new JanelaConsultaPaciente(app, serializacao, hospitalSelecionado, codigo);
+        janelaConsulta.setVisible(true);
+    }
     
+    private void listarProfissionaisSaude() {
+        // TODO
+    }
     
     protected void setOperacoes(boolean criar, boolean editar, boolean remover) {
         botaoCriar.setVisible(criar);
@@ -349,11 +442,29 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
         dispose();
     }
     
-    public void atualizar() {    
+    public void atualizar() {
+        // guarda os dados alterados
+        guardar();
+        
         //Informa o modelo que foram efetuadas alteracoes, o modelo informa a tabela e os dados são redesenhados
         modeloTabela.fireTableDataChanged();
-    }        
+    }  
+    
+    private boolean validarSeExisteSelecao(boolean isMultipla) {
+        if(tabela.getSelectedRows() == null 
+                || (isMultipla && tabela.getSelectedRows().length <= 0) 
+                || (!isMultipla && tabela.getSelectedRows().length != 1)) {
+            mostrarAviso("Tem de selecionar uma linha primeiro");
+            return false;
+        }
+        return true;
+    }
+    
+    private void guardar() {
+        serializacao.guardar(app);
+    }
     /*
      * FIM Métodos auxiliares genéricos
     */
+
 }

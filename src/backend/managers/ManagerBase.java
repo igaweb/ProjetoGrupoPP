@@ -3,10 +3,15 @@ package backend.managers;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.TreeMap;
+import java.util.UUID;
 
 public abstract class ManagerBase implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
+    private static final String PREFIXO_CODIGO = "-";
+
+    private static long counter = 0;
     
     public static final String OPERACAO_ADICIONAR = "A";
     public static final String OPERACAO_EDITAR = "E";
@@ -22,7 +27,6 @@ public abstract class ManagerBase implements Serializable {
     protected String operacao = null;
 
     public ManagerBase() {
-
     }
 
     public String getOperacao() {
@@ -45,7 +49,7 @@ public abstract class ManagerBase implements Serializable {
     }
 
     protected String gerarCodigo() {
-        return "COD" + getLista().size();
+        return PREFIXO_CODIGO + (UUID.randomUUID());
     }
     
     public TreeMap getLista() {
@@ -62,5 +66,4 @@ public abstract class ManagerBase implements Serializable {
     public ArrayList getListaArray() {
         return new ArrayList<>(lista.values());
     }
-
 }

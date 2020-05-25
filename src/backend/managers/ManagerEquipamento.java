@@ -3,10 +3,15 @@ package backend.managers;
 import backend.entidades.Equipamento;
 import backend.entidades.Paciente;
 import backend.Conteudos;
+import java.io.Serializable;
 import java.util.TreeMap;
 
-public class ManagerEquipamento extends ManagerBase {
+public class ManagerEquipamento extends ManagerBase  implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    
+    private static final String PREFIXO_CODIGO = "EQ-";
+    
     private static final String ERRO_FALTA_CODIGO = "ERRO_FALTA_CODIGO";
     private static final String ERRO_TIPO_INVALIDO = "ERRO_TIPO_INVALIDO";
     
@@ -75,7 +80,11 @@ public class ManagerEquipamento extends ManagerBase {
         // validações para todas as operaçoes na base
         boolean isValid = super.validarCampos(equipamento);
         
-          
+        // se nao for a operacao adicionar, tem de existir um codigo
+        if (!operacao.equals(OPERACAO_ADICIONAR) && equipamento.getCodigo() == null) {
+            throw new Exception(ERRO_FALTA_CODIGO);
+        }
+
          // Se a opção que o utilizador escolher for menor que 0 || "OU" || se o número que o utilizador escolher for maior que as que existem
          if (equipamento.getTipo() < 0 || equipamento.getTipo() >= Conteudos.getTiposEquipamentos().length) {
             throw new Exception(ERRO_TIPO_INVALIDO); 

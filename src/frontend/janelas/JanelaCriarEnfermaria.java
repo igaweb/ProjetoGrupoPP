@@ -6,7 +6,6 @@
 package frontend.janelas;
 
 import backend.Aplicacao;
-import backend.Serializacao;
 import backend.entidades.Enfermaria;
 import backend.entidades.Hospital;
 import backend.managers.ManagerEnfermaria;
@@ -22,7 +21,6 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
 
     private JanelaConsultaEnfermaria janela;
     private Aplicacao app;
-    private Serializacao serializacao;
     private String operacao;
     private Hospital hospital;
     private ManagerEnfermaria managerEnfermaria;
@@ -30,11 +28,14 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
 
     /**
      * Creates new form NewJDialog
+     * @param janela
+     * @param app
+     * @param codigoHospital
+     * @param codigoEnfermaria
      */
-    public JanelaCriarEnfermaria(JanelaConsultaEnfermaria janela, Aplicacao app,  Serializacao serializacao, String codigoHospital, String codigoEnfermaria) {
+    public JanelaCriarEnfermaria(JanelaConsultaEnfermaria janela, Aplicacao app, String codigoHospital, String codigoEnfermaria) {
         this.janela = janela;
         this.app = app;
-        this.serializacao = serializacao;
         
         initComponents();
 
@@ -71,6 +72,7 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
             enfermaria = listaEnfermarias.get(codigoEnfermaria);
             campoEnfermariaTipo.setSelectedIndex(enfermaria.getTipo());
             int nCamas = enfermaria.getCamas().length;
+            campoNome.setText(enfermaria.getNome());
             campoNCamas.setText(nCamas + "");
         }
     }
@@ -86,17 +88,20 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
 
         filtros = new javax.swing.JPanel();
         tipoEnfermariaPane = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        labelTipo = new javax.swing.JLabel();
         campoEnfermariaTipo = new javax.swing.JComboBox<>();
-        nCamasPane = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        nomePane = new javax.swing.JPanel();
+        labelNome = new javax.swing.JLabel();
+        campoNome = new javax.swing.JTextField();
+        labelTitulo = new javax.swing.JLabel();
+        nCamasPane1 = new javax.swing.JPanel();
+        labelNcamas = new javax.swing.JLabel();
         campoNCamas = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel4.setText("Tipo");
+        labelTipo.setText("Tipo");
 
         campoEnfermariaTipo.setModel(new TipoEnfermariaComboModel());
         campoEnfermariaTipo.addActionListener(new java.awt.event.ActionListener() {
@@ -105,52 +110,86 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
             }
         });
 
+        labelNome.setText("Nome");
+
+        campoNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoNomeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout nomePaneLayout = new javax.swing.GroupLayout(nomePane);
+        nomePane.setLayout(nomePaneLayout);
+        nomePaneLayout.setHorizontalGroup(
+            nomePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nomePaneLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(labelNome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        nomePaneLayout.setVerticalGroup(
+            nomePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nomePaneLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(nomePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNome)
+                    .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6))
+        );
+
         javax.swing.GroupLayout tipoEnfermariaPaneLayout = new javax.swing.GroupLayout(tipoEnfermariaPane);
         tipoEnfermariaPane.setLayout(tipoEnfermariaPaneLayout);
         tipoEnfermariaPaneLayout.setHorizontalGroup(
             tipoEnfermariaPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tipoEnfermariaPaneLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jLabel4)
+                .addComponent(labelTipo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(campoEnfermariaTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(tipoEnfermariaPaneLayout.createSequentialGroup()
+                .addComponent(nomePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         tipoEnfermariaPaneLayout.setVerticalGroup(
             tipoEnfermariaPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tipoEnfermariaPaneLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(nomePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 26, Short.MAX_VALUE)
                 .addGroup(tipoEnfermariaPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(campoEnfermariaTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)))
+                    .addComponent(labelTipo)))
         );
 
-        jLabel5.setText("Número de camas:");
+        labelTitulo.setText(getTitle());
+
+        labelNcamas.setText("Número de camas:");
 
         campoNCamas.setText("0");
 
-        javax.swing.GroupLayout nCamasPaneLayout = new javax.swing.GroupLayout(nCamasPane);
-        nCamasPane.setLayout(nCamasPaneLayout);
-        nCamasPaneLayout.setHorizontalGroup(
-            nCamasPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(nCamasPaneLayout.createSequentialGroup()
+        javax.swing.GroupLayout nCamasPane1Layout = new javax.swing.GroupLayout(nCamasPane1);
+        nCamasPane1.setLayout(nCamasPane1Layout);
+        nCamasPane1Layout.setHorizontalGroup(
+            nCamasPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nCamasPane1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jLabel5)
+                .addComponent(labelNcamas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(campoNCamas, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(38, Short.MAX_VALUE))
         );
-        nCamasPaneLayout.setVerticalGroup(
-            nCamasPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nCamasPaneLayout.createSequentialGroup()
+        nCamasPane1Layout.setVerticalGroup(
+            nCamasPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nCamasPane1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(nCamasPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                .addGroup(nCamasPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelNcamas)
                     .addComponent(campoNCamas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6))
         );
-
-        jLabel1.setText(getTitle());
 
         javax.swing.GroupLayout filtrosLayout = new javax.swing.GroupLayout(filtros);
         filtros.setLayout(filtrosLayout);
@@ -158,22 +197,22 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
             filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(filtrosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tipoEnfermariaPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(nCamasPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tipoEnfermariaPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nCamasPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(filtrosLayout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(labelTitulo)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         filtrosLayout.setVerticalGroup(
             filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filtrosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addComponent(labelTitulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(tipoEnfermariaPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nCamasPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(nCamasPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -181,6 +220,9 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton1MouseEntered(evt);
             }
         });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -207,7 +249,7 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(filtros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -227,36 +269,56 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
         adicionarOuEditar();
     }//GEN-LAST:event_jButton1MouseClicked
 
+    private void campoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoNomeActionPerformed
+
+    private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseEntered
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> campoEnfermariaTipo;
     private javax.swing.JTextField campoNCamas;
+    private javax.swing.JTextField campoNome;
     private javax.swing.JPanel filtros;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel nCamasPane;
+    private javax.swing.JLabel labelNcamas;
+    private javax.swing.JLabel labelNome;
+    private javax.swing.JLabel labelTipo;
+    private javax.swing.JLabel labelTitulo;
+    private javax.swing.JPanel nCamasPane1;
+    private javax.swing.JPanel nomePane;
     private javax.swing.JPanel tipoEnfermariaPane;
     // End of variables declaration//GEN-END:variables
 
     private void adicionarOuEditar() {
+        
+        String nome = campoNome.getText();
+        int tipo = campoEnfermariaTipo.getSelectedIndex();
+        Integer nCamas;
+
         try {
-            int tipo = campoEnfermariaTipo.getSelectedIndex();
-            Integer nCamas = new Integer(campoNCamas.getText());
-            Boolean[] camas = new Boolean[nCamas];
-            
+            nCamas = new Integer(campoNCamas.getText());
+        } catch (NumberFormatException ex) {
+            mostrarAviso("Número de camas inválido");
+            return;
+        }
+        Boolean[] camas = new Boolean[nCamas];
+        
+        try {
             if(operacao.equals(ManagerEnfermaria.OPERACAO_ADICIONAR)){
-                managerEnfermaria.adicionar(tipo, camas);
+                managerEnfermaria.adicionar(nome, tipo, camas);
             } else if(operacao.equals(ManagerEnfermaria.OPERACAO_EDITAR)){
+                enfermaria.setNome(nome);
                 enfermaria.setTipo(tipo);
                 enfermaria.setCamas(camas);
                 managerEnfermaria.editar(enfermaria);
             }
             
             fechar();
-            this.getOwner().firePropertyChange("tabela", 0, 0);
         } catch (Exception ex) {
-            mostrarAviso("Ocorreu um erro ao tentar guardar os dados");
+            mostrarAviso(ex.getMessage());
         }
         
     }
@@ -269,7 +331,10 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
     }
     
     private void fechar() {
+        // fehca a janela atual
         dispose();
+        
+        // atualiza os dados alterados na listagem
         janela.atualizar();
     }
     /*

@@ -8,6 +8,8 @@ public class ManagerUtilizador extends ManagerBase implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
+    private static final String PREFIXO_CODIGO = "UT-";
+
     private static final String ERRO_FALTA_NOME = "ERRO_FALTA_NOME";
     private static final String ERRO_FALTA_PASSWORD = "ERRO_FALTA_PASSWORD";
 

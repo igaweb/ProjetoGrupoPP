@@ -15,50 +15,61 @@ public class JanelaConsultaPaciente extends javax.swing.JDialog {
     private final Aplicacao app;
     private final Serializacao serializacao;
     private AbstractTableModel modeloTabela;
-    
+
     // hospital selecionado onde buscar a lista de enfermarias
     private String hospitalSelecionado;
+    private Hospital hospitalSelecionadoObj;
     private String enfermariaSelecionada;
-    
+    private Enfermaria enfermariaSelecionadaObj;
+
     /**
      * Creates new form JanelaConsultaEnfermaria
+     *
      * @param app
      * @param serializacao
+     * @param hospitalSelecionado
+     * @param enfermariaSelecionada
      */
-    public JanelaConsultaPaciente(Aplicacao app, Serializacao serializacao) {
+    public JanelaConsultaPaciente(Aplicacao app, Serializacao serializacao, String hospitalSelecionado, String enfermariaSelecionada) {
         this.app = app;
         this.serializacao = serializacao;
-        
+
         initComponents();
-        
+
         this.modeloTabela = criarModeloTabela();
         tabela.setModel(modeloTabela);
-        
-//        // inicializar filtros
-//        boolean hospitalFiltroVisible = true;
-//        boolean tipoEnfermariaVisible = true;
-//        setFiltrosVisible(hospitalFiltroVisible, tipoEnfermariaVisible);
-        
-//        // inicializar botoes de operaçoes
-//        boolean criar = true;
-//        boolean editar = true;
-//        boolean remover = true;
-//        setOperacoes(criar, editar, remover);
-        
-        // TEMPORARIO PARA TESTAR:
-        hospitalSelecionado = "COD0";
-        enfermariaSelecionada = "COD0";
+
+        // aplica a seleçao do hospital onde está esta listagem
+        this.hospitalSelecionado = hospitalSelecionado;
+        try {
+            this.hospitalSelecionadoObj = app.getHospital(hospitalSelecionado);
+        } catch (Aplicacao.HospitalNaoExistenteException ex) {
+            mostrarAviso(ex.getMessage());
+            return;
+        }
+
+        // aplica a seleçao do hospital onde está esta listagem
+        this.enfermariaSelecionada = enfermariaSelecionada;
+        try {
+            this.enfermariaSelecionadaObj = app.getEnfermaria(hospitalSelecionado, enfermariaSelecionada);
+        } catch (Aplicacao.EnfermariaNaoExistenteException | Aplicacao.HospitalNaoExistenteException ex) {
+            mostrarAviso(ex.getMessage());
+            return;
+        }
+
+        // titulo da janela
+        setTitle("Listagem Pacientes (" + hospitalSelecionadoObj.getNome() + " - " + enfermariaSelecionadaObj.getNome() + ")");
     }
-    
-    private AbstractTableModel criarModeloTabela() {   
-        String[] nomeColunas = {"Código", "Nome", "Localidade", "Cama", "Estado", "Data Entrada", "Data Saida", "Hospital","Enfermaria"};
-        
-        return new AbstractTableModel() {     
+
+    private AbstractTableModel criarModeloTabela() {
+        String[] nomeColunas = {"Código", "Nome", "Localidade", "Cama", "Estado", "Data Entrada", "Data Saida", "Hospital", "Enfermaria"};
+
+        return new AbstractTableModel() {
             @Override
             public String getColumnName(int column) {
                 return nomeColunas[column];
             }
-           
+
             @Override
             public int getRowCount() {
                 //Retorna o número de linhas que a tabela deverá ter
@@ -73,36 +84,36 @@ public class JanelaConsultaPaciente extends javax.swing.JDialog {
 
             @Override
             public Object getValueAt(int rowIndex, int columnIndex) {
-            /*
+                /*
                 Este método é invocado quando se pretende "popular" cada uma das células da tabela
                 Se a tabela tem 3 linhas e 2 colunas existem 6 células (3*2), logo o método será invocado 6 vezes
                     rowIndex representa a linha da célula (0 a rowCount -1)
                     columnIndex representa a coluna da célula (0 a ColumnCount -1)
-            */
-                Paciente paciente = (Paciente)app.getManagerPaciente(hospitalSelecionado,enfermariaSelecionada).getListaArray().get(rowIndex);
+                 */
+                Paciente paciente = (Paciente) app.getManagerPaciente(hospitalSelecionado, enfermariaSelecionada).getListaArray().get(rowIndex);
                 switch (columnIndex) {
-                    case 0: 
+                    case 0:
                         return paciente.getCodigo();
-                    case 1: 
+                    case 1:
                         return paciente.getNome();
-                    case 2: 
+                    case 2:
                         return paciente.getLocalidade();
-                    case 3: 
+                    case 3:
                         return paciente.getCama();
                     case 4:
-                        return Conteudos.getEstadosPaciente()[paciente.getEstado()];     
-                    case 5: 
+                        return Conteudos.getEstadosPaciente()[paciente.getEstado()];
+                    case 5:
                         return paciente.getDataEntrada();
-                    case 6: 
+                    case 6:
                         return paciente.getDataSaida();
                     case 7:
                         return hospitalSelecionado;
-                    case 8: 
+                    case 8:
                         return enfermariaSelecionada;
                     default:
                         return "";
-                }                              
-            }            
+                }
+            }
         };
     }
 
@@ -276,9 +287,9 @@ public class JanelaConsultaPaciente extends javax.swing.JDialog {
     }//GEN-LAST:event_botaoRemoverMouseClicked
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
-        
+
     }//GEN-LAST:event_tabelaMouseClicked
-   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCriar;
     private javax.swing.JButton botaoEditar;
@@ -290,69 +301,92 @@ public class JanelaConsultaPaciente extends javax.swing.JDialog {
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
 private void adicionar() {
-         try {
-            JanelaCriarPaciente janela = new JanelaCriarPaciente(this, app, serializacao, hospitalSelecionado,enfermariaSelecionada, null);
+        try {
+            JanelaCriarPaciente janela = new JanelaCriarPaciente(this, app, hospitalSelecionado, enfermariaSelecionada, null);
             janela.setVisible(true);
-        } catch (Exception ex) {            
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
-    
+
     private void editar() {
+        if (!validarSeExisteSelecao(false)) {
+            return;
+        }
+
         int rowIndex = tabela.getSelectedRow();
-        //Se nenhum registo selecionado, nao é possivel editar
-        if (rowIndex == -1) return;
-        
         int colunaCodigo = 0;
         String codigo = (String) modeloTabela.getValueAt(rowIndex, colunaCodigo);
-        
-         try {
-            JanelaCriarPaciente janela = new JanelaCriarPaciente(this, app, serializacao, hospitalSelecionado, enfermariaSelecionada, codigo);
+
+        try {
+            JanelaCriarPaciente janela = new JanelaCriarPaciente(this, app, hospitalSelecionado, enfermariaSelecionada, codigo);
             janela.setVisible(true);
-        } catch (Exception ex) {            
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
-        
-    }
-         
-    private void remover() {
-        if(tabela.getSelectedRows() != null && tabela.getSelectedRows().length > 0) {
-            int option = JOptionPane.showConfirmDialog(null, "Tem a certeza que quer eliminar a linha selecionada?");
 
-            if(option == JOptionPane.OK_OPTION) {
-                Hospital hospital = (Hospital) app.getManagerHospital().getLista().get(hospitalSelecionado);
-                Enfermaria enfermaria = (Enfermaria) app.getManagerEnfermaria(hospitalSelecionado).getLista().get(enfermariaSelecionada);
-                ManagerPaciente managerPaciente = new ManagerPaciente(enfermaria.getPacientes());
-                for (int i = 0; i < tabela.getSelectedRows().length; i++) {
-                    try {
-                        int index = tabela.getSelectedRows()[i];
-                       
-                        Paciente paciente = (Paciente) enfermaria.getPacientes().get(tabela.getModel().getValueAt(index, 0));
-                        managerPaciente.remover(paciente);
-                        
-                        serializacao.guardar(app);
-                        JOptionPane.showMessageDialog(this, "Paciente removido com sucesso");
-                    } catch (Exception ex) {
-                        mostrarAviso("Ocorreu um erro ao tentar remover o(s) paciente(s) selecionado(s).");
-                    }
+    }
+
+    private void remover() {
+        if (!validarSeExisteSelecao(true)) {
+            return;
+        }
+
+        int option = JOptionPane.showConfirmDialog(null, "Tem a certeza que quer eliminar a linha selecionada?");
+
+        if (option == JOptionPane.OK_OPTION) {
+            Hospital hospital = (Hospital) app.getManagerHospital().getLista().get(hospitalSelecionado);
+            Enfermaria enfermaria = (Enfermaria) app.getManagerEnfermaria(hospitalSelecionado).getLista().get(enfermariaSelecionada);
+            ManagerPaciente managerPaciente = new ManagerPaciente(enfermaria.getPacientes());
+            for (int i = 0; i < tabela.getSelectedRows().length; i++) {
+                try {
+                    int index = tabela.getSelectedRows()[i];
+
+                    Paciente paciente = (Paciente) enfermaria.getPacientes().get(tabela.getModel().getValueAt(index, 0));
+                    managerPaciente.remover(paciente);
+
+                    serializacao.guardar(app);
+                    JOptionPane.showMessageDialog(this, "Paciente removido com sucesso");
+                } catch (Exception ex) {
+                    mostrarAviso("Ocorreu um erro ao tentar remover o(s) paciente(s) selecionado(s).");
                 }
             }
         }
     }
-    protected void setOperacoes(boolean criar, boolean editar, boolean remover) {
-        botaoCriar.setVisible(criar);
-        botaoEditar.setVisible(editar);
-        botaoRemover.setVisible(remover);
-    }
 
+    /*
+     * Métodos auxiliares genéricos
+     */
     private void mostrarAviso(String aviso) {
         JOptionPane.showMessageDialog(rootPane, aviso);
     }
-     private void fechar() {
+
+    private void fechar() {
         dispose();
     }
-     public void atualizar() {    
+
+    public void atualizar() {
+        // guarda os dados alterados
+        guardar();
+
         //Informa o modelo que foram efetuadas alteracoes, o modelo informa a tabela e os dados são redesenhados
         modeloTabela.fireTableDataChanged();
-    }   
+    }
+
+    private boolean validarSeExisteSelecao(boolean isMultipla) {
+        if (tabela.getSelectedRows() == null
+                || (isMultipla && tabela.getSelectedRows().length <= 0)
+                || (!isMultipla && tabela.getSelectedRows().length != 1)) {
+            mostrarAviso("Tem de selecionar uma linha primeiro");
+            return false;
+        }
+        return true;
+    }
+
+    private void guardar() {
+        serializacao.guardar(app);
+    }
+    /*
+     * FIM Métodos auxiliares genéricos
+     */
 }

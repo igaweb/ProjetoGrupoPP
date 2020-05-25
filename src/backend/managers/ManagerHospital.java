@@ -2,9 +2,14 @@ package backend.managers;
 
 import backend.entidades.Enfermaria;
 import backend.entidades.Hospital;
+import java.io.Serializable;
 import java.util.TreeMap;
 
-public class ManagerHospital extends ManagerBase {
+public class ManagerHospital extends ManagerBase implements Serializable {
+    
+    private static final long serialVersionUID = 1L;
+    
+    private static final String PREFIXO_CODIGO = "HO-";
 
     private static final String ERRO_FALTA_CODIGO = "ERRO_FALTA_CODIGO";
     private static final String ERRO_FALTA_NOME = "ERRO_FALTA_NOME";

@@ -20,7 +20,6 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
 
     private JanelaConsultaUtilizador janela;
     private Aplicacao app;
-    private Serializacao serializacao;
     private String operacao;
     private String nomeUtilizador;
     private ManagerUtilizador managerUtilizador;
@@ -29,10 +28,9 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
     /**
      * Creates new form NewJDialog
      */
-    public JanelaCriarUtilizador(JanelaConsultaUtilizador janela, Aplicacao app, Serializacao serializacao) {
+    public JanelaCriarUtilizador(JanelaConsultaUtilizador janela, Aplicacao app) {
         this.janela = janela;
         this.app = app;
-        this.serializacao = serializacao;
 
         initComponents();
 

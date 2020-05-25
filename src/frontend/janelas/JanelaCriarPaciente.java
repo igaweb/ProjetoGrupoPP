@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
 public class JanelaCriarPaciente extends javax.swing.JDialog {
     private JanelaConsultaPaciente janela;
     private Aplicacao app;
-    private Serializacao serializacao;
     private String operacao;
     private Enfermaria enfermaria;
      private Hospital hospital;
@@ -24,10 +23,9 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
     /**
      * Creates new form NewJDialog
      */
-    public JanelaCriarPaciente(JanelaConsultaPaciente janela, Aplicacao app,  Serializacao serializacao, String codigoHospital, String codigoEnfermaria, String codigoPaciente) {
+    public JanelaCriarPaciente(JanelaConsultaPaciente janela, Aplicacao app, String codigoHospital, String codigoEnfermaria, String codigoPaciente) {
         this.janela = janela;
         this.app = app;
-        this.serializacao = serializacao;
         
         initComponents();
 

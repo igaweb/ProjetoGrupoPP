@@ -2,10 +2,15 @@ package backend.managers;
 
 import backend.Conteudos;
 import backend.entidades.Paciente;
+import java.io.Serializable;
 import java.util.TreeMap;
 
-public class ManagerPaciente extends ManagerBase {
+public class ManagerPaciente extends ManagerBase implements Serializable {
   
+    private static final long serialVersionUID = 1L;
+    
+    private static final String PREFIXO_CODIGO = "PA-";
+
     private static final String ERRO_FALTA_CODIGO = "ERRO_FALTA_CODIGO";
     private static final String ERRO_FALTA_NOME = "ERRO_FALTA_NOME";
     private static final String ERRO_FALTA_LOCALIDADE = "ERRO_FALTA_LOCALIDADE";

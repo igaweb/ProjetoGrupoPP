@@ -3,7 +3,6 @@ package frontend;
 import backend.Aplicacao;
 import backend.Serializacao;
 import backend.entidades.Administrador;
-import frontend.janelas.JanelaConsultaEnfermaria;
 import frontend.janelas.JanelaConsultaEquipamento;
 import frontend.janelas.JanelaConsultaHospital;
 import frontend.janelas.JanelaConsultaPaciente;
@@ -60,10 +59,6 @@ public class Homepage extends javax.swing.JFrame {
         menuEditarPerfil = new javax.swing.JMenuItem();
         menuIniciar = new javax.swing.JMenu();
         menuListarHospitais = new javax.swing.JMenuItem();
-        meniListarEnfermarias = new javax.swing.JCheckBoxMenuItem();
-        meniListarEquipamentos = new javax.swing.JMenuItem();
-        menuListarProfissionaisSaude = new javax.swing.JMenuItem();
-        menuListarPacientes = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -142,43 +137,6 @@ public class Homepage extends javax.swing.JFrame {
         });
         menuIniciar.add(menuListarHospitais);
 
-        meniListarEnfermarias.setText("Enfermarias");
-        meniListarEnfermarias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                meniListarEnfermariasActionPerformed(evt);
-            }
-        });
-        menuIniciar.add(meniListarEnfermarias);
-
-        meniListarEquipamentos.setText("Equipamentos");
-        meniListarEquipamentos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                meniListarEquipamentosActionPerformed(evt);
-            }
-        });
-        menuIniciar.add(meniListarEquipamentos);
-
-        menuListarProfissionaisSaude.setText("Profissionais de Saúde");
-        menuListarProfissionaisSaude.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuListarProfissionaisSaudeActionPerformed(evt);
-            }
-        });
-        menuIniciar.add(menuListarProfissionaisSaude);
-
-        menuListarPacientes.setText("Pacientes");
-        menuListarPacientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menuListarPacientesMouseClicked(evt);
-            }
-        });
-        menuListarPacientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuListarPacientesActionPerformed(evt);
-            }
-        });
-        menuIniciar.add(menuListarPacientes);
-
         jMenuBar1.add(menuIniciar);
 
         setJMenuBar(jMenuBar1);
@@ -217,29 +175,9 @@ public class Homepage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_menuEditarPerfilActionPerformed
 
-    private void menuListarPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarPacientesActionPerformed
-        listarPacientes();
-    }//GEN-LAST:event_menuListarPacientesActionPerformed
-
-    private void meniListarEnfermariasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meniListarEnfermariasActionPerformed
-        listarEnfermarias();
-    }//GEN-LAST:event_meniListarEnfermariasActionPerformed
-
     private void menuListarHospitaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarHospitaisActionPerformed
         listarHospitais();
     }//GEN-LAST:event_menuListarHospitaisActionPerformed
-
-    private void menuListarProfissionaisSaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarProfissionaisSaudeActionPerformed
-        listarProfissionaisSaude();
-    }//GEN-LAST:event_menuListarProfissionaisSaudeActionPerformed
-
-    private void meniListarEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meniListarEquipamentosActionPerformed
-        listarEquipamentos();
-    }//GEN-LAST:event_meniListarEquipamentosActionPerformed
-
-    private void menuListarPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuListarPacientesMouseClicked
-        listarPacientes();
-    }//GEN-LAST:event_menuListarPacientesMouseClicked
 
     /**
      * // * @param args the command line arguments //
@@ -285,8 +223,6 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JCheckBoxMenuItem meniListarEnfermarias;
-    private javax.swing.JMenuItem meniListarEquipamentos;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
     private javax.swing.JMenuItem menuAcessoGerirUtilizadores;
@@ -297,8 +233,6 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuEditarPerfil;
     private javax.swing.JMenu menuIniciar;
     private javax.swing.JMenuItem menuListarHospitais;
-    private javax.swing.JMenuItem menuListarPacientes;
-    private javax.swing.JMenuItem menuListarProfissionaisSaude;
     private java.awt.PopupMenu popupMenu1;
     // End of variables declaration//GEN-END:variables
 
@@ -308,13 +242,13 @@ public class Homepage extends javax.swing.JFrame {
     }
 
     private void listarEnfermarias() {
-        JanelaConsultaEnfermaria janelaConsulta = new JanelaConsultaEnfermaria(app, serializacao);
-        janelaConsulta.setVisible(true);
+//        JanelaConsultaEnfermaria janelaConsulta = new JanelaConsultaEnfermaria(app, serializacao);
+//        janelaConsulta.setVisible(true);
     }
 
     private void listarEquipamentos() {
-        JanelaConsultaEquipamento janelaConsulta = new JanelaConsultaEquipamento(app, serializacao);
-        janelaConsulta.setVisible(true);
+//        JanelaConsultaEquipamento janelaConsulta = new JanelaConsultaEquipamento(app, serializacao);
+//        janelaConsulta.setVisible(true);
     }
 
     private void listarProfissionaisSaude() {
@@ -322,8 +256,8 @@ public class Homepage extends javax.swing.JFrame {
     }
 
     private void listarPacientes() {
-        JanelaConsultaPaciente janelaConsulta = new JanelaConsultaPaciente(app, serializacao);
-        janelaConsulta.setVisible(true);
+//        JanelaConsultaPaciente janelaConsulta = new JanelaConsultaPaciente(app, serializacao);
+//        janelaConsulta.setVisible(true);
     }
 
     private void listarUtilizadores() {

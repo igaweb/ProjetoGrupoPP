@@ -1,12 +1,9 @@
 package frontend.janelas;
 
 import backend.Aplicacao;
-import backend.Conteudos;
 import backend.Serializacao;
-import backend.entidades.Enfermaria;
 import backend.entidades.Hospital;
 import backend.managers.ManagerHospital;
-import backend.managers.ManagerEnfermaria;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
@@ -36,17 +33,8 @@ public class JanelaConsultaHospital extends javax.swing.JDialog {
         this.modeloTabela = criarModeloTabela();
         tabela.setModel(modeloTabela);
 
-//        // inicializar filtros
-//        boolean hospitalFiltroVisible = true;
-//        boolean tipoEnfermariaVisible = true;
-//        setFiltrosVisible(hospitalFiltroVisible, tipoEnfermariaVisible);
-//        // inicializar botoes de operaçoes
-//        boolean criar = true;
-//        boolean editar = true;
-//        boolean remover = true;
-//        setOperacoes(criar, editar, remover);
-        // TEMPORARIO PARA TESTAR:
-        hospitalSelecionado = "COD0";
+        // titulo da janela
+        setTitle("Listagem Hospitais");
     }
 
     /*
@@ -112,6 +100,7 @@ public class JanelaConsultaHospital extends javax.swing.JDialog {
         botaoCriar = new javax.swing.JButton();
         botaoEditar = new javax.swing.JButton();
         botaoRemover = new javax.swing.JButton();
+        botaoVerEnfermarias = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
@@ -144,6 +133,13 @@ public class JanelaConsultaHospital extends javax.swing.JDialog {
             }
         });
 
+        botaoVerEnfermarias.setText("Enfermarias");
+        botaoVerEnfermarias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoVerEnfermariasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout botoesLayout = new javax.swing.GroupLayout(botoes);
         botoes.setLayout(botoesLayout);
         botoesLayout.setHorizontalGroup(
@@ -154,8 +150,10 @@ public class JanelaConsultaHospital extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botaoEditar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botaoVerEnfermarias)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botaoRemover)
-                .addContainerGap(302, Short.MAX_VALUE))
+                .addContainerGap())
         );
         botoesLayout.setVerticalGroup(
             botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,7 +161,8 @@ public class JanelaConsultaHospital extends javax.swing.JDialog {
                 .addGroup(botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoCriar)
                     .addComponent(botaoEditar)
-                    .addComponent(botaoRemover))
+                    .addComponent(botaoRemover)
+                    .addComponent(botaoVerEnfermarias))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -216,9 +215,9 @@ public class JanelaConsultaHospital extends javax.swing.JDialog {
             contentorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentorLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(contentorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(contentorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         contentorLayout.setVerticalGroup(
@@ -237,8 +236,7 @@ public class JanelaConsultaHospital extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(contentor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(contentor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,20 +269,25 @@ public class JanelaConsultaHospital extends javax.swing.JDialog {
 
     }//GEN-LAST:event_tabelaMouseClicked
 
+    private void botaoVerEnfermariasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVerEnfermariasActionPerformed
+        listarEnfermarias();
+    }//GEN-LAST:event_botaoVerEnfermariasActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCriar;
     private javax.swing.JButton botaoEditar;
     private javax.swing.JButton botaoRemover;
+    private javax.swing.JButton botaoVerEnfermarias;
     private javax.swing.JPanel botoes;
     private javax.swing.JPanel contentor;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
-
+    
     private void adicionar() {
         try {
-            JanelaCriarHospital janela = new JanelaCriarHospital(this, app, serializacao, null);
+            JanelaCriarHospital janela = new JanelaCriarHospital(this, app, null);
             janela.setVisible(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -292,17 +295,16 @@ public class JanelaConsultaHospital extends javax.swing.JDialog {
     }
 
     private void editar() {
-        int rowIndex = tabela.getSelectedRow();
-        //Se nenhum registo selecionado, nao é possivel editar
-        if (rowIndex == -1) {
+        if(!validarSeExisteSelecao(false)) {
             return;
         }
-
+        
+        int rowIndex = tabela.getSelectedRow();
         int colunaCodigo = 0;
         String codigo = (String) modeloTabela.getValueAt(rowIndex, colunaCodigo);
 
         try {
-            JanelaCriarHospital janela = new JanelaCriarHospital(this, app, serializacao, codigo);
+            JanelaCriarHospital janela = new JanelaCriarHospital(this, app, codigo);
             janela.setVisible(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -311,23 +313,25 @@ public class JanelaConsultaHospital extends javax.swing.JDialog {
     }
 
     private void remover() {
-        if (tabela.getSelectedRows() != null && tabela.getSelectedRows().length > 0) {
-            int option = JOptionPane.showConfirmDialog(null, "Tem a certeza que quer eliminar a linha selecionada?");
+        if(!validarSeExisteSelecao(true)) {
+            return;
+        }
+        
+        int option = JOptionPane.showConfirmDialog(null, "Tem a certeza que quer eliminar a linha selecionada?");
 
-            if (option == JOptionPane.OK_OPTION) {
-                managerHospital = app.getManagerHospital();
-                for (int i = 0; i < tabela.getSelectedRows().length; i++) {
-                    try {
-                        int index = tabela.getSelectedRows()[i];
+        if (option == JOptionPane.OK_OPTION) {
+            managerHospital = app.getManagerHospital();
+            for (int i = 0; i < tabela.getSelectedRows().length; i++) {
+                try {
+                    int index = tabela.getSelectedRows()[i];
 
-                        Hospital hospital = (Hospital) app.getManagerHospital().getLista().get(tabela.getModel().getValueAt(index, 0));
-                        managerHospital.remover(hospital);
-                        atualizar();
-                        serializacao.guardar(app);
-                        JOptionPane.showMessageDialog(this, "Hospital removido com sucesso");
-                    } catch (Exception ex) {
-                        mostrarAviso("Ocorreu um erro ao tentar remover o(s) hospital(ais) selecionado(s).");
-                    }
+                    Hospital hospital = (Hospital) app.getManagerHospital().getLista().get(tabela.getModel().getValueAt(index, 0));
+                    managerHospital.remover(hospital);
+                    atualizar();
+                    serializacao.guardar(app);
+                    JOptionPane.showMessageDialog(this, "Hospital removido com sucesso");
+                } catch (Exception ex) {
+                    mostrarAviso("Ocorreu um erro ao tentar remover o(s) hospital(ais) selecionado(s).");
                 }
             }
         }
@@ -339,22 +343,55 @@ public class JanelaConsultaHospital extends javax.swing.JDialog {
         botaoRemover.setVisible(remover);
     }
 
+    private void listarEnfermarias() {
+        validarSeExisteSelecao(false);
+        
+        // buscar o codigo do hospital para enviar para a listagem de enfermarias
+        int rowIndex = tabela.getSelectedRow();
+        int colunaCodigo = 0;
+        String codigo = (String) modeloTabela.getValueAt(rowIndex, colunaCodigo);
+        
+        // fecha a janela da listagem dos hospitais
+        fechar();
+        
+        // chama a janela da listagem das enfermarias do hospital selecionado
+        JanelaConsultaEnfermaria janelaConsulta = new JanelaConsultaEnfermaria(app, serializacao, codigo);
+        janelaConsulta.setVisible(true);
+    }
+    
     /*
      * Métodos auxiliares genéricos
-     */
+    */
     private void mostrarAviso(String aviso) {
         JOptionPane.showMessageDialog(rootPane, aviso);
     }
-
+    
     private void fechar() {
         dispose();
     }
-
+    
     public void atualizar() {
+        // guarda os dados alterados
+        guardar();
+        
         //Informa o modelo que foram efetuadas alteracoes, o modelo informa a tabela e os dados são redesenhados
         modeloTabela.fireTableDataChanged();
+    }  
+    
+    private boolean validarSeExisteSelecao(boolean isMultipla) {
+        if(tabela.getSelectedRows() == null 
+                || (isMultipla && tabela.getSelectedRows().length <= 0) 
+                || (!isMultipla && tabela.getSelectedRows().length != 1)) {
+            mostrarAviso("Tem de selecionar uma linha primeiro");
+            return false;
+        }
+        return true;
+    }
+    
+    private void guardar() {
+        serializacao.guardar(app);
     }
     /*
      * FIM Métodos auxiliares genéricos
-     */
+    */
 }
