@@ -7,26 +7,71 @@ package frontend.janelas;
 
 import backend.Aplicacao;
 import backend.Serializacao;
+import backend.entidades.Enfermaria;
+import backend.entidades.Equipamento;
+import backend.entidades.Hospital;
+import backend.entidades.Paciente;
+import backend.managers.ManagerEnfermaria;
+import backend.managers.ManagerEquipamento;
+import backend.managers.ManagerPaciente;
+import java.util.TreeMap;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author SERALIVE
- */
+
 public class JanelaCriarEquipamento extends javax.swing.JDialog {
-
-    private final Serializacao serializacao;
-    private final Aplicacao app;
-    private final JanelaConsultaEquipamento janela;
-
+    
+    private  JanelaConsultaEquipamento janela;
+    private  Aplicacao app;
+    private  Serializacao serializacao;
+    private String operacao;
+    private Hospital hospital;
+    private Enfermaria enfermaria;
+    private ManagerEquipamento managerEquipamento;
+    private Equipamento equipamento;
+    
     /**
      * Creates new form JanelaCriarEquipamento
      */
-    public JanelaCriarEquipamento(JanelaConsultaEquipamento janela, Aplicacao app, Serializacao serializacao, String codigoHospital) {
+    public JanelaCriarEquipamento(JanelaConsultaEquipamento janela, Aplicacao app, Serializacao serializacao, String codigoHospital,String codigoEnfermaria,String codigoEquipamento) {
         this.janela = janela;
         this.app = app;
         this.serializacao = serializacao;
         
         initComponents();
+        
+        //Indica que a janela deve ser modal ou seja,
+        //bloqueia a execução do programa até que a janela seja fechada
+        this.setModal(true);     
+        
+        this.setAlwaysOnTop(true);
+        
+        //Não permite o redimensionamento da janela
+        this.setResizable(false);
+        
+        //Mostra a centralização da janela
+        this.setLocationRelativeTo(null);
+        
+        //O processo de fecho da janela será controlado pelo programa
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);                                
+        
+        try {
+            enfermaria = (Enfermaria) app.getManagerEnfermaria(codigoHospital).getLista().get(codigoEnfermaria);
+        } catch (Exception e) {
+            throw new NullPointerException("Falta codigo da Enfermaria.");
+        }
+        
+        TreeMap<String, Equipamento> listaEquipamentos = enfermaria.getEquipamentos();
+        managerEquipamento = app.getManagerEquipamento(codigoHospital, codigoEnfermaria);
+        
+         if(codigoEquipamento == null) {
+            operacao = ManagerEquipamento.OPERACAO_ADICIONAR;
+            setTitle("Adicionar Equipamento");
+        } else {
+            operacao = ManagerEquipamento.OPERACAO_EDITAR;
+            setTitle("Editar Equipamento");
+            equipamento = listaEquipamentos.get(codigoEquipamento);
+            campoTipoEquipamento.setSelectedIndex(equipamento.getTipo());
+        }
     }
 
     /**
@@ -38,15 +83,13 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        Filtros = new javax.swing.JPanel();
+        filtros = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-
-        jButton1.setText("jButton1");
+        labelSelecionarEquipamento = new javax.swing.JLabel();
+        campoTipoEquipamento = new javax.swing.JComboBox<>();
+        rBotaoLivre = new javax.swing.JRadioButton();
+        botaoGuardar = new javax.swing.JButton();
+        rBotaoOcupado = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -61,57 +104,51 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
             .addGap(0, 28, Short.MAX_VALUE)
         );
 
-        jLabel1.setText("Selecione o tipo de equipamento que deseja criar:");
+        labelSelecionarEquipamento.setText("Selecione o tipo de equipamento que deseja criar:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        campoTipoEquipamento.setEditable(true);
+        campoTipoEquipamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ventilador", "Desfibrilhador" }));
 
-        jButton2.setText("Criar");
+        rBotaoLivre.setText("Livre");
 
-        jButton3.setText("Cancelar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        javax.swing.GroupLayout filtrosLayout = new javax.swing.GroupLayout(filtros);
+        filtros.setLayout(filtrosLayout);
+        filtrosLayout.setHorizontalGroup(
+            filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(filtrosLayout.createSequentialGroup()
+                .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(filtrosLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(labelSelecionarEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(filtrosLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(campoTipoEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rBotaoLivre, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        filtrosLayout.setVerticalGroup(
+            filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(filtrosLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelSelecionarEquipamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(campoTipoEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addComponent(rBotaoLivre))
+        );
+
+        botaoGuardar.setText("Guardar");
+        botaoGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                botaoGuardarActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout FiltrosLayout = new javax.swing.GroupLayout(Filtros);
-        Filtros.setLayout(FiltrosLayout);
-        FiltrosLayout.setHorizontalGroup(
-            FiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FiltrosLayout.createSequentialGroup()
-                .addGroup(FiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(FiltrosLayout.createSequentialGroup()
-                        .addGroup(FiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(FiltrosLayout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FiltrosLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton3)))
-                        .addGap(62, 62, 62)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(FiltrosLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        FiltrosLayout.setVerticalGroup(
-            FiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FiltrosLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(FiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addGroup(FiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addContainerGap())
-        );
+        rBotaoOcupado.setText("Ocupado");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,23 +156,35 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Filtros, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(botaoGuardar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(filtros, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rBotaoOcupado, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Filtros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addComponent(filtros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rBotaoOcupado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addComponent(botaoGuardar)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void botaoGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGuardarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_botaoGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,12 +229,52 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Filtros;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton botaoGuardar;
+    private javax.swing.JComboBox<String> campoTipoEquipamento;
+    private javax.swing.JPanel filtros;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelSelecionarEquipamento;
+    private javax.swing.JRadioButton rBotaoLivre;
+    private javax.swing.JRadioButton rBotaoOcupado;
     // End of variables declaration//GEN-END:variables
+
+    private void adicionarOuEditar() {
+        try {
+            int tipo = campoTipoEquipamento.getSelectedIndex();
+            
+            if(operacao.equals(ManagerEquipamento.OPERACAO_ADICIONAR)){
+                managerEquipamento.adicionar(equipamento);
+            } else if(operacao.equals(ManagerEquipamento.OPERACAO_EDITAR)){
+                equipamento.setTipo(tipo);
+                equipamento.isLivre();
+                managerEquipamento.editar(equipamento);
+            }
+            
+            fechar();
+            this.getOwner().firePropertyChange("tabela", 0, 0);
+            
+        }catch (Exception ex) {
+            mostrarAviso("Ocorreu um erro ao tentar guardar os dados");
+        }
+        
+    }  
+    
+      
+    /*
+     * Métodos auxiliares genéricos
+    */
+    private void mostrarAviso(String aviso) {
+        JOptionPane.showMessageDialog(rootPane, aviso);
+    }
+    
+    private void fechar() {
+        dispose();
+        janela.atualizar();
+    }
+    /*
+     * FIM Métodos auxiliares genéricos
+    */
 }
+        
+        
+       

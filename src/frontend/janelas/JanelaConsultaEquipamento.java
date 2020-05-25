@@ -1,23 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package frontend.janelas;
 
 import backend.Aplicacao;
+import backend.Conteudos;
 import backend.Serializacao;
+import backend.entidades.Hospital;
+import backend.entidades.Enfermaria;
+import backend.entidades.Equipamento;
+import backend.entidades.Paciente;
+import backend.managers.ManagerEquipamento;
 import javax.swing.JOptionPane;
+import javax.swing.table.AbstractTableModel;
 
-/**
- *
- * @author SERALIVE
- */
+
 public class JanelaConsultaEquipamento extends javax.swing.JDialog {
 
     private final Serializacao serializacao;
     private final Aplicacao app;
-
+    private AbstractTableModel modeloTabela;
+    
+//    hospital e enfermaria selecionados onde buscar a lista de equipamentos
+    private String hospitalSelecionado;
+    private String enfermariaSelecionada;
+    
+    
     /**
      * Creates new form JanelaConsultaEquipamento
      */
@@ -26,7 +32,74 @@ public class JanelaConsultaEquipamento extends javax.swing.JDialog {
         this.serializacao = serializacao;
         
         initComponents();
+        
+        this.modeloTabela = criarModeloTabela();
+        tabela.setModel(modeloTabela);
+        
+//        // inicializar filtros
+//        boolean hospitalFiltroVisible = true;
+//        boolean tipoEnfermariaVisible = true;
+//        setFiltrosVisible(hospitalFiltroVisible, tipoEnfermariaVisible);
+        
+//        // inicializar botoes de operaçoes
+//        boolean criar = true;
+//        boolean editar = true;
+//        boolean remover = true;
+//        setOperacoes(criar, editar, remover);
+        
+        // TEMPORARIO PARA TESTAR:
+        hospitalSelecionado = "COD0";
+        enfermariaSelecionada = "COD0";
     }
+    
+    private AbstractTableModel criarModeloTabela() {   
+        String[] nomeColunas = {"Código", "Tipo", "Livre", "Paciente"};
+        
+        return new AbstractTableModel() {     
+            @Override
+            public String getColumnName(int column) {
+                return nomeColunas[column];
+            }
+           
+            @Override
+            public int getRowCount() {
+                //Retorna o número de linhas que a tabela deverá ter
+                return app.getManagerEquipamento(hospitalSelecionado, enfermariaSelecionada).getLista().size();
+            }
+
+            @Override
+            public int getColumnCount() {
+                //Retorna o número de colunas que a tabela deverá ter
+                return nomeColunas.length;
+            }
+
+            @Override
+            public Object getValueAt(int rowIndex, int columnIndex) {
+            /*
+                Este método é invocado quando se pretende "popular" cada uma das células da tabela
+                Se a tabela tem 3 linhas e 2 colunas existem 6 células (3*2), logo o método será invocado 6 vezes
+                    rowIndex representa a linha da célula (0 a rowCount -1)
+                    columnIndex representa a coluna da célula (0 a ColumnCount -1)
+            */
+                Equipamento equipamento = (Equipamento)app.getManagerEquipamento(hospitalSelecionado,enfermariaSelecionada).getListaArray().get(rowIndex);
+                switch (columnIndex) {
+                    case 0: 
+                        return equipamento.getCodigo();
+                    case 1:
+                        return Conteudos.getTiposEquipamentos()[equipamento.getTipo()];
+                    case 2:
+                        return equipamento.isLivre();
+                    case 3:
+                        return hospitalSelecionado;
+                    case 4: 
+                        return enfermariaSelecionada;
+                    default:
+                        return "";
+                }                              
+            }            
+        };
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,17 +111,52 @@ public class JanelaConsultaEquipamento extends javax.swing.JDialog {
     private void initComponents() {
 
         contentor = new javax.swing.JPanel();
-        ContentorTabela = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        Tabela = new javax.swing.JTable();
-        Botoes = new javax.swing.JPanel();
-        CriarBtn = new javax.swing.JButton();
-        EditarBtn = new javax.swing.JButton();
-        RemoverBtn = new javax.swing.JButton();
+        botoes = new javax.swing.JPanel();
+        botaoCriar = new javax.swing.JButton();
+        botaoEditar = new javax.swing.JButton();
+        botaoRemover = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane = new javax.swing.JScrollPane();
+        tabela = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        Tabela.setModel(new javax.swing.table.DefaultTableModel(
+        botaoCriar.setText("Criar");
+
+        botaoEditar.setText("Editar");
+
+        botaoRemover.setText("Remover Linha");
+        botaoRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoRemoverActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout botoesLayout = new javax.swing.GroupLayout(botoes);
+        botoes.setLayout(botoesLayout);
+        botoesLayout.setHorizontalGroup(
+            botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(botoesLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(botaoCriar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botaoEditar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botaoRemover)
+                .addContainerGap(311, Short.MAX_VALUE))
+        );
+        botoesLayout.setVerticalGroup(
+            botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(botoesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoCriar)
+                    .addComponent(botaoEditar)
+                    .addComponent(botaoRemover))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -59,66 +167,19 @@ public class JanelaConsultaEquipamento extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(Tabela);
+        jScrollPane.setViewportView(tabela);
 
-        javax.swing.GroupLayout ContentorTabelaLayout = new javax.swing.GroupLayout(ContentorTabela);
-        ContentorTabela.setLayout(ContentorTabelaLayout);
-        ContentorTabelaLayout.setHorizontalGroup(
-            ContentorTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(ContentorTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContentorTabelaLayout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(83, 83, 83)))
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane)
         );
-        ContentorTabelaLayout.setVerticalGroup(
-            ContentorTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 248, Short.MAX_VALUE)
-            .addGroup(ContentorTabelaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(ContentorTabelaLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-
-        CriarBtn.setText("Criar");
-        CriarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CriarBtnMouseClicked(evt);
-            }
-        });
-        CriarBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CriarBtnActionPerformed(evt);
-            }
-        });
-
-        EditarBtn.setText("Editar");
-
-        RemoverBtn.setText("Remover");
-
-        javax.swing.GroupLayout BotoesLayout = new javax.swing.GroupLayout(Botoes);
-        Botoes.setLayout(BotoesLayout);
-        BotoesLayout.setHorizontalGroup(
-            BotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BotoesLayout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(CriarBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(EditarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RemoverBtn)
-                .addContainerGap(387, Short.MAX_VALUE))
-        );
-        BotoesLayout.setVerticalGroup(
-            BotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BotoesLayout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
-                .addGroup(BotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CriarBtn)
-                    .addComponent(EditarBtn)
-                    .addComponent(RemoverBtn))
+                .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -128,48 +189,45 @@ public class JanelaConsultaEquipamento extends javax.swing.JDialog {
             contentorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentorLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Botoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(contentorLayout.createSequentialGroup()
-                .addComponent(ContentorTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(contentorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(contentorLayout.createSequentialGroup()
+                        .addComponent(botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         contentorLayout.setVerticalGroup(
             contentorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentorLayout.createSequentialGroup()
-                .addGap(0, 169, Short.MAX_VALUE)
-                .addComponent(Botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ContentorTabela, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(contentorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(contentor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(contentor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(contentor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 126, Short.MAX_VALUE)
+                .addComponent(contentor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CriarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CriarBtnActionPerformed
+    private void botaoRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CriarBtnActionPerformed
-
-    private void CriarBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CriarBtnMouseClicked
-        try {
-            JanelaCriarEquipamento janela = new JanelaCriarEquipamento(this, app, serializacao, null);
-            janela.setVisible(true);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }//GEN-LAST:event_CriarBtnMouseClicked
+    }//GEN-LAST:event_botaoRemoverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,13 +272,81 @@ public class JanelaConsultaEquipamento extends javax.swing.JDialog {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Botoes;
-    private javax.swing.JPanel ContentorTabela;
-    private javax.swing.JButton CriarBtn;
-    private javax.swing.JButton EditarBtn;
-    private javax.swing.JButton RemoverBtn;
-    private javax.swing.JTable Tabela;
+    private javax.swing.JButton botaoCriar;
+    private javax.swing.JButton botaoEditar;
+    private javax.swing.JButton botaoRemover;
+    private javax.swing.JPanel botoes;
     private javax.swing.JPanel contentor;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
+
+private void adicionar() {
+         try {
+            JanelaCriarEquipamento janela = new JanelaCriarEquipamento(this, app, serializacao, hospitalSelecionado,enfermariaSelecionada, null);
+            janela.setVisible(true);
+        } catch (Exception ex) {            
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+    
+    private void editar() {
+        int rowIndex = tabela.getSelectedRow();
+        //Se nenhum registo selecionado, nao é possivel editar
+        if (rowIndex == -1) return;
+        
+        int colunaCodigo = 0;
+        String codigo = (String) modeloTabela.getValueAt(rowIndex, colunaCodigo);
+        
+         try {
+            JanelaCriarEquipamento janela = new JanelaCriarEquipamento(this, app, serializacao, hospitalSelecionado, enfermariaSelecionada, codigo);
+            janela.setVisible(true);
+        } catch (Exception ex) {            
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+        
+    }
+         
+    private void remover() {
+        if(tabela.getSelectedRows() != null && tabela.getSelectedRows().length > 0) {
+            int option = JOptionPane.showConfirmDialog(null, "Tem a certeza que quer eliminar a linha selecionada?");
+
+            if(option == JOptionPane.OK_OPTION) {
+                Hospital hospital = (Hospital) app.getManagerHospital().getLista().get(hospitalSelecionado);
+                Enfermaria enfermaria = (Enfermaria) app.getManagerEnfermaria(hospitalSelecionado).getLista().get(enfermariaSelecionada);
+                ManagerEquipamento managerEquipamento = new ManagerEquipamento(enfermaria.getEquipamentos());
+                for (int i = 0; i < tabela.getSelectedRows().length; i++) {
+                    try {
+                        int index = tabela.getSelectedRows()[i];
+                       
+                        Equipamento equipamento = (Equipamento) enfermaria.getEquipamentos().get(tabela.getModel().getValueAt(index, 0));
+                        managerEquipamento.remover(equipamento);
+                        
+                        serializacao.guardar(app);
+                        JOptionPane.showMessageDialog(this, "Paciente removido com sucesso");
+                    } catch (Exception ex) {
+                        mostrarAviso("Ocorreu um erro ao tentar remover o(s) paciente(s) selecionado(s).");
+                    }
+                }
+            }
+        }
+    }
+    protected void setOperacoes(boolean criar, boolean editar, boolean remover) {
+        botaoCriar.setVisible(criar);
+        botaoEditar.setVisible(editar);
+        botaoRemover.setVisible(remover);
+    }
+
+    private void mostrarAviso(String aviso) {
+        JOptionPane.showMessageDialog(rootPane, aviso);
+    }
+     private void fechar() {
+        dispose();
+    }
+     public void atualizar() {    
+        //Informa o modelo que foram efetuadas alteracoes, o modelo informa a tabela e os dados são redesenhados
+        modeloTabela.fireTableDataChanged();
+    }   
+
 }
