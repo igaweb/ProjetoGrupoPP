@@ -1,7 +1,6 @@
 package frontend.janelas;
 
 import backend.Aplicacao;
-import backend.Serializacao;
 import backend.entidades.Enfermaria;
 import backend.entidades.Hospital;
 import backend.entidades.Paciente;
