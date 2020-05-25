@@ -7,6 +7,7 @@ import frontend.janelas.JanelaConsultaEnfermaria;
 import frontend.janelas.JanelaConsultaEquipamento;
 import frontend.janelas.JanelaConsultaHospital;
 import frontend.janelas.JanelaConsultaPaciente;
+import frontend.janelas.JanelaConsultaUtilizador;
 
 public class Homepage extends javax.swing.JFrame {
 
@@ -20,15 +21,15 @@ public class Homepage extends javax.swing.JFrame {
         initComponents();
         //Força a maximização da janela
 //        this.setExtendedState(Homepage.MAXIMIZED_BOTH);    
-        
+
         //O processo de fecho da janela será controlado pelo programa
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
+
         //Apenas mostra o menu de administração se o utilizador for um administrador
         menuAdmin.setVisible(app.getUtilizadorAutenticado() instanceof Administrador);
-        
+
         //Mostra o menu Iniciar
-        menuIniciar.setVisible(true); 
+        menuIniciar.setVisible(true);
     }
 
     /**
@@ -197,7 +198,7 @@ public class Homepage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuAcessoLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAcessoLogoutActionPerformed
-        
+
     }//GEN-LAST:event_menuAcessoLogoutActionPerformed
 
     private void menuAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAdminActionPerformed
@@ -209,7 +210,7 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_menuAcessoLoginActionPerformed
 
     private void menuAcessoGerirUtilizadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAcessoGerirUtilizadoresActionPerformed
-        // TODO add your handling code here:
+        listarUtilizadores();
     }//GEN-LAST:event_menuAcessoGerirUtilizadoresActionPerformed
 
     private void menuEditarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarPerfilActionPerformed
@@ -237,12 +238,12 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_meniListarEquipamentosActionPerformed
 
     private void menuListarPacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuListarPacientesMouseClicked
-        listarPacientes();       
+        listarPacientes();
     }//GEN-LAST:event_menuListarPacientesMouseClicked
 
     /**
-//     * @param args the command line arguments
-//     */
+     * // * @param args the command line arguments //
+     */
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -305,23 +306,28 @@ public class Homepage extends javax.swing.JFrame {
         JanelaConsultaHospital janelaConsulta = new JanelaConsultaHospital(app, serializacao);
         janelaConsulta.setVisible(true);
     }
-    
+
     private void listarEnfermarias() {
         JanelaConsultaEnfermaria janelaConsulta = new JanelaConsultaEnfermaria(app, serializacao);
         janelaConsulta.setVisible(true);
     }
-    
+
     private void listarEquipamentos() {
         JanelaConsultaEquipamento janelaConsulta = new JanelaConsultaEquipamento(app, serializacao);
         janelaConsulta.setVisible(true);
     }
-    
+
     private void listarProfissionaisSaude() {
         // TODO
     }
-    
+
     private void listarPacientes() {
         JanelaConsultaPaciente janelaConsulta = new JanelaConsultaPaciente(app, serializacao);
+        janelaConsulta.setVisible(true);
+    }
+
+    private void listarUtilizadores() {
+        JanelaConsultaUtilizador janelaConsulta = new JanelaConsultaUtilizador(app, serializacao);
         janelaConsulta.setVisible(true);
     }
 }
