@@ -125,13 +125,28 @@ public class JanelaConsultaEquipamento extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         botaoCriar.setText("Criar");
+        botaoCriar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botaoCriarMouseClicked(evt);
+            }
+        });
+        botaoCriar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoCriarActionPerformed(evt);
+            }
+        });
 
         botaoEditar.setText("Editar");
+        botaoEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoEditarActionPerformed(evt);
+            }
+        });
 
         botaoRemover.setText("Remover Linha");
-        botaoRemover.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoRemoverActionPerformed(evt);
+        botaoRemover.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botaoRemoverMouseClicked(evt);
             }
         });
 
@@ -170,6 +185,11 @@ public class JanelaConsultaEquipamento extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaMouseClicked(evt);
+            }
+        });
         jScrollPane.setViewportView(tabela);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -228,9 +248,25 @@ public class JanelaConsultaEquipamento extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botaoRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverActionPerformed
+    private void botaoCriarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoCriarMouseClicked
+        adicionar();
+    }//GEN-LAST:event_botaoCriarMouseClicked
+
+    private void botaoCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_botaoRemoverActionPerformed
+    }//GEN-LAST:event_botaoCriarActionPerformed
+
+    private void botaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarActionPerformed
+        editar();
+    }//GEN-LAST:event_botaoEditarActionPerformed
+
+    private void botaoRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoRemoverMouseClicked
+        remover();
+    }//GEN-LAST:event_botaoRemoverMouseClicked
+
+    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tabelaMouseClicked
 
     /**
      * @param args the command line arguments

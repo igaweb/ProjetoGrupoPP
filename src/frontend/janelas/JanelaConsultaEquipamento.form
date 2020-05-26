@@ -106,18 +106,25 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Criar"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoCriarMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoCriarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="botaoEditar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Editar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoEditarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="botaoRemover">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Remover Linha"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoRemoverActionPerformed"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoRemoverMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>
@@ -156,6 +163,9 @@
                       </Table>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tabelaMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
