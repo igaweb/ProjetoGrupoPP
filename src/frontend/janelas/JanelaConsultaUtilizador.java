@@ -36,7 +36,7 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
      * Cria o modelo com os dados necessários para configurar a tabela, tanto na estrutura como o seu conteudo
      */
     private AbstractTableModel criarModeloTabela() {
-        String[] nomeColunas = {"Nome"};
+        String[] nomeColunas = {"Nome", "Password"};
 
         return new AbstractTableModel() {
             @Override
@@ -68,6 +68,8 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
                 switch (columnIndex) {
                     case 0:
                         return utilizador.getNome();
+                    case 1:
+                        return utilizador.getPassword();
                     default:
                         return "";
                 }
@@ -261,7 +263,7 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
 
     private void adicionar() {
         try {
-            JanelaCriarUtilizador janela = new JanelaCriarUtilizador(this, app);
+            JanelaCriarUtilizador janela = new JanelaCriarUtilizador(this, app, null);
             janela.setVisible(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -269,17 +271,17 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
     }
 
     private void editar() {
-        int rowIndex = tabela.getSelectedRow();
-        //Se nenhum registo selecionado, nao é possivel editar
-        if (rowIndex == -1) {
+        if (!validarSeExisteSelecao(false)) {
             return;
         }
 
-        int colunaCodigo = 0;
-        String codigo = (String) modeloTabela.getValueAt(rowIndex, colunaCodigo);
+        int rowIndex = tabela.getSelectedRow();
+
+        int colunaNome = 0;
+        String nome = (String) modeloTabela.getValueAt(rowIndex, colunaNome);
 
         try {
-            JanelaCriarUtilizador janela = new JanelaCriarUtilizador(this, app);
+            JanelaCriarUtilizador janela = new JanelaCriarUtilizador(this, app, nome);
             janela.setVisible(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -288,23 +290,25 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
     }
 
     private void remover() {
-        if (tabela.getSelectedRows() != null && tabela.getSelectedRows().length > 0) {
-            int option = JOptionPane.showConfirmDialog(null, "Tem a certeza que quer eliminar a linha selecionada?");
+        if (!validarSeExisteSelecao(true)) {
+            return;
+        }
 
-            if (option == JOptionPane.OK_OPTION) {
-                managerUtilizador = app.getManagerUtilizador();
-                for (int i = 0; i < tabela.getSelectedRows().length; i++) {
-                    try {
-                        int index = tabela.getSelectedRows()[i];
+        int option = JOptionPane.showConfirmDialog(null, "Tem a certeza que quer eliminar a linha selecionada?");
 
-                        Utilizador utilizador = (Utilizador) app.getManagerUtilizador().getLista().get(tabela.getModel().getValueAt(index, 0));
-                        managerUtilizador.remover(utilizador);
-                        atualizar();
-                //        serializacao.guardar(app);
-                        JOptionPane.showMessageDialog(this, "Utilizador removido com sucesso");
-                    } catch (Exception ex) {
-                        mostrarAviso("Ocorreu um erro ao tentar remover o(s) utilizador(es) selecionado(s).");
-                    }
+        if (option == JOptionPane.OK_OPTION) {
+            managerUtilizador = app.getManagerUtilizador();
+            for (int i = 0; i < tabela.getSelectedRows().length; i++) {
+                try {
+                    int index = tabela.getSelectedRows()[i];
+
+                    Utilizador utilizador = (Utilizador) app.getManagerUtilizador().getLista().get(tabela.getModel().getValueAt(index, 0));
+                    managerUtilizador.remover(utilizador);
+                    atualizar();
+                    serializacao.guardar(app);
+                    JOptionPane.showMessageDialog(this, "Utilizador removido com sucesso");
+                } catch (Exception ex) {
+                    mostrarAviso("Ocorreu um erro ao tentar remover o(s) utilizador(es) selecionado(s).");
                 }
             }
         }

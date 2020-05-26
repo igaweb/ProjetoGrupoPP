@@ -41,7 +41,7 @@ public class ManagerUtilizador extends ManagerBase implements Serializable {
     public void remover(Utilizador utilizador) throws Exception {
         setOperacao(OPERACAO_REMOVER);
 
-        lista.remove(utilizador);
+        lista.remove(utilizador.getNome());
     }
 
     public void editar(Utilizador utilizador) throws Exception {

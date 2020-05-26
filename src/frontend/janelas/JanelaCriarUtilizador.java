@@ -28,7 +28,7 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
     /**
      * Creates new form NewJDialog
      */
-    public JanelaCriarUtilizador(JanelaConsultaUtilizador janela, Aplicacao app) {
+    public JanelaCriarUtilizador(JanelaConsultaUtilizador janela, Aplicacao app, String nomeUtilizador) {
         this.janela = janela;
         this.app = app;
 
@@ -58,8 +58,8 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
             operacao = ManagerUtilizador.OPERACAO_EDITAR;
             setTitle("Editar Utilizador");
             utilizador = (Utilizador) app.getManagerUtilizador().getLista().get(nomeUtilizador);
-            campoUtilizadorNome.getText();
-            campoUtilizadorPassword.getText();
+            campoUtilizadorNome.setText(utilizador.getNome());
+            campoUtilizadorPassword.setText(utilizador.getPassword());
         }
     }
 

@@ -57,8 +57,8 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
             operacao = ManagerHospital.OPERACAO_EDITAR;
             setTitle("Editar Hospital");
             hospital = (Hospital) app.getManagerHospital().getLista().get(codigoHospital);
-            campoHospitalNome.getText();
-            campoHospitaLocalidade.getText();
+            campoHospitalNome.setText(hospital.getNome());
+            campoHospitaLocalidade.setText(hospital.getLocalidade());
         }
     }
 
