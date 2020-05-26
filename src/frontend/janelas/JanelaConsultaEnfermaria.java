@@ -377,19 +377,27 @@ public class JanelaConsultaEnfermaria extends javax.swing.JDialog {
         if(option == JOptionPane.OK_OPTION) {
             Hospital hospital = (Hospital) app.getManagerHospital().getLista().get(hospitalSelecionado);
             ManagerEnfermaria managerEnfermaria = new ManagerEnfermaria(hospital.getEnfermarias());
+            boolean error = false;
             for (int i = 0; i < tabela.getSelectedRows().length; i++) {
                 try {
                     int index = tabela.getSelectedRows()[i];
 
-                    Enfermaria enfermaria = (Enfermaria) hospital.getEnfermarias().get(tabela.getModel().getValueAt(index, 0));
+                    String key = (String) tabela.getModel().getValueAt(index, 0);
+                    Enfermaria enfermaria = (Enfermaria) hospital.getEnfermarias().get(key);
                     managerEnfermaria.remover(enfermaria);
-
-                    atualizar();
-                    JOptionPane.showMessageDialog(this, "Enfermaria removida com sucesso");
                 } catch (Exception ex) {
                     mostrarAviso("Ocorreu um erro ao tentar remover a(s) enfermaria(s) selecionada(s).");
+                    error = true;
+                    break;
                 }
             }
+            
+            if(error) {
+                return;
+            }
+            
+            atualizar();
+            mostrarAviso("Enfermaria removida com sucesso");
         }
             
     }
