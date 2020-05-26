@@ -42,7 +42,7 @@ public class ManagerProfissionalSaude extends ManagerBase implements Serializabl
     public void remover(ProfissionalSaude profissionalSaude) throws Exception {
         setOperacao(OPERACAO_REMOVER);
 
-        lista.remove(profissionalSaude);
+        lista.remove(profissionalSaude.getCodigo());
     }
 
     public void editar(ProfissionalSaude profissionalSaude) throws Exception {

@@ -53,7 +53,7 @@ public class ManagerPaciente extends ManagerBase implements Serializable {
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_REMOVER);
 
-        lista.remove(paciente);
+        lista.remove(paciente.getCodigo());
     }
 
     public void editar(Paciente paciente) throws Exception {
@@ -99,7 +99,7 @@ public class ManagerPaciente extends ManagerBase implements Serializable {
         if (paciente.getDataEntrada() == null ) {
             throw new Exception(ERRO_FALTA_DATAENTRADA);
         }
-        if (paciente.getDataSaida() == null) {
+        if (!operacao.equals(OPERACAO_ADICIONAR) && paciente.getDataSaida() == null) {
             throw new Exception(ERRO_FALTA_DATASAIDA);
         }
 
