@@ -327,8 +327,8 @@ private void adicionar() {
                        
                        ProfissionalSaude profissionalSaude = (ProfissionalSaude) managerProfissionalSaude.getLista().get(tabela.getModel().getValueAt(index, 0));
                         managerProfissionalSaude.remover(profissionalSaude);
-                        
-                        serializacao.guardar(app);
+                        atualizar();
+              //          serializacao.guardar(app);
                         JOptionPane.showMessageDialog(this, "Profissional de Sa~ude removido com sucesso");
                     } catch (Exception ex) {
                         mostrarAviso("Ocorreu um erro ao tentar remover o(s) Profissional(ais) de Saúde selecionado(s).");

@@ -344,8 +344,8 @@ private void adicionar() {
 
                     Paciente paciente = (Paciente) enfermaria.getPacientes().get(tabela.getModel().getValueAt(index, 0));
                     managerPaciente.remover(paciente);
-
-                    serializacao.guardar(app);
+                    atualizar();
+                //    serializacao.guardar(app);
                     JOptionPane.showMessageDialog(this, "Paciente removido com sucesso");
                 } catch (Exception ex) {
                     mostrarAviso("Ocorreu um erro ao tentar remover o(s) paciente(s) selecionado(s).");

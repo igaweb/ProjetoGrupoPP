@@ -300,8 +300,8 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
                         Utilizador utilizador = (Utilizador) app.getManagerUtilizador().getLista().get(tabela.getModel().getValueAt(index, 0));
                         managerUtilizador.remover(utilizador);
                         atualizar();
-                        serializacao.guardar(app);
-                        JOptionPane.showMessageDialog(this, "HUtilizador removido com sucesso");
+                //        serializacao.guardar(app);
+                        JOptionPane.showMessageDialog(this, "Utilizador removido com sucesso");
                     } catch (Exception ex) {
                         mostrarAviso("Ocorreu um erro ao tentar remover o(s) utilizador(es) selecionado(s).");
                     }

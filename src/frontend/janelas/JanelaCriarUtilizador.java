@@ -24,7 +24,7 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
     private String nomeUtilizador;
     private ManagerUtilizador managerUtilizador;
     private Utilizador utilizador;
-    
+
     /**
      * Creates new form NewJDialog
      */
@@ -205,7 +205,7 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
             String password = campoUtilizadorPassword.getText();
 
             if (operacao.equals(ManagerUtilizador.OPERACAO_ADICIONAR)) {
-                managerUtilizador.adicionar(utilizador);
+                managerUtilizador.adicionar(nome, password);
             } else if (operacao.equals(ManagerUtilizador.OPERACAO_EDITAR)) {
                 utilizador.setNome(nome);
                 utilizador.setPassword(password);

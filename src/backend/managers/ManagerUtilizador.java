@@ -31,6 +31,12 @@ public class ManagerUtilizador extends ManagerBase implements Serializable {
             throw new Exception(ERRO_ADICIONAR);
         }
     }
+    
+      public void adicionar(String nome, String password) throws Exception {
+       Utilizador utilizador = new Utilizador (nome, password);
+
+        adicionar(utilizador);
+    }
 
     public void remover(Utilizador utilizador) throws Exception {
         setOperacao(OPERACAO_REMOVER);

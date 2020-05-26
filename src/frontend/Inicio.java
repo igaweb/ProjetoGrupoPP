@@ -4,6 +4,7 @@ import backend.Aplicacao;
 import backend.Serializacao;
 import backend.entidades.Administrador;
 import backend.entidades.Utilizador;
+import frontend.janelas.JanelaLogin;
 import java.util.Scanner;
 import java.util.TreeMap;
 
@@ -26,8 +27,8 @@ public class Inicio {
         aplicacao.getManagerUtilizador().setLista(users);
 
         // login
-//        JanelaLogin janelaLogin = new JanelaLogin(aplicacao, serializacao);
-//        janelaLogin.setVisible(true);
+        JanelaLogin janelaLogin = new JanelaLogin(aplicacao, serializacao);
+        janelaLogin.setVisible(true);
         // carregar menus
 //        Menus menus = new Menus(aplicacao, serializacao, scanner);
 //        menus.getMenuPaciente().start();
