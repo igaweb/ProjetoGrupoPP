@@ -8,10 +8,8 @@ package frontend.janelas;
 
 import backend.Aplicacao;
 import backend.entidades.Enfermaria;
-import backend.entidades.Hospital;
 import backend.managers.ManagerEnfermaria;
 import frontend.model.filtros.TipoEnfermariaComboModel;
-import java.util.TreeMap;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,7 +21,6 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
     private JanelaConsultaEnfermaria janela;
     private Aplicacao app;
     private String operacao;
-    private Hospital hospital;
     private ManagerEnfermaria managerEnfermaria;
     private Enfermaria enfermaria;
 
@@ -55,13 +52,6 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
         //O processo de fecho da janela será controlado pelo programa
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);                                
         
-        try {
-            hospital = (Hospital) app.getManagerHospital().getLista().get(codigoHospital);
-        } catch (Exception e) {
-            throw  new NullPointerException("Falta codigo do hospital.");
-        }
-        
-        TreeMap<String, Enfermaria> listaEnfermarias = hospital.getEnfermarias();
         managerEnfermaria = app.getManagerEnfermaria(codigoHospital);
         
         if(codigoEnfermaria == null) {
@@ -70,7 +60,12 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
         } else {
             operacao = ManagerEnfermaria.OPERACAO_EDITAR;
             setTitle("Editar Enfermaria");
-            enfermaria = listaEnfermarias.get(codigoEnfermaria);
+            try {
+                enfermaria = app.getEnfermaria(codigoHospital, codigoEnfermaria);
+            } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException ex) {
+                mostrarAviso(ex.getMessage());
+                return;
+            }
             campoEnfermariaTipo.setSelectedIndex(enfermaria.getTipo());
             int nCamas = enfermaria.getCamas().length;
             campoNome.setText(enfermaria.getNome());
