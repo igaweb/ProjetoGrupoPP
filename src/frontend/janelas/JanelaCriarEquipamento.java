@@ -6,14 +6,10 @@
 package frontend.janelas;
 
 import backend.Aplicacao;
-import backend.Serializacao;
 import backend.entidades.Enfermaria;
 import backend.entidades.Equipamento;
 import backend.entidades.Hospital;
-import backend.entidades.Paciente;
-import backend.managers.ManagerEnfermaria;
 import backend.managers.ManagerEquipamento;
-import backend.managers.ManagerPaciente;
 import java.util.TreeMap;
 import javax.swing.JOptionPane;
 
@@ -81,13 +77,14 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         filtros = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         labelSelecionarEquipamento = new javax.swing.JLabel();
         campoTipoEquipamento = new javax.swing.JComboBox<>();
-        rBotaoLivre = new javax.swing.JRadioButton();
         botaoGuardar = new javax.swing.JButton();
         rBotaoOcupado = new javax.swing.JRadioButton();
+        rBotaoLivre = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -99,15 +96,18 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 28, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         labelSelecionarEquipamento.setText("Selecione o tipo de equipamento que deseja criar:");
 
         campoTipoEquipamento.setEditable(true);
         campoTipoEquipamento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ventilador", "Desfibrilhador" }));
-
-        rBotaoLivre.setText("Livre");
+        campoTipoEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoTipoEquipamentoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout filtrosLayout = new javax.swing.GroupLayout(filtros);
         filtros.setLayout(filtrosLayout);
@@ -122,8 +122,7 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(filtrosLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(campoTipoEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(rBotaoLivre, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(campoTipoEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         filtrosLayout.setVerticalGroup(
@@ -132,57 +131,88 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
                 .addGap(34, 34, 34)
                 .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(labelSelecionarEquipamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(labelSelecionarEquipamento, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(campoTipoEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addComponent(rBotaoLivre))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         botaoGuardar.setText("Guardar");
+        botaoGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botaoGuardarMouseClicked(evt);
+            }
+        });
         botaoGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoGuardarActionPerformed(evt);
             }
         });
 
+        buttonGroup1.add(rBotaoOcupado);
         rBotaoOcupado.setText("Ocupado");
+        rBotaoOcupado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rBotaoOcupadoActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(rBotaoLivre);
+        rBotaoLivre.setText("Livre");
+        rBotaoLivre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rBotaoLivreActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(botaoGuardar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(filtros, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rBotaoOcupado, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(6, 6, 6)
+                .addComponent(filtros, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(rBotaoLivre, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(rBotaoOcupado, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(226, 226, 226)
+                .addComponent(botaoGuardar))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addComponent(filtros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
+                .addComponent(rBotaoLivre)
+                .addGap(6, 6, 6)
                 .addComponent(rBotaoOcupado)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addComponent(botaoGuardar)
-                .addContainerGap())
+                .addGap(31, 31, 31)
+                .addComponent(botaoGuardar))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botaoGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGuardarActionPerformed
+    private void campoTipoEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTipoEquipamentoActionPerformed
         // TODO add your handling code here:
+    }//GEN-LAST:event_campoTipoEquipamentoActionPerformed
+
+    private void rBotaoLivreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBotaoLivreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rBotaoLivreActionPerformed
+
+    private void rBotaoOcupadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rBotaoOcupadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rBotaoOcupadoActionPerformed
+
+    private void botaoGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGuardarActionPerformed
+         adicionarOuEditar();
     }//GEN-LAST:event_botaoGuardarActionPerformed
+
+    private void botaoGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoGuardarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoGuardarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -228,6 +258,7 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoGuardar;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> campoTipoEquipamento;
     private javax.swing.JPanel filtros;
     private javax.swing.JPanel jPanel1;
