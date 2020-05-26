@@ -7,6 +7,7 @@ import backend.entidades.Paciente;
 import backend.managers.ManagerPaciente;
 import frontend.model.filtros.HospitalComboModel;
 import frontend.model.filtros.EstadoPacienteComboModel;
+import java.util.Date;
 import java.util.TreeMap;
 import javax.swing.JOptionPane;
 
@@ -365,7 +366,7 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
                 return;
             }
             int estado = campoPacienteEstado.getSelectedIndex();
-            int dataEntrada = 0;
+            Date dataEntrada = null;
 //            try {
 //                dataEntrada = new Integer(campoDataEntrada.getText());
 //            } catch (Exception e) {

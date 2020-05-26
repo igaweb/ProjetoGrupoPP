@@ -145,10 +145,10 @@ public class MenuPaciente extends MenuBase {
         paciente.setEstado(estado);
 
         System.out.print(perguntaDataEntrada);
-        paciente.setDataEntrada(scanner.nextInt());
+//        paciente.setDataEntrada(scanner.nextDate());
 
         System.out.print(perguntaDataSaida);
-        paciente.setDataSaida(scanner.nextInt());
+//        paciente.setDataSaida(scanner.nextDate());
 
         try {
             ManagerPaciente manager = new ManagerPaciente(getListaPaciente(hospitalSelecionado, enfermariaSelecionada));
@@ -219,13 +219,13 @@ public class MenuPaciente extends MenuBase {
 
             case 4: // Data de Entrada
                 System.out.print("Nova Data de Entrada: ");
-                pacienteAEditar.setDataEntrada(scanner.nextInt());
+//                pacienteAEditar.setDataEntrada(scanner.nextInt());
                 scanner.nextLine();
                 break;
 
             case 5: // Data de saida
                 System.out.print("Nova Data de Saida: ");
-                pacienteAEditar.setDataSaida(scanner.nextInt());
+//                pacienteAEditar.setDataSaida(scanner.nextInt());
                 break;
         }
 

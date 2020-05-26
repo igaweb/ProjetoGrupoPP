@@ -1,6 +1,7 @@
 package backend.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Paciente implements Serializable{
 
@@ -11,13 +12,13 @@ public class Paciente implements Serializable{
     private String localidade;
     private int cama;
     private Integer estado;
-    private int dataEntrada;
-    private int dataSaida;
+    private Date dataEntrada;
+    private Date dataSaida;
 
     public Paciente() {
     }
 
-    public Paciente(String codigo, String nome, String localidade, int cama, Integer estado, int dataEntrada, int dataSaida) {
+    public Paciente(String codigo, String nome, String localidade, int cama, Integer estado, Date dataEntrada, Date dataSaida) {
         this.codigo = codigo;
         this.nome = nome;
         this.localidade = localidade;
@@ -67,19 +68,19 @@ public class Paciente implements Serializable{
         this.estado = estado;
     }
 
-    public int getDataEntrada() {
+    public Date getDataEntrada() {
         return dataEntrada;
     }
 
-    public void setDataEntrada(int dataEntrada) {
+    public void setDataEntrada(Date dataEntrada) {
         this.dataEntrada = dataEntrada;
     }
 
-    public int getDataSaida() {
+    public Date getDataSaida() {
         return dataSaida;
     }
 
-    public void setDataSaida(int dataSaida) {
+    public void setDataSaida(Date dataSaida) {
         this.dataSaida = dataSaida;
     }
 

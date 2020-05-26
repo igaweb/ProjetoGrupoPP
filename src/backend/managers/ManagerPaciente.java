@@ -3,6 +3,7 @@ package backend.managers;
 import backend.Conteudos;
 import backend.entidades.Paciente;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.TreeMap;
 
 public class ManagerPaciente extends ManagerBase implements Serializable {
@@ -26,8 +27,8 @@ public class ManagerPaciente extends ManagerBase implements Serializable {
         this.lista = lista;
     }
 
-    public void adicionar(String nome, String localidade, int cama, Integer estado, int dataEntrada) throws Exception {
-        Paciente paciente = new Paciente(null, nome, localidade, cama, estado, dataEntrada, 0);
+    public void adicionar(String nome, String localidade, int cama, Integer estado, Date dataEntrada) throws Exception {
+        Paciente paciente = new Paciente(null, nome, localidade, cama, estado, dataEntrada, null);
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_ADICIONAR);
 
@@ -95,10 +96,10 @@ public class ManagerPaciente extends ManagerBase implements Serializable {
           if (paciente.getEstado() < 0 || paciente.getEstado() >= Conteudos.getEstadosPaciente().length) {
             throw new Exception(ERRO_FALTA_ESTADO);
         }
-        if (paciente.getDataEntrada() < 0 ) {
+        if (paciente.getDataEntrada() == null ) {
             throw new Exception(ERRO_FALTA_DATAENTRADA);
         }
-        if (paciente.getDataSaida() < 0) {
+        if (paciente.getDataSaida() == null) {
             throw new Exception(ERRO_FALTA_DATASAIDA);
         }
 

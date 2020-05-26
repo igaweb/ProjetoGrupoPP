@@ -60,6 +60,7 @@ public class JanelaCriarProfissionalSaude extends javax.swing.JDialog {
                 profissionalSaude = app.getProfissionalSaude(codigoHospital, codigoEnfermaria, codigoProfissionalSaude);                
             } catch (Aplicacao.EnfermariaNaoExistenteException | Aplicacao.HospitalNaoExistenteException | Aplicacao.ProfissionalSaudeNaoExistenteException e) {
                 mostrarAviso(e.getMessage());
+                return;
             } 
             
             campoNomeProfissionalSaude.setText(profissionalSaude.getNome());
