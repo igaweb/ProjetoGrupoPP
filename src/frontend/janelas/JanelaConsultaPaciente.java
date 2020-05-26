@@ -7,6 +7,11 @@ import backend.entidades.Enfermaria;
 import backend.entidades.Hospital;
 import backend.entidades.Paciente;
 import backend.managers.ManagerPaciente;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
@@ -62,7 +67,7 @@ public class JanelaConsultaPaciente extends javax.swing.JDialog {
     }
 
     private AbstractTableModel criarModeloTabela() {
-        String[] nomeColunas = {"Código", "Nome", "Localidade", "Cama", "Estado", "Data Entrada", "Data Saida", "Hospital", "Enfermaria"};
+        String[] nomeColunas = {"Código", "Nome", "Localidade", "Cama", "Estado", "Data Entrada", "Data Saida", "Enfermaria"};
 
         return new AbstractTableModel() {
             @Override
@@ -90,6 +95,9 @@ public class JanelaConsultaPaciente extends javax.swing.JDialog {
                     rowIndex representa a linha da célula (0 a rowCount -1)
                     columnIndex representa a coluna da célula (0 a ColumnCount -1)
                  */
+                Date dataEntrada;
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                
                 Paciente paciente = (Paciente) app.getManagerPaciente(hospitalSelecionado, enfermariaSelecionada).getListaArray().get(rowIndex);
                 switch (columnIndex) {
                     case 0:
@@ -103,13 +111,24 @@ public class JanelaConsultaPaciente extends javax.swing.JDialog {
                     case 4:
                         return Conteudos.getEstadosPaciente()[paciente.getEstado()];
                     case 5:
-                        return paciente.getDataEntrada();
+                        try {
+                            return df.format(paciente.getDataEntrada());
+                        } catch (Exception ex) {
+                            return "";
+                        }
                     case 6:
-                        return paciente.getDataSaida();
-                    case 7:
-                        return hospitalSelecionado;
+                        try {
+                            return df.format(paciente.getDataSaida());
+                        } catch (Exception ex) {
+                            return "";
+                        }
                     case 8:
-                        return enfermariaSelecionada;
+                        try {
+                            return app.getEnfermaria(hospitalSelecionado, enfermariaSelecionada).getNome();
+                        } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException ex) {
+                            return "";
+                        }
+
                     default:
                         return "";
                 }
@@ -335,22 +354,29 @@ private void adicionar() {
         int option = JOptionPane.showConfirmDialog(null, "Tem a certeza que quer eliminar a linha selecionada?");
 
         if (option == JOptionPane.OK_OPTION) {
-            Hospital hospital = (Hospital) app.getManagerHospital().getLista().get(hospitalSelecionado);
             Enfermaria enfermaria = (Enfermaria) app.getManagerEnfermaria(hospitalSelecionado).getLista().get(enfermariaSelecionada);
             ManagerPaciente managerPaciente = new ManagerPaciente(enfermaria.getPacientes());
+            boolean error = false;
             for (int i = 0; i < tabela.getSelectedRows().length; i++) {
                 try {
                     int index = tabela.getSelectedRows()[i];
 
-                    Paciente paciente = (Paciente) enfermaria.getPacientes().get(tabela.getModel().getValueAt(index, 0));
+                    String key = (String) tabela.getModel().getValueAt(index, 0);
+                    Paciente paciente = enfermaria.getPacientes().get(key);
                     managerPaciente.remover(paciente);
-                    atualizar();
-                //    serializacao.guardar(app);
-                    JOptionPane.showMessageDialog(this, "Paciente removido com sucesso");
                 } catch (Exception ex) {
                     mostrarAviso("Ocorreu um erro ao tentar remover o(s) paciente(s) selecionado(s).");
+                    error = true;
+                    break;
                 }
             }
+            
+            if(error) {
+                return;
+            }
+            
+            atualizar();
+            mostrarAviso("Paciente removido com sucesso");
         }
     }
 
