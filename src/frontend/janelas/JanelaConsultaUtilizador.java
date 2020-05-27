@@ -89,7 +89,6 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
         contentor = new javax.swing.JPanel();
         botoes = new javax.swing.JPanel();
         botaoCriar = new javax.swing.JButton();
-        botaoEditar = new javax.swing.JButton();
         botaoRemover = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -109,13 +108,6 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
             }
         });
 
-        botaoEditar.setText("Editar");
-        botaoEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoEditarActionPerformed(evt);
-            }
-        });
-
         botaoRemover.setText("Remover linha");
         botaoRemover.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -130,9 +122,7 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
             .addGroup(botoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(botaoCriar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoEditar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(73, 73, 73)
                 .addComponent(botaoRemover)
                 .addContainerGap(302, Short.MAX_VALUE))
         );
@@ -141,7 +131,6 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
             .addGroup(botoesLayout.createSequentialGroup()
                 .addGroup(botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoCriar)
-                    .addComponent(botaoEditar)
                     .addComponent(botaoRemover))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -238,10 +227,6 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
 
     }//GEN-LAST:event_botaoCriarActionPerformed
 
-    private void botaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarActionPerformed
-        editar();
-    }//GEN-LAST:event_botaoEditarActionPerformed
-
     private void botaoRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoRemoverMouseClicked
         remover();
     }//GEN-LAST:event_botaoRemoverMouseClicked
@@ -252,7 +237,6 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCriar;
-    private javax.swing.JButton botaoEditar;
     private javax.swing.JButton botaoRemover;
     private javax.swing.JPanel botoes;
     private javax.swing.JPanel contentor;
@@ -316,7 +300,7 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
 
     protected void setOperacoes(boolean criar, boolean editar, boolean remover) {
         botaoCriar.setVisible(criar);
-        botaoEditar.setVisible(editar);
+      //  botaoEditar.setVisible(editar);
         botaoRemover.setVisible(remover);
     }
 

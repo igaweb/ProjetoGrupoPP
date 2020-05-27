@@ -77,9 +77,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="botaoCriar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="botaoEditar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                       <Component id="botaoRemover" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="302" max="32767" attributes="0"/>
                   </Group>
@@ -90,7 +88,6 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="botaoCriar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="botaoEditar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="botaoRemover" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -106,14 +103,6 @@
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoCriarMouseClicked"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoCriarActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="botaoEditar">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Editar"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoEditarActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="botaoRemover">

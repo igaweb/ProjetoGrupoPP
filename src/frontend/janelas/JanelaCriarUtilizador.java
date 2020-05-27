@@ -54,12 +54,14 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
         if (nomeUtilizador == null) {
             operacao = ManagerUtilizador.OPERACAO_ADICIONAR;
             setTitle("Adicionar Utilizador");
+            campoUtilizadorNome.setEditable(true);
         } else {
             operacao = ManagerUtilizador.OPERACAO_EDITAR;
             setTitle("Editar Utilizador");
             utilizador = (Utilizador) app.getManagerUtilizador().getLista().get(nomeUtilizador);
             campoUtilizadorNome.setText(utilizador.getNome());
             campoUtilizadorPassword.setText(utilizador.getPassword());
+            campoUtilizadorNome.setEditable(false);
         }
     }
 
@@ -108,6 +110,8 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
         jLabel1.setText(getTitle());
 
         Nome.setText("Nome:");
+
+        campoUtilizadorNome.setEditable(false);
 
         javax.swing.GroupLayout filtrosLayout = new javax.swing.GroupLayout(filtros);
         filtros.setLayout(filtrosLayout);
@@ -207,7 +211,7 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
             if (operacao.equals(ManagerUtilizador.OPERACAO_ADICIONAR)) {
                 managerUtilizador.adicionar(nome, password);
             } else if (operacao.equals(ManagerUtilizador.OPERACAO_EDITAR)) {
-                utilizador.setNome(nome);
+         //       utilizador.setNome(nome);
                 utilizador.setPassword(password);
                 managerUtilizador.editar(utilizador);
             }

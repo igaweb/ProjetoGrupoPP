@@ -3,10 +3,9 @@ package frontend;
 import backend.Aplicacao;
 import backend.Serializacao;
 import backend.entidades.Administrador;
-import frontend.janelas.JanelaConsultaEquipamento;
 import frontend.janelas.JanelaConsultaHospital;
-import frontend.janelas.JanelaConsultaPaciente;
 import frontend.janelas.JanelaConsultaUtilizador;
+import frontend.janelas.JanelaCriarUtilizador;
 
 public class Homepage extends javax.swing.JFrame {
 
@@ -29,6 +28,8 @@ public class Homepage extends javax.swing.JFrame {
 
         //Mostra o menu Iniciar
         menuIniciar.setVisible(true);
+        
+
     }
 
     /**
@@ -59,6 +60,7 @@ public class Homepage extends javax.swing.JFrame {
         menuEditarPerfil = new javax.swing.JMenuItem();
         menuIniciar = new javax.swing.JMenu();
         menuListarHospitais = new javax.swing.JMenuItem();
+        menuEditarUtilizador = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -137,6 +139,14 @@ public class Homepage extends javax.swing.JFrame {
         });
         menuIniciar.add(menuListarHospitais);
 
+        menuEditarUtilizador.setText("Editar Perfil");
+        menuEditarUtilizador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEditarUtilizadorActionPerformed(evt);
+            }
+        });
+        menuIniciar.add(menuEditarUtilizador);
+
         jMenuBar1.add(menuIniciar);
 
         setJMenuBar(jMenuBar1);
@@ -178,6 +188,10 @@ public class Homepage extends javax.swing.JFrame {
     private void menuListarHospitaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarHospitaisActionPerformed
         listarHospitais();
     }//GEN-LAST:event_menuListarHospitaisActionPerformed
+
+    private void menuEditarUtilizadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarUtilizadorActionPerformed
+        editarUtilizadores();
+    }//GEN-LAST:event_menuEditarUtilizadorActionPerformed
 
     /**
      * // * @param args the command line arguments //
@@ -231,6 +245,7 @@ public class Homepage extends javax.swing.JFrame {
     private javax.swing.JMenu menuAdmin;
     private java.awt.MenuBar menuBar1;
     private javax.swing.JMenuItem menuEditarPerfil;
+    private javax.swing.JMenuItem menuEditarUtilizador;
     private javax.swing.JMenu menuIniciar;
     private javax.swing.JMenuItem menuListarHospitais;
     private java.awt.PopupMenu popupMenu1;
@@ -263,5 +278,10 @@ public class Homepage extends javax.swing.JFrame {
     private void listarUtilizadores() {
         JanelaConsultaUtilizador janelaConsulta = new JanelaConsultaUtilizador(app, serializacao);
         janelaConsulta.setVisible(true);
+    }
+    
+    private void editarUtilizadores() {
+        JanelaCriarUtilizador janelaEditar = new JanelaCriarUtilizador(null, app, app.getUtilizadorAutenticado().getNome());
+        janelaEditar.setVisible(true);
     }
 }
