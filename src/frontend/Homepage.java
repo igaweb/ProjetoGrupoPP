@@ -281,7 +281,7 @@ public class Homepage extends javax.swing.JFrame {
     }
     
     private void editarUtilizadores() {
-        JanelaCriarUtilizador janelaEditar = new JanelaCriarUtilizador(null, app, app.getUtilizadorAutenticado().getNome());
+        JanelaCriarUtilizador janelaEditar = new JanelaCriarUtilizador(null, app, serializacao, app.getUtilizadorAutenticado().getNome());
         janelaEditar.setVisible(true);
     }
 }

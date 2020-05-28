@@ -247,7 +247,7 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
 
     private void adicionar() {
         try {
-            JanelaCriarUtilizador janela = new JanelaCriarUtilizador(this, app, null);
+            JanelaCriarUtilizador janela = new JanelaCriarUtilizador(this, app, serializacao, null);
             janela.setVisible(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -265,7 +265,7 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
         String nome = (String) modeloTabela.getValueAt(rowIndex, colunaNome);
 
         try {
-            JanelaCriarUtilizador janela = new JanelaCriarUtilizador(this, app, nome);
+            JanelaCriarUtilizador janela = new JanelaCriarUtilizador(this, app, serializacao, nome);
             janela.setVisible(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
