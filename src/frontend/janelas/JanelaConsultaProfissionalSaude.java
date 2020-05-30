@@ -117,31 +117,33 @@ public class JanelaConsultaProfissionalSaude extends javax.swing.JDialog {
 
         contentor = new javax.swing.JPanel();
         botoes = new javax.swing.JPanel();
-        botaoCriar = new javax.swing.JButton();
-        botaoEditar = new javax.swing.JButton();
+        botaoCriarMedico = new javax.swing.JButton();
+        botaoEditarMedico = new javax.swing.JButton();
         botaoRemover = new javax.swing.JButton();
+        botaoEditarEnfermeiro = new javax.swing.JButton();
+        botaoCriarEnfermeiro = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        botaoCriar.setText("Criar");
-        botaoCriar.addMouseListener(new java.awt.event.MouseAdapter() {
+        botaoCriarMedico.setText("Criar médico");
+        botaoCriarMedico.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botaoCriarMouseClicked(evt);
+                botaoCriarMedicoMouseClicked(evt);
             }
         });
-        botaoCriar.addActionListener(new java.awt.event.ActionListener() {
+        botaoCriarMedico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoCriarActionPerformed(evt);
+                botaoCriarMedicoActionPerformed(evt);
             }
         });
 
-        botaoEditar.setText("Editar");
-        botaoEditar.addActionListener(new java.awt.event.ActionListener() {
+        botaoEditarMedico.setText("Editar Médico");
+        botaoEditarMedico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoEditarActionPerformed(evt);
+                botaoEditarMedicoActionPerformed(evt);
             }
         });
 
@@ -152,26 +154,55 @@ public class JanelaConsultaProfissionalSaude extends javax.swing.JDialog {
             }
         });
 
+        botaoEditarEnfermeiro.setText("Editar Enfermeiro");
+        botaoEditarEnfermeiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoEditarEnfermeiroActionPerformed(evt);
+            }
+        });
+
+        botaoCriarEnfermeiro.setText("Criar enfermeiro");
+        botaoCriarEnfermeiro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botaoCriarEnfermeiroMouseClicked(evt);
+            }
+        });
+        botaoCriarEnfermeiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoCriarEnfermeiroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout botoesLayout = new javax.swing.GroupLayout(botoes);
         botoes.setLayout(botoesLayout);
         botoesLayout.setHorizontalGroup(
             botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(botoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(botaoCriar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoEditar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoRemover)
+                .addGroup(botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(botoesLayout.createSequentialGroup()
+                        .addComponent(botaoCriarMedico)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoEditarMedico)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoRemover))
+                    .addGroup(botoesLayout.createSequentialGroup()
+                        .addComponent(botaoCriarEnfermeiro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoEditarEnfermeiro)))
                 .addContainerGap(302, Short.MAX_VALUE))
         );
         botoesLayout.setVerticalGroup(
             botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(botoesLayout.createSequentialGroup()
                 .addGroup(botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botaoCriar)
-                    .addComponent(botaoEditar)
+                    .addComponent(botaoCriarMedico)
+                    .addComponent(botaoEditarMedico)
                     .addComponent(botaoRemover))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoCriarEnfermeiro)
+                    .addComponent(botaoEditarEnfermeiro))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -259,17 +290,17 @@ public class JanelaConsultaProfissionalSaude extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botaoCriarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoCriarMouseClicked
-        adicionar();
-    }//GEN-LAST:event_botaoCriarMouseClicked
+    private void botaoCriarMedicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoCriarMedicoMouseClicked
+        adicionar(true);
+    }//GEN-LAST:event_botaoCriarMedicoMouseClicked
 
-    private void botaoCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarActionPerformed
+    private void botaoCriarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarMedicoActionPerformed
 
-    }//GEN-LAST:event_botaoCriarActionPerformed
+    }//GEN-LAST:event_botaoCriarMedicoActionPerformed
 
-    private void botaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarActionPerformed
-        editar();
-    }//GEN-LAST:event_botaoEditarActionPerformed
+    private void botaoEditarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarMedicoActionPerformed
+        editar(true);
+    }//GEN-LAST:event_botaoEditarMedicoActionPerformed
 
     private void botaoRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoRemoverMouseClicked
         remover();
@@ -278,10 +309,24 @@ public class JanelaConsultaProfissionalSaude extends javax.swing.JDialog {
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
         
     }//GEN-LAST:event_tabelaMouseClicked
+
+    private void botaoEditarEnfermeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarEnfermeiroActionPerformed
+        editar(false);
+    }//GEN-LAST:event_botaoEditarEnfermeiroActionPerformed
+
+    private void botaoCriarEnfermeiroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoCriarEnfermeiroMouseClicked
+        adicionar(false);
+    }//GEN-LAST:event_botaoCriarEnfermeiroMouseClicked
+
+    private void botaoCriarEnfermeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarEnfermeiroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoCriarEnfermeiroActionPerformed
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botaoCriar;
-    private javax.swing.JButton botaoEditar;
+    private javax.swing.JButton botaoCriarEnfermeiro;
+    private javax.swing.JButton botaoCriarMedico;
+    private javax.swing.JButton botaoEditarEnfermeiro;
+    private javax.swing.JButton botaoEditarMedico;
     private javax.swing.JButton botaoRemover;
     private javax.swing.JPanel botoes;
     private javax.swing.JPanel contentor;
@@ -289,16 +334,16 @@ public class JanelaConsultaProfissionalSaude extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
-private void adicionar() {
+private void adicionar(boolean isMedico) {
          try {
-            JanelaCriarProfissionalSaude janela = new JanelaCriarProfissionalSaude(this, app, hospitalSelecionado, enfermariaSelecionada, null, true);
+            JanelaCriarProfissionalSaude janela = new JanelaCriarProfissionalSaude(this, app, hospitalSelecionado, enfermariaSelecionada, null, isMedico);
             janela.setVisible(true);
         } catch (Exception ex) {            
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
     
-    private void editar() {
+    private void editar(boolean isMedico) {
         int rowIndex = tabela.getSelectedRow();
         //Se nenhum registo selecionado, nao é possivel editar
         if (rowIndex == -1) return;
@@ -307,7 +352,7 @@ private void adicionar() {
         String codigo = (String) modeloTabela.getValueAt(rowIndex, colunaCodigo);
         
          try {
-            JanelaCriarProfissionalSaude janela = new JanelaCriarProfissionalSaude(this, app, hospitalSelecionado, enfermariaSelecionada, codigo, true);
+            JanelaCriarProfissionalSaude janela = new JanelaCriarProfissionalSaude(this, app, hospitalSelecionado, enfermariaSelecionada, codigo, isMedico);
             janela.setVisible(true);
         } catch (Exception ex) {            
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -338,8 +383,8 @@ private void adicionar() {
         }
     }
     protected void setOperacoes(boolean criar, boolean editar, boolean remover) {
-        botaoCriar.setVisible(criar);
-        botaoEditar.setVisible(editar);
+        botaoCriarMedico.setVisible(criar);
+        botaoEditarMedico.setVisible(editar);
         botaoRemover.setVisible(remover);
     }
 

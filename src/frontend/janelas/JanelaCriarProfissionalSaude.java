@@ -46,12 +46,16 @@ public class JanelaCriarProfissionalSaude extends javax.swing.JDialog {
         
         if(codigoProfissionalSaude == null) {
             operacao = ManagerProfissionalSaude.OPERACAO_ADICIONAR;
-            setTitle("Adicionar Profissional de Saúde");
+            
             if(isMedico) {
+                setTitle("Adicionar Médico");
                 profissionalSaude= new Medico();
             } else {
                 profissionalSaude= new Enfermeiro();
+                setTitle("Adicionar Enfermeiro");
             }
+            labelEspecialidade.setVisible(isMedico);
+            campoEspecialidadeProfissionalSaude.setVisible(isMedico);
         } else {
             operacao = ManagerProfissionalSaude.OPERACAO_EDITAR;
             setTitle("Editar Profissional de Saúde");
@@ -85,7 +89,7 @@ public class JanelaCriarProfissionalSaude extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         campoNomeProfissionalSaude = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        labelEspecialidade = new javax.swing.JLabel();
         campoEspecialidadeProfissionalSaude = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
@@ -104,9 +108,9 @@ public class JanelaCriarProfissionalSaude extends javax.swing.JDialog {
 
         jLabel1.setText(getTitle());
 
-        jLabel6.setText("Nome ProfissionalSaude:");
+        jLabel6.setText("Nome:");
 
-        jLabel7.setText("Especialidade ProfissionalSaude:");
+        labelEspecialidade.setText("Especialidade:");
 
         javax.swing.GroupLayout filtrosLayout = new javax.swing.GroupLayout(filtros);
         filtros.setLayout(filtrosLayout);
@@ -124,14 +128,14 @@ public class JanelaCriarProfissionalSaude extends javax.swing.JDialog {
                         .addGap(44, 44, 44)
                         .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(filtrosLayout.createSequentialGroup()
-                                .addComponent(jLabel7)
+                                .addComponent(labelEspecialidade)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(campoEspecialidadeProfissionalSaude, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(filtrosLayout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
                                 .addComponent(campoNomeProfissionalSaude, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
         filtrosLayout.setVerticalGroup(
             filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,7 +148,7 @@ public class JanelaCriarProfissionalSaude extends javax.swing.JDialog {
                     .addComponent(campoNomeProfissionalSaude, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                    .addComponent(labelEspecialidade)
                     .addComponent(campoEspecialidadeProfissionalSaude, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tipoEnfermariaPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,7 +208,7 @@ public class JanelaCriarProfissionalSaude extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel labelEspecialidade;
     private javax.swing.JPanel tipoEnfermariaPane;
     // End of variables declaration//GEN-END:variables
 

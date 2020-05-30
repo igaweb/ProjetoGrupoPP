@@ -74,13 +74,22 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="botaoCriar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="botaoEditar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="botaoRemover" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="botaoCriarMedico" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="botaoEditarMedico" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="botaoRemover" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="botaoCriarEnfermeiro" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="botaoEditarEnfermeiro" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                       <EmptySpace pref="302" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -89,9 +98,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="botaoCriar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="botaoEditar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="botaoCriarMedico" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="botaoEditarMedico" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="botaoRemover" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="botaoCriarEnfermeiro" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="botaoEditarEnfermeiro" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -99,21 +113,21 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="botaoCriar">
+            <Component class="javax.swing.JButton" name="botaoCriarMedico">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Criar"/>
+                <Property name="text" type="java.lang.String" value="Criar m&#xe9;dico"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoCriarMouseClicked"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoCriarActionPerformed"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoCriarMedicoMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoCriarMedicoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="botaoEditar">
+            <Component class="javax.swing.JButton" name="botaoEditarMedico">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Editar"/>
+                <Property name="text" type="java.lang.String" value="Editar M&#xe9;dico"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoEditarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoEditarMedicoActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="botaoRemover">
@@ -122,6 +136,23 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoRemoverMouseClicked"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="botaoEditarEnfermeiro">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Editar Enfermeiro"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoEditarEnfermeiroActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="botaoCriarEnfermeiro">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Criar enfermeiro"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="botaoCriarEnfermeiroMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoCriarEnfermeiroActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
