@@ -69,6 +69,7 @@ public class JanelaCriarProfissionalSaude extends javax.swing.JDialog {
             
             campoNomeProfissionalSaude.setText(profissionalSaude.getNome());
             campoEspecialidadeProfissionalSaude.setVisible(isMedico);
+            labelEspecialidade.setVisible(isMedico);
             if(isMedico) {
                 campoEspecialidadeProfissionalSaude.setText(((Medico)profissionalSaude).getEspecialidade());
             }
@@ -229,7 +230,6 @@ public class JanelaCriarProfissionalSaude extends javax.swing.JDialog {
             }
             
             fechar();
-            this.getOwner().firePropertyChange("tabela", 0, 0);
         } catch (Exception ex) {
             mostrarAviso("Ocorreu um erro ao tentar guardar os dados");
         }

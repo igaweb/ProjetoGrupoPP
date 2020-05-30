@@ -118,9 +118,8 @@ public class JanelaConsultaProfissionalSaude extends javax.swing.JDialog {
         contentor = new javax.swing.JPanel();
         botoes = new javax.swing.JPanel();
         botaoCriarMedico = new javax.swing.JButton();
-        botaoEditarMedico = new javax.swing.JButton();
+        botaoEditar = new javax.swing.JButton();
         botaoRemover = new javax.swing.JButton();
-        botaoEditarEnfermeiro = new javax.swing.JButton();
         botaoCriarEnfermeiro = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -140,10 +139,10 @@ public class JanelaConsultaProfissionalSaude extends javax.swing.JDialog {
             }
         });
 
-        botaoEditarMedico.setText("Editar Médico");
-        botaoEditarMedico.addActionListener(new java.awt.event.ActionListener() {
+        botaoEditar.setText("Editar");
+        botaoEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoEditarMedicoActionPerformed(evt);
+                botaoEditarActionPerformed(evt);
             }
         });
 
@@ -153,11 +152,9 @@ public class JanelaConsultaProfissionalSaude extends javax.swing.JDialog {
                 botaoRemoverMouseClicked(evt);
             }
         });
-
-        botaoEditarEnfermeiro.setText("Editar Enfermeiro");
-        botaoEditarEnfermeiro.addActionListener(new java.awt.event.ActionListener() {
+        botaoRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoEditarEnfermeiroActionPerformed(evt);
+                botaoRemoverActionPerformed(evt);
             }
         });
 
@@ -179,31 +176,22 @@ public class JanelaConsultaProfissionalSaude extends javax.swing.JDialog {
             botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(botoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(botoesLayout.createSequentialGroup()
-                        .addComponent(botaoCriarMedico)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoEditarMedico)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoRemover))
-                    .addGroup(botoesLayout.createSequentialGroup()
-                        .addComponent(botaoCriarEnfermeiro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoEditarEnfermeiro)))
-                .addContainerGap(302, Short.MAX_VALUE))
+                .addComponent(botaoCriarMedico)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botaoCriarEnfermeiro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botaoEditar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botaoRemover)
+                .addContainerGap(189, Short.MAX_VALUE))
         );
         botoesLayout.setVerticalGroup(
             botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(botoesLayout.createSequentialGroup()
-                .addGroup(botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botaoCriarMedico)
-                    .addComponent(botaoEditarMedico)
-                    .addComponent(botaoRemover))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botaoCriarEnfermeiro)
-                    .addComponent(botaoEditarEnfermeiro))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(botaoCriarMedico)
+                .addComponent(botaoEditar)
+                .addComponent(botaoCriarEnfermeiro)
+                .addComponent(botaoRemover))
         );
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
@@ -265,7 +253,7 @@ public class JanelaConsultaProfissionalSaude extends javax.swing.JDialog {
             .addGroup(contentorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -274,17 +262,14 @@ public class JanelaConsultaProfissionalSaude extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(contentor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(contentor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(135, 135, 135)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(124, Short.MAX_VALUE)
                 .addComponent(contentor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(34, 34, 34))
         );
 
         pack();
@@ -298,9 +283,9 @@ public class JanelaConsultaProfissionalSaude extends javax.swing.JDialog {
 
     }//GEN-LAST:event_botaoCriarMedicoActionPerformed
 
-    private void botaoEditarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarMedicoActionPerformed
-        editar(true);
-    }//GEN-LAST:event_botaoEditarMedicoActionPerformed
+    private void botaoEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarActionPerformed
+        editar();
+    }//GEN-LAST:event_botaoEditarActionPerformed
 
     private void botaoRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoRemoverMouseClicked
         remover();
@@ -310,10 +295,6 @@ public class JanelaConsultaProfissionalSaude extends javax.swing.JDialog {
         
     }//GEN-LAST:event_tabelaMouseClicked
 
-    private void botaoEditarEnfermeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoEditarEnfermeiroActionPerformed
-        editar(false);
-    }//GEN-LAST:event_botaoEditarEnfermeiroActionPerformed
-
     private void botaoCriarEnfermeiroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoCriarEnfermeiroMouseClicked
         adicionar(false);
     }//GEN-LAST:event_botaoCriarEnfermeiroMouseClicked
@@ -321,12 +302,15 @@ public class JanelaConsultaProfissionalSaude extends javax.swing.JDialog {
     private void botaoCriarEnfermeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarEnfermeiroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botaoCriarEnfermeiroActionPerformed
+
+    private void botaoRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoRemoverActionPerformed
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCriarEnfermeiro;
     private javax.swing.JButton botaoCriarMedico;
-    private javax.swing.JButton botaoEditarEnfermeiro;
-    private javax.swing.JButton botaoEditarMedico;
+    private javax.swing.JButton botaoEditar;
     private javax.swing.JButton botaoRemover;
     private javax.swing.JPanel botoes;
     private javax.swing.JPanel contentor;
@@ -343,15 +327,18 @@ private void adicionar(boolean isMedico) {
         }
     }
     
-    private void editar(boolean isMedico) {
-        int rowIndex = tabela.getSelectedRow();
-        //Se nenhum registo selecionado, nao é possivel editar
-        if (rowIndex == -1) return;
-        
+    private void editar() {
+         if (!validarSeExisteSelecao(false)) {
+            return;
+        }
+         
+        int rowIndex = tabela.getSelectedRow();           
         int colunaCodigo = 0;
         String codigo = (String) modeloTabela.getValueAt(rowIndex, colunaCodigo);
-        
+
          try {
+            ProfissionalSaude profissionalSaude = app.getProfissionalSaude(hospitalSelecionado, enfermariaSelecionada, codigo);
+            boolean isMedico = profissionalSaude instanceof Medico;
             JanelaCriarProfissionalSaude janela = new JanelaCriarProfissionalSaude(this, app, hospitalSelecionado, enfermariaSelecionada, codigo, isMedico);
             janela.setVisible(true);
         } catch (Exception ex) {            
@@ -361,30 +348,32 @@ private void adicionar(boolean isMedico) {
     }
          
     private void remover() {
-        if(tabela.getSelectedRows() != null && tabela.getSelectedRows().length > 0) {
-            int option = JOptionPane.showConfirmDialog(null, "Tem a certeza que quer eliminar a linha selecionada?");
+        if (!validarSeExisteSelecao(true)) {
+            return;
+        }
 
-            if(option == JOptionPane.OK_OPTION) {
-                ManagerProfissionalSaude managerProfissionalSaude = app.getManagerProfissionalSaude(hospitalSelecionado, enfermariaSelecionada);
-                for (int i = 0; i < tabela.getSelectedRows().length; i++) {
-                    try {
-                        int index = tabela.getSelectedRows()[i];
-                       
-                       ProfissionalSaude profissionalSaude = (ProfissionalSaude) managerProfissionalSaude.getLista().get(tabela.getModel().getValueAt(index, 0));
-                        managerProfissionalSaude.remover(profissionalSaude);
-                        atualizar();
-              //          serializacao.guardar(app);
-                        JOptionPane.showMessageDialog(this, "Profissional de Sa~ude removido com sucesso");
-                    } catch (Exception ex) {
-                        mostrarAviso("Ocorreu um erro ao tentar remover o(s) Profissional(ais) de Saúde selecionado(s).");
-                    }
+        int option = JOptionPane.showConfirmDialog(null, "Tem a certeza que quer eliminar a linha selecionada?");
+
+        if (option == JOptionPane.OK_OPTION) {
+            ManagerProfissionalSaude managerProfissionalSaude = app.getManagerProfissionalSaude(hospitalSelecionado, enfermariaSelecionada);
+            for (int i = 0; i < tabela.getSelectedRows().length; i++) {
+                try {
+                    int index = tabela.getSelectedRows()[i];
+
+                    ProfissionalSaude profissionalSaude = (ProfissionalSaude) managerProfissionalSaude.getLista().get(tabela.getModel().getValueAt(index, 0));
+                    managerProfissionalSaude.remover(profissionalSaude);
+                    atualizar();
+                    //          serializacao.guardar(app);
+                    JOptionPane.showMessageDialog(this, "Profissional de Sa~ude removido com sucesso");
+                } catch (Exception ex) {
+                    mostrarAviso("Ocorreu um erro ao tentar remover o(s) Profissional(ais) de Saúde selecionado(s).");
                 }
             }
         }
     }
     protected void setOperacoes(boolean criar, boolean editar, boolean remover) {
         botaoCriarMedico.setVisible(criar);
-        botaoEditarMedico.setVisible(editar);
+        botaoEditar.setVisible(editar);
         botaoRemover.setVisible(remover);
     }
 
@@ -394,8 +383,25 @@ private void adicionar(boolean isMedico) {
      private void fechar() {
         dispose();
     }
-     public void atualizar() {    
+      public void atualizar() {
+        // guarda os dados alterados
+        guardar();
+
         //Informa o modelo que foram efetuadas alteracoes, o modelo informa a tabela e os dados são redesenhados
         modeloTabela.fireTableDataChanged();
-    }   
+    }
+      
+    private boolean validarSeExisteSelecao(boolean isMultipla) {
+        if (tabela.getSelectedRows() == null
+                || (isMultipla && tabela.getSelectedRows().length <= 0)
+                || (!isMultipla && tabela.getSelectedRows().length != 1)) {
+            mostrarAviso("Tem de selecionar uma linha primeiro");
+            return false;
+        }
+        return true;
+    }
+    
+    private void guardar() {
+        serializacao.guardar(app);
+    }
 }
