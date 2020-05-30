@@ -4,6 +4,7 @@ import backend.Conteudos;
 import backend.entidades.Enfermaria;
 import backend.entidades.Equipamento;
 import backend.entidades.Paciente;
+import backend.entidades.ProfissionalSaude;
 import java.io.Serializable;
 import java.util.TreeMap;
 
@@ -22,7 +23,7 @@ public class ManagerEnfermaria extends ManagerBase implements Serializable {
     }
 
     public void adicionar(String nome, int tipo, Boolean[] camas) throws Exception {
-        Enfermaria enfermaria = new Enfermaria(null, nome, tipo, camas, new TreeMap<String, Equipamento>(), new TreeMap<String, Paciente>());
+        Enfermaria enfermaria = new Enfermaria(null, nome, tipo, camas, new TreeMap<String, Equipamento>(), new TreeMap<String, Paciente>(), new TreeMap<String, ProfissionalSaude>());
         
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_ADICIONAR);

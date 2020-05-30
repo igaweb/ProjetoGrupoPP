@@ -18,13 +18,14 @@ public class Enfermaria implements Serializable{
     public Enfermaria() {
     }
 
-    public Enfermaria(String codigo, String nome, int tipo, Boolean[] camas, TreeMap<String, Equipamento> equipamentos, TreeMap<String, Paciente> pacientes) {
+    public Enfermaria(String codigo, String nome, int tipo, Boolean[] camas, TreeMap<String, Equipamento> equipamentos, TreeMap<String, Paciente> pacientes, TreeMap<String, ProfissionalSaude> profissionalSaude) {
         this.codigo = codigo;
         this.nome = nome;
         this.tipo = tipo;
         this.camas = camas;
         this.equipamentos = equipamentos;
         this.pacientes = pacientes;
+        this.profissionalSaude = profissionalSaude;
     }
 
     public String getCodigo() {
