@@ -1,42 +1,22 @@
 package backend.entidades;
 
-import java.io.Serializable;
-import java.util.ArrayList;
+import backend.bases.EntidadeBase;
+import backend.interfaces.IEntidade;
 import java.util.TreeMap;
 
-public class Hospital implements Serializable {
+public class Hospital extends EntidadeBase implements IEntidade {
 
-    private static final long serialVersionUID = 1L;
-    
-    private String codigo;
     private String nome;
     private String localidade;
-    private TreeMap<String, Enfermaria> enfermarias = new TreeMap();
+    private TreeMap<String, EntidadeBase> enfermarias = new TreeMap();
 
     public Hospital() {
     }
 
-    public Hospital(String codigo, String nome, String localidade, TreeMap<String, Enfermaria> enfermarias) {
-        this.codigo = codigo;
-        this.nome = nome;
+    public Hospital(String codigo, String nome, String localidade, TreeMap<String, EntidadeBase> enfermarias) {
+        super(codigo, nome);
         this.localidade = localidade;
         this.enfermarias = enfermarias;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getLocalidade() {
@@ -47,11 +27,11 @@ public class Hospital implements Serializable {
         this.localidade = localidade;
     }
 
-    public TreeMap<String, Enfermaria> getEnfermarias() {
+    public TreeMap<String, EntidadeBase> getEnfermarias() {
         return enfermarias;
     }
 
-    public void setEnfermarias(TreeMap<String, Enfermaria> enfermarias) {
+    public void setEnfermarias(TreeMap<String, EntidadeBase> enfermarias) {
         this.enfermarias = enfermarias;
     }
 

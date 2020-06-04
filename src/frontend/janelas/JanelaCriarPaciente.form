@@ -98,7 +98,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="146" max="32767" attributes="0"/>
+                  <EmptySpace pref="64" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -298,12 +298,12 @@
         </Component>
         <Component class="javax.swing.JLabel" name="labelDataEntrada">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Data de Entrada:"/>
+            <Property name="text" type="java.lang.String" value="Data de Entrada (YYYYMMdd):"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelDataSaida">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Data de Sa&#xed;da:"/>
+            <Property name="text" type="java.lang.String" value="Data de Sa&#xed;da (YYYYMMdd):"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="campoDataEntrada">

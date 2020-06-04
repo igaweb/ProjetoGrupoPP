@@ -1,19 +1,19 @@
 package backend.managers;
 
+import backend.bases.ManagerBase;
+import backend.interfaces.IManager;
 import backend.Conteudos;
+import backend.bases.EntidadeBase;
 import backend.entidades.Paciente;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.TreeMap;
 
-public class ManagerPaciente extends ManagerBase implements Serializable {
+public class ManagerPaciente extends ManagerBase implements IManager {
   
     private static final long serialVersionUID = 1L;
     
     private static final String PREFIXO_CODIGO = "PA-";
 
-    private static final String ERRO_FALTA_CODIGO = "ERRO_FALTA_CODIGO";
-    private static final String ERRO_FALTA_NOME = "ERRO_FALTA_NOME";
     private static final String ERRO_FALTA_LOCALIDADE = "ERRO_FALTA_LOCALIDADE";
     private static final String ERRO_FALTA_CAMA = "ERRO_FALTA_CAMA";
     private static final String ERRO_FALTA_ESTADO = "ERRO_FALTA_ESTADO";
@@ -23,89 +23,40 @@ public class ManagerPaciente extends ManagerBase implements Serializable {
     public ManagerPaciente() {
     }
 
-    public ManagerPaciente(TreeMap<String,Paciente>lista) {
+    public ManagerPaciente(TreeMap<String,EntidadeBase>lista) {
         this.lista = lista;
     }
 
     public void adicionar(String nome, String localidade, int cama, Integer estado, Date dataEntrada) throws Exception {
         Paciente paciente = new Paciente(null, nome, localidade, cama, estado, dataEntrada, null);
-        // set da operacao que estamos a fazer
-        setOperacao(OPERACAO_ADICIONAR);
-
-        // validar se os campos vêm todos bem preenchidos
-        boolean isValido = validarCampos(paciente);
-
-        // se estiver bem preenchido,
-        // avança para a adição
-        if (isValido) {
-            // gerar o codigo para a novo paciente
-            String novoCodigo = gerarCodigo();
-            paciente.setCodigo(novoCodigo);
-            
-            lista.put(paciente.getCodigo(), paciente);
-        } else {
-            // senão, retorna erro
-            throw new Exception(ERRO_ADICIONAR);
-        }
-    }
-
-    public void remover(Paciente paciente) throws Exception {
-        // set da operacao que estamos a fazer
-        setOperacao(OPERACAO_REMOVER);
-
-        lista.remove(paciente.getCodigo());
-    }
-
-    public void editar(Paciente paciente) throws Exception {
-        // set da operacao que estamos a fazer
-        setOperacao(OPERACAO_EDITAR);
-
-        // validar se os campos vêm todos bem preenchidos
-        boolean isValido = validarCampos(paciente);
-
-        // se estiver bem preenchido,
-        // avança para a adição
-        if (isValido) {
-            lista.put(paciente.getCodigo(), paciente);
-        } else {
-            // senão, retorna erro
-            throw new Exception(ERRO_EDITAR);
-        }
+        
+        adicionar(paciente);
     }
 
     /*
      * Método para validar se os campos da classe estão bem preenchidos
      */
-    private boolean validarCampos(Paciente paciente) throws Exception {
+    @Override
+    public boolean validarCampos(EntidadeBase paciente) throws ValidacaoEntidadeException {
         // validações para todas as operaçoes na base
         boolean isValid = super.validarCampos(paciente);
 
-        // se nao for a operacao adicionar, tem de existir um codigo
-        if (!operacao.equals(OPERACAO_ADICIONAR) && (paciente.getCodigo() == null || paciente.getCodigo().isEmpty())) {
-            throw new Exception(ERRO_FALTA_CODIGO);
+        if (((Paciente)paciente).getLocalidade() == null || ((Paciente)paciente).getLocalidade().isEmpty()) {
+            throw new ValidacaoEntidadeException(ERRO_FALTA_LOCALIDADE);
         }
-        if (paciente.getNome() == null || paciente.getNome().isEmpty()) {
-            throw new Exception(ERRO_FALTA_NOME);
+        if (((Paciente)paciente).getCama() < 0 ) {
+            throw new ValidacaoEntidadeException(ERRO_FALTA_CAMA);
         }
-        if (paciente.getLocalidade() == null || paciente.getLocalidade().isEmpty()) {
-            throw new Exception(ERRO_FALTA_LOCALIDADE);
+          if (((Paciente)paciente).getEstado() < 0 || ((Paciente)paciente).getEstado() >= Conteudos.getEstadosPaciente().length) {
+            throw new ValidacaoEntidadeException(ERRO_FALTA_ESTADO);
         }
-        if (paciente.getCama() < 0 ) {
-            throw new Exception(ERRO_FALTA_CAMA);
+        if (((Paciente)paciente).getDataEntrada() == null ) {
+            throw new ValidacaoEntidadeException(ERRO_FALTA_DATAENTRADA);
         }
-          if (paciente.getEstado() < 0 || paciente.getEstado() >= Conteudos.getEstadosPaciente().length) {
-            throw new Exception(ERRO_FALTA_ESTADO);
-        }
-        if (paciente.getDataEntrada() == null ) {
-            throw new Exception(ERRO_FALTA_DATAENTRADA);
-        }
-        if (!operacao.equals(OPERACAO_ADICIONAR) && paciente.getDataSaida() == null) {
-            throw new Exception(ERRO_FALTA_DATASAIDA);
+        if (!operacao.equals(OPERACAO_ADICIONAR) && ((Paciente)paciente).getDataSaida() == null) {
+            throw new ValidacaoEntidadeException(ERRO_FALTA_DATASAIDA);
         }
 
-        // tem de ter um tipo definido (int nao permite nulls)
-        // neste caso, o tipo indica o indice do array definido em Conteudos.getTiposPaciente(), por isso, terá de ser maior de 0 e menor que o comprimento do array
-            
         return isValid;
     }
 

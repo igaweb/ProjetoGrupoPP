@@ -1,73 +1,57 @@
 package backend.managers;
 
+import backend.bases.ManagerBase;
+import backend.interfaces.IManager;
+import backend.bases.EntidadeBase;
 import backend.entidades.Utilizador;
-import java.io.Serializable;
 import java.util.TreeMap;
 
-public class ManagerUtilizador extends ManagerBase implements Serializable {
+public class ManagerUtilizador extends ManagerBase implements IManager {
 
     private static final long serialVersionUID = 1L;
     
     private static final String PREFIXO_CODIGO = "UT-";
 
-    private static final String ERRO_FALTA_NOME = "ERRO_FALTA_NOME";
     private static final String ERRO_FALTA_PASSWORD = "ERRO_FALTA_PASSWORD";
 
     public ManagerUtilizador() {
     }
 
-    public ManagerUtilizador(TreeMap<String, Utilizador> lista) {
+    public ManagerUtilizador(TreeMap<String, EntidadeBase> lista) {
         this.lista = lista;
     }
 
-    public void adicionar(Utilizador utilizador) throws Exception {
+    @Override
+    public void adicionar(EntidadeBase utilizador) throws Exception {
+        // set da operacao que estamos a fazer
         setOperacao(OPERACAO_ADICIONAR);
+
+        // validar se os campos vêm todos bem preenchidos
         boolean isValido = validarCampos(utilizador);
 
+        // se estiver bem preenchido,
+        // avança para a adição
         if (isValido) {
-
             lista.put(utilizador.getNome(), utilizador);
         } else {
             throw new Exception(ERRO_ADICIONAR);
         }
     }
     
-      public void adicionar(String nome, String password) throws Exception {
-       Utilizador utilizador = new Utilizador (nome, password);
+    public void adicionar(String nome, String password) throws Exception {
+        Utilizador utilizador = new Utilizador(nome, password);
 
         adicionar(utilizador);
-    }
-
-    public void remover(Utilizador utilizador) throws Exception {
-        setOperacao(OPERACAO_REMOVER);
-
-        lista.remove(utilizador.getNome());
-    }
-
-    public void editar(Utilizador utilizador) throws Exception {
-        setOperacao(OPERACAO_EDITAR);
-
-        boolean isValido = validarCampos(utilizador);
-
-        if (isValido) {
-            lista.put(utilizador.getNome(), utilizador);
-        } else {
-
-            throw new Exception(ERRO_EDITAR);
-        }
     }
 
     /*
      * Método para validar se os campos da classe estão bem preenchidos
      */
-    private boolean validarCampos(Utilizador utilizador) throws Exception {
+    private boolean validarCampos(Utilizador utilizador) throws ValidacaoEntidadeException {
         // validações para todas as operaçoes na base
         boolean isValid = super.validarCampos(utilizador);
-        if (!operacao.equals(OPERACAO_ADICIONAR) && utilizador.getNome() == null) {
-            throw new Exception(ERRO_FALTA_NOME);
-        }
         if (!operacao.equals(OPERACAO_ADICIONAR) && utilizador.getPassword() == null) {
-            throw new Exception(ERRO_FALTA_PASSWORD);
+            throw new ValidacaoEntidadeException(ERRO_FALTA_PASSWORD);
         }
         // validações....... (campos obrigatorios, tipos de dados, etc...)
         return isValid;

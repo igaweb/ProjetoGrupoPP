@@ -1,18 +1,18 @@
 package backend.entidades;
 
-import java.util.ArrayList;
+import backend.bases.EntidadeBase;
+import java.util.TreeMap;
 
 public class Medico extends ProfissionalSaude {
 
     private String especialidade;
-    private ArrayList<Paciente> pacientes = new ArrayList();
+    private TreeMap<String, EntidadeBase> pacientes = new TreeMap();
 
     public Medico() {
     }
 
-    public Medico(String especialidade, ArrayList<Paciente> pacientes) {
+    public Medico(String especialidade) {
         this.especialidade = especialidade;
-        this.pacientes = pacientes;
     }
 
     public String getEspecialidade() {
@@ -23,20 +23,20 @@ public class Medico extends ProfissionalSaude {
         this.especialidade = especialidade;
     }
 
-    public ArrayList<Paciente> getPacientes() {
+    public TreeMap<String, EntidadeBase> getPacientes() {
         return pacientes;
     }
 
-    public void setPacientes(ArrayList<Paciente> pacientes) {
+    public void setPacientes(TreeMap<String, EntidadeBase> pacientes) {
         this.pacientes = pacientes;
     }
 
     public void addPaciente(Paciente paciente) {
-
+        pacientes.put(paciente.getCodigo(), paciente);
     }
 
     public void removePaciente(Paciente paciente) {
-
+        pacientes.remove(paciente);
     }
 
     @Override

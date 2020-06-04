@@ -4,11 +4,12 @@ import backend.Aplicacao;
 import backend.entidades.Enfermeiro;
 import backend.entidades.Medico;
 import backend.entidades.ProfissionalSaude;
+import backend.interfaces.ICallerJanelaCriarInterface;
 import backend.managers.ManagerProfissionalSaude;
 import javax.swing.JOptionPane;
 
 public class JanelaCriarProfissionalSaude extends javax.swing.JDialog {
-    private JanelaConsultaProfissionalSaude janela;
+    private ICallerJanelaCriarInterface janela;
     private Aplicacao app;
 
     private String operacao;
@@ -20,7 +21,7 @@ public class JanelaCriarProfissionalSaude extends javax.swing.JDialog {
     /**
      * Creates new form NewJDialog
      */
-    public JanelaCriarProfissionalSaude(JanelaConsultaProfissionalSaude janela, Aplicacao app,String codigoHospital, String codigoEnfermaria, String codigoProfissionalSaude, boolean isMedico) {
+    public JanelaCriarProfissionalSaude(ICallerJanelaCriarInterface janela, Aplicacao app,String codigoHospital, String codigoEnfermaria, String codigoProfissionalSaude, boolean isMedico) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException {
         this.janela = janela;
         this.app = app;
         this.isMedico = isMedico;
@@ -231,7 +232,7 @@ public class JanelaCriarProfissionalSaude extends javax.swing.JDialog {
             
             fechar();
         } catch (Exception ex) {
-            mostrarAviso("Ocorreu um erro ao tentar guardar os dados");
+            mostrarAviso(ex.getMessage());
         }
         
     }

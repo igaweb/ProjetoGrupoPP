@@ -1,28 +1,20 @@
 package backend.entidades;
 
-import java.io.Serializable;
+import backend.bases.EntidadeBase;
+import backend.interfaces.IEntidade;
 
-public class Utilizador implements Serializable{
+public class Utilizador extends EntidadeBase implements IEntidade{
 
     private static final long serialVersionUID = 1L;
     
-    protected String nome;
     protected String password;
 
     public Utilizador() {
     }
 
     public Utilizador(String nome, String password) {
-        this.nome = nome;
+        super(nome, nome);
         this.password = password;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getPassword() {

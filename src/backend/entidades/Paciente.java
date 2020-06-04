@@ -1,14 +1,12 @@
 package backend.entidades;
 
+import backend.bases.EntidadeBase;
+import backend.interfaces.IEntidade;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Paciente implements Serializable{
+public class Paciente extends EntidadeBase implements IEntidade {
 
-    private static final long serialVersionUID = 1L;
-    
-    private String codigo;
-    private String nome;
     private String localidade;
     private int cama;
     private Integer estado;
@@ -19,29 +17,12 @@ public class Paciente implements Serializable{
     }
 
     public Paciente(String codigo, String nome, String localidade, int cama, Integer estado, Date dataEntrada, Date dataSaida) {
-        this.codigo = codigo;
-        this.nome = nome;
+        super(codigo, nome);
         this.localidade = localidade;
         this.cama = cama;
         this.estado = estado;
         this.dataEntrada = dataEntrada;
         this.dataSaida = dataSaida;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getLocalidade() {

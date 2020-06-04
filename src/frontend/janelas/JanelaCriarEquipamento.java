@@ -5,66 +5,77 @@
  */
 package frontend.janelas;
 
+import backend.interfaces.ICallerJanelaCriarInterface;
 import backend.Aplicacao;
 import backend.entidades.Enfermaria;
+import backend.bases.EntidadeBase;
 import backend.entidades.Equipamento;
-import backend.entidades.Hospital;
+import backend.entidades.Paciente;
 import backend.managers.ManagerEquipamento;
 import java.util.TreeMap;
 import javax.swing.JOptionPane;
 
-
 public class JanelaCriarEquipamento extends javax.swing.JDialog {
-    
-    private  JanelaConsultaEquipamento janela;
-    private  Aplicacao app;
+
+    private ICallerJanelaCriarInterface janela;
+    private Aplicacao app;
     private String operacao;
-    private Hospital hospital;
     private Enfermaria enfermaria;
     private ManagerEquipamento managerEquipamento;
     private Equipamento equipamento;
-    
+
     /**
      * Creates new form JanelaCriarEquipamento
      */
-    public JanelaCriarEquipamento(JanelaConsultaEquipamento janela, Aplicacao app, String codigoHospital,String codigoEnfermaria,String codigoEquipamento) {
+    public JanelaCriarEquipamento(ICallerJanelaCriarInterface janela, Aplicacao app, String codigoHospital, String codigoEnfermaria, String codigoEquipamento) {
         this.janela = janela;
         this.app = app;
-        
+
         initComponents();
-        
+
         //Indica que a janela deve ser modal ou seja,
         //bloqueia a execução do programa até que a janela seja fechada
-        this.setModal(true);     
-        
+        this.setModal(true);
+
         this.setAlwaysOnTop(true);
-        
+
         //Não permite o redimensionamento da janela
         this.setResizable(false);
-        
+
         //Mostra a centralização da janela
         this.setLocationRelativeTo(null);
-        
+
         //O processo de fecho da janela será controlado pelo programa
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);                                
-        
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
         try {
             enfermaria = (Enfermaria) app.getManagerEnfermaria(codigoHospital).getLista().get(codigoEnfermaria);
         } catch (Exception e) {
             throw new NullPointerException("Falta codigo da Enfermaria.");
         }
-        
-        TreeMap<String, Equipamento> listaEquipamentos = enfermaria.getEquipamentos();
+
+        TreeMap<String, EntidadeBase> listaEquipamentos = enfermaria.getEquipamentos();
         managerEquipamento = app.getManagerEquipamento(codigoHospital, codigoEnfermaria);
-        
-         if(codigoEquipamento == null) {
+
+        if (codigoEquipamento == null) {
             operacao = ManagerEquipamento.OPERACAO_ADICIONAR;
             setTitle("Adicionar Equipamento");
         } else {
             operacao = ManagerEquipamento.OPERACAO_EDITAR;
             setTitle("Editar Equipamento");
-            equipamento = listaEquipamentos.get(codigoEquipamento);
+            equipamento = (Equipamento) listaEquipamentos.get(codigoEquipamento);
             campoTipoEquipamento.setSelectedIndex(equipamento.getTipo());
+
+            if (equipamento.isLivre() == true) {
+                rBotaoLivre.setSelected(true);
+            } else {
+
+                rBotaoOcupado.setSelected(true);
+            }
+            
+//         Enfermaria enfermaria = app.getEnfermaria(codigoHospital, codigoEnfermaria);
+//         enfermaria.getPacientes(); 
+
         }
     }
 
@@ -85,6 +96,8 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
         botaoGuardar = new javax.swing.JButton();
         rBotaoOcupado = new javax.swing.JRadioButton();
         rBotaoLivre = new javax.swing.JRadioButton();
+        labelCodPaciente = new javax.swing.JLabel();
+        codPaciente = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -114,15 +127,13 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
         filtrosLayout.setHorizontalGroup(
             filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(filtrosLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(filtrosLayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
                         .addComponent(labelSelecionarEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62)
+                        .addGap(60, 60, 60)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(filtrosLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(campoTipoEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(campoTipoEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         filtrosLayout.setVerticalGroup(
@@ -165,6 +176,8 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
             }
         });
 
+        labelCodPaciente.setText("Codigo Paciente :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -173,21 +186,36 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
                 .addGap(6, 6, 6)
                 .addComponent(filtros, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(rBotaoLivre, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(rBotaoOcupado, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(226, 226, 226)
                 .addComponent(botaoGuardar))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelCodPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(rBotaoOcupado, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(codPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addComponent(filtros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rBotaoLivre)
-                .addGap(6, 6, 6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rBotaoOcupado)
-                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(labelCodPaciente)
+                        .addGap(34, 34, 34))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(codPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)))
                 .addComponent(botaoGuardar))
         );
 
@@ -207,103 +235,68 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
     }//GEN-LAST:event_rBotaoOcupadoActionPerformed
 
     private void botaoGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGuardarActionPerformed
-         adicionarOuEditar();
+        adicionarOuEditar();
     }//GEN-LAST:event_botaoGuardarActionPerformed
 
     private void botaoGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoGuardarMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_botaoGuardarMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(JanelaCriarEquipamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(JanelaCriarEquipamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(JanelaCriarEquipamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(JanelaCriarEquipamento.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the dialog */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                JanelaCriarEquipamento dialog = new JanelaCriarEquipamento(new javax.swing.JFrame(), true);
-//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-//                    @Override
-//                    public void windowClosing(java.awt.event.WindowEvent e) {
-//                        System.exit(0);
-//                    }
-//                });
-//                dialog.setVisible(true);
-//            }
-//        });
-//    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoGuardar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> campoTipoEquipamento;
+    private javax.swing.JTextField codPaciente;
     private javax.swing.JPanel filtros;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelCodPaciente;
     private javax.swing.JLabel labelSelecionarEquipamento;
     private javax.swing.JRadioButton rBotaoLivre;
     private javax.swing.JRadioButton rBotaoOcupado;
     // End of variables declaration//GEN-END:variables
 
     private void adicionarOuEditar() {
+        int tipo = campoTipoEquipamento.getSelectedIndex();
+        boolean livre;
+        String codigoPaciente;
+        Paciente paciente = null;
+
+        livre = rBotaoLivre.isSelected();
+
         try {
-            int tipo = campoTipoEquipamento.getSelectedIndex();
-            
-            if(operacao.equals(ManagerEquipamento.OPERACAO_ADICIONAR)){
-                managerEquipamento.adicionar(equipamento);
-            } else if(operacao.equals(ManagerEquipamento.OPERACAO_EDITAR)){
-                equipamento.setTipo(tipo);
-                equipamento.isLivre();
-                managerEquipamento.editar(equipamento);
+
+            if (operacao.equals(ManagerEquipamento.OPERACAO_ADICIONAR)) {
+                managerEquipamento.adicionar(tipo, livre, paciente);
+            } else if (operacao.equals(ManagerEquipamento.OPERACAO_EDITAR)) {
+                equipamento.setTipo(campoTipoEquipamento.getSelectedIndex());
+
+                if (rBotaoLivre.isSelected()) {
+                    equipamento.setLivre(true);
+                } else {
+                    equipamento.setLivre(false);
+                }
             }
             
             fechar();
-            this.getOwner().firePropertyChange("tabela", 0, 0);
-            
-        }catch (Exception ex) {
-            mostrarAviso("Ocorreu um erro ao tentar guardar os dados");
+ 
+        } catch (Exception ex) {
+            mostrarAviso(ex.getMessage());
         }
-        
-    }  
-    
-      
+
+    }
+
     /*
      * Métodos auxiliares genéricos
-    */
+     */
     private void mostrarAviso(String aviso) {
         JOptionPane.showMessageDialog(rootPane, aviso);
     }
-    
+
     private void fechar() {
         dispose();
         janela.atualizar();
     }
     /*
      * FIM Métodos auxiliares genéricos
-    */
+     */
 }
-        
-        
-       

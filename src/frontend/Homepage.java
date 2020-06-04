@@ -3,11 +3,14 @@ package frontend;
 import backend.Aplicacao;
 import backend.Serializacao;
 import backend.entidades.Administrador;
-import frontend.janelas.JanelaConsultaHospital;
 import frontend.janelas.JanelaConsultaUtilizador;
 import frontend.janelas.JanelaCriarUtilizador;
+import javax.swing.JOptionPane;
+import backend.interfaces.ICallerJanelaCriarInterface;
+import frontend.janelas.JanelaListaHospital;
+import frontend.janelas.JanelaLogin;
 
-public class Homepage extends javax.swing.JFrame {
+public class Homepage extends javax.swing.JFrame implements ICallerJanelaCriarInterface {
 
     private static Aplicacao app;
     private static Serializacao serializacao;
@@ -54,13 +57,11 @@ public class Homepage extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuAdmin = new javax.swing.JMenu();
-        menuAcessoLogout = new javax.swing.JMenuItem();
-        menuAcessoLogin = new javax.swing.JMenuItem();
         menuAcessoGerirUtilizadores = new javax.swing.JMenuItem();
-        menuEditarPerfil = new javax.swing.JMenuItem();
         menuIniciar = new javax.swing.JMenu();
         menuListarHospitais = new javax.swing.JMenuItem();
         menuEditarUtilizador = new javax.swing.JMenuItem();
+        menuAcessoLogin = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -95,22 +96,6 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
 
-        menuAcessoLogout.setText("Login");
-        menuAcessoLogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuAcessoLogoutActionPerformed(evt);
-            }
-        });
-        menuAdmin.add(menuAcessoLogout);
-
-        menuAcessoLogin.setText("Logout");
-        menuAcessoLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuAcessoLoginActionPerformed(evt);
-            }
-        });
-        menuAdmin.add(menuAcessoLogin);
-
         menuAcessoGerirUtilizadores.setText("Gerir Utilizadores");
         menuAcessoGerirUtilizadores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,14 +103,6 @@ public class Homepage extends javax.swing.JFrame {
             }
         });
         menuAdmin.add(menuAcessoGerirUtilizadores);
-
-        menuEditarPerfil.setText("Editar Perfil");
-        menuEditarPerfil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuEditarPerfilActionPerformed(evt);
-            }
-        });
-        menuAdmin.add(menuEditarPerfil);
 
         jMenuBar1.add(menuAdmin);
 
@@ -147,6 +124,14 @@ public class Homepage extends javax.swing.JFrame {
         });
         menuIniciar.add(menuEditarUtilizador);
 
+        menuAcessoLogin.setText("Logout");
+        menuAcessoLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAcessoLoginActionPerformed(evt);
+            }
+        });
+        menuIniciar.add(menuAcessoLogin);
+
         jMenuBar1.add(menuIniciar);
 
         setJMenuBar(jMenuBar1);
@@ -165,68 +150,25 @@ public class Homepage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menuAcessoLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAcessoLogoutActionPerformed
-
-    }//GEN-LAST:event_menuAcessoLogoutActionPerformed
-
     private void menuAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAdminActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuAdminActionPerformed
 
     private void menuAcessoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAcessoLoginActionPerformed
-        // TODO add your handling code here:
+        logout();
     }//GEN-LAST:event_menuAcessoLoginActionPerformed
 
     private void menuAcessoGerirUtilizadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAcessoGerirUtilizadoresActionPerformed
         listarUtilizadores();
     }//GEN-LAST:event_menuAcessoGerirUtilizadoresActionPerformed
 
-    private void menuEditarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarPerfilActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuEditarPerfilActionPerformed
-
     private void menuListarHospitaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarHospitaisActionPerformed
         listarHospitais();
     }//GEN-LAST:event_menuListarHospitaisActionPerformed
 
     private void menuEditarUtilizadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarUtilizadorActionPerformed
-        editarUtilizadores();
+        
     }//GEN-LAST:event_menuEditarUtilizadorActionPerformed
-
-    /**
-     * // * @param args the command line arguments //
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(Homepage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(Homepage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(Homepage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(Homepage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new Homepage().setVisible(true);
-//            }
-//        });
-//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private backend.entidades.Hospital hospital1;
@@ -241,10 +183,8 @@ public class Homepage extends javax.swing.JFrame {
     private java.awt.Menu menu2;
     private javax.swing.JMenuItem menuAcessoGerirUtilizadores;
     private javax.swing.JMenuItem menuAcessoLogin;
-    private javax.swing.JMenuItem menuAcessoLogout;
     private javax.swing.JMenu menuAdmin;
     private java.awt.MenuBar menuBar1;
-    private javax.swing.JMenuItem menuEditarPerfil;
     private javax.swing.JMenuItem menuEditarUtilizador;
     private javax.swing.JMenu menuIniciar;
     private javax.swing.JMenuItem menuListarHospitais;
@@ -252,36 +192,62 @@ public class Homepage extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void listarHospitais() {
-        JanelaConsultaHospital janelaConsulta = new JanelaConsultaHospital(app, serializacao);
-        janelaConsulta.setVisible(true);
-    }
-
-    private void listarEnfermarias() {
-//        JanelaConsultaEnfermaria janelaConsulta = new JanelaConsultaEnfermaria(app, serializacao);
-//        janelaConsulta.setVisible(true);
-    }
-
-    private void listarEquipamentos() {
-//        JanelaConsultaEquipamento janelaConsulta = new JanelaConsultaEquipamento(app, serializacao);
-//        janelaConsulta.setVisible(true);
-    }
-
-    private void listarProfissionaisSaude() {
-        // TODO
-    }
-
-    private void listarPacientes() {
-//        JanelaConsultaPaciente janelaConsulta = new JanelaConsultaPaciente(app, serializacao);
-//        janelaConsulta.setVisible(true);
+        // chama a janela da listagem das enfermarias do hospital selecionado
+        String titutlo = "Listagem Hospitais";
+        JanelaListaHospital janelaConsulta;
+        try {
+            janelaConsulta = new JanelaListaHospital(app, serializacao, titutlo);
+            janelaConsulta.setVisible(true);
+        } catch (Exception ex) {
+            mostrarAviso(ex.getMessage());
+        }
     }
 
     private void listarUtilizadores() {
         JanelaConsultaUtilizador janelaConsulta = new JanelaConsultaUtilizador(app, serializacao);
         janelaConsulta.setVisible(true);
     }
-    
-    private void editarUtilizadores() {
-        JanelaCriarUtilizador janelaEditar = new JanelaCriarUtilizador(null, app, serializacao, app.getUtilizadorAutenticado().getNome());
-        janelaEditar.setVisible(true);
+
+    private void editarPerfil() {
+        try {
+            JanelaCriarUtilizador janela = new JanelaCriarUtilizador(this, app, serializacao, app.getUtilizadorAutenticado().getNome());
+            janela.setVisible(true);
+        } catch (Exception ex) {
+            mostrarAviso(ex.getMessage());
+        }
     }
+
+    private void logout() {
+        app.setUtilizadorAutenticado(null);
+        fechar();
+        
+        JanelaLogin janelaLogin = new JanelaLogin(app, serializacao);
+        janelaLogin.setVisible(true);
+    }
+
+    
+    /*
+     * Métodos auxiliares genéricos
+    */
+    private void mostrarAviso(String aviso) {
+        JOptionPane.showMessageDialog(rootPane, aviso);
+    }
+    
+    private void fechar() {
+        dispose();
+    }
+    
+    @Override
+    public void atualizar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public void guardar() {
+        serializacao.guardar(app);
+    }
+    /*
+     * FIM Métodos auxiliares genéricos
+    */
+
 }

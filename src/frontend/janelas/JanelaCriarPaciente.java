@@ -1,31 +1,27 @@
 package frontend.janelas;
 
 import backend.Aplicacao;
-import backend.entidades.Enfermaria;
-import backend.entidades.Hospital;
 import backend.entidades.Paciente;
+import backend.interfaces.ICallerJanelaCriarInterface;
 import backend.managers.ManagerPaciente;
 import frontend.model.filtros.HospitalComboModel;
 import frontend.model.filtros.EstadoPacienteComboModel;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TreeMap;
 import javax.swing.JOptionPane;
 
 public class JanelaCriarPaciente extends javax.swing.JDialog {
-    private JanelaConsultaPaciente janela;
+    private ICallerJanelaCriarInterface janela;
     private Aplicacao app;
     private String operacao;
-    private Enfermaria enfermaria;
-     private Hospital hospital;
     private ManagerPaciente managerPaciente;
     private Paciente paciente;
     
     /**
      * Creates new form NewJDialog
      */
-    public JanelaCriarPaciente(JanelaConsultaPaciente janela, Aplicacao app, String codigoHospital, String codigoEnfermaria, String codigoPaciente) {
+    public JanelaCriarPaciente(ICallerJanelaCriarInterface janela, Aplicacao app, String codigoHospital, String codigoEnfermaria, String codigoPaciente) throws Exception {
         this.janela = janela;
         this.app = app;
         
@@ -46,13 +42,6 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
         //O processo de fecho da janela será controlado pelo programa
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);                                
         
-       try {
-            enfermaria = (Enfermaria) app.getManagerEnfermaria(codigoHospital).getLista().get(codigoEnfermaria);
-        } catch (Exception e) {
-            throw  new NullPointerException("Falta codigo da Enfermaria.");
-        }
-        
-        TreeMap<String, Paciente> listaPacientes= enfermaria.getPacientes();
         managerPaciente = app.getManagerPaciente(codigoHospital, codigoEnfermaria);
         
         if(codigoPaciente == null) {
@@ -65,7 +54,7 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
         } else {
             operacao = ManagerPaciente.OPERACAO_EDITAR;
             setTitle("Editar Paciente");
-            paciente = listaPacientes.get(codigoPaciente);
+            paciente = (Paciente)app.getPaciente(codigoHospital, codigoEnfermaria, codigoPaciente);
             campoPacienteEstado.setSelectedIndex(paciente.getEstado());
             int nCamas = paciente.getCama();
             campoPacienteCama.setText(nCamas + "");
@@ -198,9 +187,9 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
             }
         });
 
-        labelDataEntrada.setText("Data de Entrada:");
+        labelDataEntrada.setText("Data de Entrada (YYYYMMdd):");
 
-        labelDataSaida.setText("Data de Saída:");
+        labelDataSaida.setText("Data de Saída (YYYYMMdd):");
 
         try {
             campoDataEntrada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("########")));
@@ -252,7 +241,7 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
                                 .addComponent(labelDataSaida)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(campoDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         filtrosLayout.setVerticalGroup(
             filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -6,6 +6,7 @@
  */
 package frontend.janelas;
 
+import backend.interfaces.ICallerJanelaCriarInterface;
 import backend.Aplicacao;
 import backend.entidades.Enfermaria;
 import backend.managers.ManagerEnfermaria;
@@ -18,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class JanelaCriarEnfermaria extends javax.swing.JDialog {
 
-    private JanelaConsultaEnfermaria janela;
+    private ICallerJanelaCriarInterface janela;
     private Aplicacao app;
     private String operacao;
     private ManagerEnfermaria managerEnfermaria;
@@ -31,7 +32,7 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
      * @param codigoHospital
      * @param codigoEnfermaria
      */
-    public JanelaCriarEnfermaria(JanelaConsultaEnfermaria janela, Aplicacao app, String codigoHospital, String codigoEnfermaria) {
+    public JanelaCriarEnfermaria(ICallerJanelaCriarInterface janela, Aplicacao app, String codigoHospital, String codigoEnfermaria) {
         this.janela = janela;
         this.app = app;
         

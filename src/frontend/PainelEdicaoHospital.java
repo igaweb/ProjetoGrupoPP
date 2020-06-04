@@ -3,62 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package frontend.janelas;
-
-import backend.Aplicacao;
-import backend.entidades.Hospital;
-import backend.interfaces.ICallerJanelaCriarInterface;
-import backend.managers.ManagerHospital;
-import javax.swing.JOptionPane;
+package frontend;
 
 /**
  *
  * @author iga
  */
-public class JanelaCriarHospital extends javax.swing.JDialog {
-
-    private ICallerJanelaCriarInterface janela;
-    private Aplicacao app;
-    private String operacao;
-    private ManagerHospital managerHospital;
-    private Hospital hospital;
+public class PainelEdicaoHospital extends javax.swing.JPanel {
 
     /**
-     * Creates new form NewJDialog
+     * Creates new form PainelEdicaoBase
      */
-    public JanelaCriarHospital(ICallerJanelaCriarInterface janela, Aplicacao app, String codigoHospital) {
-        this.janela = janela;
-        this.app = app;
-
+    public PainelEdicaoHospital() {
         initComponents();
-
-        //Indica que a janela deve ser modal ou seja,
-        //bloqueia a execução do programa até que a janela seja fechada
-        this.setModal(true);
-
-        this.setAlwaysOnTop(true);
-
-        //Não permite o redimensionamento da janela
-        this.setResizable(false);
-
-        //Mostra a centralização da janela
-        this.setLocationRelativeTo(null);
-
-        //O processo de fecho da janela será controlado pelo programa
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
-        managerHospital = app.getManagerHospital();
-
-        if (codigoHospital == null) {
-            operacao = ManagerHospital.OPERACAO_ADICIONAR;
-            setTitle("Adicionar Hospital");
-        } else {
-            operacao = ManagerHospital.OPERACAO_EDITAR;
-            setTitle("Editar Hospital");
-            hospital = (Hospital) app.getManagerHospital().getLista().get(codigoHospital);
-            campoHospitalNome.setText(hospital.getNome());
-            campoHospitaLocalidade.setText(hospital.getLocalidade());
-        }
     }
 
     /**
@@ -77,9 +34,6 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         Nome = new javax.swing.JLabel();
         campoHospitalNome = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Localidade.setText("Localidade:");
 
@@ -103,7 +57,7 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
                     .addComponent(campoHospitaLocalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jLabel1.setText(getTitle());
+        jLabel1.setText("Editar Hospital");
 
         Nome.setText("Nome:");
 
@@ -140,51 +94,28 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
                 .addGap(54, 54, 54))
         );
 
-        jButton1.setText("Guardar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(13, 13, 13)
                     .addComponent(filtros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
-                .addContainerGap())
+                    .addGap(14, 14, 14)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(filtros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
+            .addGap(0, 124, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(filtros, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        adicionarOuEditar();
-    }//GEN-LAST:event_jButton1MouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Localidade;
@@ -192,44 +123,7 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
     private javax.swing.JTextField campoHospitaLocalidade;
     private javax.swing.JTextField campoHospitalNome;
     private javax.swing.JPanel filtros;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel tipoEnfermariaPane;
     // End of variables declaration//GEN-END:variables
-
-    private void adicionarOuEditar() {
-        try {
-            String nome = campoHospitalNome.getText();
-            String localidade = campoHospitaLocalidade.getText();
-
-            if (operacao.equals(ManagerHospital.OPERACAO_ADICIONAR)) {
-                managerHospital.adicionar(nome, localidade);
-            } else if (operacao.equals(ManagerHospital.OPERACAO_EDITAR)) {
-                hospital.setNome(nome);
-                hospital.setLocalidade(localidade);
-                managerHospital.editar(hospital);
-            }
-
-            fechar();
-            this.getOwner().firePropertyChange("tabela", 0, 0);
-        } catch (Exception ex) {
-            mostrarAviso(ex.getMessage());
-        }
-
-    }
-
-    /*
-     * Métodos auxiliares genéricos
-     */
-    private void mostrarAviso(String aviso) {
-        JOptionPane.showMessageDialog(rootPane, aviso);
-    }
-
-    private void fechar() {
-        dispose();
-        janela.atualizar();
-    }
-    /*
-     * FIM Métodos auxiliares genéricos
-     */
 }

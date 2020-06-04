@@ -1,14 +1,10 @@
 package backend.entidades;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.TreeMap;
+import backend.bases.EntidadeBase;
+import backend.interfaces.IEntidade;
 
-public class Equipamento implements Serializable{
+public class Equipamento extends EntidadeBase implements IEntidade {
 
-    private static final long serialVersionUID = 1L;
-    
-    private String codigo;
     private Integer tipo;
     private boolean livre;
     private Paciente paciente;
@@ -17,18 +13,10 @@ public class Equipamento implements Serializable{
     }
 
     public Equipamento(String codigo, Integer tipo, boolean livre, Paciente paciente) {
-        this.codigo = codigo;
+        super(codigo, "E");
         this.tipo = tipo;
         this.livre = livre;
         this.paciente = paciente;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public Integer getTipo() {
@@ -59,9 +47,4 @@ public class Equipamento implements Serializable{
     public String toString() {
         return "Equipamento{" + "codigo=" + codigo + ", tipo=" + tipo + ", livre=" + livre + ", paciente=" + paciente + '}';
     }
-
-    
-   
-   
-    
 }

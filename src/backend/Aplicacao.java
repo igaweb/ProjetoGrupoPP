@@ -2,8 +2,10 @@ package backend;
 
 import backend.entidades.Administrador;
 import backend.entidades.Enfermaria;
+import backend.bases.EntidadeBase;
 import backend.entidades.Equipamento;
 import backend.entidades.Hospital;
+import backend.entidades.Medico;
 import backend.entidades.Paciente;
 import backend.entidades.ProfissionalSaude;
 import backend.entidades.Utilizador;
@@ -31,8 +33,8 @@ public class Aplicacao implements Serializable {
     }
     
     private void inicializarManagers() {
-        managerUtilizador = new ManagerUtilizador(new TreeMap<String, Utilizador>());
-        managerHospital = new ManagerHospital(new TreeMap<String, Hospital>());
+        managerUtilizador = new ManagerUtilizador(new TreeMap<String, EntidadeBase>());
+        managerHospital = new ManagerHospital(new TreeMap<String, EntidadeBase>());
     }
     
     public ManagerUtilizador getManagerUtilizador() {
@@ -56,7 +58,7 @@ public class Aplicacao implements Serializable {
         
         if(codigoHospital != null && !codigoHospital.isEmpty() && codigoEnfermaria != null && !codigoEnfermaria.isEmpty()) {
             Hospital hospital = (Hospital) getManagerHospital().getLista().get(codigoHospital);
-            Enfermaria enfermaria = hospital.getEnfermarias().get(codigoEnfermaria);
+            Enfermaria enfermaria = (Enfermaria) hospital.getEnfermarias().get(codigoEnfermaria);
             
             managerEquipamento = new ManagerEquipamento(enfermaria.getEquipamentos());
         }
@@ -68,25 +70,20 @@ public class Aplicacao implements Serializable {
         return managerHospital;
     }
 
-    public ManagerPaciente getManagerPaciente(String codigoHospital, String codigoEnfermaria) {
+    public ManagerPaciente getManagerPaciente(String codigoHospital, String codigoEnfermaria) throws HospitalNaoExistenteException, EnfermariaNaoExistenteException {
         ManagerPaciente managerPaciente = null;
         
-        if(codigoHospital != null && !codigoHospital.isEmpty() && codigoEnfermaria != null && !codigoEnfermaria.isEmpty()) {
-            Hospital hospital = (Hospital) getManagerHospital().getLista().get(codigoHospital);
-            Enfermaria enfermaria = hospital.getEnfermarias().get(codigoEnfermaria);
-            
-            managerPaciente = new ManagerPaciente(enfermaria.getPacientes());
-        }
+        Enfermaria enfermaria = getEnfermaria(codigoHospital, codigoEnfermaria);
+        managerPaciente = new ManagerPaciente(enfermaria.getPacientes());
         
         return managerPaciente;
     }
 
-    public ManagerProfissionalSaude getManagerProfissionalSaude(String codigoHospital, String codigoEnfermaria) {
+    public ManagerProfissionalSaude getManagerProfissionalSaude(String codigoHospital, String codigoEnfermaria) throws HospitalNaoExistenteException, EnfermariaNaoExistenteException {
         ManagerProfissionalSaude managerProfissionalSaude = null;
         
         if(codigoHospital != null && !codigoHospital.isEmpty() && codigoEnfermaria != null && !codigoEnfermaria.isEmpty()) {
-            Hospital hospital = (Hospital) getManagerHospital().getLista().get(codigoHospital);
-            Enfermaria enfermaria = hospital.getEnfermarias().get(codigoEnfermaria);
+            Enfermaria enfermaria = getEnfermaria(codigoHospital, codigoEnfermaria);
             
             managerProfissionalSaude = new ManagerProfissionalSaude(enfermaria.getProfissionalSaude());
         }
@@ -118,7 +115,7 @@ public class Aplicacao implements Serializable {
     }
     
     public Enfermaria getEnfermaria(String codigoHospital, String codigoEnfermaria) throws HospitalNaoExistenteException, EnfermariaNaoExistenteException {
-        Enfermaria enfermaria = getHospital(codigoHospital).getEnfermarias().get(codigoEnfermaria);
+        Enfermaria enfermaria = (Enfermaria) getHospital(codigoHospital).getEnfermarias().get(codigoEnfermaria);
         if(enfermaria == null) {
             throw new EnfermariaNaoExistenteException();
         }
@@ -134,7 +131,8 @@ public class Aplicacao implements Serializable {
     }
     
     public Paciente getPaciente(String codigoHospital, String codigoEnfermaria, String codigoPaciente) throws HospitalNaoExistenteException, PacienteNaoExistenteException, EnfermariaNaoExistenteException {
-        Paciente paciente = (Paciente) getEnfermaria(codigoHospital, codigoEnfermaria).getPacientes().get(codigoPaciente);
+        Enfermaria enfermaria = getEnfermaria(codigoHospital, codigoEnfermaria);
+        Paciente paciente = (Paciente) enfermaria.getPacientes().get(codigoPaciente);
         if(paciente == null) {
             throw new PacienteNaoExistenteException();
         }
@@ -142,13 +140,17 @@ public class Aplicacao implements Serializable {
     }
     
     public ProfissionalSaude getProfissionalSaude(String codigoHospital, String codigoEnfermaria, String codigoProfissionalSaude) throws HospitalNaoExistenteException, EnfermariaNaoExistenteException, ProfissionalSaudeNaoExistenteException {
+        if(codigoProfissionalSaude == null) {
+            throw new ProfissionalSaudeNaoExistenteException();
+        }
+        
         ProfissionalSaude profissionalSaude =  (ProfissionalSaude) getEnfermaria(codigoHospital, codigoEnfermaria).getProfissionalSaude().get(codigoProfissionalSaude);
+        
         if(profissionalSaude == null) {
             throw new ProfissionalSaudeNaoExistenteException();
         }
         return profissionalSaude;
     }
-    
     
     public static class HospitalNaoExistenteException extends Exception {
 

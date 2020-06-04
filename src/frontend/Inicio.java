@@ -24,7 +24,7 @@ public class Inicio {
         TreeMap<String, Utilizador> users = new TreeMap();
         users.put("user", new Utilizador("user", "1234"));
         users.put("admin", new Administrador("admin", "admin"));
-    //    aplicacao.getManagerUtilizador().setLista(users);
+        aplicacao.getManagerUtilizador().setLista(users);
 
         // login
         JanelaLogin janelaLogin = new JanelaLogin(aplicacao, serializacao);

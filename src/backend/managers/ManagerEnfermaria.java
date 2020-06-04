@@ -1,101 +1,41 @@
 package backend.managers;
 
+import backend.bases.ManagerBase;
+import backend.interfaces.IManager;
 import backend.Conteudos;
 import backend.entidades.Enfermaria;
-import backend.entidades.Equipamento;
-import backend.entidades.Paciente;
-import backend.entidades.ProfissionalSaude;
-import java.io.Serializable;
+import backend.bases.EntidadeBase;
 import java.util.TreeMap;
 
-public class ManagerEnfermaria extends ManagerBase implements Serializable {
+public class ManagerEnfermaria extends ManagerBase implements IManager {
 
-    private static final long serialVersionUID = 1L;
-    
     private static final String PREFIXO_CODIGO = "EN-";
 
     private static final String ERRO_TIPO_INVALIDO = "ERRO_TIPO_INVALIDO";
-    private static final String ERRO_FALTA_NOME = "ERRO_FALTA_NOME";
-    private static final String ERRO_FALTA_CODIGO = "ERRO_FALTA_CODIGO";
-
-    public ManagerEnfermaria(TreeMap<String, Enfermaria> listaTreeMap) {
+    
+    public ManagerEnfermaria(TreeMap<String, EntidadeBase> listaTreeMap) {
         this.lista = listaTreeMap;
     }
 
     public void adicionar(String nome, int tipo, Boolean[] camas) throws Exception {
-        Enfermaria enfermaria = new Enfermaria(null, nome, tipo, camas, new TreeMap<String, Equipamento>(), new TreeMap<String, Paciente>(), new TreeMap<String, ProfissionalSaude>());
+        Enfermaria enfermaria = new Enfermaria(null, nome, tipo, camas, new TreeMap<String, EntidadeBase>(), new TreeMap<String, EntidadeBase>(), new TreeMap<String, EntidadeBase>());
         
-        // set da operacao que estamos a fazer
-        setOperacao(OPERACAO_ADICIONAR);
-
-        // validar se os campos vêm todos bem preenchidos
-        boolean isValido = validarCampos(enfermaria);
-
-        // se estiver bem preenchido,
-        // avança para a adição
-        if (isValido) {
-            // gerar o codigo para a nova enfermaria
-            String novoCodigo = gerarCodigo();
-            enfermaria.setCodigo(novoCodigo);
-            
-            lista.put(novoCodigo, enfermaria);
-        } else {
-            // senão, retorna erro
-            throw new Exception(ERRO_ADICIONAR);
-        }
-    }
-
-    public void remover(Enfermaria enfermaria) throws Exception {
-        // set da operacao que estamos a fazer
-        setOperacao(OPERACAO_REMOVER);
-
-        lista.remove(enfermaria.getCodigo());
-    }
-
-    public void editar(Enfermaria enfermaria) throws Exception {
-        // set da operacao que estamos a fazer
-        setOperacao(OPERACAO_EDITAR);
-
-        // validar se os campos vêm todos bem preenchidos
-        boolean isValido = validarCampos(enfermaria);
-
-        // se estiver bem preenchido,
-        // avança para a edição
-        if (isValido) {
-            lista.put(enfermaria.getCodigo(), enfermaria);
-        } else {
-            // senão, retorna erro
-            throw new Exception(ERRO_EDITAR);
-        }
+        adicionar(enfermaria);
     }
 
     /*
      * Método para validar se os campos da classe estão bem preenchidos
      */
-    private boolean validarCampos(Enfermaria enfermaria) throws Exception {
+    public boolean validarCampos(EntidadeBase enfermaria) throws ValidacaoEntidadeException {
         // validações para todas as operaçoes na base
         boolean isValid = super.validarCampos(enfermaria);
 
-        // se nao for a operacao adicionar, tem de existir um codigo
-        if (!operacao.equals(OPERACAO_ADICIONAR) && enfermaria.getCodigo() == null) {
-            throw new Exception(ERRO_FALTA_CODIGO);
-        }
-
-        if (enfermaria.getNome() == null || enfermaria.getNome().isEmpty()) {
-            throw new Exception(ERRO_FALTA_NOME);
-        }
-        
         // tem de ter um tipo definido (int nao permite nulls)
         // neste caso, o tipo indica o indice do array definido em Conteudos.getTiposEnfermaria(), por isso, terá de ser maior de 0 e menor que o comprimento do array
-        if (enfermaria.getTipo() < 0 || enfermaria.getTipo() >= Conteudos.getTiposEnfermarias().length) {
-            throw new Exception(ERRO_TIPO_INVALIDO);
+        if (((Enfermaria) enfermaria).getTipo() < 0 || ((Enfermaria) enfermaria).getTipo() >= Conteudos.getTiposEnfermarias().length) {
+            throw new ValidacaoEntidadeException(ERRO_TIPO_INVALIDO);
         }
 
         return isValid;
-    }
-
-    @Override
-    public String toString() {
-        return "ListaEnfermaria{" + "lista=" + lista + '}';
     }
 }

@@ -1,26 +1,22 @@
 package backend.entidades;
 
-import java.io.Serializable;
+import backend.bases.EntidadeBase;
+import backend.interfaces.IEntidade;
 import java.util.TreeMap;
 
-public class Enfermaria implements Serializable{
-
-    private static final long serialVersionUID = 1L;
+public class Enfermaria extends EntidadeBase implements IEntidade{
     
-    private String codigo;
-    private String nome;
     private Integer tipo;
     private Boolean[] camas;
-    private TreeMap<String, Equipamento> equipamentos;
-    private TreeMap<String, Paciente> pacientes;
-    private TreeMap<String, ProfissionalSaude> profissionalSaude;
+    private TreeMap<String, EntidadeBase> equipamentos;
+    private TreeMap<String, EntidadeBase> pacientes;
+    private TreeMap<String, EntidadeBase> profissionalSaude;
 
     public Enfermaria() {
     }
 
-    public Enfermaria(String codigo, String nome, int tipo, Boolean[] camas, TreeMap<String, Equipamento> equipamentos, TreeMap<String, Paciente> pacientes, TreeMap<String, ProfissionalSaude> profissionalSaude) {
-        this.codigo = codigo;
-        this.nome = nome;
+    public Enfermaria(String codigo, String nome, int tipo, Boolean[] camas, TreeMap<String, EntidadeBase> equipamentos, TreeMap<String, EntidadeBase> pacientes, TreeMap<String, EntidadeBase> profissionalSaude) {
+        super(codigo, nome);
         this.tipo = tipo;
         this.camas = camas;
         this.equipamentos = equipamentos;
@@ -28,24 +24,8 @@ public class Enfermaria implements Serializable{
         this.profissionalSaude = profissionalSaude;
     }
 
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
     public Integer getTipo() {
         return tipo;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public void setTipo(Integer tipo) {
@@ -60,27 +40,27 @@ public class Enfermaria implements Serializable{
         this.camas = camas;
     }
 
-    public TreeMap<String, Equipamento> getEquipamentos() {
+    public TreeMap<String, EntidadeBase> getEquipamentos() {
         return equipamentos;
     }
 
-    public void setEquipamentos(TreeMap<String, Equipamento> equipamentos) {
+    public void setEquipamentos(TreeMap<String, EntidadeBase> equipamentos) {
         this.equipamentos = equipamentos;
     }
 
-    public TreeMap<String, Paciente> getPacientes() {
+    public TreeMap<String, EntidadeBase> getPacientes() {
         return pacientes;
     }
 
-    public void setPacientes(TreeMap<String, Paciente> pacientes) {
+    public void setPacientes(TreeMap<String, EntidadeBase> pacientes) {
         this.pacientes = pacientes;
     }
-
-    public TreeMap<String, ProfissionalSaude> getProfissionalSaude() {
+    
+    public TreeMap<String, EntidadeBase> getProfissionalSaude() {
         return profissionalSaude;
     }
 
-    public void setProfissionalSaude(TreeMap<String, ProfissionalSaude> profissionalSaude) {
+    public void setProfissionalSaude(TreeMap<String, EntidadeBase> profissionalSaude) {
         this.profissionalSaude = profissionalSaude;
     }
     

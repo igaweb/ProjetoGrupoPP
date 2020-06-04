@@ -1,5 +1,6 @@
 package frontend.janelas;
 
+import backend.interfaces.ICallerJanelaCriarInterface;
 import backend.Aplicacao;
 import backend.Serializacao;
 import backend.entidades.Utilizador;
@@ -7,13 +8,12 @@ import backend.managers.ManagerUtilizador;
 import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 
-public class JanelaConsultaUtilizador extends javax.swing.JDialog {
+public class JanelaConsultaUtilizador extends javax.swing.JDialog implements ICallerJanelaCriarInterface {
 
     private final Aplicacao app;
     private final Serializacao serializacao;
     private AbstractTableModel modeloTabela;
     private ManagerUtilizador managerUtilizador;
-    private String nomeUtilizador;
 
     /**
      * Creates new form JanelaConsultaUtilizador
@@ -30,6 +30,7 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
         this.modeloTabela = criarModeloTabela();
         tabela.setModel(modeloTabela);
 
+        managerUtilizador = app.getManagerUtilizador();
     }
 
     /*
@@ -122,9 +123,8 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
             .addGroup(botoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(botaoCriar)
-                .addGap(73, 73, 73)
-                .addComponent(botaoRemover)
-                .addContainerGap(302, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botaoRemover))
         );
         botoesLayout.setVerticalGroup(
             botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,9 +185,10 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
             .addGroup(contentorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(contentorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(contentorLayout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(botoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         contentorLayout.setVerticalGroup(
             contentorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,7 +212,7 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(131, 131, 131)
+                .addContainerGap()
                 .addComponent(contentor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -281,7 +282,6 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
         int option = JOptionPane.showConfirmDialog(null, "Tem a certeza que quer eliminar a linha selecionada?");
 
         if (option == JOptionPane.OK_OPTION) {
-            managerUtilizador = app.getManagerUtilizador();
             for (int i = 0; i < tabela.getSelectedRows().length; i++) {
                 try {
                     int index = tabela.getSelectedRows()[i];
@@ -292,16 +292,10 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
                     serializacao.guardar(app);
                     JOptionPane.showMessageDialog(this, "Utilizador removido com sucesso");
                 } catch (Exception ex) {
-                    mostrarAviso("Ocorreu um erro ao tentar remover o(s) utilizador(es) selecionado(s).");
+                    mostrarAviso("Ocorreu um erro ao tentar remover o(s) utilizador(es) selecionado(s): "+ ex.getMessage());
                 }
             }
         }
-    }
-
-    protected void setOperacoes(boolean criar, boolean editar, boolean remover) {
-        botaoCriar.setVisible(criar);
-      //  botaoEditar.setVisible(editar);
-        botaoRemover.setVisible(remover);
     }
 
     /*
@@ -333,7 +327,7 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog {
         return true;
     }
 
-    private void guardar() {
+    public void guardar() {
         serializacao.guardar(app);
     }
     /*

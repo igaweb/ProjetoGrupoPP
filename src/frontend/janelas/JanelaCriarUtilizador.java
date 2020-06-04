@@ -5,6 +5,7 @@
  */
 package frontend.janelas;
 
+import backend.interfaces.ICallerJanelaCriarInterface;
 import backend.Aplicacao;
 import backend.Serializacao;
 import backend.entidades.Utilizador;
@@ -17,18 +18,17 @@ import javax.swing.JOptionPane;
  */
 public class JanelaCriarUtilizador extends javax.swing.JDialog {
 
-    private JanelaConsultaUtilizador janela;
+    private ICallerJanelaCriarInterface janela;
     private Aplicacao app;
     private Serializacao serializacao;
     private String operacao;
-    private String nomeUtilizador;
     private ManagerUtilizador managerUtilizador;
     private Utilizador utilizador;
 
     /**
      * Creates new form NewJDialog
      */
-    public JanelaCriarUtilizador(JanelaConsultaUtilizador janela, Aplicacao app, Serializacao serializacao, String nomeUtilizador) {
+    public JanelaCriarUtilizador(ICallerJanelaCriarInterface janela, Aplicacao app, Serializacao serializacao, String nomeUtilizador) {
         this.janela = janela;
         this.app = app;
         this.serializacao = serializacao;
@@ -236,8 +236,7 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
             fechar();
             this.getOwner().firePropertyChange("tabela", 0, 0);
         } catch (Exception ex) {
-            ex.printStackTrace();
-            mostrarAviso("Ocorreu um erro ao tentar guardar os dados");
+            mostrarAviso(ex.getMessage());
         }
 
     }
