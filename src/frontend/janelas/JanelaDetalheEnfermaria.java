@@ -3,16 +3,20 @@ package frontend.janelas;
 import frontend.tabelas.TabelaProfissionalSaude;
 import frontend.tabelas.TabelaEquipamento;
 import backend.Aplicacao;
+import backend.Conteudos;
 import backend.Serializacao;
 import backend.entidades.Hospital;
 import backend.entidades.Enfermaria;
 import backend.bases.EntidadeBase;
+import backend.entidades.Equipamento;
 import backend.entidades.Medico;
 import backend.interfaces.IManager;
 import backend.interfaces.ITable;
 import frontend.bases.JanelaBase;
 import frontend.bases.TabelaBase;
 import frontend.tabelas.TabelaPaciente;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class JanelaDetalheEnfermaria extends JanelaBase {
 
@@ -47,6 +51,8 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
         this.enfermariaSelecionada = enfermariaSelecionada;
         this.enfermariaSelecionadaObj = app.getEnfermaria(hospitalSelecionado, enfermariaSelecionada);
         
+        setTextoDetalhe();
+        
         getTabTabela().add(new TabelaEquipamento(app, serializacao, hospitalSelecionado, enfermariaSelecionada));
         getTabTabela().setTitleAt(0, "Equipamentos");
         getTabTabela().add(new TabelaProfissionalSaude(app, serializacao, hospitalSelecionado, enfermariaSelecionada));
@@ -58,6 +64,21 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
         getTabTabela().repaint();
     }
 
+    @Override
+    public void setTextoDetalhe() {
+        String detalhe = "<html>";
+        detalhe += "<b>Hospital " + hospitalSelecionadoObj.getNome() + " - " + hospitalSelecionadoObj.getLocalidade() + "</b>";
+        detalhe += "<br>";
+        detalhe += "<b>Enfermaria " + enfermariaSelecionadaObj.getNome() + " (" + Conteudos.getTiposEnfermarias()[enfermariaSelecionadaObj.getTipo()] + ")</b>";
+        detalhe += "<br>";
+        detalhe += "- Nº de camas: " + enfermariaSelecionadaObj.getCamas().length + " (" + getCamasLivres() + " livres)";
+        detalhe += "<br>";
+        detalhe += "- Nº de equipamentos: " + enfermariaSelecionadaObj.getEquipamentos().size() + " (" + getEquipamentosLivres() + " livres)";
+        detalhe += "</html>";
+        
+        getLabelDetalhe().setText(detalhe);
+    }
+    
     @Override
     public void adicionar() {
         try {
@@ -160,5 +181,31 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
                 adicionarProfissionalSaude(false);
             }
         });
+    }
+
+    private int getCamasLivres() {
+        Boolean[] camas = enfermariaSelecionadaObj.getCamas();
+        int contador = 0;
+        for (int i = 0; i < camas.length; i++) {
+            if(camas[i] == null || camas[i]) {
+                contador ++;
+            }
+        }
+        
+        return contador;
+    }
+
+    private int getEquipamentosLivres() {
+        TreeMap<String, EntidadeBase> equipamentos = enfermariaSelecionadaObj.getEquipamentos();
+        int contador = 0;
+        for (Map.Entry<String, EntidadeBase> entry : equipamentos.entrySet()) {
+            Equipamento equipamento = (Equipamento) entry.getValue();
+            
+            if(equipamento.isLivre()) {
+                contador ++;
+            }
+        }
+        
+        return contador;
     }
 }

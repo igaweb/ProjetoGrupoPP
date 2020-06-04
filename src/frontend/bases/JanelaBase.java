@@ -13,8 +13,8 @@ import frontend.tabelas.TabelaHospital;
 import frontend.tabelas.TabelaPaciente;
 import frontend.tabelas.TabelaProfissionalSaude;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
@@ -81,20 +81,26 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         labelDetalhe.setBackground(new java.awt.Color(255, 255, 255));
-        labelDetalhe.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        labelDetalhe.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        labelDetalhe.setForeground(new java.awt.Color(153, 153, 153));
         labelDetalhe.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        labelDetalhe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
         javax.swing.GroupLayout paneDetalheLayout = new javax.swing.GroupLayout(paneDetalhe);
         paneDetalhe.setLayout(paneDetalheLayout);
         paneDetalheLayout.setHorizontalGroup(
             paneDetalheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(labelDetalhe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneDetalheLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelDetalhe, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
         paneDetalheLayout.setVerticalGroup(
             paneDetalheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneDetalheLayout.createSequentialGroup()
-                .addComponent(labelDetalhe, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(labelDetalhe, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         botaoCriar.setText("Criar");
@@ -306,6 +312,11 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     private javax.swing.JPanel tabs;
     // End of variables declaration//GEN-END:variables
 
+    @Override
+    public void setTextoDetalhe() {
+        // para as janelas que nao precisam de ter texto no detalhe
+    }
+    
     private void remover() {
         try {
             validarSeExisteSelecao(true);
@@ -355,6 +366,9 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     public void atualizar() {
         // guarda os dados alterados
         guardar();
+        
+        // atualizar os dados na label do detalhe
+        setTextoDetalhe();
         
         //Informa o modelo que foram efetuadas alteracoes, o modelo informa a tabela e os dados são redesenhados
         ((AbstractTableModel) getTabelaSelecionada().getModel()).fireTableDataChanged();
@@ -456,8 +470,8 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         return entidadeRef;
     }
     
-    public JPanel getPaneDetalhe() {
-        return paneDetalhe;
+    public JLabel getLabelDetalhe() {
+        return labelDetalhe;
     }
 
     private void esconderTabs() {

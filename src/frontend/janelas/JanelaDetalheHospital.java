@@ -31,11 +31,22 @@ public class JanelaDetalheHospital extends JanelaBase {
         this.hospitalSelecionado = hospitalSelecionado;
         this.hospitalSelecionadoObj = app.getHospital(hospitalSelecionado);
         
+        setTextoDetalhe();
+        
         getTabTabela().add(new TabelaEnfermaria(app, serializacao, hospitalSelecionado));
         getTabTabela().setTitleAt(0, "Enfermarias");
         getTabTabela().setVisible(true);
         getTabTabela().revalidate();
         getTabTabela().repaint();
+    }
+    
+    @Override
+    public void setTextoDetalhe() {
+        String detalhe = "<html>";
+        detalhe += "Hospital " + hospitalSelecionadoObj.getNome() + " - " + hospitalSelecionadoObj.getLocalidade();
+        detalhe += "</html>";
+        
+        getLabelDetalhe().setText(detalhe);
     }
     
     @Override
@@ -89,4 +100,5 @@ public class JanelaDetalheHospital extends JanelaBase {
     public IManager getManager() {
         return app.getManagerEnfermaria(hospitalSelecionado);
     }
+
 }
