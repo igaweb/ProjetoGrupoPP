@@ -221,8 +221,7 @@ public class Homepage extends javax.swing.JFrame implements ICallerJanelaCriarIn
         app.setUtilizadorAutenticado(null);
         fechar();
         
-        JanelaLogin janelaLogin = new JanelaLogin(app, serializacao);
-        janelaLogin.setVisible(true);
+        Inicio.main(new String[0]);
     }
 
     
