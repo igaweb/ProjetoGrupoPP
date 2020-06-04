@@ -167,7 +167,7 @@ public class Homepage extends javax.swing.JFrame implements ICallerJanelaCriarIn
     }//GEN-LAST:event_menuListarHospitaisActionPerformed
 
     private void menuEditarUtilizadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarUtilizadorActionPerformed
-        
+        editarPerfil();
     }//GEN-LAST:event_menuEditarUtilizadorActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
