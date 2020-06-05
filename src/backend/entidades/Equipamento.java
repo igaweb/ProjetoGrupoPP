@@ -9,11 +9,12 @@ public class Equipamento extends EntidadeBase implements IEntidade {
     private boolean livre;
     private Paciente paciente;
 
+
     public Equipamento() {
     }
 
-    public Equipamento(String codigo, Integer tipo, boolean livre, Paciente paciente) {
-        super(codigo, "E");
+    public Equipamento(String nome, String codigo, Integer tipo, boolean livre, Paciente paciente) {
+        super(codigo, nome);
         this.tipo = tipo;
         this.livre = livre;
         this.paciente = paciente;

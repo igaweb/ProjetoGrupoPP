@@ -7,6 +7,8 @@ import backend.Serializacao;
 import backend.entidades.Enfermaria;
 import backend.entidades.Equipamento;
 import backend.entidades.Hospital;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.AbstractTableModel;
 
 public class TabelaEquipamento extends TabelaBase {
@@ -48,8 +50,13 @@ public class TabelaEquipamento extends TabelaBase {
 
             @Override
             public int getRowCount() {
-                //Retorna o número de linhas que a tabela deverá ter
-                return app.getManagerEquipamento(hospitalSelecionado, enfermariaSelecionada).getLista().size();
+                try {
+                    //Retorna o número de linhas que a tabela deverá ter
+                    return app.getManagerEquipamento(hospitalSelecionado, enfermariaSelecionada).getLista().size();
+                } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException ex) {
+                    Logger.getLogger(TabelaEquipamento.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return 0;
             }
 
             @Override
@@ -66,7 +73,13 @@ public class TabelaEquipamento extends TabelaBase {
                     rowIndex representa a linha da célula (0 a rowCount -1)
                     columnIndex representa a coluna da célula (0 a ColumnCount -1)
                  */
-                Equipamento equipamento = (Equipamento) app.getManagerEquipamento(hospitalSelecionado, enfermariaSelecionada).getListaArray().get(rowIndex);
+                Equipamento equipamento;
+                try {
+                    equipamento = (Equipamento) app.getManagerEquipamento(hospitalSelecionado, enfermariaSelecionada).getListaArray().get(rowIndex);
+                } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException ex) {
+                    Logger.getLogger(TabelaEquipamento.class.getName()).log(Level.SEVERE, null, ex);
+                    equipamento = null;
+                }
                 switch (columnIndex) {
                     case 0:
                         return equipamento.getCodigo();
