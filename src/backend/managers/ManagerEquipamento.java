@@ -20,9 +20,10 @@ public class ManagerEquipamento extends ManagerBase implements IManager {
         this.lista = lista;
     }
      
-    public void adicionar(String nome, Integer tipo, boolean livre, Paciente paciente)throws Exception {
+    public void adicionar(String nome, int tipo)throws Exception {
         
-        Equipamento equipamento = new Equipamento(nome, null, tipo, livre, paciente);
+        Equipamento equipamento = new Equipamento(null, nome, tipo, null);
+        
         adicionar(equipamento);
     }
     

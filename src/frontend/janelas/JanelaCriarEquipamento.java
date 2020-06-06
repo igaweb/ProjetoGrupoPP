@@ -9,6 +9,7 @@ import backend.interfaces.ICallerJanelaCriarInterface;
 import backend.Aplicacao;
 import backend.entidades.Enfermaria;
 import backend.entidades.Equipamento;
+import backend.entidades.Paciente;
 import backend.managers.ManagerEquipamento;
 import frontend.model.filtros.PacienteComboModel;
 import frontend.model.filtros.TipoEquipamentoComboModel;
@@ -63,18 +64,17 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
         if (codigoEquipamento == null) {
             operacao = ManagerEquipamento.OPERACAO_ADICIONAR;
             setTitle("Adicionar Equipamento");
-            
-            Enfermaria enfermaria = app.getEnfermaria(codigoHospital, codigoEnfermaria);
-            enfermaria.getPacientes();
         } else {
             operacao = ManagerEquipamento.OPERACAO_EDITAR;
             setTitle("Editar Equipamento");
-//            equipamento = (Equipamento) listaEquipamentos.get(codigoEquipamento);
             equipamento = (Equipamento) app.getEquipamento(codigoHospital, codigoEnfermaria, codigoEquipamento);
-            campoNomeEquipamento.getText();
+            
+            campoNomeEquipamento.setText(equipamento.getNome());
+            comboTipoEquipamento.setSelectedIndex(equipamento.getTipo());
+//            comboNomePaciente.setText(paciente.getNome());
 
-            Enfermaria enfermaria = app.getEnfermaria(codigoHospital, codigoEnfermaria);
-            enfermaria.getPacientes(); 
+//            Enfermaria enfermaria = app.getEnfermaria(codigoHospital, codigoEnfermaria);
+//            enfermaria.getPacientes(); 
         }
     }
     
@@ -92,7 +92,7 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
         comboNomePaciente = new javax.swing.JComboBox<>();
         jLabelNomeEquipamento = new javax.swing.JLabel();
         campoNomeEquipamento = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        userCode = new javax.swing.JLabel();
         labelTipoEquipamento = new javax.swing.JLabel();
         comboTipoEquipamento = new javax.swing.JComboBox<>();
 
@@ -126,12 +126,22 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
         jLabelNomeEquipamento.setText("Nome do Equipamento : ");
 
         campoNomeEquipamento.setText(" ");
+        campoNomeEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoNomeEquipamentoActionPerformed(evt);
+            }
+        });
 
-        jLabel1.setText("<User Code>");
+        userCode.setText("<User Code>");
 
         labelTipoEquipamento.setText("Tipo de equipamento:");
 
         comboTipoEquipamento.setModel(new TipoEquipamentoComboModel());
+        comboTipoEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboTipoEquipamentoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -146,7 +156,7 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
                                 .addComponent(botaoGuardar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(133, 133, 133)
-                                .addComponent(jLabel1)))
+                                .addComponent(userCode)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -172,7 +182,7 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addComponent(jLabel1)
+                .addComponent(userCode)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNomeEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -205,32 +215,38 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboNomePacienteActionPerformed
 
+    private void campoNomeEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNomeEquipamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoNomeEquipamentoActionPerformed
+
+    private void comboTipoEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoEquipamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboTipoEquipamentoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoGuardar;
     private javax.swing.JTextField campoNomeEquipamento;
     private javax.swing.JComboBox<String> comboNomePaciente;
     private javax.swing.JComboBox<String> comboTipoEquipamento;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelNomeEquipamento;
     private javax.swing.JLabel labelNomePaciente;
     private javax.swing.JLabel labelTipoEquipamento;
+    private javax.swing.JLabel userCode;
     // End of variables declaration//GEN-END:variables
 
     private void adicionarOuEditar() {
         String nome = campoNomeEquipamento.getText();
-        boolean livre;
-        livre = false; // so para teste
-        String codigoPaciente;
-//        Paciente paciente = null;
-
-//        livre = rBotaoLivre.isSelected();
-
+        int tipo = comboTipoEquipamento.getSelectedIndex();
+        String paciente;
+        
         try {
 
             if (operacao.equals(ManagerEquipamento.OPERACAO_ADICIONAR)) {
-//                managerEquipamento.adicionar(tipo, livre, paciente);
+              managerEquipamento.adicionar(nome, tipo);
             } else if (operacao.equals(ManagerEquipamento.OPERACAO_EDITAR)) {
-//                equipamento.setTipo(campoNomeEquipamento.getSelectedIndex());
+                equipamento.setNome(nome);
+                equipamento.setTipo(tipo);
+                managerEquipamento.editar(equipamento);
             }
             
             fechar();
@@ -250,6 +266,7 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
 
     private void fechar() {
         dispose();
+        
         janela.atualizar();
     }
     /*

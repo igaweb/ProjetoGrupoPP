@@ -6,17 +6,15 @@ import backend.interfaces.IEntidade;
 public class Equipamento extends EntidadeBase implements IEntidade {
 
     private Integer tipo;
-    private boolean livre;
     private Paciente paciente;
-
+    
 
     public Equipamento() {
     }
 
-    public Equipamento(String nome, String codigo, Integer tipo, boolean livre, Paciente paciente) {
+    public Equipamento(String codigo, String nome, Integer tipo, Paciente paciente) {
         super(codigo, nome);
         this.tipo = tipo;
-        this.livre = livre;
         this.paciente = paciente;
     }
 
@@ -26,14 +24,6 @@ public class Equipamento extends EntidadeBase implements IEntidade {
 
     public void setTipo(Integer tipo) {
         this.tipo = tipo;
-    }
-
-    public boolean isLivre() {
-        return livre;
-    }
-
-    public void setLivre(boolean livre) {
-        this.livre = livre;
     }
 
     public Paciente getPaciente() {
@@ -46,6 +36,6 @@ public class Equipamento extends EntidadeBase implements IEntidade {
 
     @Override
     public String toString() {
-        return "Equipamento{" + "codigo=" + codigo + ", tipo=" + tipo + ", livre=" + livre + ", paciente=" + paciente + '}';
+        return "Equipamento{" + "codigo=" + codigo + ", tipo=" + tipo + ", paciente=" + paciente + '}';
     }
 }

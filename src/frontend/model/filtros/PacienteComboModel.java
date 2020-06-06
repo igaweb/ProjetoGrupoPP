@@ -38,7 +38,7 @@ public class PacienteComboModel implements ComboBoxModel<String> {
             }
         } else {
             pacienteNomeList = new String[] {""};
-            pacienteNomeList = new String[] {""};
+//             = new String[] {""};
         }
         
         try {

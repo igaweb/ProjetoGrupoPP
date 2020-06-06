@@ -201,7 +201,7 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
         for (Map.Entry<String, EntidadeBase> entry : equipamentos.entrySet()) {
             Equipamento equipamento = (Equipamento) entry.getValue();
             
-            if(equipamento.isLivre()) {
+            if(equipamento.getPaciente() == null) {
                 contador ++;
             }
         }

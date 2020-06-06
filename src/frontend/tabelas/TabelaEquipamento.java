@@ -40,7 +40,7 @@ public class TabelaEquipamento extends TabelaBase {
     */
     @Override
     public AbstractTableModel criarModeloTabela() {
-        String[] nomeColunas = {"Código", "Tipo", "Livre", "Paciente"};
+        String[] nomeColunas = {"Código", "Nome", "Tipo", "Paciente"};
 
         return new AbstractTableModel() {
             @Override
@@ -84,13 +84,17 @@ public class TabelaEquipamento extends TabelaBase {
                     case 0:
                         return equipamento.getCodigo();
                     case 1:
+                           return  equipamento.getNome();
+                    case 2:               
                         return Conteudos.getTiposEquipamentos()[equipamento.getTipo()];
-                    case 2:
-                        return equipamento.isLivre();
                     case 3:
-                        return hospitalSelecionadoObj.getNome();
-                    case 4:
-                        return enfermariaSelecionadaObj.getNome();
+                        try {
+                            return equipamento.getPaciente().getNome();
+                        }catch (Exception e){
+                           return ""; 
+                        }
+                                
+                        
                     default:
                         return "";
                 }
