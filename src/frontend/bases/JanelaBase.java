@@ -324,7 +324,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
             mostrarAviso(e.getMessage());
         }
         
-        int option = JOptionPane.showConfirmDialog(null, "Tem a certeza que quer eliminar a linha selecionada?");
+        int option = JOptionPane.showConfirmDialog(this, "Tem a certeza que quer eliminar a linha selecionada?");
 
         if(option == JOptionPane.OK_OPTION) {
             IManager manager = getManager();

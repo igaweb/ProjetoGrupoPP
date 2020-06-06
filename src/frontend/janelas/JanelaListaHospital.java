@@ -74,6 +74,6 @@ public class JanelaListaHospital extends JanelaBase {
 
     @Override
     public IManager getManager() {
-        return app.getManagerEnfermaria(hospitalSelecionado);
+        return app.getManagerHospital();
     }
 }

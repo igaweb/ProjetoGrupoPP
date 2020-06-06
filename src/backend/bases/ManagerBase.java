@@ -9,11 +9,11 @@ import java.util.UUID;
 public abstract class ManagerBase implements Serializable, IManager {
 
     private static final long serialVersionUID = 1L;
-    
+
     private static final String PREFIXO_CODIGO = "-";
 
     private static long counter = 0;
-    
+
     public static final String OPERACAO_ADICIONAR = "A";
     public static final String OPERACAO_EDITAR = "E";
     public static final String OPERACAO_REMOVER = "R";
@@ -48,7 +48,7 @@ public abstract class ManagerBase implements Serializable, IManager {
         if (entidade == null) {
             throw new ValidacaoEntidadeException(ERRO_OBJ_NULO);
         }
-        
+
         // se nao for a operacao adicionar, tem de existir um codigo
         if (!operacao.equals(OPERACAO_ADICIONAR) && entidade.getCodigo() == null) {
             throw new ValidacaoEntidadeException(ERRO_FALTA_CODIGO);
@@ -64,9 +64,9 @@ public abstract class ManagerBase implements Serializable, IManager {
     protected String gerarCodigo() {
         return PREFIXO_CODIGO + (UUID.randomUUID());
     }
-    
+
     public TreeMap getLista() {
-        if(lista == null){
+        if (lista == null) {
             lista = new TreeMap();
         }
         return lista;
@@ -79,7 +79,7 @@ public abstract class ManagerBase implements Serializable, IManager {
     public ArrayList getListaArray() {
         return new ArrayList<>(lista.values());
     }
-    
+
     @Override
     public void adicionar(EntidadeBase entidade) throws Exception {
         // set da operacao que estamos a fazer
@@ -94,14 +94,14 @@ public abstract class ManagerBase implements Serializable, IManager {
             // gerar o codigo para a nova enfermaria
             String novoCodigo = gerarCodigo();
             entidade.setCodigo(novoCodigo);
-            
+
             lista.put(novoCodigo, entidade);
         } else {
             // senão, retorna erro
             throw new Exception(ERRO_ADICIONAR);
         }
     }
-    
+
     @Override
     public void editar(EntidadeBase entidade) throws Exception {
         // set da operacao que estamos a fazer
@@ -125,13 +125,24 @@ public abstract class ManagerBase implements Serializable, IManager {
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_REMOVER);
 
-        lista.remove(entidade.getCodigo());
+        try {
+            lista.remove(entidade.getCodigo());
+        } catch (Exception e) {
+            throw new RemoverEntidadeException();
+        }
     }
 
     public static class ValidacaoEntidadeException extends Exception {
 
         public ValidacaoEntidadeException(String msg) {
             super("Erro ao validar: " + msg);
+        }
+    }
+
+    public static class RemoverEntidadeException extends Exception {
+
+        public RemoverEntidadeException() {
+            super("Ocorreu um erro ao remover");
         }
     }
 
