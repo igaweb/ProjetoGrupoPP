@@ -21,6 +21,11 @@ public class ManagerUtilizador extends ManagerBase implements IManager {
         this.lista = lista;
     }
 
+    /**
+     * Adiciona utilizador com codigo com o nome do utilizador
+     * @param utilizador
+     * @throws Exception 
+     */
     @Override
     public void adicionar(EntidadeBase utilizador) throws Exception {
         // set da operacao que estamos a fazer
@@ -34,26 +39,35 @@ public class ManagerUtilizador extends ManagerBase implements IManager {
         if (isValido) {
             lista.put(utilizador.getNome(), utilizador);
         } else {
-            throw new Exception(ERRO_ADICIONAR);
+            throw new AdicionarEntidadeException();
         }
     }
     
+    /**
+     * Adicionar nova entidade à lista
+     * @param nome
+     * @param password
+     * @throws Exception 
+     */
     public void adicionar(String nome, String password) throws Exception {
         Utilizador utilizador = new Utilizador(nome, password);
 
         adicionar(utilizador);
     }
 
-    /*
+    /**
      * Método para validar se os campos da classe estão bem preenchidos
+     * @param utilizador
+     * @return
+     * @throws backend.bases.ManagerBase.ValidacaoEntidadeException 
      */
     private boolean validarCampos(Utilizador utilizador) throws ValidacaoEntidadeException {
         // validações para todas as operaçoes na base
         boolean isValid = super.validarCampos(utilizador);
-        if (!operacao.equals(OPERACAO_ADICIONAR) && utilizador.getPassword() == null) {
+            if (!operacao.equals(OPERACAO_ADICIONAR) && utilizador.getPassword() == null) {
             throw new ValidacaoEntidadeException(ERRO_FALTA_PASSWORD);
         }
-        // validações....... (campos obrigatorios, tipos de dados, etc...)
+        
         return isValid;
     }
 

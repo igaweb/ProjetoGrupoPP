@@ -20,11 +20,8 @@ public abstract class ManagerBase implements Serializable, IManager {
 
     protected static final String ERRO_GENERICO = "ERRO_GENERICO";
     protected static final String ERRO_OBJ_NULO = "ERRO_OBJ_NULO";
-    protected static final String ERRO_FALTA_NOME = "ERRO_FALTA_NOME";
-    protected static final String ERRO_FALTA_CODIGO = "ERRO_FALTA_CODIGO";
-    protected static final String ERRO_REMOVER = "ERRO_REMOVER";
-    protected static final String ERRO_EDITAR = "ERRO_EDITAR";
-    protected static final String ERRO_ADICIONAR = "ERRO_ADICIONAR";
+    protected static final String ERRO_FALTA_NOME = "O campo nome é obrigatório";
+    protected static final String ERRO_FALTA_CODIGO = "Falta codigo";
 
     protected TreeMap<String, EntidadeBase> lista = new TreeMap();
     protected String operacao = null;
@@ -98,7 +95,7 @@ public abstract class ManagerBase implements Serializable, IManager {
             lista.put(novoCodigo, entidade);
         } else {
             // senão, retorna erro
-            throw new Exception(ERRO_ADICIONAR);
+            throw new AdicionarEntidadeException();
         }
     }
 
@@ -116,7 +113,7 @@ public abstract class ManagerBase implements Serializable, IManager {
             lista.put(entidade.getCodigo(), entidade);
         } else {
             // senão, retorna erro
-            throw new Exception(ERRO_EDITAR);
+            throw new EditarEntidadeException();
         }
     }
 
@@ -135,7 +132,21 @@ public abstract class ManagerBase implements Serializable, IManager {
     public static class ValidacaoEntidadeException extends Exception {
 
         public ValidacaoEntidadeException(String msg) {
-            super("Erro ao validar: " + msg);
+            super("Erro de validação: " + msg);
+        }
+    }
+
+    public static class AdicionarEntidadeException extends Exception {
+
+        public AdicionarEntidadeException() {
+            super("Ocorreu um erro ao adicionar");
+        }
+    }
+
+    public static class EditarEntidadeException extends Exception {
+
+        public EditarEntidadeException() {
+            super("Ocorreu um erro ao editar");
         }
     }
 
