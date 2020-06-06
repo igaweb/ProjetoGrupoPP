@@ -238,7 +238,7 @@ public class Homepage extends javax.swing.JFrame implements ICallerJanelaCriarIn
     
     @Override
     public void atualizar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Nada a atualizar!");
     }
     
     @Override

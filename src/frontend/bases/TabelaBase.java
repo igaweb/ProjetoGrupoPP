@@ -115,7 +115,7 @@ public abstract class TabelaBase extends javax.swing.JPanel implements ICallerJa
 
     @Override
     public AbstractTableModel criarModeloTabela() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Nao existe tabela");
     }
 
     @Override

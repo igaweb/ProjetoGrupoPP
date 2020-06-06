@@ -254,8 +254,10 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
     private void fechar() {
         dispose();
 
-        if (janela != null) {
+        try {
             janela.atualizar();
+        } catch (Exception e) {
+            mostrarAviso("Dados guardados com sucesso!");
         }
         serializacao.guardar(app);
 

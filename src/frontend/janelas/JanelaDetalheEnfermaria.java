@@ -139,7 +139,7 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
     
     @Override
     public void detalhe() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Não existe detalhe."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
