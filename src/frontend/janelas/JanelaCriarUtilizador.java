@@ -56,6 +56,10 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
             operacao = ManagerUtilizador.OPERACAO_ADICIONAR;
             setTitle("Adicionar Utilizador");
             campoUtilizadorNome.setEditable(true);
+            campoUtilizadorNovaPassword.setVisible(false);
+            campoUtilizadorValidarPassword.setVisible(false);
+            Password1.setVisible(false);
+            Password2.setVisible(false);
         } else {
             operacao = ManagerUtilizador.OPERACAO_EDITAR;
             setTitle("Editar Utilizador");
@@ -83,9 +87,9 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
         Password = new javax.swing.JLabel();
         Password1 = new javax.swing.JLabel();
         Password2 = new javax.swing.JLabel();
-        campoUtilizadorPassword = new javax.swing.JTextField();
         campoUtilizadorNovaPassword = new javax.swing.JPasswordField();
         campoUtilizadorValidarPassword = new javax.swing.JPasswordField();
+        campoUtilizadorPassword = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -110,24 +114,23 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(campoUtilizadorNovaPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(filtrosLayout.createSequentialGroup()
                             .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Password)
                                 .addComponent(Password1)
                                 .addComponent(Password2))
-                            .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(filtrosLayout.createSequentialGroup()
-                                    .addGap(69, 69, 69)
-                                    .addComponent(campoUtilizadorPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filtrosLayout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(campoUtilizadorValidarPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGap(187, 187, 187)
+                            .addComponent(campoUtilizadorValidarPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(filtrosLayout.createSequentialGroup()
                             .addComponent(Nome)
-                            .addGap(123, 123, 123)
-                            .addComponent(campoUtilizadorNome, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(campoUtilizadorNome, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(filtrosLayout.createSequentialGroup()
+                            .addComponent(Password)
+                            .addGap(222, 222, 222)
+                            .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(campoUtilizadorNovaPassword)
+                                .addComponent(campoUtilizadorPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         filtrosLayout.setVerticalGroup(
@@ -142,7 +145,7 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
                 .addGap(32, 32, 32)
                 .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Password)
-                    .addComponent(campoUtilizadorPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoUtilizadorPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(campoUtilizadorNovaPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -175,7 +178,7 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(filtros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 4, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1)))
@@ -209,7 +212,7 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
     private javax.swing.JLabel Password2;
     private javax.swing.JTextField campoUtilizadorNome;
     private javax.swing.JPasswordField campoUtilizadorNovaPassword;
-    private javax.swing.JTextField campoUtilizadorPassword;
+    private javax.swing.JPasswordField campoUtilizadorPassword;
     private javax.swing.JPasswordField campoUtilizadorValidarPassword;
     private javax.swing.JPanel filtros;
     private javax.swing.JButton jButton1;
@@ -222,13 +225,13 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
             String password = campoUtilizadorPassword.getText();
             String novaPassword = campoUtilizadorNovaPassword.getText();
             String validarPassword = campoUtilizadorValidarPassword.getText();
-            
+
             if (operacao.equals(ManagerUtilizador.OPERACAO_ADICIONAR)) {
                 managerUtilizador.adicionar(nome, password);
             } else if (operacao.equals(ManagerUtilizador.OPERACAO_EDITAR)) {
                 if (novaPassword.equals(validarPassword)) {
-                utilizador.setPassword(novaPassword);
-                managerUtilizador.editar(utilizador);
+                    utilizador.setPassword(novaPassword);
+                    managerUtilizador.editar(utilizador);
                 }
 
             }
@@ -250,12 +253,12 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
 
     private void fechar() {
         dispose();
-        
-        if(janela != null) {
+
+        if (janela != null) {
             janela.atualizar();
         }
         serializacao.guardar(app);
-        
+
     }
     /*
      * FIM Métodos auxiliares genéricos
