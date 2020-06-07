@@ -20,12 +20,14 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
     private ICallerJanelaCriarInterface janela;
     private Aplicacao app;
     private String operacao;
-    private Enfermaria enfermaria;
     private ManagerEquipamento managerEquipamento;
     private Equipamento equipamento;
+    private Paciente paciente;
+    private Enfermaria enfermaria;
     private String codigoHospital;
     private String codigoEnfermaria;
-
+    
+    
     /**
      * Creates new form JanelaCriarEquipamento
      */
@@ -52,29 +54,26 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
         //O processo de fecho da janela será controlado pelo programa
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-//        try {
-//            enfermaria = (Enfermaria) app.getManagerEnfermaria(codigoHospital).getLista().get(codigoEnfermaria);
-//        } catch (Exception e) {
-//            throw new NullPointerException("Falta codigo da Enfermaria.");
-//        }
-//        TreeMap<String, EntidadeBase> listaEquipamentos = enfermaria.getEquipamentos();
-//        managerEquipamento = app.getManagerEquipamento(codigoHospital, codigoEnfermaria);
+        try {
+            enfermaria = (Enfermaria) app.getManagerEnfermaria(codigoHospital).getLista().get(codigoEnfermaria);
+        } catch (Exception e) {
+            throw new NullPointerException("Falta codigo da Enfermaria.");
+        }
+        
         managerEquipamento = app.getManagerEquipamento(codigoHospital, codigoEnfermaria);
-
+        
         if (codigoEquipamento == null) {
             operacao = ManagerEquipamento.OPERACAO_ADICIONAR;
             setTitle("Adicionar Equipamento");
+            comboNomePaciente.setVisible(false);
+            labelNomePaciente.setVisible(false);
         } else {
             operacao = ManagerEquipamento.OPERACAO_EDITAR;
             setTitle("Editar Equipamento");
             equipamento = (Equipamento) app.getEquipamento(codigoHospital, codigoEnfermaria, codigoEquipamento);
-            
             campoNomeEquipamento.setText(equipamento.getNome());
             comboTipoEquipamento.setSelectedIndex(equipamento.getTipo());
-//            comboNomePaciente.setText(paciente.getNome());
-
-//            Enfermaria enfermaria = app.getEnfermaria(codigoHospital, codigoEnfermaria);
-//            enfermaria.getPacientes(); 
+            
         }
     }
     
@@ -237,16 +236,17 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
     private void adicionarOuEditar() {
         String nome = campoNomeEquipamento.getText();
         int tipo = comboTipoEquipamento.getSelectedIndex();
-        String paciente;
         
         try {
-
             if (operacao.equals(ManagerEquipamento.OPERACAO_ADICIONAR)) {
               managerEquipamento.adicionar(nome, tipo);
+
             } else if (operacao.equals(ManagerEquipamento.OPERACAO_EDITAR)) {
                 equipamento.setNome(nome);
                 equipamento.setTipo(tipo);
                 managerEquipamento.editar(equipamento);
+               
+                
             }
             
             fechar();

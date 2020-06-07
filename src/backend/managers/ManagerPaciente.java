@@ -5,6 +5,7 @@ import backend.interfaces.IManager;
 import backend.Conteudos;
 import backend.bases.EntidadeBase;
 import backend.entidades.Paciente;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.TreeMap;
 
@@ -59,6 +60,7 @@ public class ManagerPaciente extends ManagerBase implements IManager {
 
         return isValid;
     }
+   
 
     @Override
     public String toString() {

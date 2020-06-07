@@ -4,6 +4,8 @@ import backend.Aplicacao;
 import backend.entidades.Paciente;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
 import javax.swing.event.ListDataListener;
 
@@ -12,8 +14,9 @@ public class PacienteComboModel implements ComboBoxModel<String> {
     private Aplicacao app;
     private TreeMap<String, Paciente> lista;
     private String[] pacienteList;
-    private String[] pacienteNomeList;
+    private String[] pacienteCodigoList;
     private String selectedItem;
+
 
     public PacienteComboModel(Aplicacao app, String codigoHospital, String codigoEnfermaria) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException {
         this.lista = app.getManagerPaciente(codigoHospital,codigoEnfermaria).getLista();
@@ -27,22 +30,22 @@ public class PacienteComboModel implements ComboBoxModel<String> {
         if (lista != null) {
             int i = 0;
             pacienteList = new String[lista.size()];
-            pacienteNomeList = new String[lista.size()];
+            pacienteCodigoList = new String[lista.size()];
             for (Map.Entry<String, Paciente> entry : lista.entrySet()) {
                 Paciente paciente = (Paciente) entry.getValue();
             
                 pacienteList[i] = paciente.getNome();
-                pacienteNomeList[i] = paciente.getCodigo();
+                pacienteCodigoList[i] = paciente.getCodigo();
                 
                 i++;
             }
         } else {
-            pacienteNomeList = new String[] {""};
-//             = new String[] {""};
+            pacienteList = new String[] {""};
+
         }
         
         try {
-            selectedItem = pacienteNomeList[0];
+            selectedItem = pacienteList[0];
         } catch (Exception e) {
             selectedItem = "";
         }
@@ -83,9 +86,11 @@ public class PacienteComboModel implements ComboBoxModel<String> {
 
     @Override
     public String getElementAt(int index) {
-        return pacienteNomeList == null ? null : pacienteNomeList[index];
-
+       return pacienteList == null ? null : pacienteList[index];
+  
     }
+    
+    
 
     @Override
     public void addListDataListener(ListDataListener l) {
@@ -97,7 +102,7 @@ public class PacienteComboModel implements ComboBoxModel<String> {
         
     }
 
-    public Paciente getEnfermairaSelecionado() {
+    public Paciente getPacienteSelecionado() {
         Paciente paciente;
         try {
             String codigoPaciente = (String) getSelectedItem();

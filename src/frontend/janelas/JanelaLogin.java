@@ -135,6 +135,7 @@ public class JanelaLogin extends javax.swing.JDialog {
     private void autenticar() {
         String user = campoNome.getText();
         String password = campoPassword.getText();
+        //String password = String.valueOf(campoPassword.getPassword());
         Login login = new Login(app, user, password);
         
         // autentica o user
