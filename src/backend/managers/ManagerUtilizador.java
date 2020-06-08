@@ -4,6 +4,7 @@ import backend.bases.ManagerBase;
 import backend.interfaces.IManager;
 import backend.bases.EntidadeBase;
 import backend.entidades.Utilizador;
+import backend.Aplicacao;
 import java.util.TreeMap;
 
 public class ManagerUtilizador extends ManagerBase implements IManager {
@@ -13,6 +14,10 @@ public class ManagerUtilizador extends ManagerBase implements IManager {
     private static final String PREFIXO_CODIGO = "UT-";
 
     private static final String ERRO_FALTA_PASSWORD = "ERRO_FALTA_PASSWORD";
+    
+      private static final String ERRO_REMOVER_UTILIZADOR = "ERRO_REMOVER_UTILIZADOR";
+    
+    private static Aplicacao app;
 
     public ManagerUtilizador() {
     }
@@ -64,8 +69,11 @@ public class ManagerUtilizador extends ManagerBase implements IManager {
     private boolean validarCampos(Utilizador utilizador) throws ValidacaoEntidadeException {
         // validações para todas as operaçoes na base
         boolean isValid = super.validarCampos(utilizador);
-            if (!operacao.equals(OPERACAO_ADICIONAR) && utilizador.getPassword() == null) {
+        if (!operacao.equals(OPERACAO_ADICIONAR) && utilizador.getPassword() == null) {
             throw new ValidacaoEntidadeException(ERRO_FALTA_PASSWORD);
+        }
+            if (operacao.equals(OPERACAO_REMOVER) && app.isAdministrador(utilizador)) {
+            throw new ValidacaoEntidadeException(ERRO_REMOVER_UTILIZADOR);
         }
         
         return isValid;
