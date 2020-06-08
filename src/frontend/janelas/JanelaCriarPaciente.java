@@ -92,6 +92,7 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(500, 250));
 
         filtros.setPreferredSize(new java.awt.Dimension(500, 500));
 
@@ -110,8 +111,9 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
         nCamasPaneLayout.setHorizontalGroup(
             nCamasPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nCamasPaneLayout.createSequentialGroup()
-                .addGap(0, 10, Short.MAX_VALUE)
-                .addComponent(labelDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labelDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         nCamasPaneLayout.setVerticalGroup(
             nCamasPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
