@@ -69,8 +69,8 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="campoLocalidadePaciente" min="-2" pref="78" max="-2" attributes="0"/>
-                              <Component id="campoNomePaciente" min="-2" pref="78" max="-2" attributes="0"/>
+                              <Component id="campoPacienteLocalidade" min="-2" pref="78" max="-2" attributes="0"/>
+                              <Component id="campoPacienteNome" min="-2" pref="78" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -110,12 +110,12 @@
                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="campoNomePaciente" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="campoPacienteNome" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="campoLocalidadePaciente" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="campoPacienteLocalidade" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="tipoEnfermariaPane" min="-2" max="-2" attributes="0"/>
@@ -289,12 +289,12 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JTextField" name="campoLocalidadePaciente">
+        <Component class="javax.swing.JTextField" name="campoPacienteLocalidade">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoLocalidadePacienteActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoPacienteLocalidadeActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="campoNomePaciente">
+        <Component class="javax.swing.JTextField" name="campoPacienteNome">
         </Component>
         <Component class="javax.swing.JLabel" name="labelDataEntrada">
           <Properties>

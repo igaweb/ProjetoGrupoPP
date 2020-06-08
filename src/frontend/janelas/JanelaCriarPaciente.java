@@ -55,6 +55,8 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
             operacao = ManagerPaciente.OPERACAO_EDITAR;
             setTitle("Editar Paciente");
             paciente = (Paciente)app.getPaciente(codigoHospital, codigoEnfermaria, codigoPaciente);
+            campoPacienteNome.setText(paciente.getNome());
+            campoPacienteLocalidade.setText(paciente.getLocalidade());
             campoPacienteEstado.setSelectedIndex(paciente.getEstado());
             int nCamas = paciente.getCama();
             campoPacienteCama.setText(nCamas + "");
@@ -83,8 +85,8 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
         nCamasPane = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         campoPacienteCama = new javax.swing.JTextField();
-        campoLocalidadePaciente = new javax.swing.JTextField();
-        campoNomePaciente = new javax.swing.JTextField();
+        campoPacienteLocalidade = new javax.swing.JTextField();
+        campoPacienteNome = new javax.swing.JTextField();
         labelDataEntrada = new javax.swing.JLabel();
         labelDataSaida = new javax.swing.JLabel();
         campoDataEntrada = new javax.swing.JFormattedTextField();
@@ -181,9 +183,9 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
                 .addGap(6, 6, 6))
         );
 
-        campoLocalidadePaciente.addActionListener(new java.awt.event.ActionListener() {
+        campoPacienteLocalidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoLocalidadePacienteActionPerformed(evt);
+                campoPacienteLocalidadeActionPerformed(evt);
             }
         });
 
@@ -221,8 +223,8 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(campoLocalidadePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(campoNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(campoPacienteLocalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoPacienteNome, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(filtrosLayout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addComponent(tipoEnfermariaPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -251,11 +253,11 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
                 .addGap(4, 4, 4)
                 .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(campoNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoPacienteNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(campoLocalidadePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoPacienteLocalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tipoEnfermariaPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
@@ -319,9 +321,9 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
        adicionarOuEditar();          
     }//GEN-LAST:event_jButton1MouseClicked
 
-    private void campoLocalidadePacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoLocalidadePacienteActionPerformed
+    private void campoPacienteLocalidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoPacienteLocalidadeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoLocalidadePacienteActionPerformed
+    }//GEN-LAST:event_campoPacienteLocalidadeActionPerformed
 
     private void campoEnfermariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoEnfermariaActionPerformed
 
@@ -339,10 +341,10 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField campoDataEntrada;
     private javax.swing.JFormattedTextField campoDataSaida;
     private javax.swing.JComboBox<String> campoEnfermaria;
-    private javax.swing.JTextField campoLocalidadePaciente;
-    private javax.swing.JTextField campoNomePaciente;
     private javax.swing.JTextField campoPacienteCama;
     private javax.swing.JComboBox<String> campoPacienteEstado;
+    private javax.swing.JTextField campoPacienteLocalidade;
+    private javax.swing.JTextField campoPacienteNome;
     private javax.swing.JPanel filtros;
     private javax.swing.JPanel hospitalPane;
     private javax.swing.JButton jButton1;
@@ -360,8 +362,8 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
 
     private void adicionarOuEditar() {
         try {
-            String nome = campoNomePaciente.getText();
-            String localidade = campoLocalidadePaciente.getText();                             
+            String nome = campoPacienteNome.getText();
+            String localidade = campoPacienteLocalidade.getText();                             
             int cama;
             try {
                 cama = Integer.parseInt(campoPacienteCama.getText());
@@ -395,6 +397,8 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
                     return;
                 }
                 
+                paciente.setNome(nome);
+                paciente.setLocalidade(localidade);
                 paciente.setEstado(estado);
                 paciente.setCama(cama);
                 paciente.setDataEntrada(dataEntrada);
