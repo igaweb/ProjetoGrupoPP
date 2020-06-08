@@ -56,8 +56,6 @@ public class Aplicacao implements Serializable {
         ManagerEquipamento managerEquipamento = null;
 
         if (codigoHospital != null && !codigoHospital.isEmpty() && codigoEnfermaria != null && !codigoEnfermaria.isEmpty()) {
-//            Hospital hospital = (Hospital) getManagerHospital().getLista().get(codigoHospital);
-//            Enfermaria enfermaria = (Enfermaria) hospital.getEnfermarias().get(codigoEnfermaria);
             Enfermaria enfermaria = getEnfermaria(codigoHospital, codigoEnfermaria);
             managerEquipamento = new ManagerEquipamento(enfermaria.getEquipamentos());
         }
@@ -69,6 +67,14 @@ public class Aplicacao implements Serializable {
         return managerHospital;
     }
 
+    /**
+     * Buscar todos os pacientes do hospital
+     * @param codigoHospital
+     * @param codigoEnfermaria 
+     * @return
+     * @throws backend.Aplicacao.HospitalNaoExistenteException
+     * @throws backend.Aplicacao.EnfermariaNaoExistenteException 
+     */
     public ManagerPaciente getManagerPaciente(String codigoHospital, String codigoEnfermaria) throws HospitalNaoExistenteException, EnfermariaNaoExistenteException {
         ManagerPaciente managerPaciente = null;
 
