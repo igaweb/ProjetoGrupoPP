@@ -150,7 +150,7 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
             if (tabelaSelecionada instanceof TabelaEquipamento) {
                 return app.getManagerEquipamento(hospitalSelecionado, enfermariaSelecionada);
             } else if (tabelaSelecionada instanceof TabelaPaciente) {
-                return app.getManagerEquipamento(hospitalSelecionado, enfermariaSelecionada);
+                return app.getManagerPaciente(hospitalSelecionado, enfermariaSelecionada);
             } else if (tabelaSelecionada instanceof TabelaProfissionalSaude) {
                 return app.getManagerProfissionalSaude(hospitalSelecionado, enfermariaSelecionada);
             } else {

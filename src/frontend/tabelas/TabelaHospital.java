@@ -50,18 +50,23 @@ public class TabelaHospital extends TabelaBase {
                     rowIndex representa a linha da célula (0 a rowCount -1)
                     columnIndex representa a coluna da célula (0 a ColumnCount -1)
                  */
-                Hospital hospital = (Hospital) app.getManagerHospital().getListaArray().get(rowIndex);
-                switch (columnIndex) {
-                    case 0:
-                        return hospital.getCodigo();
-                    case 1:
-                        return hospital.getNome();
-                    case 2:
-                        return hospital.getLocalidade();
-                    case 3:
-                        return hospital.getEnfermarias().size();
-                    default:
-                        return "";
+                Hospital hospital;
+                try {
+                    hospital = (Hospital) app.getManagerHospital().getListaArray().get(rowIndex);
+                    switch (columnIndex) {
+                        case 0:
+                            return hospital.getCodigo();
+                        case 1:
+                            return hospital.getNome();
+                        case 2:
+                            return hospital.getLocalidade();
+                        case 3:
+                            return hospital.getEnfermarias().size();
+                        default:
+                            return "";
+                    }
+                } catch (Exception ex) {
+                    return "";
                 }
             }
         };

@@ -54,9 +54,6 @@ public class ManagerPaciente extends ManagerBase implements IManager {
         if (((Paciente)paciente).getDataEntrada() == null ) {
             throw new ValidacaoEntidadeException(ERRO_FALTA_DATAENTRADA);
         }
-        if (!operacao.equals(OPERACAO_ADICIONAR) && ((Paciente)paciente).getDataSaida() == null) {
-            throw new ValidacaoEntidadeException(ERRO_FALTA_DATASAIDA);
-        }
 
         return isValid;
     }

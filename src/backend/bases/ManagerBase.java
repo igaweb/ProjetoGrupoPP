@@ -126,7 +126,7 @@ public abstract class ManagerBase implements Serializable, IManager {
 
         try {
             if (isValido) {
-                lista.remove(entidade);
+                lista.remove(entidade.getCodigo());
             } else {
                 // senão, retorna erro
                 throw new RemoverEntidadeException();

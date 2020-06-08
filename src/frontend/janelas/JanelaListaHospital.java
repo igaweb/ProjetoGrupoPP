@@ -66,8 +66,11 @@ public class JanelaListaHospital extends JanelaBase {
         try {
             janelaConsulta = new JanelaDetalheHospital(app, serializacao, titutloConsultaEnfermaria, getCodigoSelecionado());
             janelaConsulta.setVisible(true);
-        } catch (Exception ex) {
+        } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException | NenhumaLinhaSelecionadaException ex) {
             mostrarAviso(ex.getMessage());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            mostrarAviso("Ocorre um erro no sistema");
         }
         
     }

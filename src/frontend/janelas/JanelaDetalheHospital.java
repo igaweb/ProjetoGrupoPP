@@ -82,7 +82,7 @@ public class JanelaDetalheHospital extends JanelaBase {
         try {
             janela = new JanelaDetalheEnfermaria(app, serializacao, titutloConsultaEnfermaria, hospitalSelecionado, getCodigoSelecionado());
             janela.setVisible(true);
-        } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException ex) {
+        } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException | NenhumaLinhaSelecionadaException ex) {
             mostrarAviso(ex.getMessage());
         } catch (Exception ex) {
             ex.printStackTrace();
