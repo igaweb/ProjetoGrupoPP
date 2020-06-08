@@ -6,6 +6,7 @@ import backend.Conteudos;
 import backend.Serializacao;
 import backend.entidades.Enfermaria;
 import backend.entidades.Hospital;
+import javax.swing.Icon;
 import javax.swing.table.AbstractTableModel;
 
 public class TabelaEnfermaria extends TabelaBase {
@@ -32,7 +33,7 @@ public class TabelaEnfermaria extends TabelaBase {
      */
     @Override
     public AbstractTableModel criarModeloTabela() {
-        String[] nomeColunas = {"Código", "Nome", "Tipo", "Equipamentos", "Camas"};
+        String[] nomeColunas = {"Código", "Nome", "Tipo", "Equipamentos", "Camas", ""};
 
         return new AbstractTableModel() {
             @Override
@@ -75,6 +76,8 @@ public class TabelaEnfermaria extends TabelaBase {
                             return enfermaria.getEquipamentos().size();
                         case 4:
                             return enfermaria.getCamas().length;
+                        case 5:
+                            return "ver detalhe";
                         default:
                             return "";
                     }

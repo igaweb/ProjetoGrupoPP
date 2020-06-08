@@ -4,9 +4,7 @@ import frontend.tabelas.TabelaHospital;
 import frontend.bases.JanelaBase;
 import backend.Aplicacao;
 import backend.Serializacao;
-import backend.bases.EntidadeBase;
 import backend.interfaces.IManager;
-import javax.swing.JOptionPane;
 
 public class JanelaListaHospital extends JanelaBase {
 
@@ -21,15 +19,12 @@ public class JanelaListaHospital extends JanelaBase {
         super(app, serializacao, tituloJanela);
 
         getBotaoCriar().setVisible(true);
-        getBotaoEditar().setVisible(true);
-
         getBotaoDetalhe().setVisible(true);
 
         getTabTabela().add(new TabelaHospital(app, serializacao));
         getTabTabela().setTitleAt(0, "Hospitais");
         getTabTabela().setVisible(true);
-        getTabTabela().revalidate();
-        getTabTabela().repaint();
+        redesenharTabela();
     }
 
     @Override
@@ -64,6 +59,7 @@ public class JanelaListaHospital extends JanelaBase {
         String titutloConsultaEnfermaria = "Listagem Enfermarias (" + getTabelaSelecionada().getModel().getValueAt(rowIndex, 1) + ")";
         JanelaDetalheHospital janelaConsulta;
         try {
+            fechar();
             janelaConsulta = new JanelaDetalheHospital(app, serializacao, titutloConsultaEnfermaria, getCodigoSelecionado());
             janelaConsulta.setVisible(true);
         } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException | NenhumaLinhaSelecionadaException ex) {

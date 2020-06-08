@@ -12,9 +12,12 @@ import frontend.tabelas.TabelaEquipamento;
 import frontend.tabelas.TabelaHospital;
 import frontend.tabelas.TabelaPaciente;
 import frontend.tabelas.TabelaProfissionalSaude;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
@@ -23,38 +26,39 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
 
     protected final Aplicacao app;
     protected final Serializacao serializacao;
-    
+
     /**
      * Seleçoes
      */
     protected String hospitalSelecionado;
     protected String enfermariaSelecionada;
     protected String medicoSelecionado;
-    
+
     /**
      * Creates new form JanelaConsultaEnfermaria
+     *
      * @param app
      * @param serializacao
      */
     public JanelaBase(Aplicacao app, Serializacao serializacao, String tituloJanela) {
         this.app = app;
         this.serializacao = serializacao;
-        
+
         initComponents();
-        
+
         // começar por pôr todos os botoes invisiveis
         esconderBotoes();
-        
+
         // tabs
         esconderTabs();
-        
-        // definir os eventos dos botoes
+
+        // definir os eventos dos botoes e tabela
         setEventos();
-        
+
         // titulo da janela
         setTitle(tituloJanela);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -316,17 +320,17 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     public void setTextoDetalhe() {
         // para as janelas que nao precisam de ter texto no detalhe
     }
-    
+
     private void remover() {
         try {
             validarSeExisteSelecao(true);
         } catch (Exception e) {
             mostrarAviso(e.getMessage());
         }
-        
+
         int option = JOptionPane.showConfirmDialog(this, "Tem a certeza que quer eliminar a linha selecionada?");
 
-        if(option == JOptionPane.OK_OPTION) {
+        if (option == JOptionPane.OK_OPTION) {
             IManager manager = getManager();
             boolean error = false;
             for (int i = 0; i < getTabelaSelecionada().getSelectedRows().length; i++) {
@@ -336,86 +340,86 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
                     String key = (String) getTabelaSelecionada().getModel().getValueAt(index, 0);
                     manager.remover(getEntidadeSelecionada(key));
                 } catch (Exception ex) {
-                    mostrarAviso("Ocorreu um erro ao tentar remover a(s) linha(s) selecionada(s): "+ ex.getMessage());
+                    mostrarAviso("Ocorreu um erro ao tentar remover a(s) linha(s) selecionada(s): " + ex.getMessage());
                     error = true;
                     break;
                 }
             }
-            
-            if(error) {
+
+            if (error) {
                 return;
             }
-            
+
             atualizar();
             mostrarAviso("Operação executada com sucesso");
         }
-            
+
     }
 
     /*
      * Métodos auxiliares genéricos
-    */
+     */
     protected void mostrarAviso(String aviso) {
         JOptionPane.showMessageDialog(rootPane, aviso);
     }
-    
+
     protected void fechar() {
         dispose();
     }
-    
+
     public void atualizar() {
         // guarda os dados alterados
         guardar();
-        
+
         // atualizar os dados na label do detalhe
         setTextoDetalhe();
-        
+
         //Informa o modelo que foram efetuadas alteracoes, o modelo informa a tabela e os dados são redesenhados
         ((AbstractTableModel) getTabelaSelecionada().getModel()).fireTableDataChanged();
-    }  
-    
+    }
+
     protected String getCodigoSelecionado() throws NenhumaLinhaSelecionadaException {
         validarSeExisteSelecao(false);
-              
+
         ITable tabela = ((TabelaBase) getTabTabela().getSelectedComponent());
         int rowIndex = getTabelaSelecionada().getSelectedRow();
         String codigo = (String) getTabelaSelecionada().getModel().getValueAt(rowIndex, tabela.getColunaCodigo());
-        
+
         return codigo;
     }
-    
+
     protected void validarSeExisteSelecao(boolean isMultipla) throws NenhumaLinhaSelecionadaException {
-        if(getTabelaSelecionada().getSelectedRows() == null 
-                || (isMultipla && getTabelaSelecionada().getSelectedRows().length <= 0) 
+        if (getTabelaSelecionada().getSelectedRows() == null
+                || (isMultipla && getTabelaSelecionada().getSelectedRows().length <= 0)
                 || (!isMultipla && getTabelaSelecionada().getSelectedRows().length != 1)) {
             throw new NenhumaLinhaSelecionadaException();
         }
         return;
     }
-    
+
     public void guardar() {
         serializacao.guardar(app);
     }
-    
+
     public JTable getTabelaSelecionada() {
-        return ((TabelaBase) getTabTabela().getSelectedComponent()).getTabela();
+        return ((ITable) getTabTabela().getSelectedComponent()).getTabela();
     }
 
     protected int getSelectedRow() {
         return getTabelaSelecionada().getSelectedRow();
     }
-    
+
     protected int[] getSelectedRows() {
         return getTabelaSelecionada().getSelectedRows();
     }
+
     /*
      * FIM Métodos auxiliares genéricos
-    */
-    
+     */
+
     /**
      * Getters botoes
      */
-    
     public JButton getBotaoGuardar() {
         return botaoGuardar;
     }
@@ -447,12 +451,12 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     public JTabbedPane getTabTabela() {
         return tabTabela;
     }
-    
+
     public EntidadeBase getEntidadeSelecionada(String key) throws Exception {
 
         EntidadeBase entidadeRef;
         ITable tabelaSelecionada = ((TabelaBase) getTabTabela().getSelectedComponent());
-        
+
         if (tabelaSelecionada instanceof TabelaHospital) {
             entidadeRef = app.getHospital(key);
         } else if (tabelaSelecionada instanceof TabelaEnfermaria) {
@@ -469,7 +473,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
 
         return entidadeRef;
     }
-    
+
     public JLabel getLabelDetalhe() {
         return labelDetalhe;
     }
@@ -485,6 +489,12 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         botaoCriarEnfermeiro.setVisible(false);
         botaoDetalhe.setVisible(false);
         botaoGuardar.setVisible(false);
+    }
+
+    protected void redesenharTabela() {
+        getTabTabela().revalidate();
+        getTabTabela().repaint();
+        setEventosTabela();
     }
 
     protected void setEventos() {
@@ -509,7 +519,23 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
             }
         });
     }
-    
+
+    /**
+     * Atribui os eventos às tabelas existentes na janela
+     */
+    protected void setEventosTabela() {
+        for (int i = 0; i < getTabTabela().getComponentCount(); i++) {
+            ((ITable)getTabTabela().getComponentAt(i)).getTabela().addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent evt) {
+                    
+                    if (evt.getClickCount() == 2) {
+                        editar();
+                    }
+                }
+            });
+        }
+    }
+
     public static class NenhumaLinhaSelecionadaException extends Exception {
 
         public NenhumaLinhaSelecionadaException() {

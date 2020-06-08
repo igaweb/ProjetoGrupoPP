@@ -24,7 +24,6 @@ public class JanelaDetalheHospital extends JanelaBase {
         super(app, serializacao, tituloJanela);
         
         getBotaoCriar().setVisible(true);
-        getBotaoEditar().setVisible(true);
         getBotaoDetalhe().setVisible(true);
 
         // aplica a seleçao do hospital onde está esta listagem
@@ -38,6 +37,7 @@ public class JanelaDetalheHospital extends JanelaBase {
         getTabTabela().setVisible(true);
         getTabTabela().revalidate();
         getTabTabela().repaint();
+        redesenharTabela();
     }
     
     @Override
@@ -80,6 +80,7 @@ public class JanelaDetalheHospital extends JanelaBase {
         String titutloConsultaEnfermaria = "Detalhe Enfermaria (" + getTabelaSelecionada().getModel().getValueAt(rowIndex, 1) + ")";
         JanelaDetalheEnfermaria janela;
         try {
+            fechar();
             janela = new JanelaDetalheEnfermaria(app, serializacao, titutloConsultaEnfermaria, hospitalSelecionado, getCodigoSelecionado());
             janela.setVisible(true);
         } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException | NenhumaLinhaSelecionadaException ex) {

@@ -37,7 +37,6 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
         super(app, serializacao, tituloJanela);
 
         getBotaoCriar().setVisible(true);
-        getBotaoEditar().setVisible(true);
         
         // TODO: alterar para nao so mostrar quando selecionarmos a tab do profissional de saude
         getBotaoCriarEnfermeiro().setVisible(true);
@@ -60,8 +59,7 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
         getTabTabela().add(new TabelaPaciente(app, serializacao, hospitalSelecionado, enfermariaSelecionada, null));
         getTabTabela().setTitleAt(2, "Pacientes");
         getTabTabela().setVisible(true);
-        getTabTabela().revalidate();
-        getTabTabela().repaint();
+        redesenharTabela();
     }
 
     @Override
@@ -139,7 +137,7 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
     
     @Override
     public void detalhe() {
-        throw new UnsupportedOperationException("Não existe detalhe."); //To change body of generated methods, choose Tools | Templates.
+        // não existe detalhe
     }
 
     @Override
