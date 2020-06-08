@@ -122,8 +122,15 @@ public abstract class ManagerBase implements Serializable, IManager {
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_REMOVER);
 
+        boolean isValido = validarCampos(entidade);
+
         try {
-            lista.remove(entidade.getCodigo());
+            if (isValido) {
+                lista.remove(entidade);
+            } else {
+                // senão, retorna erro
+                throw new RemoverEntidadeException();
+            }
         } catch (Exception e) {
             throw new RemoverEntidadeException();
         }

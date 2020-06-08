@@ -10,13 +10,13 @@ import java.util.TreeMap;
 public class ManagerUtilizador extends ManagerBase implements IManager {
 
     private static final long serialVersionUID = 1L;
-    
+
     private static final String PREFIXO_CODIGO = "UT-";
 
     private static final String ERRO_FALTA_PASSWORD = "ERRO_FALTA_PASSWORD";
-    
-      private static final String ERRO_REMOVER_UTILIZADOR = "ERRO_REMOVER_UTILIZADOR";
-    
+
+    private static final String ERRO_REMOVER_UTILIZADOR = "Operação inválida, utilizador não pode ser eliminado";
+
     private static Aplicacao app;
 
     public ManagerUtilizador() {
@@ -28,8 +28,9 @@ public class ManagerUtilizador extends ManagerBase implements IManager {
 
     /**
      * Adiciona utilizador com codigo com o nome do utilizador
+     *
      * @param utilizador
-     * @throws Exception 
+     * @throws Exception
      */
     @Override
     public void adicionar(EntidadeBase utilizador) throws Exception {
@@ -47,12 +48,13 @@ public class ManagerUtilizador extends ManagerBase implements IManager {
             throw new AdicionarEntidadeException();
         }
     }
-    
+
     /**
      * Adicionar nova entidade à lista
+     *
      * @param nome
      * @param password
-     * @throws Exception 
+     * @throws Exception
      */
     public void adicionar(String nome, String password) throws Exception {
         Utilizador utilizador = new Utilizador(nome, password);
@@ -62,9 +64,10 @@ public class ManagerUtilizador extends ManagerBase implements IManager {
 
     /**
      * Método para validar se os campos da classe estão bem preenchidos
+     *
      * @param utilizador
      * @return
-     * @throws backend.bases.ManagerBase.ValidacaoEntidadeException 
+     * @throws backend.bases.ManagerBase.ValidacaoEntidadeException
      */
     private boolean validarCampos(Utilizador utilizador) throws ValidacaoEntidadeException {
         // validações para todas as operaçoes na base
@@ -72,10 +75,10 @@ public class ManagerUtilizador extends ManagerBase implements IManager {
         if (!operacao.equals(OPERACAO_ADICIONAR) && utilizador.getPassword() == null) {
             throw new ValidacaoEntidadeException(ERRO_FALTA_PASSWORD);
         }
-            if (operacao.equals(OPERACAO_REMOVER) && app.isAdministrador(utilizador)) {
+        if (operacao.equals(OPERACAO_REMOVER) && utilizador.equals(app.getUtilizadorAutenticado())) {
             throw new ValidacaoEntidadeException(ERRO_REMOVER_UTILIZADOR);
         }
-        
+
         return isValid;
     }
 

@@ -292,7 +292,7 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog implements ICa
                     serializacao.guardar(app);
                     JOptionPane.showMessageDialog(this, "Utilizador removido com sucesso");
                 } catch (Exception ex) {
-                    mostrarAviso("Ocorreu um erro ao tentar remover o(s) utilizador(es) selecionado(s): "+ ex.getMessage());
+                    mostrarAviso("Não foi possível remover o(s) utilizador(es) selecionado(s): "+ ex.getMessage());
                 }
             }
         }
