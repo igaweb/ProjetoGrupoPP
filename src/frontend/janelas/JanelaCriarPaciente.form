@@ -88,7 +88,7 @@
                                       <Component id="campoPacienteEstado" min="-2" pref="250" max="-2" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="campoEnfermaria" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
+                                              <Component id="campoMedicoAtribuido" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
                                               <Component id="campoPacienteCama" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
                                               <Component id="campoDataEntrada" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                                               <Component id="campoDataSaida" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
@@ -124,7 +124,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="campoPacienteEstado" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="campoEnfermaria" min="-2" max="-2" attributes="0"/>
+                          <Component id="campoMedicoAtribuido" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="campoPacienteCama" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -261,7 +261,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Enfermaria:"/>
+            <Property name="text" type="java.lang.String" value="Medico:"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[60, 15]"/>
             </Property>
@@ -278,14 +278,9 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="campoEnfermaria">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new HospitalComboModel(app)" type="code"/>
-            </Property>
-          </Properties>
+        <Component class="javax.swing.JComboBox" name="campoMedicoAtribuido">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoEnfermariaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoMedicoAtribuidoActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

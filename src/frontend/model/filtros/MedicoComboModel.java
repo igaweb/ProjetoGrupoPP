@@ -7,7 +7,7 @@ import java.util.TreeMap;
 import javax.swing.ComboBoxModel;
 import javax.swing.event.ListDataListener;
 
-public class MedicosComboModel implements ComboBoxModel<String> {
+public class MedicoComboModel implements ComboBoxModel<String> {
 
     private TreeMap<String, Medico> lista;
     private String[] medicoList;
@@ -15,7 +15,7 @@ public class MedicosComboModel implements ComboBoxModel<String> {
     private String selectedItem;
 
 
-    public MedicosComboModel(Aplicacao app, String codigoHospital, String codigoEnfermaria) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException {
+    public MedicoComboModel(Aplicacao app, String codigoHospital, String codigoEnfermaria) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException {
         this.lista = app.getManagerProfissionalSaude(codigoHospital,codigoEnfermaria).getMedicos();
         
         inicializar();
@@ -94,5 +94,17 @@ public class MedicosComboModel implements ComboBoxModel<String> {
     @Override
     public void removeListDataListener(ListDataListener l) {
         
+    }
+    
+    public Medico getMedicoSelecionado() {
+        Medico medico;
+        try {
+            String codigoMedico = (String) getSelectedItem();
+            medico = lista.get(codigoMedico);
+        } catch (Exception e) {
+            medico = null;
+        }
+        
+        return medico;
     }
 }

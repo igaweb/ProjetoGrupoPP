@@ -1,10 +1,11 @@
 package frontend.janelas;
 
 import backend.Aplicacao;
+import backend.entidades.Medico;
 import backend.entidades.Paciente;
 import backend.interfaces.ICallerJanelaCriarInterface;
 import backend.managers.ManagerPaciente;
-import frontend.model.filtros.HospitalComboModel;
+import frontend.model.filtros.MedicoComboModel;
 import frontend.model.filtros.EstadoPacienteComboModel;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -17,13 +18,15 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
     private String operacao;
     private ManagerPaciente managerPaciente;
     private Paciente paciente;
-    
+    private String codigoHospital, codigoEnfermaria;
     /**
      * Creates new form NewJDialog
      */
     public JanelaCriarPaciente(ICallerJanelaCriarInterface janela, Aplicacao app, String codigoHospital, String codigoEnfermaria, String codigoPaciente) throws Exception {
         this.janela = janela;
         this.app = app;
+        this.codigoHospital = codigoHospital;
+        this.codigoEnfermaria = codigoEnfermaria;
         
         initComponents();
 
@@ -41,6 +44,8 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
         
         //O processo de fecho da janela será controlado pelo programa
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);                                
+        
+        campoMedicoAtribuido.setModel(new MedicoComboModel(app,codigoHospital, codigoEnfermaria));
         
         managerPaciente = app.getManagerPaciente(codigoHospital, codigoEnfermaria);
         
@@ -60,6 +65,8 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
             campoPacienteEstado.setSelectedIndex(paciente.getEstado());
             int nCamas = paciente.getCama();
             campoPacienteCama.setText(nCamas + "");
+//            campoDataEntrada.setDate(paciente.getDataEntrada());
+//            campoDataSaida.setDate(paciente.getDataSaida());
         }
     }
 
@@ -86,7 +93,7 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
         campoPacienteEstado = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        campoEnfermaria = new javax.swing.JComboBox<>();
+        campoMedicoAtribuido = new javax.swing.JComboBox<>();
         campoPacienteCama = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -155,17 +162,16 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setText("Enfermaria:");
+        jLabel2.setText("Medico:");
         jLabel2.setMaximumSize(new java.awt.Dimension(60, 15));
         jLabel2.setPreferredSize(new java.awt.Dimension(60, 15));
 
         jLabel4.setText("Estado:");
         jLabel4.setPreferredSize(new java.awt.Dimension(40, 15));
 
-        campoEnfermaria.setModel(new HospitalComboModel(app));
-        campoEnfermaria.addActionListener(new java.awt.event.ActionListener() {
+        campoMedicoAtribuido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoEnfermariaActionPerformed(evt);
+                campoMedicoAtribuidoActionPerformed(evt);
             }
         });
 
@@ -220,7 +226,7 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
                                     .addComponent(campoPacienteEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filtrosLayout.createSequentialGroup()
                                         .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(campoEnfermaria, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(campoMedicoAtribuido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(campoPacienteCama, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(campoDataEntrada, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(campoDataSaida, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -245,7 +251,7 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
                     .addGroup(filtrosLayout.createSequentialGroup()
                         .addComponent(campoPacienteEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoEnfermaria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(campoMedicoAtribuido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(campoPacienteCama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -297,9 +303,9 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
         adicionarOuEditar();
     }//GEN-LAST:event_jButton1MouseClicked
 
-    private void campoEnfermariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoEnfermariaActionPerformed
+    private void campoMedicoAtribuidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoMedicoAtribuidoActionPerformed
 
-    }//GEN-LAST:event_campoEnfermariaActionPerformed
+    }//GEN-LAST:event_campoMedicoAtribuidoActionPerformed
 
     private void campoPacienteEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoPacienteEstadoActionPerformed
         // TODO add your handling code here:
@@ -316,7 +322,7 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField campoDataEntrada;
     private javax.swing.JFormattedTextField campoDataSaida;
-    private javax.swing.JComboBox<String> campoEnfermaria;
+    private javax.swing.JComboBox<String> campoMedicoAtribuido;
     private javax.swing.JTextField campoPacienteCama;
     private javax.swing.JComboBox<String> campoPacienteEstado;
     private javax.swing.JTextField campoPacienteLocalidade;
@@ -373,14 +379,20 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
                 
                 paciente.setNome(nome);
                 paciente.setLocalidade(localidade);
-                paciente.setEstado(estado);
+                paciente.setEstado(estado);               
                 paciente.setCama(cama);
                 paciente.setDataEntrada(dataEntrada);
                 paciente.setDataSaida(dataSaida);
                 managerPaciente.editar(paciente);
+                
+                
             }
             
-            fechar();
+            // buscar o medico selecionado
+            Medico medico = ((MedicoComboModel)campoMedicoAtribuido.getModel()).getMedicoSelecionado();
+            ((Medico)app.getProfissionalSaude(codigoHospital, codigoEnfermaria, medico.getCodigo())).getPacientes().put(paciente.getCodigo(), paciente);
+
+                    fechar();
             
         } catch (Exception ex) {
             mostrarAviso(ex.getMessage());
