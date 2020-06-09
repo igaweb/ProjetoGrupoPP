@@ -64,9 +64,9 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
             campoPacienteLocalidade.setText(paciente.getLocalidade());
             campoPacienteEstado.setSelectedIndex(paciente.getEstado());
             int nCamas = paciente.getCama();
-            campoPacienteCama.setText(nCamas + "");
-//            campoDataEntrada.setDate(paciente.getDataEntrada());
-//            campoDataSaida.setDate(paciente.getDataSaida());
+            campoPacienteCama.setText(nCamas + "");      
+            campoDataEntrada.setText(paciente.getDataEntrada().toString());
+            campoDataSaida.setText(paciente.getDataSaida().toString());
         }
     }
 

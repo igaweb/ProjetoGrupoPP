@@ -15,6 +15,7 @@ public class TabelaHospital extends TabelaBase {
      */
     public TabelaHospital(Aplicacao app, Serializacao serializacao) throws Exception {
         super(app, serializacao);
+        setOrdenacao();
     }
     
     /*

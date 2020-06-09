@@ -31,7 +31,11 @@ public abstract class TabelaBase extends javax.swing.JPanel implements ICallerJa
         initComponents();
         
         this.modeloTabela = criarModeloTabela();
-        tabela.setModel(modeloTabela);
+        tabela.setModel(modeloTabela);        
+    }
+    
+    protected void setOrdenacao() {
+        tabela.setAutoCreateRowSorter(true);
     }
 
     /**
@@ -90,7 +94,7 @@ public abstract class TabelaBase extends javax.swing.JPanel implements ICallerJa
     }// </editor-fold>//GEN-END:initComponents
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
-
+        
     }//GEN-LAST:event_tabelaMouseClicked
 
 
@@ -119,7 +123,7 @@ public abstract class TabelaBase extends javax.swing.JPanel implements ICallerJa
     }
 
     @Override
-    public JTable getTabela() {
+    public JTable getTabela() {        
         return tabela;
     }
     

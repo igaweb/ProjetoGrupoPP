@@ -26,6 +26,8 @@ public class TabelaEnfermaria extends TabelaBase {
         // aplica a seleçao do hospital onde está esta listagem
         this.hospitalSelecionado = hospitalSelecionado;
         this.hospitalSelecionadoObj = app.getHospital(hospitalSelecionado);
+        
+        setOrdenacao();
     }
 
     /*

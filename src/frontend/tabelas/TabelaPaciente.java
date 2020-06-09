@@ -41,6 +41,7 @@ public class TabelaPaciente extends TabelaBase {
             this.medicoSelecionado = medicoSelecionado;
             this.medicoSelecionadoObj = (Medico) app.getProfissionalSaude(hospitalSelecionado, enfermariaSelecionada, medicoSelecionado);
         }
+        setOrdenacao();
     }
     
     /*

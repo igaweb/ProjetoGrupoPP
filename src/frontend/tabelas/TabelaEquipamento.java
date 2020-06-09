@@ -33,6 +33,7 @@ public class TabelaEquipamento extends TabelaBase {
         
         this.enfermariaSelecionada = enfermariaSelecionada;
         this.enfermariaSelecionadaObj = app.getEnfermaria(hospitalSelecionado, enfermariaSelecionada);
+        setOrdenacao();
     }
     
     /*
