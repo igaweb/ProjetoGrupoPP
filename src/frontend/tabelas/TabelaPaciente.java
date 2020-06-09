@@ -48,7 +48,7 @@ public class TabelaPaciente extends TabelaBase {
     */
     @Override
     public AbstractTableModel criarModeloTabela() {
-        String[] nomeColunas = {"Código", "Nome", "Localidade", "Cama", "Estado", "Data Entrada", "Data Saida", "Enfermaria"};
+        String[] nomeColunas = {"Código", "Nome", "Localidade", "Cama", "Estado","Medico", "Data Entrada", "Data Saida"};
 
         return new AbstractTableModel() {
             @Override
@@ -100,28 +100,27 @@ public class TabelaPaciente extends TabelaBase {
                         return paciente.getCama();
                     case 4:
                         return Conteudos.getEstadosPaciente()[paciente.getEstado()];
-                    case 5:
+                    case 5:                      
+                         try {
+                        return ((Medico) app.getProfissionalSaude(hospitalSelecionado, enfermariaSelecionada, medicoSelecionado));
+                    } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException | Aplicacao.ProfissionalSaudeNaoExistenteException ex) {
+                        return "";
+                    }                                    
+                    case 6:
                         try {
                         return df.format(paciente.getDataEntrada());
                     } catch (Exception ex) {
                         return "";
                     }
-                    case 6:
+                    case 7:
                         try {
                         return df.format(paciente.getDataSaida());
                     } catch (Exception ex) {
                         return "";
                     }
-                    case 8:
-                        try {
-                        return app.getEnfermaria(hospitalSelecionado, enfermariaSelecionada).getNome();
-                    } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException ex) {
-                        return "";
-                    }
-
                     default:
                         return "";
-                }
+                    }
             }
         };
     }
