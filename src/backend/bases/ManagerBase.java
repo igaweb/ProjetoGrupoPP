@@ -103,16 +103,20 @@ public abstract class ManagerBase implements Serializable, IManager {
     public void editar(EntidadeBase entidade) throws Exception {
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_EDITAR);
+        try {
+            // validar se os campos vêm todos bem preenchidos
+            boolean isValido = validarCampos(entidade);
 
-        // validar se os campos vêm todos bem preenchidos
-        boolean isValido = validarCampos(entidade);
+            // se estiver bem preenchido,
+            // avança para a edição
+            if (isValido) {
 
-        // se estiver bem preenchido,
-        // avança para a edição
-        if (isValido) {
-            lista.put(entidade.getCodigo(), entidade);
-        } else {
-            // senão, retorna erro
+                lista.put(entidade.getCodigo(), entidade);
+            } else {
+                // senão, retorna erro
+                throw new EditarEntidadeException();
+            }
+        } catch (Exception e) {
             throw new EditarEntidadeException();
         }
     }
@@ -122,9 +126,8 @@ public abstract class ManagerBase implements Serializable, IManager {
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_REMOVER);
 
-        boolean isValido = validarCampos(entidade);
-
         try {
+            boolean isValido = validarCampos(entidade);
             if (isValido) {
                 lista.remove(entidade.getCodigo());
             } else {

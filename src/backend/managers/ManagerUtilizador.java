@@ -17,6 +17,8 @@ public class ManagerUtilizador extends ManagerBase implements IManager {
 
     private static final String ERRO_REMOVER_UTILIZADOR = "Operação inválida, utilizador não pode ser eliminado";
 
+    private static final String ERRO_EDITAR_UTILIZADOR = "ERRO_EDITAR_UTILIZADOR";
+    
     private static Aplicacao app;
 
     public ManagerUtilizador() {
@@ -69,10 +71,13 @@ public class ManagerUtilizador extends ManagerBase implements IManager {
      * @return
      * @throws backend.bases.ManagerBase.ValidacaoEntidadeException
      */
-    private boolean validarCampos(Utilizador utilizador) throws ValidacaoEntidadeException {
+    @Override
+    public boolean validarCampos(EntidadeBase entidade) throws ValidacaoEntidadeException {
+        Utilizador utilizador = (Utilizador) entidade;
+        
         // validações para todas as operaçoes na base
         boolean isValid = super.validarCampos(utilizador);
-        if (!operacao.equals(OPERACAO_ADICIONAR) && utilizador.getPassword() == null) {
+        if (!operacao.equals(OPERACAO_ADICIONAR) && utilizador.getPassword() == null || utilizador.getPassword().isEmpty()) {
             throw new ValidacaoEntidadeException(ERRO_FALTA_PASSWORD);
         }
         if (operacao.equals(OPERACAO_REMOVER) && utilizador.equals(app.getUtilizadorAutenticado())) {
@@ -81,6 +86,8 @@ public class ManagerUtilizador extends ManagerBase implements IManager {
 
         return isValid;
     }
+    
+    
 
     @Override
     public String toString() {
