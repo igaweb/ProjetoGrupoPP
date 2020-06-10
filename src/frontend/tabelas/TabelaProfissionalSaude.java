@@ -39,7 +39,7 @@ public class TabelaProfissionalSaude extends TabelaBase {
     */
     @Override
     public AbstractTableModel criarModeloTabela() {
-        String[] nomeColunas = {"Código", "Nome", "Especialidade"};
+        String[] nomeColunas = {"Código", "Nome", "Especialidade", "Nº pacientes"};
         
         return new AbstractTableModel() {     
             @Override
@@ -84,6 +84,12 @@ public class TabelaProfissionalSaude extends TabelaBase {
                             especialidade = ((Medico) profissionalSaude).getEspecialidade();
                         }
                         return especialidade;
+                    case 3:
+                        int nPacientes = 0;
+                        if (profissionalSaude instanceof Medico) {
+                            nPacientes = ((Medico) profissionalSaude).getPacientes().size();
+                        }
+                        return nPacientes;
                     default:
                         return "";
                 }

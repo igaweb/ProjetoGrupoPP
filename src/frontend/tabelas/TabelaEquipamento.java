@@ -92,7 +92,7 @@ public class TabelaEquipamento extends TabelaBase {
                         try {
                             return equipamento.getPaciente().getNome();
                         }catch (Exception e){
-                           return ""; 
+                           return "<livre>"; 
                         }
                                 
                         
