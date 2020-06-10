@@ -10,6 +10,7 @@ import backend.entidades.Enfermaria;
 import backend.bases.EntidadeBase;
 import backend.entidades.Equipamento;
 import backend.entidades.Medico;
+import backend.entidades.Paciente;
 import backend.interfaces.IManager;
 import backend.interfaces.ITable;
 import frontend.bases.JanelaBase;
@@ -17,6 +18,7 @@ import frontend.bases.TabelaBase;
 import frontend.tabelas.TabelaPaciente;
 import java.util.Map;
 import java.util.TreeMap;
+import javax.swing.JOptionPane;
 
 public class JanelaDetalheEnfermaria extends JanelaBase {
 
@@ -26,6 +28,7 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
 
     /**
      * Creates new form JanelaConsultaEquipamento
+     *
      * @param app
      * @param serializacao
      * @param hospitalSelecionado
@@ -33,15 +36,15 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
      * @param enfermariaSelecionada
      * @throws java.lang.Exception
      */
-    public JanelaDetalheEnfermaria(Aplicacao app, Serializacao serializacao, String tituloJanela, String hospitalSelecionado, String enfermariaSelecionada) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException, Exception  {
+    public JanelaDetalheEnfermaria(Aplicacao app, Serializacao serializacao, String tituloJanela, String hospitalSelecionado, String enfermariaSelecionada) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException, Exception {
         super(app, serializacao, tituloJanela);
 
         getBotaoCriar().setVisible(true);
-        
+
         // TODO: alterar para nao so mostrar quando selecionarmos a tab do profissional de saude
         getBotaoCriarEnfermeiro().setVisible(true);
         getBotaoCriarMedico().setVisible(true);
-        
+
         // aplica a seleçao do hospital onde está esta listagem
         this.hospitalSelecionado = hospitalSelecionado;
         this.hospitalSelecionadoObj = app.getHospital(hospitalSelecionado);
@@ -49,9 +52,9 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
         // aplica a seleçao da enfermaria onde está esta listagem
         this.enfermariaSelecionada = enfermariaSelecionada;
         this.enfermariaSelecionadaObj = app.getEnfermaria(hospitalSelecionado, enfermariaSelecionada);
-        
+
         setTextoDetalhe();
-        
+
         getTabTabela().add(new TabelaEquipamento(app, serializacao, hospitalSelecionado, enfermariaSelecionada));
         getTabTabela().setTitleAt(0, "Equipamentos");
         getTabTabela().add(new TabelaProfissionalSaude(app, serializacao, hospitalSelecionado, enfermariaSelecionada));
@@ -73,17 +76,17 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
         detalhe += "<br>";
         detalhe += "- Nº de equipamentos: " + enfermariaSelecionadaObj.getEquipamentos().size() + " (" + getEquipamentosLivres() + " livres)";
         detalhe += "</html>";
-        
+
         getLabelDetalhe().setText(detalhe);
     }
-    
+
     @Override
     public void adicionar() {
         try {
-            
+
             EntidadeBase entidadeRef;
             ITable tabelaSelecionada = ((TabelaBase) getTabTabela().getSelectedComponent());
-            
+
             if (tabelaSelecionada instanceof TabelaEquipamento) {
                 JanelaCriarEquipamento janela = new JanelaCriarEquipamento(this, app, hospitalSelecionado, enfermariaSelecionada, null);
                 janela.setVisible(true);
@@ -101,10 +104,10 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
     @Override
     public void editar() {
         try {
-            
+
             ITable tabelaSelecionada = ((TabelaBase) getTabTabela().getSelectedComponent());
             String codigo = getCodigoSelecionado();
-            
+
             if (tabelaSelecionada instanceof TabelaEquipamento) {
                 JanelaCriarEquipamento janela = new JanelaCriarEquipamento(this, app, hospitalSelecionado, enfermariaSelecionada, codigo);
                 janela.setVisible(true);
@@ -122,7 +125,51 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
         }
 
     }
-    
+
+    protected void remover() {
+
+        ITable tabelaSelecionada = ((TabelaBase) getTabTabela().getSelectedComponent());
+        if (tabelaSelecionada instanceof TabelaPaciente) {
+            try {
+                validarSeExisteSelecao(true);
+            } catch (Exception e) {
+                mostrarAviso(e.getMessage());
+            }
+
+            int option = JOptionPane.showConfirmDialog(this, "Tem a certeza que quer eliminar a linha selecionada?");
+
+            if (option == JOptionPane.OK_OPTION) {
+                IManager manager = getManager();
+                boolean error = false;
+                for (int i = 0; i < getTabelaSelecionada().getSelectedRows().length; i++) {
+                    try {
+                        int index = getTabelaSelecionada().getSelectedRows()[i];
+
+                        String key = (String) getTabelaSelecionada().getModel().getValueAt(index, 0);
+                        Paciente paciente = ((Paciente) getEntidadeSelecionada(key));
+                        Integer camaIndex = paciente.getCama();
+                        manager.remover(paciente);
+                        app.setCamaLivre(hospitalSelecionado, enfermariaSelecionada, camaIndex);
+                    } catch (Exception ex) {
+                        mostrarAviso("Ocorreu um erro ao tentar remover a(s) linha(s) selecionada(s): " + ex.getMessage());
+                        error = true;
+                        break;
+                    }
+                }
+
+                if (error) {
+                    return;
+                }
+
+                atualizar();
+                mostrarAviso("Operação executada com sucesso");
+            }
+
+        } else {
+            super.remover();
+        }
+    }
+
     private void adicionarProfissionalSaude(boolean isMedico) {
         try {
             JanelaCriarProfissionalSaude janela = new JanelaCriarProfissionalSaude(this, app, hospitalSelecionado, enfermariaSelecionada, null, isMedico);
@@ -134,7 +181,7 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
             mostrarAviso("Ocorreu um erro generico.");
         }
     }
-    
+
     @Override
     public void detalhe() {
         // não existe detalhe
@@ -143,7 +190,7 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
     @Override
     public IManager getManager() {
         ITable tabelaSelecionada = ((TabelaBase) getTabTabela().getSelectedComponent());
-        
+
         try {
             if (tabelaSelecionada instanceof TabelaEquipamento) {
                 return app.getManagerEquipamento(hospitalSelecionado, enfermariaSelecionada);
@@ -156,23 +203,23 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
             }
         } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException ex) {
             mostrarAviso(ex.getMessage());
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         return null;
     }
-    
+
     protected void setEventos() {
         // executa os eventos do super e acrescenta uns especificos desta janela
         super.setEventos();
-        
+
         // criar medico
         getBotaoCriarMedico().addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 adicionarProfissionalSaude(true);
             }
         });
-        
+
         // criar enfermeiro
         getBotaoCriarEnfermeiro().addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -185,11 +232,11 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
         Boolean[] camas = enfermariaSelecionadaObj.getCamas();
         int contador = 0;
         for (int i = 0; i < camas.length; i++) {
-            if(camas[i] == null || camas[i]) {
-                contador ++;
+            if (camas[i] == null || !camas[i]) {
+                contador++;
             }
         }
-        
+
         return contador;
     }
 
@@ -198,12 +245,12 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
         int contador = 0;
         for (Map.Entry<String, EntidadeBase> entry : equipamentos.entrySet()) {
             Equipamento equipamento = (Equipamento) entry.getValue();
-            
-            if(equipamento.getPaciente() == null) {
-                contador ++;
+
+            if (equipamento.getPaciente() == null) {
+                contador++;
             }
         }
-        
+
         return contador;
     }
 }

@@ -62,9 +62,7 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
             paciente = (Paciente)app.getPaciente(codigoHospital, codigoEnfermaria, codigoPaciente);
             campoPacienteNome.setText(paciente.getNome());
             campoPacienteLocalidade.setText(paciente.getLocalidade());
-            campoPacienteEstado.setSelectedIndex(paciente.getEstado());
-            int nCamas = paciente.getCama();
-            campoPacienteCama.setText(nCamas + "");      
+            campoPacienteEstado.setSelectedIndex(paciente.getEstado());                
             campoDataEntrada.setText(paciente.getDataEntrada().toString());
             campoDataSaida.setText(paciente.getDataSaida().toString());
         }
@@ -94,8 +92,6 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         campoMedicoAtribuido = new javax.swing.JComboBox<>();
-        campoPacienteCama = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -175,11 +171,6 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
             }
         });
 
-        campoPacienteCama.setText("0");
-
-        jLabel5.setText("Número de cama:");
-        jLabel5.setPreferredSize(new java.awt.Dimension(85, 15));
-
         jButton1.setText("Guardar");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -219,7 +210,6 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
                                     .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
                                         .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(labelDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,7 +217,6 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filtrosLayout.createSequentialGroup()
                                         .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addComponent(campoMedicoAtribuido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(campoPacienteCama, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(campoDataEntrada, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(campoDataSaida, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(203, 203, 203)))))))
@@ -252,11 +241,7 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
                         .addComponent(campoPacienteEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(campoMedicoAtribuido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(campoPacienteCama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(27, 27, 27)
                         .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(campoDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -323,7 +308,6 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField campoDataEntrada;
     private javax.swing.JFormattedTextField campoDataSaida;
     private javax.swing.JComboBox<String> campoMedicoAtribuido;
-    private javax.swing.JTextField campoPacienteCama;
     private javax.swing.JComboBox<String> campoPacienteEstado;
     private javax.swing.JTextField campoPacienteLocalidade;
     private javax.swing.JTextField campoPacienteNome;
@@ -332,7 +316,6 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel labelDataEntrada;
@@ -344,13 +327,6 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
         try {
             String nome = campoPacienteNome.getText();
             String localidade = campoPacienteLocalidade.getText();                             
-            int cama;
-            try {
-                cama = Integer.parseInt(campoPacienteCama.getText());
-            } catch (Exception e) {
-                mostrarAviso("Tem de inserir um número");
-                return;
-            }
             int estado = campoPacienteEstado.getSelectedIndex();
             
             // buscar o valor inserido na data de entrada
@@ -365,7 +341,10 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
             }
             
             if(operacao.equals(ManagerPaciente.OPERACAO_ADICIONAR)){
+                Integer cama = app.getCamaDisponivel(codigoHospital, codigoEnfermaria);
+                
                 managerPaciente.adicionar(nome, localidade, cama, estado, dataEntrada);
+                 app.setCamaOcupada(codigoHospital, codigoEnfermaria, cama);
             } else if(operacao.equals(ManagerPaciente.OPERACAO_EDITAR)){
                 // buscar o valor inserido na data de saída
                 Date dataSaida;
@@ -380,17 +359,14 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
                 paciente.setNome(nome);
                 paciente.setLocalidade(localidade);
                 paciente.setEstado(estado);               
-                paciente.setCama(cama);
                 paciente.setDataEntrada(dataEntrada);
                 paciente.setDataSaida(dataSaida);
                 managerPaciente.editar(paciente);
-                
-                
             }
             
             // buscar o medico selecionado
-            Medico medico = ((MedicoComboModel)campoMedicoAtribuido.getModel()).getMedicoSelecionado();
-            ((Medico)app.getProfissionalSaude(codigoHospital, codigoEnfermaria, medico.getCodigo())).getPacientes().put(paciente.getCodigo(), paciente);
+//            Medico medico = ((MedicoComboModel)campoMedicoAtribuido.getModel()).getMedicoSelecionado();
+//            ((Medico)app.getProfissionalSaude(codigoHospital, codigoEnfermaria, medico.getCodigo())).getPacientes().put(paciente.getCodigo(), paciente);
 
                     fechar();
             

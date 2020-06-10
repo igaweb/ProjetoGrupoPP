@@ -156,6 +156,35 @@ public class Aplicacao implements Serializable {
         }
         return profissionalSaude;
     }
+    
+    public Integer getCamaDisponivel(String codigoHospital, String codigoEnfermaria) throws HospitalNaoExistenteException, EnfermariaNaoExistenteException, PacienteCamaNaoExistenteException {
+        Boolean[] camas = getEnfermaria(codigoHospital, codigoEnfermaria).getCamas();
+        
+        Integer camaDisponivel = null;
+        for (int i = 0; i < camas.length; i++) {
+            if(camas[i] == null || camas[i]) {
+                camaDisponivel = i;
+                break;
+            }
+        }
+        
+        if(camaDisponivel == null){
+            throw new PacienteCamaNaoExistenteException();
+        }
+        return camaDisponivel;
+    } 
+    
+    public void setCamaOcupada(String codigoHospital, String codigoEnfermaria, Integer camaIndex) throws HospitalNaoExistenteException, EnfermariaNaoExistenteException {
+        Boolean[] camas = getEnfermaria(codigoHospital, codigoEnfermaria).getCamas();
+        camas[camaIndex] = false;
+        getEnfermaria(codigoHospital, codigoEnfermaria).setCamas(camas);
+    } 
+    
+    public void setCamaLivre(String codigoHospital, String codigoEnfermaria, Integer camaIndex) throws HospitalNaoExistenteException, EnfermariaNaoExistenteException {
+        Boolean[] camas = getEnfermaria(codigoHospital, codigoEnfermaria).getCamas();
+        camas[camaIndex] = true;
+        getEnfermaria(codigoHospital, codigoEnfermaria).setCamas(camas);
+    } 
 
     public static class HospitalNaoExistenteException extends Exception {
 
@@ -184,11 +213,16 @@ public class Aplicacao implements Serializable {
             super("Paciente nao existente");
         }
     }
+    public static class PacienteCamaNaoExistenteException extends Exception {
 
+        public PacienteCamaNaoExistenteException() {
+            super("Não há camas disponiveis");
+        }
+    }
     public static class ProfissionalSaudeNaoExistenteException extends Exception {
 
         public ProfissionalSaudeNaoExistenteException() {
             super("ProfissionalSaude nao existente");
         }
-    }
+    }   
 }

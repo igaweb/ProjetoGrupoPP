@@ -321,7 +321,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         // para as janelas que nao precisam de ter texto no detalhe
     }
 
-    private void remover() {
+    protected void remover() {
         try {
             validarSeExisteSelecao(true);
         } catch (Exception e) {
