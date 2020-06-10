@@ -355,6 +355,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
             validarSeExisteSelecao(true);
         } catch (Exception e) {
             mostrarAviso(e.getMessage());
+            return;
         }
 
         int option = JOptionPane.showConfirmDialog(this, "Tem a certeza que quer eliminar a linha selecionada?");
