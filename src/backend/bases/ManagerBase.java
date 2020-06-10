@@ -47,11 +47,11 @@ public abstract class ManagerBase implements Serializable, IManager {
         }
 
         // se nao for a operacao adicionar, tem de existir um codigo
-        if (!operacao.equals(OPERACAO_ADICIONAR) && entidade.getCodigo() == null) {
+        if (!operacao.equals(OPERACAO_ADICIONAR) && (entidade.getCodigo() == null || entidade.getCodigo().trim().isEmpty())) {
             throw new ValidacaoEntidadeException(ERRO_FALTA_CODIGO);
         }
 
-        if (entidade.getNome() == null || entidade.getNome().isEmpty()) {
+        if (entidade.getNome() == null || (entidade.getNome() == null || entidade.getNome().trim().isEmpty())) {
             throw new ValidacaoEntidadeException(ERRO_FALTA_NOME);
         }
 
