@@ -34,7 +34,7 @@ public class TabelaEnfermaria extends TabelaBase {
      */
     @Override
     public AbstractTableModel criarModeloTabela() {
-        String[] nomeColunas = {"Código", "Nome", "Tipo", "Equipamentos", "Camas"};
+        String[] nomeColunas = {"Código", "Nome", "Tipo", "Equipamentos", "Camas", "Prof.Saúde", "Pacientes"};
 
         return new AbstractTableModel() {
             @Override
@@ -77,6 +77,10 @@ public class TabelaEnfermaria extends TabelaBase {
                             return enfermaria.getEquipamentos().size();
                         case 4:
                             return enfermaria.getCamas().length;
+                        case 5:
+                            return enfermaria.getProfissionalSaude().size();
+                        case 6:
+                            return enfermaria.getPacientes().size();
                         default:
                             return "";
                     }
