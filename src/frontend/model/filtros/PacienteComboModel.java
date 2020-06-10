@@ -14,6 +14,7 @@ public class PacienteComboModel implements ComboBoxModel<String> {
     private String[] pacienteList;
     private String[] pacienteCodigoList;
     private String selectedItem;
+    private int selectedIndex;
 
 
     public PacienteComboModel(Aplicacao app, String codigoHospital, String codigoEnfermaria) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException {
@@ -29,11 +30,10 @@ public class PacienteComboModel implements ComboBoxModel<String> {
             int i = 1;
             pacienteList = new String[(lista.size()+1)];
             pacienteCodigoList = new String[(lista.size()+1)];
-            pacienteList[0] = "";
-            pacienteCodigoList[0] = "";
+            pacienteList[0] = "<--Sem Paciente-->";
+            pacienteCodigoList[0] = "<--Sem Paciente-->";
             for (Map.Entry<String, Paciente> entry : lista.entrySet()) {
-                Paciente paciente = (Paciente) entry.getValue();
-                
+                Paciente paciente = (Paciente) entry.getValue();               
             
                 pacienteList[i] = paciente.getNome();
                 pacienteCodigoList[i] = paciente.getCodigo();
@@ -41,8 +41,7 @@ public class PacienteComboModel implements ComboBoxModel<String> {
                 i++;
             }
         } else {
-            pacienteList = new String[] {""};
-
+            pacienteList = new String[] {"Não existem Pacientes"};
         }
         
         try {
@@ -87,7 +86,8 @@ public class PacienteComboModel implements ComboBoxModel<String> {
 
     @Override
     public String getElementAt(int index) {
-       return pacienteCodigoList == null ? null : pacienteCodigoList[index];
+        this.selectedIndex = index;
+       return pacienteList == null ? null : pacienteList[index];
   
     }
     
@@ -106,7 +106,8 @@ public class PacienteComboModel implements ComboBoxModel<String> {
     public Paciente getPacienteSelecionado() {
         Paciente paciente;
         try {
-            String codigoPaciente = (String) getSelectedItem();
+            //String codigoPaciente = (String) getSelectedItem();
+            String codigoPaciente = pacienteCodigoList[selectedIndex];
             paciente = lista.get(codigoPaciente);
         } catch (Exception e) {
             paciente = null;

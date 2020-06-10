@@ -249,7 +249,8 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
                 if (comboNomePaciente.getSelectedIndex() == 0) {
                     equipamento.setPaciente(null);
                 } else {
-                    equipamento.setPaciente(app.getPaciente(codigoHospital, codigoEnfermaria, paciente.getCodigo()));
+                    //equipamento.setPaciente(app.getPaciente(codigoHospital, codigoEnfermaria, paciente.getCodigo()));
+                    equipamento.setPaciente(paciente);
                 }
                 managerEquipamento.editar(equipamento);
                
