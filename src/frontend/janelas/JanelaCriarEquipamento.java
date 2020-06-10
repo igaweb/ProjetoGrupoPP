@@ -236,6 +236,8 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
     private void adicionarOuEditar() {
         String nome = campoNomeEquipamento.getText();
         int tipo = comboTipoEquipamento.getSelectedIndex();
+        //paciente = comboNomePaciente.getSelectedItem();
+            
         
         try {
             if (operacao.equals(ManagerEquipamento.OPERACAO_ADICIONAR)) {
@@ -244,6 +246,8 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
             } else if (operacao.equals(ManagerEquipamento.OPERACAO_EDITAR)) {
                 equipamento.setNome(nome);
                 equipamento.setTipo(tipo);
+                Paciente paciente = ((PacienteComboModel)comboNomePaciente.getModel()).getPacienteSelecionado();
+                equipamento.setPaciente(app.getPaciente(codigoHospital, codigoEnfermaria, paciente.getCodigo()));
                 managerEquipamento.editar(equipamento);
                
                 
