@@ -14,37 +14,34 @@ public class PacienteComboModel implements ComboBoxModel<String> {
     private String[] pacienteList;
     private String[] pacienteCodigoList;
     private String selectedItem;
-    private int selectedIndex;
-
 
     public PacienteComboModel(Aplicacao app, String codigoHospital, String codigoEnfermaria) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException {
-        this.lista = app.getManagerPaciente(codigoHospital,codigoEnfermaria).getLista();
-        
+        this.lista = app.getManagerPaciente(codigoHospital, codigoEnfermaria).getLista();
+
         inicializar();
     }
-    
-    
+
     private void inicializar() {
 
         if (lista != null) {
             int i = 1;
-            pacienteList = new String[(lista.size()+1)];
-            pacienteCodigoList = new String[(lista.size()+1)];
-            pacienteList[0] = "<--Sem Paciente-->";
-            pacienteCodigoList[0] = "<--Sem Paciente-->";
+            pacienteList = new String[(lista.size() + 1)];
+            pacienteCodigoList = new String[(lista.size() + 1)];
+            pacienteList[0] = "<Nenhum>";
+            pacienteCodigoList[0] = null;
             for (Map.Entry<String, Paciente> entry : lista.entrySet()) {
-                Paciente paciente = (Paciente) entry.getValue();               
-            
+                Paciente paciente = (Paciente) entry.getValue();
+
                 pacienteList[i] = paciente.getNome();
                 pacienteCodigoList[i] = paciente.getCodigo();
-                
+
                 i++;
             }
         } else {
-            pacienteList = new String[] {""};
-            pacienteCodigoList = new String[] {""};
+            pacienteList = new String[]{""};
+            pacienteCodigoList = new String[]{""};
         }
-        
+
         try {
             selectedItem = pacienteList[0];
         } catch (Exception e) {
@@ -82,36 +79,37 @@ public class PacienteComboModel implements ComboBoxModel<String> {
 
     @Override
     public int getSize() {
-        return pacienteList == null? 0 : pacienteList.length;
+        return pacienteList == null ? 0 : pacienteList.length;
     }
 
     @Override
     public String getElementAt(int index) {
-        this.selectedIndex = index;
-       return pacienteList == null ? null : pacienteList[index];
-  
+        return pacienteList == null ? null : pacienteList[index];
+
     }
 
     @Override
     public void addListDataListener(ListDataListener l) {
-        
+
     }
 
     @Override
     public void removeListDataListener(ListDataListener l) {
-        
+
     }
 
-    public Paciente getPacienteSelecionado() {
+    public Paciente getPacienteSelecionado(int index) {
         Paciente paciente;
         try {
-            //String codigoPaciente = (String) getSelectedItem();
-            String codigoPaciente = pacienteCodigoList[selectedIndex];
-            paciente = lista.get(codigoPaciente);
+            paciente = lista.get(pacienteCodigoList[index]);
         } catch (Exception e) {
             paciente = null;
         }
-        
+
         return paciente;
+    }
+
+    public void setPacienteSelecionado(Paciente paciente) {
+        selectedItem = paciente == null ? null : paciente.getNome();
     }
 }
