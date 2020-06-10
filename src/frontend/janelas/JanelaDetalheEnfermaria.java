@@ -184,6 +184,17 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
     }
 
     private void darAltaPaciente() {
+        ITable tabelaSelecionada = ((TabelaBase) getTabTabela().getSelectedComponent());
+        if (tabelaSelecionada instanceof TabelaPaciente) {
+            try {
+                validarSeExisteSelecao(true);
+            } catch (Exception e) {
+                mostrarAviso(e.getMessage());
+            }
+        } else {
+            mostrarAviso("Tem de selecionar um paciente!");
+        }
+        
         // paciente.setDataSaida....
         // manager. editar(paciente....)
         // app.setCamaLivre(hospitalSelecionado, enfermariaSelecionada, camaIndex);
