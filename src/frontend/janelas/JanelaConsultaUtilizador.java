@@ -300,7 +300,7 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog implements ICa
                     int index = tabela.getSelectedRows()[i];
 
                     Utilizador utilizador = (Utilizador) app.getManagerUtilizador().getLista().get(tabela.getModel().getValueAt(index, 0));
-                    if (operacao.equals(OPERACAO_REMOVER) && utilizador.equals(app.isAdministrador(utilizador))) {
+                    if (operacao.equals(OPERACAO_REMOVER) && utilizador.equals(app.getUtilizadorAutenticado())) {
                         throw new ManagerBase.ValidacaoEntidadeException(ERRO_REMOVER_UTILIZADOR);
                     }
                     managerUtilizador.remover(utilizador);
