@@ -26,11 +26,14 @@ public class PacienteComboModel implements ComboBoxModel<String> {
     private void inicializar() {
 
         if (lista != null) {
-            int i = 0;
-            pacienteList = new String[lista.size()];
-            pacienteCodigoList = new String[lista.size()];
+            int i = 1;
+            pacienteList = new String[(lista.size()+1)];
+            pacienteCodigoList = new String[(lista.size()+1)];
+            pacienteList[0] = "";
+            pacienteCodigoList[0] = "";
             for (Map.Entry<String, Paciente> entry : lista.entrySet()) {
                 Paciente paciente = (Paciente) entry.getValue();
+                
             
                 pacienteList[i] = paciente.getNome();
                 pacienteCodigoList[i] = paciente.getCodigo();

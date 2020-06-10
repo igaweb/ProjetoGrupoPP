@@ -124,7 +124,6 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
 
         jLabelNomeEquipamento.setText("Nome do Equipamento : ");
 
-        campoNomeEquipamento.setText(" ");
         campoNomeEquipamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoNomeEquipamentoActionPerformed(evt);
@@ -149,33 +148,30 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(226, 226, 226)
-                                .addComponent(botaoGuardar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(133, 133, 133)
-                                .addComponent(userCode)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(226, 226, 226)
+                        .addComponent(botaoGuardar))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(133, 133, 133)
+                        .addComponent(userCode)))
+                .addContainerGap(28, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabelNomeEquipamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(labelNomePaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(labelTipoEquipamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(campoNomeEquipamento)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(comboTipoEquipamento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(comboNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 29, Short.MAX_VALUE)))))
-                .addContainerGap())
+                            .addComponent(jLabelNomeEquipamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labelNomePaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(labelTipoEquipamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(comboTipoEquipamento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(35, Short.MAX_VALUE))
+                    .addComponent(campoNomeEquipamento)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,6 +194,9 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
                 .addComponent(botaoGuardar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        campoNomeEquipamento.getAccessibleContext().setAccessibleName("");
+        campoNomeEquipamento.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -233,21 +232,25 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
     private javax.swing.JLabel userCode;
     // End of variables declaration//GEN-END:variables
 
+   
+    
     private void adicionarOuEditar() {
         String nome = campoNomeEquipamento.getText();
-        int tipo = comboTipoEquipamento.getSelectedIndex();
-        //paciente = comboNomePaciente.getSelectedItem();
-            
+        int tipo = comboTipoEquipamento.getSelectedIndex();        
         
         try {
             if (operacao.equals(ManagerEquipamento.OPERACAO_ADICIONAR)) {
-              managerEquipamento.adicionar(nome, tipo);
+              managerEquipamento.adicionar(nome,tipo);
 
             } else if (operacao.equals(ManagerEquipamento.OPERACAO_EDITAR)) {
                 equipamento.setNome(nome);
                 equipamento.setTipo(tipo);
                 Paciente paciente = ((PacienteComboModel)comboNomePaciente.getModel()).getPacienteSelecionado();
-                equipamento.setPaciente(app.getPaciente(codigoHospital, codigoEnfermaria, paciente.getCodigo()));
+                if (comboNomePaciente.getSelectedIndex() == 0) {
+                    equipamento.setPaciente(null);
+                } else {
+                    equipamento.setPaciente(app.getPaciente(codigoHospital, codigoEnfermaria, paciente.getCodigo()));
+                }
                 managerEquipamento.editar(equipamento);
                
                 
