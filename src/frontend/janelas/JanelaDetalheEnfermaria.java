@@ -44,6 +44,7 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
         // TODO: alterar para nao so mostrar quando selecionarmos a tab do profissional de saude
         getBotaoCriarEnfermeiro().setVisible(true);
         getBotaoCriarMedico().setVisible(true);
+        getBotaoDarAlta().setVisible(true);
 
         // aplica a seleçao do hospital onde está esta listagem
         this.hospitalSelecionado = hospitalSelecionado;
@@ -182,6 +183,15 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
         }
     }
 
+    private void darAltaPaciente() {
+        // paciente.setDataSaida....
+        // manager. editar(paciente....)
+        // app.setCamaLivre(hospitalSelecionado, enfermariaSelecionada, camaIndex);
+        // mostrarAviso de sucesso, senao...
+        // ( tudo num try catch) e no catch um mostraAviso (ex.getMessage)
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     @Override
     public void detalhe() {
         // não existe detalhe
@@ -225,6 +235,14 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 adicionarProfissionalSaude(false);
             }
+        });
+
+        // dar alta
+        getBotaoDarAlta().addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                darAltaPaciente();
+            }
+
         });
     }
 

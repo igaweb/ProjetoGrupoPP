@@ -17,7 +17,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
@@ -79,6 +78,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         botaoCriarEnfermeiro = new javax.swing.JButton();
         botaoDetalhe = new javax.swing.JButton();
         botaoGuardar = new javax.swing.JButton();
+        botaoDarAlta = new javax.swing.JButton();
         tabs = new javax.swing.JPanel();
         tabTabela = new javax.swing.JTabbedPane();
 
@@ -171,37 +171,57 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
             }
         });
 
+        botaoDarAlta.setText("Dar alta Paciente");
+        botaoDarAlta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botaoDarAltaMouseClicked(evt);
+            }
+        });
+        botaoDarAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoDarAltaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout botoesLayout = new javax.swing.GroupLayout(botoes);
         botoes.setLayout(botoesLayout);
         botoesLayout.setHorizontalGroup(
             botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(botoesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(botaoCriar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoCriarMedico)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoCriarEnfermeiro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoEditar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoDetalhe)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoRemover)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botaoGuardar)
-                .addContainerGap())
+                .addGroup(botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(botoesLayout.createSequentialGroup()
+                        .addComponent(botaoCriar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoCriarMedico)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoCriarEnfermeiro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoDetalhe)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoRemover)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botaoGuardar)
+                        .addContainerGap())
+                    .addGroup(botoesLayout.createSequentialGroup()
+                        .addComponent(botaoDarAlta)
+                        .addGap(709, 709, 709))))
         );
         botoesLayout.setVerticalGroup(
             botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(botaoCriar)
-                .addComponent(botaoRemover)
-                .addComponent(botaoDetalhe)
-                .addComponent(botaoCriarMedico)
-                .addComponent(botaoCriarEnfermeiro)
-                .addComponent(botaoEditar)
-                .addComponent(botaoGuardar))
+            .addGroup(botoesLayout.createSequentialGroup()
+                .addGroup(botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoCriar)
+                    .addComponent(botaoRemover)
+                    .addComponent(botaoDetalhe)
+                    .addComponent(botaoCriarMedico)
+                    .addComponent(botaoCriarEnfermeiro)
+                    .addComponent(botaoEditar)
+                    .addComponent(botaoGuardar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botaoDarAlta))
         );
 
         javax.swing.GroupLayout tabsLayout = new javax.swing.GroupLayout(tabs);
@@ -300,10 +320,19 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         // TODO add your handling code here:
     }//GEN-LAST:event_botaoGuardarMouseClicked
 
+    private void botaoDarAltaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoDarAltaMouseClicked
+        
+    }//GEN-LAST:event_botaoDarAltaMouseClicked
+
+    private void botaoDarAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDarAltaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoDarAltaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCriar;
     private javax.swing.JButton botaoCriarEnfermeiro;
     private javax.swing.JButton botaoCriarMedico;
+    private javax.swing.JButton botaoDarAlta;
     private javax.swing.JButton botaoDetalhe;
     private javax.swing.JButton botaoEditar;
     private javax.swing.JButton botaoGuardar;
@@ -450,6 +479,10 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         return botaoDetalhe;
     }
 
+    public JButton getBotaoDarAlta() {
+        return botaoDarAlta;
+    }
+
     public JTabbedPane getTabTabela() {
         return tabTabela;
     }
@@ -491,6 +524,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         botaoCriarEnfermeiro.setVisible(false);
         botaoDetalhe.setVisible(false);
         botaoGuardar.setVisible(false);
+        botaoDarAlta.setVisible(false);
     }
 
     protected void redesenharTabela() {
