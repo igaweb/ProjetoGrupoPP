@@ -84,20 +84,15 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        paneDetalhe = new javax.swing.JPanel();
-        labelDetalhe = new javax.swing.JLabel();
         contentor = new javax.swing.JPanel();
         botoes = new javax.swing.JPanel();
         botaoCriar = new javax.swing.JButton();
         botaoEditar = new javax.swing.JButton();
         botaoRemover = new javax.swing.JButton();
-        botaoCriarMedico = new javax.swing.JButton();
-        botaoCriarEnfermeiro = new javax.swing.JButton();
         botaoDetalhe = new javax.swing.JButton();
-        botaoGuardar = new javax.swing.JButton();
-        botaoDarAlta = new javax.swing.JButton();
         tabs = new javax.swing.JPanel();
         tabTabela = new javax.swing.JTabbedPane();
+        labelDetalhe = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuEquipamento = new javax.swing.JMenu();
         menuNovoEquipamento = new javax.swing.JMenuItem();
@@ -115,29 +110,6 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         menuDarAlta = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        labelDetalhe.setBackground(new java.awt.Color(255, 255, 255));
-        labelDetalhe.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        labelDetalhe.setForeground(new java.awt.Color(153, 153, 153));
-        labelDetalhe.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        labelDetalhe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-
-        javax.swing.GroupLayout paneDetalheLayout = new javax.swing.GroupLayout(paneDetalhe);
-        paneDetalhe.setLayout(paneDetalheLayout);
-        paneDetalheLayout.setHorizontalGroup(
-            paneDetalheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneDetalheLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelDetalhe, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
-        );
-        paneDetalheLayout.setVerticalGroup(
-            paneDetalheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(paneDetalheLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelDetalhe, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         botaoCriar.setText("Criar");
         botaoCriar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -170,53 +142,10 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
             }
         });
 
-        botaoCriarMedico.setText("Criar Médico");
-        botaoCriarMedico.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botaoCriarMedicoMouseClicked(evt);
-            }
-        });
-        botaoCriarMedico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoCriarMedicoActionPerformed(evt);
-            }
-        });
-
-        botaoCriarEnfermeiro.setText("Criar Enfermeiro");
-        botaoCriarEnfermeiro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botaoCriarEnfermeiroMouseClicked(evt);
-            }
-        });
-        botaoCriarEnfermeiro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoCriarEnfermeiroActionPerformed(evt);
-            }
-        });
-
         botaoDetalhe.setText("Detalhe");
         botaoDetalhe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoDetalheActionPerformed(evt);
-            }
-        });
-
-        botaoGuardar.setText("Guardar");
-        botaoGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botaoGuardarMouseClicked(evt);
-            }
-        });
-
-        botaoDarAlta.setText("Dar alta Paciente");
-        botaoDarAlta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botaoDarAltaMouseClicked(evt);
-            }
-        });
-        botaoDarAlta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoDarAltaActionPerformed(evt);
             }
         });
 
@@ -225,47 +154,30 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         botoesLayout.setHorizontalGroup(
             botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(botoesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(botoesLayout.createSequentialGroup()
-                        .addComponent(botaoCriar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoCriarMedico)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoCriarEnfermeiro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoDetalhe)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botaoRemover)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botaoGuardar)
-                        .addContainerGap())
-                    .addGroup(botoesLayout.createSequentialGroup()
-                        .addComponent(botaoDarAlta)
-                        .addGap(709, 709, 709))))
+                .addGap(20, 20, 20)
+                .addComponent(botaoCriar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botaoEditar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botaoDetalhe)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 348, Short.MAX_VALUE)
+                .addComponent(botaoRemover)
+                .addGap(20, 20, 20))
         );
         botoesLayout.setVerticalGroup(
             botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(botoesLayout.createSequentialGroup()
-                .addGroup(botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botaoCriar)
-                    .addComponent(botaoRemover)
-                    .addComponent(botaoDetalhe)
-                    .addComponent(botaoCriarMedico)
-                    .addComponent(botaoCriarEnfermeiro)
-                    .addComponent(botaoEditar)
-                    .addComponent(botaoGuardar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoDarAlta))
+            .addGroup(botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(botaoCriar)
+                .addComponent(botaoDetalhe)
+                .addComponent(botaoEditar)
+                .addComponent(botaoRemover))
         );
 
         javax.swing.GroupLayout tabsLayout = new javax.swing.GroupLayout(tabs);
         tabs.setLayout(tabsLayout);
         tabsLayout.setHorizontalGroup(
             tabsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabTabela, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(tabTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         tabsLayout.setVerticalGroup(
             tabsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,22 +189,30 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         contentorLayout.setHorizontalGroup(
             contentorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentorLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(contentorLayout.createSequentialGroup()
-                .addComponent(botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(contentorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(contentorLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(contentorLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         contentorLayout.setVerticalGroup(
             contentorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentorLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addComponent(botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        labelDetalhe.setBackground(new java.awt.Color(255, 255, 255));
+        labelDetalhe.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        labelDetalhe.setForeground(new java.awt.Color(153, 153, 153));
+        labelDetalhe.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        labelDetalhe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
         menuEquipamento.setText("Equipamentos");
 
@@ -426,18 +346,22 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(contentor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(paneDetalhe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(labelDetalhe, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(contentor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(0, 0, 0))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(paneDetalhe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(20, 20, 20)
+                .addComponent(labelDetalhe, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(contentor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -460,37 +384,9 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         remover((ITable) getTabTabela().getSelectedComponent());
     }//GEN-LAST:event_botaoRemoverMouseClicked
 
-    private void botaoCriarMedicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoCriarMedicoMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botaoCriarMedicoMouseClicked
-
-    private void botaoCriarMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarMedicoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botaoCriarMedicoActionPerformed
-
-    private void botaoCriarEnfermeiroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoCriarEnfermeiroMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botaoCriarEnfermeiroMouseClicked
-
-    private void botaoCriarEnfermeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCriarEnfermeiroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botaoCriarEnfermeiroActionPerformed
-
     private void botaoDetalheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDetalheActionPerformed
 
     }//GEN-LAST:event_botaoDetalheActionPerformed
-
-    private void botaoGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoGuardarMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botaoGuardarMouseClicked
-
-    private void botaoDarAltaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoDarAltaMouseClicked
-
-    }//GEN-LAST:event_botaoDarAltaMouseClicked
-
-    private void botaoDarAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDarAltaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botaoDarAltaActionPerformed
 
     private void menuNovoEquipamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuNovoEquipamentoMouseClicked
         // TODO add your handling code here:
@@ -562,12 +458,8 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCriar;
-    private javax.swing.JButton botaoCriarEnfermeiro;
-    private javax.swing.JButton botaoCriarMedico;
-    private javax.swing.JButton botaoDarAlta;
     private javax.swing.JButton botaoDetalhe;
     private javax.swing.JButton botaoEditar;
-    private javax.swing.JButton botaoGuardar;
     private javax.swing.JButton botaoRemover;
     private javax.swing.JPanel botoes;
     private javax.swing.JPanel contentor;
@@ -587,7 +479,6 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     private javax.swing.JMenuItem menuRemoverEquipamento;
     private javax.swing.JMenuItem menuRemoverPaciente;
     private javax.swing.JMenuItem menuRemoverProfissionalSaude;
-    private javax.swing.JPanel paneDetalhe;
     private javax.swing.JTabbedPane tabTabela;
     private javax.swing.JPanel tabs;
     // End of variables declaration//GEN-END:variables
@@ -919,20 +810,8 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     /**
      * Getters botoes
      */
-    public JButton getBotaoGuardar() {
-        return botaoGuardar;
-    }
-
     public JButton getBotaoCriar() {
         return botaoCriar;
-    }
-
-    public JButton getBotaoCriarEnfermeiro() {
-        return botaoCriarEnfermeiro;
-    }
-
-    public JButton getBotaoCriarMedico() {
-        return botaoCriarMedico;
     }
 
     public JButton getBotaoEditar() {
@@ -945,10 +824,6 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
 
     public JButton getBotaoDetalhe() {
         return botaoDetalhe;
-    }
-
-    public JButton getBotaoDarAlta() {
-        return botaoDarAlta;
     }
 
     public JMenu getMenuEquipamento() {
@@ -999,11 +874,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     private void esconderBotoes() {
         botaoCriar.setVisible(false);
         botaoEditar.setVisible(false);
-        botaoCriarMedico.setVisible(false);
-        botaoCriarEnfermeiro.setVisible(false);
         botaoDetalhe.setVisible(false);
-        botaoGuardar.setVisible(false);
-        botaoDarAlta.setVisible(false);
     }
 
     private void esconderMenus() {

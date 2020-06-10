@@ -35,8 +35,6 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
     public JanelaDetalheEnfermaria(Aplicacao app, Serializacao serializacao, String tituloJanela, String hospitalSelecionado, String enfermariaSelecionada) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException, Exception {
         super(app, serializacao, tituloJanela);
 
-        getBotaoCriar().setVisible(true);
-
         getMenuEquipamento().setVisible(true);
         getMenuProfissionalSaude().setVisible(true);
         getMenuPaciente().setVisible(true);
