@@ -164,6 +164,11 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
                 botaoRemoverMouseClicked(evt);
             }
         });
+        botaoRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoRemoverActionPerformed(evt);
+            }
+        });
 
         botaoCriarMedico.setText("Criar Médico");
         botaoCriarMedico.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -551,6 +556,10 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         removerProfissionalSaude();
     }//GEN-LAST:event_menuRemoverProfissionalSaudeActionPerformed
 
+    private void botaoRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoRemoverActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCriar;
     private javax.swing.JButton botaoCriarEnfermeiro;
@@ -770,6 +779,12 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
 
     protected void remover(ITable tabelaPane) {
         JTable tabela = tabelaPane.getTabela();
+        
+        if(tabelaPane instanceof TabelaPaciente) {
+            removerPaciente();
+            return;
+        }
+        
         try {
             validarSeExisteSelecao(tabela, true);
         } catch (Exception e) {
