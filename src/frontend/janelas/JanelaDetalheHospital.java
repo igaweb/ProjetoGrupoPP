@@ -6,7 +6,6 @@ import backend.interfaces.ITable;
 import backend.Aplicacao;
 import backend.Serializacao;
 import backend.entidades.Hospital;
-import backend.interfaces.IManager;
 import javax.swing.JTable;
 
 public class JanelaDetalheHospital extends JanelaBase {
@@ -43,7 +42,9 @@ public class JanelaDetalheHospital extends JanelaBase {
     @Override
     public void setTextoDetalhe() {
         String detalhe = "<html>";
-        detalhe += "Hospital " + hospitalSelecionadoObj.getNome() + " - " + hospitalSelecionadoObj.getLocalidade();
+        detalhe += "<center><b>Hospital " + hospitalSelecionadoObj.getNome() + " - " + hospitalSelecionadoObj.getLocalidade() + "</b></center>";
+        detalhe += "<br>";
+        detalhe += "- Enfermarias: " + hospitalSelecionadoObj.getEnfermarias().size();
         detalhe += "</html>";
         
         getLabelDetalhe().setText(detalhe);
