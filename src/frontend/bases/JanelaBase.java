@@ -511,7 +511,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         try {
             ITable tabelaPane = ((ITable) getTabTabela().getComponentAt(tabPacienteIndex));
             validarSeExisteSelecao(tabelaPane.getTabela(), false);
-            int rowIndex = tabelaPane.getTabela().getSelectedRow();
+            int rowIndex = tabelaPane.getLinhaSelecionada();
             String codigo = (String) tabelaPane.getTabela().getModel().getValueAt(rowIndex, tabelaPane.getColunaCodigo());
 
             JanelaCriarPaciente janela = new JanelaCriarPaciente(this, app, hospitalSelecionado, enfermariaSelecionada, codigo);
@@ -579,7 +579,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
             // mostrarAviso de sucesso, senao...
             // ( tudo num try catch) e no catch um mostraAviso (ex.getMessage)
             
-            Paciente paciente = (Paciente)app.getPaciente(hospitalSelecionado, enfermariaSelecionada, getCodigoSelecionado());
+            Paciente paciente = (Paciente)app.getPaciente(hospitalSelecionado, enfermariaSelecionada, getCodigoSelecionado(tabelaSelecionada));
             
             if (paciente.getDataSaida() != null){
                mostrarAviso("O paciente ja teve alta"); 
@@ -634,7 +634,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         try {
             ITable tabelaPane = ((ITable) getTabTabela().getComponentAt(tabProfissionalSaudeIndex));
             validarSeExisteSelecao(tabelaPane.getTabela(), false);
-            int rowIndex = tabelaPane.getTabela().getSelectedRow();
+            int rowIndex = tabelaPane.getLinhaSelecionada();
             String codigo = (String) tabelaPane.getTabela().getModel().getValueAt(rowIndex, tabelaPane.getColunaCodigo());
 
             boolean isMedico = (app.getProfissionalSaude(hospitalSelecionado, enfermariaSelecionada, codigo) instanceof Medico);
@@ -668,7 +668,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         try {
             ITable tabelaPane = ((ITable) getTabTabela().getComponentAt(tabEquipamentoIndex));
             validarSeExisteSelecao(tabelaPane.getTabela(), false);
-            int rowIndex = tabelaPane.getTabela().getSelectedRow();
+            int rowIndex = tabelaPane.getLinhaSelecionada();
             String codigo = (String) tabelaPane.getTabela().getModel().getValueAt(rowIndex, tabelaPane.getColunaCodigo());
 
             JanelaCriarEquipamento janela = new JanelaCriarEquipamento(this, app, hospitalSelecionado, enfermariaSelecionada, codigo);
@@ -691,7 +691,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
             return hospitalSelecionado;
         }
 
-        return getCodigoSelecionado();
+        return getCodigoSelecionado(((ITable) getTabTabela().getSelectedComponent()));
     }
 
     protected void remover(ITable tabelaPane) {
@@ -761,12 +761,11 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         }
     }
 
-    protected String getCodigoSelecionado() throws NenhumaLinhaSelecionadaException {
+    protected String getCodigoSelecionado(ITable tabelaPane) throws NenhumaLinhaSelecionadaException {
         validarSeExisteSelecao(false);
 
-        ITable tabela = ((TabelaBase) getTabTabela().getSelectedComponent());
-        int rowIndex = getTabelaSelecionada().getSelectedRow();
-        String codigo = (String) getTabelaSelecionada().getModel().getValueAt(rowIndex, tabela.getColunaCodigo());
+        int rowIndex = tabelaPane.getLinhaSelecionada();
+        String codigo = (String) getTabelaSelecionada().getModel().getValueAt(rowIndex, tabelaPane.getColunaCodigo());
 
         return codigo;
     }

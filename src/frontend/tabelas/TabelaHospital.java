@@ -4,6 +4,7 @@ import frontend.bases.TabelaBase;
 import backend.Aplicacao;
 import backend.Serializacao;
 import backend.entidades.Hospital;
+import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 public class TabelaHospital extends TabelaBase {
@@ -24,6 +25,7 @@ public class TabelaHospital extends TabelaBase {
     @Override
     public AbstractTableModel criarModeloTabela() {
         String[] nomeColunas = {"Código", "Nome", "Localidade", "Enfermarias"};
+        ArrayList dados = app.getManagerHospital().getListaArray();
 
         return new AbstractTableModel() {
             @Override
@@ -34,7 +36,7 @@ public class TabelaHospital extends TabelaBase {
             @Override
             public int getRowCount() {
                 //Retorna o número de linhas que a tabela deverá ter
-                return app.getManagerHospital().getLista().size();
+                return dados.size();
             }
 
             @Override
@@ -53,7 +55,8 @@ public class TabelaHospital extends TabelaBase {
                  */
                 Hospital hospital;
                 try {
-                    hospital = (Hospital) app.getManagerHospital().getListaArray().get(rowIndex);
+                    
+                    hospital = (Hospital) dados.get(rowIndex);
                     switch (columnIndex) {
                         case 0:
                             return hospital.getCodigo();

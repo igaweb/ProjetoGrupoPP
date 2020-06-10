@@ -64,7 +64,7 @@ public class JanelaDetalheHospital extends JanelaBase {
     public void editar() {
         
         try {
-            JanelaCriarEnfermaria janela = new JanelaCriarEnfermaria(this, app, hospitalSelecionado, getCodigoSelecionado());
+            JanelaCriarEnfermaria janela = new JanelaCriarEnfermaria(this, app, hospitalSelecionado, getCodigoSelecionado(((ITable) getTabTabela().getSelectedComponent())));
             janela.setVisible(true);
         } catch (Exception ex) { 
             mostrarAviso(ex.getMessage());
@@ -75,14 +75,14 @@ public class JanelaDetalheHospital extends JanelaBase {
     @Override
     public void detalhe() {
         // buscar o codigo do hospital para enviar para a listagem de enfermarias
-        int rowIndex = getTabelaSelecionada().getSelectedRow();
+        int rowIndex = getLinhaSelecionada();
         
         // chama a janela da listagem das enfermarias do hospital selecionado
         String titutloConsultaEnfermaria = "Detalhe Enfermaria (" + getTabelaSelecionada().getModel().getValueAt(rowIndex, 1) + ")";
         JanelaDetalheEnfermaria janela;
         try {
             fechar();
-            janela = new JanelaDetalheEnfermaria(app, serializacao, titutloConsultaEnfermaria, hospitalSelecionado, getCodigoSelecionado());
+            janela = new JanelaDetalheEnfermaria(app, serializacao, titutloConsultaEnfermaria, hospitalSelecionado, getCodigoSelecionado(((ITable) getTabTabela().getSelectedComponent())));
             janela.setVisible(true);
         } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException | NenhumaLinhaSelecionadaException ex) {
             mostrarAviso(ex.getMessage());
@@ -96,5 +96,9 @@ public class JanelaDetalheHospital extends JanelaBase {
     @Override
     public JTable getTabelaSelecionada() {
         return ((ITable) getTabTabela().getComponentAt(0)).getTabela();
+    }
+    
+    public int getLinhaSelecionada() {
+        return ((ITable) getTabTabela().getComponentAt(0)).getLinhaSelecionada();
     }
 }

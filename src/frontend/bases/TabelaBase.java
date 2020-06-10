@@ -81,15 +81,15 @@ public abstract class TabelaBase extends javax.swing.JPanel implements ICallerJa
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -118,11 +118,6 @@ public abstract class TabelaBase extends javax.swing.JPanel implements ICallerJa
     }
 
     @Override
-    public AbstractTableModel criarModeloTabela() {
-        throw new UnsupportedOperationException("Nao existe tabela");
-    }
-
-    @Override
     public JTable getTabela() {        
         return tabela;
     }
@@ -130,5 +125,10 @@ public abstract class TabelaBase extends javax.swing.JPanel implements ICallerJa
     @Override
     public int getColunaCodigo() {
         return 0;
+    }
+    
+    @Override
+    public int getLinhaSelecionada() {
+        return tabela.getRowSorter().convertRowIndexToModel(tabela.getSelectedRow());
     }
 }

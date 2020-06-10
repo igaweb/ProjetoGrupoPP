@@ -41,7 +41,7 @@ public class JanelaListaHospital extends JanelaBase {
     @Override
     public void editar() {
         try {
-            JanelaCriarHospital janela = new JanelaCriarHospital(this, app, getCodigoSelecionado());
+            JanelaCriarHospital janela = new JanelaCriarHospital(this, app, getCodigoSelecionado(((ITable) getTabTabela().getSelectedComponent())));
             janela.setVisible(true);
         } catch (NenhumaLinhaSelecionadaException ex) {
             mostrarAviso(ex.getMessage());
@@ -54,14 +54,14 @@ public class JanelaListaHospital extends JanelaBase {
     @Override
     public void detalhe() {
         // buscar o codigo do hospital para enviar para a listagem de enfermarias
-        int rowIndex = getTabelaSelecionada().getSelectedRow();
+        int rowIndex = getLinhaSelecionada();
         
         // chama a janela da listagem das enfermarias do hospital selecionado
         String titutloConsultaEnfermaria = "Listagem Enfermarias (" + getTabelaSelecionada().getModel().getValueAt(rowIndex, 1) + ")";
         JanelaDetalheHospital janelaConsulta;
         try {
             fechar();
-            janelaConsulta = new JanelaDetalheHospital(app, serializacao, titutloConsultaEnfermaria, getCodigoSelecionado());
+            janelaConsulta = new JanelaDetalheHospital(app, serializacao, titutloConsultaEnfermaria, getCodigoSelecionado(((ITable) getTabTabela().getSelectedComponent())));
             janelaConsulta.setVisible(true);
         } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException | NenhumaLinhaSelecionadaException ex) {
             mostrarAviso(ex.getMessage());
@@ -70,5 +70,9 @@ public class JanelaListaHospital extends JanelaBase {
             mostrarAviso("Ocorre um erro no sistema");
         }
         
+    }
+    
+    public int getLinhaSelecionada() {
+        return ((ITable) getTabTabela().getComponentAt(0)).getLinhaSelecionada();
     }
 }
