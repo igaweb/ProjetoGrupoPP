@@ -248,7 +248,8 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
 
                 fechar();
             }
-            
+            fechar();
+            mostrarAviso("Utilizadro criado com sucesso!");
         } catch (Exception ex) {
             mostrarAviso(ex.getMessage());
         }

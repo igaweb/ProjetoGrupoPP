@@ -3,6 +3,8 @@ package frontend.janelas;
 import backend.interfaces.ICallerJanelaCriarInterface;
 import backend.Aplicacao;
 import backend.Serializacao;
+import backend.bases.ManagerBase;
+import static backend.bases.ManagerBase.OPERACAO_REMOVER;
 import backend.entidades.Utilizador;
 import backend.managers.ManagerUtilizador;
 import javax.swing.JOptionPane;
@@ -14,6 +16,16 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog implements ICa
     private final Serializacao serializacao;
     private AbstractTableModel modeloTabela;
     private ManagerUtilizador managerUtilizador;
+    protected String operacao;
+
+    public String getOperacao() {
+        return operacao;
+    }
+
+    public void setOperacao(String operacao) {
+        this.operacao = operacao;
+    }
+    private static final String ERRO_REMOVER_UTILIZADOR = "ERRO_REMOVER_UTILIZADOR";
 
     /**
      * Creates new form JanelaConsultaUtilizador
@@ -280,19 +292,22 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog implements ICa
         }
 
         int option = JOptionPane.showConfirmDialog(null, "Tem a certeza que quer eliminar a linha selecionada?");
-
+       
         if (option == JOptionPane.OK_OPTION) {
             for (int i = 0; i < tabela.getSelectedRows().length; i++) {
+                 setOperacao(OPERACAO_REMOVER);
                 try {
                     int index = tabela.getSelectedRows()[i];
 
                     Utilizador utilizador = (Utilizador) app.getManagerUtilizador().getLista().get(tabela.getModel().getValueAt(index, 0));
+                    if (operacao.equals(OPERACAO_REMOVER) && utilizador.equals(app.isAdministrador(utilizador))) {
+                        throw new ManagerBase.ValidacaoEntidadeException(ERRO_REMOVER_UTILIZADOR);
+                    }
                     managerUtilizador.remover(utilizador);
                     atualizar();
-                    serializacao.guardar(app);
                     JOptionPane.showMessageDialog(this, "Utilizador removido com sucesso");
                 } catch (Exception ex) {
-                    mostrarAviso("Não foi possível remover o(s) utilizador(es) selecionado(s): "+ ex.getMessage());
+                    mostrarAviso("Não foi possível remover o(s) utilizador(es) selecionado(s): " + ex.getMessage());
                 }
             }
         }
