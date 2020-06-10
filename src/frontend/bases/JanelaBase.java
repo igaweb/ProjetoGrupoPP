@@ -374,8 +374,10 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         // atualizar os dados na label do detalhe
         setTextoDetalhe();
 
-        //Informa o modelo que foram efetuadas alteracoes, o modelo informa a tabela e os dados são redesenhados
-        ((AbstractTableModel) getTabelaSelecionada().getModel()).fireTableDataChanged();
+        //Informa o modelo de todas as tabelas que foram efetuadas alteracoes, o modelo informa a tabela e os dados são redesenhados
+        for (int i = 0; i < getTabTabela().getComponentCount(); i++) {
+            ((AbstractTableModel) ((ITable)getTabTabela().getComponentAt(i)).getTabela().getModel()).fireTableDataChanged();
+        }
     }
 
     protected String getCodigoSelecionado() throws NenhumaLinhaSelecionadaException {
