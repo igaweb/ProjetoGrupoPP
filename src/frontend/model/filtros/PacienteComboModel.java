@@ -4,8 +4,6 @@ import backend.Aplicacao;
 import backend.entidades.Paciente;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
 import javax.swing.event.ListDataListener;
 

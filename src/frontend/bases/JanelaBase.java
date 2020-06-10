@@ -6,7 +6,14 @@ import backend.interfaces.ICallerJanelaCriarInterface;
 import backend.Aplicacao;
 import backend.Serializacao;
 import backend.bases.EntidadeBase;
+import backend.entidades.Medico;
+import backend.entidades.Paciente;
 import backend.interfaces.IManager;
+import frontend.janelas.JanelaCriarEnfermaria;
+import frontend.janelas.JanelaCriarEquipamento;
+import frontend.janelas.JanelaCriarHospital;
+import frontend.janelas.JanelaCriarPaciente;
+import frontend.janelas.JanelaCriarProfissionalSaude;
 import frontend.tabelas.TabelaEnfermaria;
 import frontend.tabelas.TabelaEquipamento;
 import frontend.tabelas.TabelaHospital;
@@ -14,8 +21,11 @@ import frontend.tabelas.TabelaPaciente;
 import frontend.tabelas.TabelaProfissionalSaude;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -32,6 +42,10 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     protected String hospitalSelecionado;
     protected String enfermariaSelecionada;
     protected String medicoSelecionado;
+
+    private final int tabEquipamentoIndex = 0;
+    private final int tabProfissionalSaudeIndex = 1;
+    private final int tabPacienteIndex = 2;
 
     /**
      * Creates new form JanelaConsultaEnfermaria
@@ -51,7 +65,10 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         // tabs
         esconderTabs();
 
-        // definir os eventos dos botoes e tabela
+        // menus
+        esconderMenus();
+
+        // definir os eventos dos botoes e tabelaPane
         setEventos();
 
         // titulo da janela
@@ -81,6 +98,21 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         botaoDarAlta = new javax.swing.JButton();
         tabs = new javax.swing.JPanel();
         tabTabela = new javax.swing.JTabbedPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menuEquipamento = new javax.swing.JMenu();
+        menuNovoEquipamento = new javax.swing.JMenuItem();
+        menuEditarEquipamento = new javax.swing.JMenuItem();
+        menuRemoverEquipamento = new javax.swing.JMenuItem();
+        menuProfissionalSaude = new javax.swing.JMenu();
+        menuNovoMedico = new javax.swing.JMenuItem();
+        menuNovoEnfermeiro = new javax.swing.JMenuItem();
+        menuEditarProfissionalSaude = new javax.swing.JMenuItem();
+        menuRemoverProfissionalSaude = new javax.swing.JMenuItem();
+        menuPaciente = new javax.swing.JMenu();
+        menuNovoPaciente = new javax.swing.JMenuItem();
+        menuEditarPaciente = new javax.swing.JMenuItem();
+        menuRemoverPaciente = new javax.swing.JMenuItem();
+        menuDarAlta = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -257,6 +289,133 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
                 .addContainerGap())
         );
 
+        menuEquipamento.setText("Equipamentos");
+
+        menuNovoEquipamento.setText("Adicionar");
+        menuNovoEquipamento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuNovoEquipamentoMouseClicked(evt);
+            }
+        });
+        menuNovoEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuNovoEquipamentoActionPerformed(evt);
+            }
+        });
+        menuEquipamento.add(menuNovoEquipamento);
+
+        menuEditarEquipamento.setText("Editar");
+        menuEditarEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEditarEquipamentoActionPerformed(evt);
+            }
+        });
+        menuEquipamento.add(menuEditarEquipamento);
+
+        menuRemoverEquipamento.setText("Remover");
+        menuRemoverEquipamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRemoverEquipamentoActionPerformed(evt);
+            }
+        });
+        menuEquipamento.add(menuRemoverEquipamento);
+
+        jMenuBar1.add(menuEquipamento);
+
+        menuProfissionalSaude.setText("Profissionais de Saúde");
+
+        menuNovoMedico.setText("Adicionar Médico");
+        menuNovoMedico.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuNovoMedicoMouseClicked(evt);
+            }
+        });
+        menuNovoMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuNovoMedicoActionPerformed(evt);
+            }
+        });
+        menuProfissionalSaude.add(menuNovoMedico);
+
+        menuNovoEnfermeiro.setText("Adicionar Enfermeiro");
+        menuNovoEnfermeiro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuNovoEnfermeiroMouseClicked(evt);
+            }
+        });
+        menuNovoEnfermeiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuNovoEnfermeiroActionPerformed(evt);
+            }
+        });
+        menuProfissionalSaude.add(menuNovoEnfermeiro);
+
+        menuEditarProfissionalSaude.setText("Editar");
+        menuEditarProfissionalSaude.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEditarProfissionalSaudeActionPerformed(evt);
+            }
+        });
+        menuProfissionalSaude.add(menuEditarProfissionalSaude);
+
+        menuRemoverProfissionalSaude.setText("Remover");
+        menuRemoverProfissionalSaude.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRemoverProfissionalSaudeActionPerformed(evt);
+            }
+        });
+        menuProfissionalSaude.add(menuRemoverProfissionalSaude);
+
+        jMenuBar1.add(menuProfissionalSaude);
+
+        menuPaciente.setText("Paciente");
+
+        menuNovoPaciente.setText("Adicionar");
+        menuNovoPaciente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuNovoPacienteMouseClicked(evt);
+            }
+        });
+        menuNovoPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuNovoPacienteActionPerformed(evt);
+            }
+        });
+        menuPaciente.add(menuNovoPaciente);
+
+        menuEditarPaciente.setText("Editar");
+        menuEditarPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEditarPacienteActionPerformed(evt);
+            }
+        });
+        menuPaciente.add(menuEditarPaciente);
+
+        menuRemoverPaciente.setText("Remover");
+        menuRemoverPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRemoverPacienteActionPerformed(evt);
+            }
+        });
+        menuPaciente.add(menuRemoverPaciente);
+
+        menuDarAlta.setText("Dar alta a paciente");
+        menuDarAlta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuDarAltaMouseClicked(evt);
+            }
+        });
+        menuDarAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDarAltaActionPerformed(evt);
+            }
+        });
+        menuPaciente.add(menuDarAlta);
+
+        jMenuBar1.add(menuPaciente);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -293,7 +452,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     }//GEN-LAST:event_botaoEditarActionPerformed
 
     private void botaoRemoverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoRemoverMouseClicked
-        remover();
+        remover((ITable) getTabTabela().getSelectedComponent());
     }//GEN-LAST:event_botaoRemoverMouseClicked
 
     private void botaoCriarMedicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoCriarMedicoMouseClicked
@@ -321,12 +480,76 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     }//GEN-LAST:event_botaoGuardarMouseClicked
 
     private void botaoDarAltaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoDarAltaMouseClicked
-        
+
     }//GEN-LAST:event_botaoDarAltaMouseClicked
 
     private void botaoDarAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoDarAltaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botaoDarAltaActionPerformed
+
+    private void menuNovoEquipamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuNovoEquipamentoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuNovoEquipamentoMouseClicked
+
+    private void menuNovoEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNovoEquipamentoActionPerformed
+        adicionarEquipamento();
+    }//GEN-LAST:event_menuNovoEquipamentoActionPerformed
+
+    private void menuEditarEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarEquipamentoActionPerformed
+        editarEquipamento();
+    }//GEN-LAST:event_menuEditarEquipamentoActionPerformed
+
+    private void menuNovoMedicoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuNovoMedicoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuNovoMedicoMouseClicked
+
+    private void menuNovoMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNovoMedicoActionPerformed
+        adicionarMedico();
+    }//GEN-LAST:event_menuNovoMedicoActionPerformed
+
+    private void menuEditarProfissionalSaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarProfissionalSaudeActionPerformed
+        editarProfissionalSaude();
+    }//GEN-LAST:event_menuEditarProfissionalSaudeActionPerformed
+
+    private void menuRemoverEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRemoverEquipamentoActionPerformed
+        removerEquipamento();
+    }//GEN-LAST:event_menuRemoverEquipamentoActionPerformed
+
+    private void menuNovoEnfermeiroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuNovoEnfermeiroMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuNovoEnfermeiroMouseClicked
+
+    private void menuNovoEnfermeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNovoEnfermeiroActionPerformed
+        adicionarEnfermeiro();
+    }//GEN-LAST:event_menuNovoEnfermeiroActionPerformed
+
+    private void menuNovoPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuNovoPacienteMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuNovoPacienteMouseClicked
+
+    private void menuNovoPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNovoPacienteActionPerformed
+        adicionarPaciente();
+    }//GEN-LAST:event_menuNovoPacienteActionPerformed
+
+    private void menuEditarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarPacienteActionPerformed
+        editarPaciente();
+    }//GEN-LAST:event_menuEditarPacienteActionPerformed
+
+    private void menuRemoverPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRemoverPacienteActionPerformed
+        removerPaciente();
+    }//GEN-LAST:event_menuRemoverPacienteActionPerformed
+
+    private void menuDarAltaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuDarAltaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuDarAltaMouseClicked
+
+    private void menuDarAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDarAltaActionPerformed
+        darAltaPaciente();
+    }//GEN-LAST:event_menuDarAltaActionPerformed
+
+    private void menuRemoverProfissionalSaudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRemoverProfissionalSaudeActionPerformed
+        removerProfissionalSaude();
+    }//GEN-LAST:event_menuRemoverProfissionalSaudeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCriar;
@@ -339,7 +562,22 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     private javax.swing.JButton botaoRemover;
     private javax.swing.JPanel botoes;
     private javax.swing.JPanel contentor;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel labelDetalhe;
+    private javax.swing.JMenuItem menuDarAlta;
+    private javax.swing.JMenuItem menuEditarEquipamento;
+    private javax.swing.JMenuItem menuEditarPaciente;
+    private javax.swing.JMenuItem menuEditarProfissionalSaude;
+    private javax.swing.JMenu menuEquipamento;
+    private javax.swing.JMenuItem menuNovoEnfermeiro;
+    private javax.swing.JMenuItem menuNovoEquipamento;
+    private javax.swing.JMenuItem menuNovoMedico;
+    private javax.swing.JMenuItem menuNovoPaciente;
+    private javax.swing.JMenu menuPaciente;
+    private javax.swing.JMenu menuProfissionalSaude;
+    private javax.swing.JMenuItem menuRemoverEquipamento;
+    private javax.swing.JMenuItem menuRemoverPaciente;
+    private javax.swing.JMenuItem menuRemoverProfissionalSaude;
     private javax.swing.JPanel paneDetalhe;
     private javax.swing.JTabbedPane tabTabela;
     private javax.swing.JPanel tabs;
@@ -350,9 +588,190 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         // para as janelas que nao precisam de ter texto no detalhe
     }
 
-    protected void remover() {
+    private void adicionarEnfermaria() {
+        try {
+            JanelaCriarEnfermaria janela = new JanelaCriarEnfermaria(this, app, getHospitalSelecionado(), null);
+            janela.setVisible(true);
+        } catch (Exception ex) {
+            mostrarAviso(ex.getMessage());
+        }
+    }
+
+    private void adicionarPaciente() {
+        try {
+            JanelaCriarPaciente janela = new JanelaCriarPaciente(this, app, hospitalSelecionado, enfermariaSelecionada, null);
+            janela.setVisible(true);
+        } catch (Exception ex) {
+            mostrarAviso(ex.getMessage());
+        }
+    }
+
+    protected void editarPaciente() {
+        try {
+            ITable tabelaPane = ((ITable) getTabTabela().getComponentAt(tabPacienteIndex));
+            validarSeExisteSelecao(tabelaPane.getTabela(), false);
+            int rowIndex = tabelaPane.getTabela().getSelectedRow();
+            String codigo = (String) tabelaPane.getTabela().getModel().getValueAt(rowIndex, tabelaPane.getColunaCodigo());
+
+            JanelaCriarPaciente janela = new JanelaCriarPaciente(this, app, hospitalSelecionado, enfermariaSelecionada, codigo);
+            janela.setVisible(true);
+        } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException | Aplicacao.PacienteNaoExistenteException | NenhumaLinhaSelecionadaException ex) {
+            mostrarAviso(ex.getMessage());
+        } catch (Exception ex) {
+            mostrarAviso("Erro interno");
+        }
+    }
+
+    private void removerPaciente() {
+        ITable tabelaPane = ((ITable) getTabTabela().getComponentAt(tabPacienteIndex));
+
         try {
             validarSeExisteSelecao(true);
+        } catch (Exception e) {
+            mostrarAviso(e.getMessage());
+        }
+
+        int option = JOptionPane.showConfirmDialog(this, "Tem a certeza que quer eliminar a linha selecionada?");
+
+        if (option == JOptionPane.OK_OPTION) {
+            IManager manager = getManager(tabelaPane);
+            boolean error = false;
+            for (int i = 0; i < getTabelaSelecionada().getSelectedRows().length; i++) {
+                try {
+                    int index = getTabelaSelecionada().getSelectedRows()[i];
+
+                    String key = (String) getTabelaSelecionada().getModel().getValueAt(index, 0);
+                    Paciente paciente = ((Paciente) getEntidadeSelecionada(tabelaPane, key));
+                    Integer camaIndex = paciente.getCama();
+                    manager.remover(paciente);
+                    app.setCamaLivre(hospitalSelecionado, enfermariaSelecionada, camaIndex);
+                } catch (Exception ex) {
+                    mostrarAviso("Ocorreu um erro ao tentar remover a(s) linha(s) selecionada(s): " + ex.getMessage());
+                    error = true;
+                    break;
+                }
+            }
+
+            if (error) {
+                return;
+            }
+
+            atualizar();
+            mostrarAviso("Operação executada com sucesso");
+        }
+    }
+    
+    private void darAltaPaciente() {
+        ITable tabelaSelecionada = ((TabelaBase) getTabTabela().getSelectedComponent());
+        if (tabelaSelecionada instanceof TabelaPaciente) {
+            try {
+                validarSeExisteSelecao(true);
+            } catch (Exception e) {
+                mostrarAviso(e.getMessage());
+            }
+        } else {
+            mostrarAviso("Tem de selecionar um paciente!");
+        }
+        
+        // validar que o paciente nao tem alta ainda (dataSaida == null)
+        // paciente.setDataSaida....
+        // manager. editar(paciente....)
+        // app.setCamaLivre(hospitalSelecionado, enfermariaSelecionada, camaIndex);
+        // mostrarAviso de sucesso, senao...
+        // ( tudo num try catch) e no catch um mostraAviso (ex.getMessage)
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void adicionarEnfermeiro() {
+        try {
+            JanelaCriarProfissionalSaude janela = new JanelaCriarProfissionalSaude(this, app, hospitalSelecionado, enfermariaSelecionada, null, false);
+            janela.setVisible(true);
+        } catch (Aplicacao.EnfermariaNaoExistenteException | Aplicacao.HospitalNaoExistenteException ex) {
+            mostrarAviso(ex.getMessage());
+        } catch (Exception ex) {
+            mostrarAviso("Erro interno");
+        }
+    }
+
+    private void adicionarMedico() {
+        try {
+            JanelaCriarProfissionalSaude janela = new JanelaCriarProfissionalSaude(this, app, hospitalSelecionado, enfermariaSelecionada, null, true);
+            janela.setVisible(true);
+        } catch (Aplicacao.EnfermariaNaoExistenteException | Aplicacao.HospitalNaoExistenteException ex) {
+            mostrarAviso(ex.getMessage());
+        } catch (Exception ex) {
+            mostrarAviso("Erro interno");
+        }
+    }
+
+    protected void editarProfissionalSaude() {
+        try {
+            ITable tabelaPane = ((ITable) getTabTabela().getComponentAt(tabProfissionalSaudeIndex));
+            validarSeExisteSelecao(tabelaPane.getTabela(), false);
+            int rowIndex = tabelaPane.getTabela().getSelectedRow();
+            String codigo = (String) tabelaPane.getTabela().getModel().getValueAt(rowIndex, tabelaPane.getColunaCodigo());
+
+            boolean isMedico = (app.getProfissionalSaude(hospitalSelecionado, enfermariaSelecionada, codigo) instanceof Medico);
+            JanelaCriarProfissionalSaude janela = new JanelaCriarProfissionalSaude(this, app, hospitalSelecionado, enfermariaSelecionada, codigo, isMedico);
+            janela.setVisible(true);
+        } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException | Aplicacao.ProfissionalSaudeNaoExistenteException | NenhumaLinhaSelecionadaException ex) {
+            mostrarAviso(ex.getMessage());
+        } catch (Exception ex) {
+            mostrarAviso("Erro interno");
+        }
+    }
+
+    private void removerProfissionalSaude() {
+        ITable tabelaPane = ((ITable) getTabTabela().getComponentAt(tabProfissionalSaudeIndex));
+
+        remover(tabelaPane);
+    }
+
+    private void adicionarEquipamento() {
+        try {
+            JanelaCriarEquipamento janela = new JanelaCriarEquipamento(this, app, hospitalSelecionado, enfermariaSelecionada, null);
+            janela.setVisible(true);
+        } catch (Aplicacao.EnfermariaNaoExistenteException | Aplicacao.EquipamentoNaoExistenteException | Aplicacao.HospitalNaoExistenteException ex) {
+            mostrarAviso(ex.getMessage());
+        } catch (Exception ex) {
+            mostrarAviso("Erro interno");
+        }
+    }
+
+    protected void editarEquipamento() {
+        try {
+            ITable tabelaPane = ((ITable) getTabTabela().getComponentAt(tabEquipamentoIndex));
+            validarSeExisteSelecao(tabelaPane.getTabela(), false);
+            int rowIndex = tabelaPane.getTabela().getSelectedRow();
+            String codigo = (String) tabelaPane.getTabela().getModel().getValueAt(rowIndex, tabelaPane.getColunaCodigo());
+
+            JanelaCriarEquipamento janela = new JanelaCriarEquipamento(this, app, hospitalSelecionado, enfermariaSelecionada, codigo);
+            janela.setVisible(true);
+        } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException | Aplicacao.EquipamentoNaoExistenteException | NenhumaLinhaSelecionadaException ex) {
+            mostrarAviso(ex.getMessage());
+        } catch (Exception ex) {
+            mostrarAviso("Erro interno");
+        }
+    }
+
+    private void removerEquipamento() {
+        ITable tabelaPane = ((ITable) getTabTabela().getComponentAt(tabEquipamentoIndex));
+
+        remover(tabelaPane);
+    }
+
+    private String getHospitalSelecionado() throws NenhumaLinhaSelecionadaException {
+        if (hospitalSelecionado != null) {
+            return hospitalSelecionado;
+        }
+
+        return getCodigoSelecionado();
+    }
+
+    protected void remover(ITable tabelaPane) {
+        JTable tabela = tabelaPane.getTabela();
+        try {
+            validarSeExisteSelecao(tabela, true);
         } catch (Exception e) {
             mostrarAviso(e.getMessage());
             return;
@@ -361,14 +780,14 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         int option = JOptionPane.showConfirmDialog(this, "Tem a certeza que quer eliminar a linha selecionada?");
 
         if (option == JOptionPane.OK_OPTION) {
-            IManager manager = getManager();
+            IManager manager = getManager(tabelaPane);
             boolean error = false;
-            for (int i = 0; i < getTabelaSelecionada().getSelectedRows().length; i++) {
+            for (int i = 0; i < tabela.getSelectedRows().length; i++) {
                 try {
-                    int index = getTabelaSelecionada().getSelectedRows()[i];
+                    int index = tabela.getSelectedRows()[i];
 
-                    String key = (String) getTabelaSelecionada().getModel().getValueAt(index, 0);
-                    manager.remover(getEntidadeSelecionada(key));
+                    String key = (String) tabela.getModel().getValueAt(index, 0);
+                    manager.remover(getEntidadeSelecionada(tabelaPane, key));
                 } catch (Exception ex) {
                     mostrarAviso("Ocorreu um erro ao tentar remover a(s) linha(s) selecionada(s): " + ex.getMessage());
                     error = true;
@@ -404,9 +823,9 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         // atualizar os dados na label do detalhe
         setTextoDetalhe();
 
-        //Informa o modelo de todas as tabelas que foram efetuadas alteracoes, o modelo informa a tabela e os dados são redesenhados
+        //Informa o modelo de todas as tabelas que foram efetuadas alteracoes, o modelo informa a tabelaPane e os dados são redesenhados
         for (int i = 0; i < getTabTabela().getComponentCount(); i++) {
-            ((AbstractTableModel) ((ITable)getTabTabela().getComponentAt(i)).getTabela().getModel()).fireTableDataChanged();
+            ((AbstractTableModel) ((ITable) getTabTabela().getComponentAt(i)).getTabela().getModel()).fireTableDataChanged();
         }
     }
 
@@ -421,9 +840,13 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     }
 
     protected void validarSeExisteSelecao(boolean isMultipla) throws NenhumaLinhaSelecionadaException {
-        if (getTabelaSelecionada().getSelectedRows() == null
-                || (isMultipla && getTabelaSelecionada().getSelectedRows().length <= 0)
-                || (!isMultipla && getTabelaSelecionada().getSelectedRows().length != 1)) {
+        validarSeExisteSelecao(getTabelaSelecionada(), isMultipla);
+    }
+
+    protected void validarSeExisteSelecao(JTable tabela, boolean isMultipla) throws NenhumaLinhaSelecionadaException {
+        if (tabela.getSelectedRows() == null
+                || (isMultipla && tabela.getSelectedRows().length <= 0)
+                || (!isMultipla && tabela.getSelectedRows().length != 1)) {
             throw new NenhumaLinhaSelecionadaException();
         }
         return;
@@ -445,10 +868,39 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         return getTabelaSelecionada().getSelectedRows();
     }
 
+    /**
+     * Get manager correspondente à entidade da tabela
+     *
+     * @param tabelaPane
+     * @return
+     */
+    public IManager getManager(ITable tabelaPane) {
+
+        try {
+            if (tabelaPane instanceof TabelaEquipamento) {
+                return app.getManagerEquipamento(hospitalSelecionado, enfermariaSelecionada);
+            } else if (tabelaPane instanceof TabelaPaciente) {
+                return app.getManagerPaciente(hospitalSelecionado, enfermariaSelecionada);
+            } else if (tabelaPane instanceof TabelaProfissionalSaude) {
+                return app.getManagerProfissionalSaude(hospitalSelecionado, enfermariaSelecionada);
+            } else if (tabelaPane instanceof TabelaHospital) {
+                return app.getManagerHospital();
+            } else if (tabelaPane instanceof TabelaEnfermaria) {
+                return app.getManagerEnfermaria(hospitalSelecionado);
+            } else {
+                return null;
+            }
+        } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException ex) {
+            mostrarAviso(ex.getMessage());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     /*
      * FIM Métodos auxiliares genéricos
      */
-
     /**
      * Getters botoes
      */
@@ -484,14 +936,25 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         return botaoDarAlta;
     }
 
+    public JMenu getMenuEquipamento() {
+        return menuEquipamento;
+    }
+
+    public JMenu getMenuProfissionalSaude() {
+        return menuProfissionalSaude;
+    }
+
+    public JMenu getMenuPaciente() {
+        return menuPaciente;
+    }
+
     public JTabbedPane getTabTabela() {
         return tabTabela;
     }
 
-    public EntidadeBase getEntidadeSelecionada(String key) throws Exception {
+    public EntidadeBase getEntidadeSelecionada(ITable tabelaSelecionada, String key) throws Exception {
 
         EntidadeBase entidadeRef;
-        ITable tabelaSelecionada = ((TabelaBase) getTabTabela().getSelectedComponent());
 
         if (tabelaSelecionada instanceof TabelaHospital) {
             entidadeRef = app.getHospital(key);
@@ -528,6 +991,12 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         botaoDarAlta.setVisible(false);
     }
 
+    private void esconderMenus() {
+        menuEquipamento.setVisible(false);
+        menuProfissionalSaude.setVisible(false);
+        menuPaciente.setVisible(false);
+    }
+
     protected void redesenharTabela() {
         getTabTabela().revalidate();
         getTabTabela().repaint();
@@ -562,9 +1031,9 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
      */
     protected void setEventosTabela() {
         for (int i = 0; i < getTabTabela().getComponentCount(); i++) {
-            ((ITable)getTabTabela().getComponentAt(i)).getTabela().addMouseListener(new MouseAdapter() {
+            ((ITable) getTabTabela().getComponentAt(i)).getTabela().addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent evt) {
-                    
+
                     if (evt.getClickCount() == 2) {
                         editar();
                     }

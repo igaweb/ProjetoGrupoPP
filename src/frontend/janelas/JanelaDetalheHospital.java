@@ -96,10 +96,4 @@ public class JanelaDetalheHospital extends JanelaBase {
     public JTable getTabelaSelecionada() {
         return ((ITable) getTabTabela().getComponentAt(0)).getTabela();
     }
-
-    @Override
-    public IManager getManager() {
-        return app.getManagerEnfermaria(hospitalSelecionado);
-    }
-
 }

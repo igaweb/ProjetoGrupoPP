@@ -5,6 +5,7 @@ import frontend.bases.JanelaBase;
 import backend.Aplicacao;
 import backend.Serializacao;
 import backend.interfaces.IManager;
+import backend.interfaces.ITable;
 
 public class JanelaListaHospital extends JanelaBase {
 
@@ -69,10 +70,5 @@ public class JanelaListaHospital extends JanelaBase {
             mostrarAviso("Ocorre um erro no sistema");
         }
         
-    }
-
-    @Override
-    public IManager getManager() {
-        return app.getManagerHospital();
     }
 }

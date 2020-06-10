@@ -9,16 +9,12 @@ import backend.entidades.Hospital;
 import backend.entidades.Enfermaria;
 import backend.bases.EntidadeBase;
 import backend.entidades.Equipamento;
-import backend.entidades.Medico;
-import backend.entidades.Paciente;
-import backend.interfaces.IManager;
 import backend.interfaces.ITable;
 import frontend.bases.JanelaBase;
 import frontend.bases.TabelaBase;
 import frontend.tabelas.TabelaPaciente;
 import java.util.Map;
 import java.util.TreeMap;
-import javax.swing.JOptionPane;
 
 public class JanelaDetalheEnfermaria extends JanelaBase {
 
@@ -41,10 +37,9 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
 
         getBotaoCriar().setVisible(true);
 
-        // TODO: alterar para nao so mostrar quando selecionarmos a tab do profissional de saude
-        getBotaoCriarEnfermeiro().setVisible(true);
-        getBotaoCriarMedico().setVisible(true);
-        getBotaoDarAlta().setVisible(true);
+        getMenuEquipamento().setVisible(true);
+        getMenuProfissionalSaude().setVisible(true);
+        getMenuPaciente().setVisible(true);
 
         // aplica a seleçao do hospital onde está esta listagem
         this.hospitalSelecionado = hospitalSelecionado;
@@ -107,68 +102,19 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
         try {
 
             ITable tabelaSelecionada = ((TabelaBase) getTabTabela().getSelectedComponent());
-            String codigo = getCodigoSelecionado();
 
             if (tabelaSelecionada instanceof TabelaEquipamento) {
-                JanelaCriarEquipamento janela = new JanelaCriarEquipamento(this, app, hospitalSelecionado, enfermariaSelecionada, codigo);
-                janela.setVisible(true);
+                editarEquipamento();
             } else if (tabelaSelecionada instanceof TabelaProfissionalSaude) {
-                boolean isMedico = (app.getProfissionalSaude(hospitalSelecionado, enfermariaSelecionada, codigo) instanceof Medico);
-                JanelaCriarProfissionalSaude janela = new JanelaCriarProfissionalSaude(this, app, hospitalSelecionado, enfermariaSelecionada, codigo, isMedico);
-                janela.setVisible(true);
+                editarProfissionalSaude();
             } else if (tabelaSelecionada instanceof TabelaPaciente) {
-                JanelaCriarPaciente janela = new JanelaCriarPaciente(this, app, hospitalSelecionado, enfermariaSelecionada, codigo);
-                janela.setVisible(true);
+                editarPaciente();
             } else {
             }
         } catch (Exception ex) {
             mostrarAviso(ex.getMessage());
         }
 
-    }
-
-    protected void remover() {
-
-        ITable tabelaSelecionada = ((TabelaBase) getTabTabela().getSelectedComponent());
-        if (tabelaSelecionada instanceof TabelaPaciente) {
-            try {
-                validarSeExisteSelecao(true);
-            } catch (Exception e) {
-                mostrarAviso(e.getMessage());
-            }
-
-            int option = JOptionPane.showConfirmDialog(this, "Tem a certeza que quer eliminar a linha selecionada?");
-
-            if (option == JOptionPane.OK_OPTION) {
-                IManager manager = getManager();
-                boolean error = false;
-                for (int i = 0; i < getTabelaSelecionada().getSelectedRows().length; i++) {
-                    try {
-                        int index = getTabelaSelecionada().getSelectedRows()[i];
-
-                        String key = (String) getTabelaSelecionada().getModel().getValueAt(index, 0);
-                        Paciente paciente = ((Paciente) getEntidadeSelecionada(key));
-                        Integer camaIndex = paciente.getCama();
-                        manager.remover(paciente);
-                        app.setCamaLivre(hospitalSelecionado, enfermariaSelecionada, camaIndex);
-                    } catch (Exception ex) {
-                        mostrarAviso("Ocorreu um erro ao tentar remover a(s) linha(s) selecionada(s): " + ex.getMessage());
-                        error = true;
-                        break;
-                    }
-                }
-
-                if (error) {
-                    return;
-                }
-
-                atualizar();
-                mostrarAviso("Operação executada com sucesso");
-            }
-
-        } else {
-            super.remover();
-        }
     }
 
     private void adicionarProfissionalSaude(boolean isMedico) {
@@ -183,85 +129,16 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
         }
     }
 
-    private void darAltaPaciente() {
-        ITable tabelaSelecionada = ((TabelaBase) getTabTabela().getSelectedComponent());
-        if (tabelaSelecionada instanceof TabelaPaciente) {
-            try {
-                validarSeExisteSelecao(true);
-            } catch (Exception e) {
-                mostrarAviso(e.getMessage());
-            }
-        } else {
-            mostrarAviso("Tem de selecionar um paciente!");
-        }
-        
-        // paciente.setDataSaida....
-        // manager. editar(paciente....)
-        // app.setCamaLivre(hospitalSelecionado, enfermariaSelecionada, camaIndex);
-        // mostrarAviso de sucesso, senao...
-        // ( tudo num try catch) e no catch um mostraAviso (ex.getMessage)
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public void detalhe() {
         // não existe detalhe
-    }
-
-    @Override
-    public IManager getManager() {
-        ITable tabelaSelecionada = ((TabelaBase) getTabTabela().getSelectedComponent());
-
-        try {
-            if (tabelaSelecionada instanceof TabelaEquipamento) {
-                return app.getManagerEquipamento(hospitalSelecionado, enfermariaSelecionada);
-            } else if (tabelaSelecionada instanceof TabelaPaciente) {
-                return app.getManagerPaciente(hospitalSelecionado, enfermariaSelecionada);
-            } else if (tabelaSelecionada instanceof TabelaProfissionalSaude) {
-                return app.getManagerProfissionalSaude(hospitalSelecionado, enfermariaSelecionada);
-            } else {
-                return null;
-            }
-        } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException ex) {
-            mostrarAviso(ex.getMessage());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
-    protected void setEventos() {
-        // executa os eventos do super e acrescenta uns especificos desta janela
-        super.setEventos();
-
-        // criar medico
-        getBotaoCriarMedico().addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                adicionarProfissionalSaude(true);
-            }
-        });
-
-        // criar enfermeiro
-        getBotaoCriarEnfermeiro().addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                adicionarProfissionalSaude(false);
-            }
-        });
-
-        // dar alta
-        getBotaoDarAlta().addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                darAltaPaciente();
-            }
-
-        });
     }
 
     private int getCamasLivres() {
         Boolean[] camas = enfermariaSelecionadaObj.getCamas();
         int contador = 0;
         for (int i = 0; i < camas.length; i++) {
-            if (camas[i] == null || !camas[i]) {
+            if (camas[i] == null || camas[i]) {
                 contador++;
             }
         }
