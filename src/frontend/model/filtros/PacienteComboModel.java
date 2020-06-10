@@ -114,8 +114,4 @@ public class PacienteComboModel implements ComboBoxModel<String> {
         
         return paciente;
     }
-    
-    public void setPacienteSelecionado(Paciente paciente) {
-        selectedItem = paciente == null ? null : paciente.getNome();
-    }
 }
