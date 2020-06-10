@@ -29,12 +29,11 @@ public class PacienteComboModel implements ComboBoxModel<String> {
             int i = 1;
             pacienteList = new String[(lista.size()+1)];
             pacienteCodigoList = new String[(lista.size()+1)];
-            pacienteList[0] = "";
-            pacienteCodigoList[0] = "";
+            pacienteList[0] = "<Nenhum>";
+            pacienteCodigoList[0] = null;
             for (Map.Entry<String, Paciente> entry : lista.entrySet()) {
                 Paciente paciente = (Paciente) entry.getValue();
                 
-            
                 pacienteList[i] = paciente.getNome();
                 pacienteCodigoList[i] = paciente.getCodigo();
                 
@@ -42,7 +41,7 @@ public class PacienteComboModel implements ComboBoxModel<String> {
             }
         } else {
             pacienteList = new String[] {""};
-
+            pacienteCodigoList = new String[] {""};
         }
         
         try {
@@ -87,11 +86,9 @@ public class PacienteComboModel implements ComboBoxModel<String> {
 
     @Override
     public String getElementAt(int index) {
-       return pacienteCodigoList == null ? null : pacienteCodigoList[index];
+       return pacienteList == null ? null : pacienteList[index];
   
     }
-    
-    
 
     @Override
     public void addListDataListener(ListDataListener l) {
@@ -103,15 +100,18 @@ public class PacienteComboModel implements ComboBoxModel<String> {
         
     }
 
-    public Paciente getPacienteSelecionado() {
+    public Paciente getPacienteSelecionado(int index) {
         Paciente paciente;
         try {
-            String codigoPaciente = (String) getSelectedItem();
-            paciente = lista.get(codigoPaciente);
+            paciente = lista.get(pacienteCodigoList[index]);
         } catch (Exception e) {
             paciente = null;
         }
         
         return paciente;
+    }
+    
+    public void setPacienteSelecionado(Paciente paciente) {
+        selectedItem = paciente == null ? null : paciente.getNome();
     }
 }

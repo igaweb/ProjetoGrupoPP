@@ -22,7 +22,6 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
     private String operacao;
     private ManagerEquipamento managerEquipamento;
     private Equipamento equipamento;
-    private Paciente paciente;
     private Enfermaria enfermaria;
     private String codigoHospital;
     private String codigoEnfermaria;
@@ -73,6 +72,8 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
             equipamento = (Equipamento) app.getEquipamento(codigoHospital, codigoEnfermaria, codigoEquipamento);
             campoNomeEquipamento.setText(equipamento.getNome());
             comboTipoEquipamento.setSelectedIndex(equipamento.getTipo());
+            PacienteComboModel pacienteComboModel = (PacienteComboModel) comboNomePaciente.getModel();
+            pacienteComboModel.setPacienteSelecionado(equipamento.getPaciente());
             
         }
     }
@@ -245,15 +246,14 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
             } else if (operacao.equals(ManagerEquipamento.OPERACAO_EDITAR)) {
                 equipamento.setNome(nome);
                 equipamento.setTipo(tipo);
-                Paciente paciente = ((PacienteComboModel)comboNomePaciente.getModel()).getPacienteSelecionado();
-                if (comboNomePaciente.getSelectedIndex() == 0) {
+                if(comboNomePaciente.getSelectedIndex() == 0) {
                     equipamento.setPaciente(null);
                 } else {
-                    equipamento.setPaciente(app.getPaciente(codigoHospital, codigoEnfermaria, paciente.getCodigo()));
+                    Paciente paciente = ((PacienteComboModel)comboNomePaciente.getModel()).getPacienteSelecionado(comboNomePaciente.getSelectedIndex());
+                    equipamento.setPaciente(paciente);
                 }
-                managerEquipamento.editar(equipamento);
-               
                 
+                managerEquipamento.editar(equipamento);
             }
             
             fechar();
