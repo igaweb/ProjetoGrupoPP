@@ -84,7 +84,7 @@ public class PacienteComboModel implements ComboBoxModel<String> {
 
     @Override
     public String getElementAt(int index) {
-       return pacienteList == null ? null : pacienteList[index];
+       return pacienteCodigoList == null ? null : pacienteCodigoList[index];
   
     }
     
