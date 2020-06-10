@@ -18,8 +18,8 @@ public abstract class ManagerBase implements Serializable, IManager {
     public static final String OPERACAO_EDITAR = "E";
     public static final String OPERACAO_REMOVER = "R";
 
-    protected static final String ERRO_GENERICO = "ERRO_GENERICO";
-    protected static final String ERRO_OBJ_NULO = "ERRO_OBJ_NULO";
+    protected static final String ERRO_GENERICO = "Erro genérico";
+    protected static final String ERRO_OBJ_NULO = "Erro de sistema (objeto nulo)";
     protected static final String ERRO_FALTA_NOME = "O campo nome é obrigatório";
     protected static final String ERRO_FALTA_CODIGO = "Falta codigo";
 
