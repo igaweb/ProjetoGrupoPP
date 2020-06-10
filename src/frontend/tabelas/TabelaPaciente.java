@@ -81,8 +81,8 @@ public class TabelaPaciente extends TabelaBase {
                     rowIndex representa a linha da célula (0 a rowCount -1)
                     columnIndex representa a coluna da célula (0 a ColumnCount -1)
                  */
-                Date dataEntrada;
-                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//                Date dataEntrada;
+//                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
                 Paciente paciente = null;
                 try {
@@ -108,14 +108,10 @@ public class TabelaPaciente extends TabelaBase {
                         return "";
                     }                                    
                     case 6:
-                        try {
-                        return df.format(paciente.getDataEntrada());
-                    } catch (Exception ex) {
-                        return "";
-                    }
+                        return paciente.getDataEntrada();                                     
                     case 7:
                         try {
-                        return df.format(paciente.getDataSaida());
+                        return paciente.getDataSaida();
                     } catch (Exception ex) {
                         return "";
                     }

@@ -18,8 +18,6 @@ public class ManagerPaciente extends ManagerBase implements IManager {
     private static final String ERRO_FALTA_LOCALIDADE = "ERRO_FALTA_LOCALIDADE";
     private static final String ERRO_FALTA_CAMA = "ERRO_FALTA_CAMA";
     private static final String ERRO_FALTA_ESTADO = "ERRO_FALTA_ESTADO";
-    private static final String ERRO_FALTA_DATAENTRADA = "ERRO_FALTA_DATAENTRADA";
-    private static final String ERRO_FALTA_DATASAIDA = "ERRO_FALTA_DATASAIDA";
 
     public ManagerPaciente() {
     }
@@ -28,7 +26,7 @@ public class ManagerPaciente extends ManagerBase implements IManager {
         this.lista = lista;
     }
 
-    public void adicionar(String nome, String localidade, int cama, Integer estado, Date dataEntrada) throws Exception {
+    public void adicionar(String nome, String localidade, int cama, Integer estado, String dataEntrada) throws Exception {
         Paciente paciente = new Paciente(null, nome, localidade, cama, estado, dataEntrada, null);
         
         adicionar(paciente);
@@ -50,10 +48,7 @@ public class ManagerPaciente extends ManagerBase implements IManager {
         }
           if (((Paciente)paciente).getEstado() < 0 || ((Paciente)paciente).getEstado() >= Conteudos.getEstadosPaciente().length) {
             throw new ValidacaoEntidadeException(ERRO_FALTA_ESTADO);
-        }
-        if (((Paciente)paciente).getDataEntrada() == null ) {
-            throw new ValidacaoEntidadeException(ERRO_FALTA_DATAENTRADA);
-        }
+        }       
 
         return isValid;
     }

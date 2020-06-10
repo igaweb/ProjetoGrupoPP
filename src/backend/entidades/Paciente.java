@@ -10,13 +10,13 @@ public class Paciente extends EntidadeBase implements IEntidade {
     private String localidade;
     private int cama;
     private Integer estado;
-    private Date dataEntrada;
-    private Date dataSaida;
+    private String dataEntrada;
+    private String dataSaida;
 
     public Paciente() {
     }
 
-    public Paciente(String codigo, String nome, String localidade, int cama, Integer estado, Date dataEntrada, Date dataSaida) {
+    public Paciente(String codigo, String nome, String localidade, int cama, Integer estado, String dataEntrada, String dataSaida) {
         super(codigo, nome);
         this.localidade = localidade;
         this.cama = cama;
@@ -49,19 +49,19 @@ public class Paciente extends EntidadeBase implements IEntidade {
         this.estado = estado;
     }
 
-    public Date getDataEntrada() {
+    public String getDataEntrada() {
         return dataEntrada;
     }
 
-    public void setDataEntrada(Date dataEntrada) {
+    public void setDataEntrada(String dataEntrada) {
         this.dataEntrada = dataEntrada;
     }
 
-    public Date getDataSaida() {
+    public String getDataSaida() {
         return dataSaida;
     }
 
-    public void setDataSaida(Date dataSaida) {
+    public void setDataSaida(String dataSaida) {
         this.dataSaida = dataSaida;
     }
 

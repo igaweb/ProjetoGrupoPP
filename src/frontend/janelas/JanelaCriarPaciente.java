@@ -1,15 +1,12 @@
 package frontend.janelas;
 
 import backend.Aplicacao;
-import backend.entidades.Medico;
 import backend.entidades.Paciente;
 import backend.interfaces.ICallerJanelaCriarInterface;
 import backend.managers.ManagerPaciente;
 import frontend.model.filtros.MedicoComboModel;
 import frontend.model.filtros.EstadoPacienteComboModel;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 
 public class JanelaCriarPaciente extends javax.swing.JDialog {
@@ -53,9 +50,7 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
             operacao = ManagerPaciente.OPERACAO_ADICIONAR;
             setTitle("Adicionar Paciente");
             
-            // se estamos a adicionar, nao pedimos a data de saída
-            campoDataSaida.setVisible(false);
-            labelDataSaida.setVisible(false);
+            // se estamos a adicionar, nao pedimos a data de saída          
         } else {
             operacao = ManagerPaciente.OPERACAO_EDITAR;
             setTitle("Editar Paciente");
@@ -63,8 +58,6 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
             campoPacienteNome.setText(paciente.getNome());
             campoPacienteLocalidade.setText(paciente.getLocalidade());
             campoPacienteEstado.setSelectedIndex(paciente.getEstado());                
-            campoDataEntrada.setText(paciente.getDataEntrada().toString());
-            campoDataSaida.setText(paciente.getDataSaida().toString());
         }
     }
 
@@ -82,12 +75,8 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         nCamasPane = new javax.swing.JPanel();
-        labelDataSaida = new javax.swing.JLabel();
         campoPacienteLocalidade = new javax.swing.JTextField();
         campoPacienteNome = new javax.swing.JTextField();
-        labelDataEntrada = new javax.swing.JLabel();
-        campoDataEntrada = new javax.swing.JFormattedTextField();
-        campoDataSaida = new javax.swing.JFormattedTextField();
         campoPacienteEstado = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -107,22 +96,15 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
         jLabel7.setText("Localidade:");
         jLabel7.setPreferredSize(new java.awt.Dimension(60, 15));
 
-        labelDataSaida.setText("Data de Saída (YYYYMMdd):");
-
         javax.swing.GroupLayout nCamasPaneLayout = new javax.swing.GroupLayout(nCamasPane);
         nCamasPane.setLayout(nCamasPaneLayout);
         nCamasPaneLayout.setHorizontalGroup(
             nCamasPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nCamasPaneLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGap(0, 180, Short.MAX_VALUE)
         );
         nCamasPaneLayout.setVerticalGroup(
             nCamasPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nCamasPaneLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(labelDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 22, Short.MAX_VALUE)
         );
 
         campoPacienteLocalidade.addActionListener(new java.awt.event.ActionListener() {
@@ -130,26 +112,6 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
                 campoPacienteLocalidadeActionPerformed(evt);
             }
         });
-
-        labelDataEntrada.setText("Data de Entrada (YYYYMMdd):");
-        labelDataEntrada.setPreferredSize(new java.awt.Dimension(150, 15));
-
-        try {
-            campoDataEntrada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("########")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        campoDataEntrada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoDataEntradaActionPerformed(evt);
-            }
-        });
-
-        try {
-            campoDataSaida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("########")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
 
         campoPacienteEstado.setModel(new EstadoPacienteComboModel());
         campoPacienteEstado.addActionListener(new java.awt.event.ActionListener() {
@@ -206,19 +168,14 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
                                     .addComponent(campoPacienteLocalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton1)))
                             .addGroup(filtrosLayout.createSequentialGroup()
-                                .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(labelDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(116, 116, 116)
                                 .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(campoPacienteEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filtrosLayout.createSequentialGroup()
-                                        .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(campoMedicoAtribuido, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(campoDataEntrada, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(campoDataSaida, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(campoMedicoAtribuido, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(203, 203, 203)))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -240,25 +197,20 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
                     .addGroup(filtrosLayout.createSequentialGroup()
                         .addComponent(campoPacienteEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoMedicoAtribuido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(campoDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(campoMedicoAtribuido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(filtrosLayout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(47, 47, 47)
                 .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(filtrosLayout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addComponent(nCamasPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(filtrosLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(campoDataSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))))
+                        .addComponent(jButton1)))
                 .addGap(71, 71, 71))
         );
 
@@ -296,17 +248,11 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoPacienteEstadoActionPerformed
 
-    private void campoDataEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoDataEntradaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoDataEntradaActionPerformed
-
     private void campoPacienteLocalidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoPacienteLocalidadeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoPacienteLocalidadeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField campoDataEntrada;
-    private javax.swing.JFormattedTextField campoDataSaida;
     private javax.swing.JComboBox<String> campoMedicoAtribuido;
     private javax.swing.JComboBox<String> campoPacienteEstado;
     private javax.swing.JTextField campoPacienteLocalidade;
@@ -318,8 +264,6 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel labelDataEntrada;
-    private javax.swing.JLabel labelDataSaida;
     private javax.swing.JPanel nCamasPane;
     // End of variables declaration//GEN-END:variables
 
@@ -330,37 +274,24 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
             int estado = campoPacienteEstado.getSelectedIndex();
             
             // buscar o valor inserido na data de entrada
-            Date dataEntrada;
-            String dDataEntrada = campoDataEntrada.getText(); 
-            DateFormat df = new SimpleDateFormat("yyyyMMdd");
-            try {
-                dataEntrada = df.parse(dDataEntrada);
-            } catch (Exception e) {
-                mostrarAviso("Tem de inserir em formato de data de entrada");
-                return;
-            }
+            Calendar dataEntrada = Calendar.getInstance();
+            int dia = dataEntrada.get(Calendar.DAY_OF_MONTH);
+            int mes = dataEntrada.get(Calendar.MONTH) + 1;
+            int ano = dataEntrada.get(Calendar.YEAR);
+            
             
             if(operacao.equals(ManagerPaciente.OPERACAO_ADICIONAR)){
                 Integer cama = app.getCamaDisponivel(codigoHospital, codigoEnfermaria);
-                
-                managerPaciente.adicionar(nome, localidade, cama, estado, dataEntrada);
+                String dataEntradaStr = String.valueOf(dia + "/" + mes + "/" + ano);     
+                managerPaciente.adicionar(nome, localidade, cama, estado, dataEntradaStr);
                  app.setCamaOcupada(codigoHospital, codigoEnfermaria, cama);
             } else if(operacao.equals(ManagerPaciente.OPERACAO_EDITAR)){
-                // buscar o valor inserido na data de saída
-                Date dataSaida;
-                String dDataSaida = campoDataSaida.getText(); 
-                try {
-                    dataSaida = df.parse(dDataSaida);
-                } catch (Exception e) {
-                    mostrarAviso("Tem de inserir em formato de data de saída");
-                    return;
-                }
+                // buscar o valor inserido na data de saída              
                 
                 paciente.setNome(nome);
                 paciente.setLocalidade(localidade);
                 paciente.setEstado(estado);               
-                paciente.setDataEntrada(dataEntrada);
-                paciente.setDataSaida(dataSaida);
+                         
                 managerPaciente.editar(paciente);
             }
             
