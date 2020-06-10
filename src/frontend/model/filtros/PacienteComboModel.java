@@ -41,7 +41,8 @@ public class PacienteComboModel implements ComboBoxModel<String> {
                 i++;
             }
         } else {
-            pacienteList = new String[] {"Não existem Pacientes"};
+            pacienteList = new String[] {""};
+            pacienteCodigoList = new String[] {""};
         }
         
         try {
@@ -90,8 +91,6 @@ public class PacienteComboModel implements ComboBoxModel<String> {
        return pacienteList == null ? null : pacienteList[index];
   
     }
-    
-    
 
     @Override
     public void addListDataListener(ListDataListener l) {
@@ -114,5 +113,9 @@ public class PacienteComboModel implements ComboBoxModel<String> {
         }
         
         return paciente;
+    }
+    
+    public void setPacienteSelecionado(Paciente paciente) {
+        selectedItem = paciente == null ? null : paciente.getNome();
     }
 }
