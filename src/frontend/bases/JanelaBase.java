@@ -9,9 +9,9 @@ import backend.bases.EntidadeBase;
 import backend.entidades.Medico;
 import backend.entidades.Paciente;
 import backend.interfaces.IManager;
+import backend.managers.ManagerPaciente;
 import frontend.janelas.JanelaCriarEnfermaria;
 import frontend.janelas.JanelaCriarEquipamento;
-import frontend.janelas.JanelaCriarHospital;
 import frontend.janelas.JanelaCriarPaciente;
 import frontend.janelas.JanelaCriarProfissionalSaude;
 import frontend.tabelas.TabelaEnfermaria;
@@ -21,6 +21,7 @@ import frontend.tabelas.TabelaPaciente;
 import frontend.tabelas.TabelaProfissionalSaude;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -572,14 +573,39 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         } else {
             mostrarAviso("Tem de selecionar um paciente!");
         }
-        
-        // validar que o paciente nao tem alta ainda (dataSaida == null)
-        // paciente.setDataSaida....
-        // manager. editar(paciente....)
-        // app.setCamaLivre(hospitalSelecionado, enfermariaSelecionada, camaIndex);
-        // mostrarAviso de sucesso, senao...
-        // ( tudo num try catch) e no catch um mostraAviso (ex.getMessage)
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            
+        try {
+            // manager. editar(paciente....)
+            // mostrarAviso de sucesso, senao...
+            // ( tudo num try catch) e no catch um mostraAviso (ex.getMessage)
+            
+            Paciente paciente = (Paciente)app.getPaciente(hospitalSelecionado, enfermariaSelecionada, getCodigoSelecionado());
+            
+            if (paciente.getDataSaida() != null){
+               mostrarAviso("O paciente ja teve alta"); 
+               return;
+            }
+            
+            //inserir data de saida
+            Calendar dataSaida = Calendar.getInstance();
+            int dia = dataSaida.get(Calendar.DAY_OF_MONTH);
+            int mes = dataSaida.get(Calendar.MONTH) + 1;
+            int ano = dataSaida.get(Calendar.YEAR);
+            String dataSaidaStr = String.valueOf(dia + "/" + mes + "/" + ano);
+
+            paciente.setDataSaida(dataSaidaStr);
+            ManagerPaciente manager = app.getManagerPaciente(hospitalSelecionado, enfermariaSelecionada);
+            manager.editar(paciente);
+            
+            //libertar o paciente da cama ocupada
+            app.setCamaLivre(hospitalSelecionado, enfermariaSelecionada, paciente.getCama());
+
+            atualizar();
+            mostrarAviso("Operaçao efetuada com sucesso");
+
+        } catch (Exception ex) {
+             mostrarAviso(ex.getMessage());
+        }
     }
 
     private void adicionarEnfermeiro() {
