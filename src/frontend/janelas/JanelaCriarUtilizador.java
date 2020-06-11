@@ -57,9 +57,9 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
             setTitle("Adicionar Utilizador");
             campoUtilizadorNome.setEditable(true);
             campoUtilizadorNovaPassword.setVisible(false);
-            campoUtilizadorValidarPassword.setVisible(false);
+            campoUtilizadorValidarPassword.setVisible(true);
             Password1.setVisible(false);
-            Password2.setVisible(false);
+            Password2.setVisible(true);
         } else {
             operacao = ManagerUtilizador.OPERACAO_EDITAR;
             setTitle("Editar Utilizador");
@@ -230,19 +230,24 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
             String validarPassword = campoUtilizadorValidarPassword.getText();
 
             if (operacao.equals(ManagerUtilizador.OPERACAO_ADICIONAR)) {
-                managerUtilizador.adicionar(nome, password);
+                if (validarPassword.equals(campoUtilizadorPassword.getText())) {
+                    managerUtilizador.adicionar(nome, password);
+                } else {
+                    mostrarAviso("As passwords não coincidem!");
+                    return;
+                }
             } else if (operacao.equals(ManagerUtilizador.OPERACAO_EDITAR)) {
-                
+
                 if (!validarPassword.equals(novaPassword)) {
                     mostrarAviso("As passwords não coincidem!");
                     return;
                 }
-                
-                if(!password.equals(app.getUtilizadorAutenticado().getPassword())) {
+
+                if (!password.equals(app.getUtilizadorAutenticado().getPassword())) {
                     mostrarAviso("Utilizador inválido!");
                     return;
                 }
-                
+
                 utilizador.setPassword(novaPassword);
                 managerUtilizador.editar(utilizador);
 
