@@ -19,7 +19,6 @@ public abstract class TabelaBase extends javax.swing.JPanel implements ICallerJa
      */
     protected String hospitalSelecionado;
     protected String enfermariaSelecionada;
-    protected String medicoSelecionado;
     
     /**
      * Creates new form TabPanel
