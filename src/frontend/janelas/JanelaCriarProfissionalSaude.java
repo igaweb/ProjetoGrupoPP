@@ -19,8 +19,17 @@ public class JanelaCriarProfissionalSaude extends javax.swing.JDialog {
     private boolean isMedico;
     
     /**
-     * Creates new form NewJDialog
+     * 
+     * @param janela
+     * @param app
+     * @param codigoHospital
+     * @param codigoEnfermaria
+     * @param codigoProfissionalSaude
+     * @param isMedico
+     * @throws backend.Aplicacao.HospitalNaoExistenteException
+     * @throws backend.Aplicacao.EnfermariaNaoExistenteException 
      */
+    
     public JanelaCriarProfissionalSaude(ICallerJanelaCriarInterface janela, Aplicacao app,String codigoHospital, String codigoEnfermaria, String codigoProfissionalSaude, boolean isMedico) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException {
         this.janela = janela;
         this.app = app;

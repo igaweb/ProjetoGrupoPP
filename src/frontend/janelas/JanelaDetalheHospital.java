@@ -13,12 +13,14 @@ public class JanelaDetalheHospital extends JanelaBase {
     private Hospital hospitalSelecionadoObj;
     
     /**
-     * Creates new form JanelaConsultaEnfermaria
+     * 
      * @param app
      * @param serializacao
      * @param tituloJanela
      * @param hospitalSelecionado
+     * @throws Exception 
      */
+    
     public JanelaDetalheHospital(Aplicacao app, Serializacao serializacao, String tituloJanela, String hospitalSelecionado) throws Exception {
         super(app, serializacao, tituloJanela);
         

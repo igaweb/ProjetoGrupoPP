@@ -69,14 +69,15 @@ public class Aplicacao implements Serializable {
         return managerHospital;
     }
 
-    /**
-     * Buscar todos os pacientes do hospital
-     * @param codigoHospital
-     * @param codigoEnfermaria 
-     * @return
-     * @throws backend.Aplicacao.HospitalNaoExistenteException
-     * @throws backend.Aplicacao.EnfermariaNaoExistenteException 
-     */
+   /**
+    * 
+    * @param codigoHospital
+    * @param codigoEnfermaria
+    * @return
+    * @throws backend.Aplicacao.HospitalNaoExistenteException
+    * @throws backend.Aplicacao.EnfermariaNaoExistenteException 
+    */
+    
     public ManagerPaciente getManagerPaciente(String codigoHospital, String codigoEnfermaria) throws HospitalNaoExistenteException, EnfermariaNaoExistenteException {
         ManagerPaciente managerPaciente = null;
 
@@ -189,11 +190,15 @@ public class Aplicacao implements Serializable {
     } 
 
     /**
-     * Pôr o(s) equipamento(s) que o paciente enviado pudesse estar a usar como livres
-     *  @param codigoHospital 
-     *  @param codigoEnfermaria 
-     *  @param paciente 
+     * 
+     * @param codigoHospital
+     * @param codigoEnfermaria
+     * @param paciente
+     * @throws backend.Aplicacao.HospitalNaoExistenteException
+     * @throws backend.Aplicacao.EnfermariaNaoExistenteException
+     * @throws Exception 
      */
+    
     public void setEquipamentosLivre(String codigoHospital, String codigoEnfermaria, Paciente paciente) throws HospitalNaoExistenteException, EnfermariaNaoExistenteException, Exception {
         
         try {
@@ -213,11 +218,15 @@ public class Aplicacao implements Serializable {
     
 
     /**
-     *  Retirar o paciente da lista do médico onde está
-     *  @param codigoHospital 
-     *  @param codigoEnfermaria 
-     *  @param paciente 
+     * 
+     * @param codigoHospital
+     * @param codigoEnfermaria
+     * @param paciente
+     * @throws backend.Aplicacao.HospitalNaoExistenteException
+     * @throws backend.Aplicacao.EnfermariaNaoExistenteException
+     * @throws Exception 
      */
+    
     public void retirarPacienteDoMedico(String codigoHospital, String codigoEnfermaria, Paciente paciente) throws HospitalNaoExistenteException, EnfermariaNaoExistenteException, Exception {
         
         try {

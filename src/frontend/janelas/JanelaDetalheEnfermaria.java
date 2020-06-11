@@ -23,15 +23,17 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
     private Enfermaria enfermariaSelecionadaObj;
 
     /**
-     * Creates new form JanelaConsultaEquipamento
-     *
+     * 
      * @param app
      * @param serializacao
-     * @param hospitalSelecionado
      * @param tituloJanela
+     * @param hospitalSelecionado
      * @param enfermariaSelecionada
-     * @throws java.lang.Exception
+     * @throws backend.Aplicacao.HospitalNaoExistenteException
+     * @throws backend.Aplicacao.EnfermariaNaoExistenteException
+     * @throws Exception 
      */
+     
     public JanelaDetalheEnfermaria(Aplicacao app, Serializacao serializacao, String tituloJanela, String hospitalSelecionado, String enfermariaSelecionada) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException, Exception {
         super(app, serializacao, tituloJanela);
 

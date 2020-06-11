@@ -13,12 +13,13 @@ public class TabelaEnfermaria extends TabelaBase {
     private Hospital hospitalSelecionadoObj;
 
     /**
-     * Creates new form JanelaConsultaEnfermaria
-     *
+     * 
      * @param app
      * @param serializacao
      * @param hospitalSelecionado
+     * @throws backend.Aplicacao.HospitalNaoExistenteException 
      */
+     
     public TabelaEnfermaria(Aplicacao app, Serializacao serializacao, String hospitalSelecionado) throws Aplicacao.HospitalNaoExistenteException {
         super(app, serializacao);
 

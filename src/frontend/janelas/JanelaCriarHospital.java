@@ -24,8 +24,12 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
     private Hospital hospital;
 
     /**
-     * Creates new form NewJDialog
+     * 
+     * @param janela
+     * @param app
+     * @param codigoHospital 
      */
+    
     public JanelaCriarHospital(ICallerJanelaCriarInterface janela, Aplicacao app, String codigoHospital) {
         this.janela = janela;
         this.app = app;

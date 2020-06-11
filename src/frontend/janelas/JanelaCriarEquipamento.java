@@ -28,8 +28,17 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
     
     
     /**
-     * Creates new form JanelaCriarEquipamento
+     * 
+     * @param janela
+     * @param app
+     * @param codigoHospital
+     * @param codigoEnfermaria
+     * @param codigoEquipamento
+     * @throws backend.Aplicacao.HospitalNaoExistenteException
+     * @throws backend.Aplicacao.EnfermariaNaoExistenteException
+     * @throws backend.Aplicacao.EquipamentoNaoExistenteException 
      */
+   
     public JanelaCriarEquipamento(ICallerJanelaCriarInterface janela, Aplicacao app, String codigoHospital, String codigoEnfermaria, String codigoEquipamento) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException, Aplicacao.EquipamentoNaoExistenteException {
         this.janela = janela;
         this.app = app;

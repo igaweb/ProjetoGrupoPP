@@ -10,12 +10,13 @@ import backend.interfaces.ITable;
 public class JanelaListaHospital extends JanelaBase {
 
     /**
-     * Creates new form JanelaConsultaEnfermaria
-     *
+     * 
      * @param app
      * @param serializacao
      * @param tituloJanela
+     * @throws Exception 
      */
+    
     public JanelaListaHospital(Aplicacao app, Serializacao serializacao, String tituloJanela) throws Exception {
         super(app, serializacao, tituloJanela);
 

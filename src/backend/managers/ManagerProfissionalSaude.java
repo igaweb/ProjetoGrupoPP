@@ -22,9 +22,10 @@ public class ManagerProfissionalSaude extends ManagerBase implements IManager {
     }
 
     /**
-     * Retorna todos os medicos de uma enfermaria
+     * 
      * @return 
      */
+     
     public TreeMap<String, Medico> getMedicos() {
         TreeMap<String, Medico> medicos = new TreeMap<>();
                 
@@ -40,11 +41,12 @@ public class ManagerProfissionalSaude extends ManagerBase implements IManager {
     }
     
     /**
-     * Método para validar se os campos da classe estão bem preenchidos
+     * 
      * @param profissionalSaude
      * @return
      * @throws backend.bases.ManagerBase.ValidacaoEntidadeException 
      */
+     
     @Override
     public boolean validarCampos(EntidadeBase profissionalSaude) throws ValidacaoEntidadeException {
         boolean isValid = super.validarCampos(profissionalSaude);

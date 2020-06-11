@@ -17,13 +17,14 @@ public class TabelaEquipamento extends TabelaBase {
     private Enfermaria enfermariaSelecionadaObj;
     
     /**
-     * Creates new form JanelaConsultaEnfermaria
+     * 
      * @param app
      * @param serializacao
      * @param hospitalSelecionado
      * @param enfermariaSelecionada
-     * @throws java.lang.Exception
+     * @throws Exception 
      */
+   
     public TabelaEquipamento(Aplicacao app, Serializacao serializacao, String hospitalSelecionado, String enfermariaSelecionada) throws Exception {
         super(app, serializacao);
         

@@ -28,11 +28,11 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog implements ICa
     private static final String ERRO_REMOVER_UTILIZADOR = "ERRO_REMOVER_UTILIZADOR";
 
     /**
-     * Creates new form JanelaConsultaUtilizador
-     *
+     * 
      * @param app
-     * @param serializacao
+     * @param serializacao 
      */
+    
     public JanelaConsultaUtilizador(Aplicacao app, Serializacao serializacao) {
         this.app = app;
         this.serializacao = serializacao;

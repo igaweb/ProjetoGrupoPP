@@ -20,13 +20,16 @@ public class TabelaPaciente extends TabelaBase {
     private Medico medicoAssociado;
     
     /**
-     * Creates new form JanelaConsultaEnfermaria
+     * 
      * @param app
-     * @param serializacao
+     * @param serializacao 
      * @param hospitalSelecionado
      * @param enfermariaSelecionada
-     * @throws java.lang.Exception
+     * @throws backend.Aplicacao.HospitalNaoExistenteException
+     * @throws backend.Aplicacao.EnfermariaNaoExistenteException
+     * @throws backend.Aplicacao.ProfissionalSaudeNaoExistenteException 
      */
+    
     public TabelaPaciente(Aplicacao app, Serializacao serializacao, String hospitalSelecionado, String enfermariaSelecionada) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException, Aplicacao.ProfissionalSaudeNaoExistenteException  {
         super(app, serializacao);
         

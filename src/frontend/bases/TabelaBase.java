@@ -21,8 +21,11 @@ public abstract class TabelaBase extends javax.swing.JPanel implements ICallerJa
     protected String enfermariaSelecionada;
     
     /**
-     * Creates new form TabPanel
+     * 
+     * @param app
+     * @param serializacao 
      */
+    
     public TabelaBase(Aplicacao app, Serializacao serializacao) {
         this.app = app;
         this.serializacao = serializacao;

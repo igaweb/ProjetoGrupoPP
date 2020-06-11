@@ -49,11 +49,12 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     private final int tabPacienteIndex = 2;
 
     /**
-     * Creates new form JanelaConsultaEnfermaria
-     *
+     * 
      * @param app
      * @param serializacao
+     * @param tituloJanela 
      */
+     
     public JanelaBase(Aplicacao app, Serializacao serializacao, String tituloJanela) {
         this.app = app;
         this.serializacao = serializacao;
@@ -800,11 +801,11 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     }
 
     /**
-     * Get manager correspondente à entidade da tabela
-     *
+     * 
      * @param tabelaPane
-     * @return
+     * @return 
      */
+    
     public IManager getManager(ITable tabelaPane) {
 
         try {
@@ -829,12 +830,11 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         return null;
     }
 
-    /*
-     * FIM Métodos auxiliares genéricos
-     */
     /**
-     * Getters botoes
+     * 
+     * @return 
      */
+    
     public JButton getBotaoCriar() {
         return botaoCriar;
     }

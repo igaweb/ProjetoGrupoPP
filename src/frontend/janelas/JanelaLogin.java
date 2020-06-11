@@ -12,8 +12,11 @@ public class JanelaLogin extends javax.swing.JDialog {
     private final Serializacao serializacao;
 
     /**
-     * Creates new form JanelaLogin
+     * 
+     * @param app
+     * @param serializacao 
      */
+     
     public JanelaLogin(Aplicacao app, Serializacao serializacao) {
         this.app = app;
         this.serializacao = serializacao;

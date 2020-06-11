@@ -29,11 +29,11 @@ public class ManagerUtilizador extends ManagerBase implements IManager {
     }
 
     /**
-     * Adiciona utilizador com codigo com o nome do utilizador
-     *
+     * 
      * @param utilizador
-     * @throws Exception
+     * @throws Exception 
      */
+    
     @Override
     public void adicionar(EntidadeBase utilizador) throws Exception {
         // set da operacao que estamos a fazer
@@ -52,12 +52,12 @@ public class ManagerUtilizador extends ManagerBase implements IManager {
     }
 
     /**
-     * Adicionar nova entidade à lista
-     *
+     * 
      * @param nome
      * @param password
-     * @throws Exception
+     * @throws Exception 
      */
+     
     public void adicionar(String nome, String password) throws Exception {
         Utilizador utilizador = new Utilizador(nome, password);
 
@@ -65,12 +65,12 @@ public class ManagerUtilizador extends ManagerBase implements IManager {
     }
 
     /**
-     * Método para validar se os campos da classe estão bem preenchidos
-     *
-     * @param utilizador
+     * 
+     * @param entidade
      * @return
-     * @throws backend.bases.ManagerBase.ValidacaoEntidadeException
+     * @throws backend.bases.ManagerBase.ValidacaoEntidadeException 
      */
+     
     @Override
     public boolean validarCampos(EntidadeBase entidade) throws ValidacaoEntidadeException {
         Utilizador utilizador = (Utilizador) entidade;

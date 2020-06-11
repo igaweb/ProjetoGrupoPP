@@ -26,12 +26,13 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
     private Enfermaria enfermaria;
 
     /**
-     * Creates new form NewJDialog
+     * 
      * @param janela
      * @param app
      * @param codigoHospital
-     * @param codigoEnfermaria
+     * @param codigoEnfermaria 
      */
+     
     public JanelaCriarEnfermaria(ICallerJanelaCriarInterface janela, Aplicacao app, String codigoHospital, String codigoEnfermaria) {
         this.janela = janela;
         this.app = app;
