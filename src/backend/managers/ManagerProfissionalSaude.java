@@ -12,6 +12,7 @@ public class ManagerProfissionalSaude extends ManagerBase implements IManager {
     private static final long serialVersionUID = 1L;
     
     private static final String PREFIXO_CODIGO = "PR-";
+    private String ERRO_FALTA_ESPECIALIDADE = "O campo especialidade é obrigatório";
 
     public ManagerProfissionalSaude() {
     }
@@ -47,6 +48,12 @@ public class ManagerProfissionalSaude extends ManagerBase implements IManager {
     @Override
     public boolean validarCampos(EntidadeBase profissionalSaude) throws ValidacaoEntidadeException {
         boolean isValid = super.validarCampos(profissionalSaude);
+        
+        if(profissionalSaude instanceof Medico) {
+            if(((Medico) profissionalSaude).getEspecialidade() == null || ((Medico) profissionalSaude).getEspecialidade().trim().isEmpty()) {
+                throw new ValidacaoEntidadeException(ERRO_FALTA_ESPECIALIDADE);
+            }
+        }
 
         return isValid;
     }

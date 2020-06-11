@@ -35,17 +35,11 @@ public class ManagerEquipamento extends ManagerBase implements IManager {
         // validações para todas as operaçoes na base
         boolean isValid = super.validarCampos(equipamento);
         
-        // se nao for a operacao adicionar, tem de existir um codigo
-        if (!operacao.equals(OPERACAO_ADICIONAR) && equipamento.getCodigo() == null) {
-            throw new ValidacaoEntidadeException(ERRO_FALTA_CODIGO);
-        }
-
          // Se a opção que o utilizador escolher for menor que 0 || "OU" || se o número que o utilizador escolher for maior que as que existem
          if (((Equipamento) equipamento).getTipo() < 0 || ((Equipamento) equipamento).getTipo() >= Conteudos.getTiposEquipamentos().length) {
             throw new ValidacaoEntidadeException(ERRO_TIPO_INVALIDO); 
          }
 
-         // validações....... (campos obrigatorios, tipos de dados, etc...)
         return isValid;
    
     }  
