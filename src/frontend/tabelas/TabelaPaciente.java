@@ -8,16 +8,16 @@ import backend.entidades.Enfermaria;
 import backend.entidades.Hospital;
 import backend.entidades.Medico;
 import backend.entidades.Paciente;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Map;
+import java.util.TreeMap;
 import javax.swing.table.AbstractTableModel;
 
 public class TabelaPaciente extends TabelaBase {
 
     private Hospital hospitalSelecionadoObj;
     private Enfermaria enfermariaSelecionadaObj;
-    private Medico medicoSelecionadoObj;
+    
+    private Medico medicoAssociado;
     
     /**
      * Creates new form JanelaConsultaEnfermaria
@@ -27,7 +27,7 @@ public class TabelaPaciente extends TabelaBase {
      * @param enfermariaSelecionada
      * @throws java.lang.Exception
      */
-    public TabelaPaciente(Aplicacao app, Serializacao serializacao, String hospitalSelecionado, String enfermariaSelecionada, String medicoSelecionado) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException, Aplicacao.ProfissionalSaudeNaoExistenteException  {
+    public TabelaPaciente(Aplicacao app, Serializacao serializacao, String hospitalSelecionado, String enfermariaSelecionada) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException, Aplicacao.ProfissionalSaudeNaoExistenteException  {
         super(app, serializacao);
         
         // aplica a seleçao do hospital onde está esta listagem
@@ -37,10 +37,6 @@ public class TabelaPaciente extends TabelaBase {
         this.enfermariaSelecionada = enfermariaSelecionada;
         this.enfermariaSelecionadaObj = app.getEnfermaria(hospitalSelecionado, enfermariaSelecionada);
         
-        if(medicoSelecionado != null) {
-            this.medicoSelecionado = medicoSelecionado;
-            this.medicoSelecionadoObj = (Medico) app.getProfissionalSaude(hospitalSelecionado, enfermariaSelecionada, medicoSelecionado);
-        }
         setOrdenacao();
     }
     
@@ -103,8 +99,8 @@ public class TabelaPaciente extends TabelaBase {
                         return Conteudos.getEstadosPaciente()[paciente.getEstado()];
                     case 5:                      
                          try {
-                        return ((Medico) app.getProfissionalSaude(hospitalSelecionado, enfermariaSelecionada, medicoSelecionado));
-                    } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException | Aplicacao.ProfissionalSaudeNaoExistenteException ex) {
+                        return getMedico(paciente).getNome();
+                    } catch (Exception ex) {
                         return "";
                     }                                    
                     case 6:
@@ -120,5 +116,17 @@ public class TabelaPaciente extends TabelaBase {
                     }
             }
         };
+    }
+    
+    private Medico getMedico(Paciente paciente) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException {
+        // buscar o médico que está associado a este paciente
+        TreeMap<String, Medico> medicos = app.getManagerProfissionalSaude(hospitalSelecionado,enfermariaSelecionada).getMedicos();
+        for (Map.Entry<String, Medico> entry : medicos.entrySet()) {
+            Medico medico = (Medico) entry.getValue();
+            if(medico.getPacientes().containsKey(paciente.getCodigo())) {
+                return medico;
+            }
+        }
+        return null;
     }
 }
