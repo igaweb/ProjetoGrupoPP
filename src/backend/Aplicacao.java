@@ -5,6 +5,7 @@ import backend.entidades.Enfermaria;
 import backend.bases.EntidadeBase;
 import backend.entidades.Equipamento;
 import backend.entidades.Hospital;
+import backend.entidades.Medico;
 import backend.entidades.Paciente;
 import backend.entidades.ProfissionalSaude;
 import backend.entidades.Utilizador;
@@ -181,7 +182,7 @@ public class Aplicacao implements Serializable {
         getEnfermaria(codigoHospital, codigoEnfermaria).setCamas(camas);
     } 
     
-    public void setCamaLivre(String codigoHospital, String codigoEnfermaria, Integer camaIndex) throws HospitalNaoExistenteException, EnfermariaNaoExistenteException {
+    public void setCamaLivre(String codigoHospital, String codigoEnfermaria, Integer camaIndex) throws HospitalNaoExistenteException, EnfermariaNaoExistenteException, Exception {
         Boolean[] camas = getEnfermaria(codigoHospital, codigoEnfermaria).getCamas();
         camas[camaIndex] = true;
         getEnfermaria(codigoHospital, codigoEnfermaria).setCamas(camas);
@@ -209,7 +210,30 @@ public class Aplicacao implements Serializable {
             throw ex;
         }
     }
+    
 
+    /**
+     *  Retirar o paciente da lista do médico onde está
+     *  @param codigoHospital 
+     *  @param codigoEnfermaria 
+     *  @param paciente 
+     */
+    public void retirarPacienteDoMedico(String codigoHospital, String codigoEnfermaria, Paciente paciente) throws HospitalNaoExistenteException, EnfermariaNaoExistenteException, Exception {
+        
+        try {
+            ManagerProfissionalSaude managerProfissionalSaude = getManagerProfissionalSaude(codigoHospital, codigoEnfermaria);
+            TreeMap<String, Medico> medicos = managerProfissionalSaude.getMedicos();
+            for (Map.Entry<String, Medico> entry : medicos.entrySet()) {
+                Medico medico = (Medico) entry.getValue();
+                if(medico.getPacientes() != null && medico.getPacientes().containsKey(paciente.getCodigo())) {
+                    medico.getPacientes().remove(paciente.getCodigo());
+                }
+            }
+        } catch (Exception ex){
+            throw ex;
+        }
+    }
+    
     public static class HospitalNaoExistenteException extends Exception {
 
         public HospitalNaoExistenteException() {

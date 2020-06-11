@@ -543,12 +543,11 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
                     Paciente paciente = ((Paciente) getEntidadeSelecionada(tabelaPane, key));
                     Integer camaIndex = paciente.getCama();
                     manager.remover(paciente);
-                    //libertar o paciente da cama ocupada
-                    app.setCamaLivre(hospitalSelecionado, enfermariaSelecionada, camaIndex);
-                    // libertar possiveis equipamentos utilizados pelo paciente
-                    app.setEquipamentosLivre(hospitalSelecionado, enfermariaSelecionada, paciente);
+                    libertarPaciente(paciente);
+                } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException ex) {
+                    mostrarAviso(ex.getMessage());
                 } catch (Exception ex) {
-                    mostrarAviso("Ocorreu um erro ao tentar remover a(s) linha(s) selecionada(s): " + ex.getMessage());
+                    mostrarAviso("Ocorreu um erro ao tentar remover a(s) linha(s) selecionada(s)" + (ex.getMessage()== null ? "" : ": " + ex.getMessage()));
                     error = true;
                     break;
                 }
@@ -593,10 +592,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
             paciente.setDataSaida(dataSaidaStr);
             ManagerPaciente manager = app.getManagerPaciente(hospitalSelecionado, enfermariaSelecionada);
             manager.editar(paciente);
-            //libertar o paciente da cama ocupada
-            app.setCamaLivre(hospitalSelecionado, enfermariaSelecionada, paciente.getCama());
-            // libertar possiveis equipamentos utilizados pelo paciente
-            app.setEquipamentosLivre(hospitalSelecionado, enfermariaSelecionada, paciente);
+            libertarPaciente(paciente);
 
             atualizar();
             mostrarAviso("Operaçao efetuada com sucesso");
@@ -955,6 +951,20 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
                 }
             });
         }
+    }
+
+    /**
+     * Libertar camas, equipamentos e o paciente da lista do seu médico
+     * @param paciente 
+     */
+    private void libertarPaciente(Paciente paciente) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException, Exception {
+
+        //libertar o paciente da cama ocupada
+        app.setCamaLivre(hospitalSelecionado, enfermariaSelecionada, paciente.getCama());
+        // libertar possiveis equipamentos utilizados pelo paciente
+        app.setEquipamentosLivre(hospitalSelecionado, enfermariaSelecionada, paciente);
+        // retirar paciente da lista do seu medico
+        app.retirarPacienteDoMedico(hospitalSelecionado, enfermariaSelecionada, paciente);
     }
 
     public static class NenhumaLinhaSelecionadaException extends Exception {
