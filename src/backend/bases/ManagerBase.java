@@ -100,23 +100,19 @@ public abstract class ManagerBase implements Serializable, IManager {
     }
 
     @Override
-    public void editar(EntidadeBase entidade) throws Exception {
+    public void editar(EntidadeBase entidade) throws EditarEntidadeException, ValidacaoEntidadeException, Exception {
         // set da operacao que estamos a fazer
         setOperacao(OPERACAO_EDITAR);
-        try {
-            // validar se os campos vêm todos bem preenchidos
-            boolean isValido = validarCampos(entidade);
+        // validar se os campos vêm todos bem preenchidos
+        boolean isValido = validarCampos(entidade);
 
-            // se estiver bem preenchido,
-            // avança para a edição
-            if (isValido) {
+        // se estiver bem preenchido,
+        // avança para a edição
+        if (isValido) {
 
-                lista.put(entidade.getCodigo(), entidade);
-            } else {
-                // senão, retorna erro
-                throw new EditarEntidadeException();
-            }
-        } catch (Exception e) {
+            lista.put(entidade.getCodigo(), entidade);
+        } else {
+            // senão, retorna erro
             throw new EditarEntidadeException();
         }
     }
