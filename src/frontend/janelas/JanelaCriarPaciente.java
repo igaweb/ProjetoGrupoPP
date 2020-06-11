@@ -1,6 +1,7 @@
 package frontend.janelas;
 
 import backend.Aplicacao;
+import backend.entidades.Medico;
 import backend.entidades.Paciente;
 import backend.interfaces.ICallerJanelaCriarInterface;
 import backend.managers.ManagerPaciente;
@@ -57,7 +58,10 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
             paciente = (Paciente)app.getPaciente(codigoHospital, codigoEnfermaria, codigoPaciente);
             campoPacienteNome.setText(paciente.getNome());
             campoPacienteLocalidade.setText(paciente.getLocalidade());
-            campoPacienteEstado.setSelectedIndex(paciente.getEstado());                
+            campoPacienteEstado.setSelectedIndex(paciente.getEstado());  
+            MedicoComboModel medicoComboModel = (MedicoComboModel) campoMedicoAtribuido.getModel();
+            medicoComboModel.setMedicoSelecionado(paciente);
+            
         }
     }
 
@@ -208,9 +212,7 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
                     .addGroup(filtrosLayout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addComponent(nCamasPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(filtrosLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                    .addComponent(jButton1))
                 .addGap(71, 71, 71))
         );
 
@@ -293,13 +295,18 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
                 paciente.setEstado(estado);               
                          
                 managerPaciente.editar(paciente);
+                
+                // retirar paciente da lista do seu medico
+                app.retirarPacienteDoMedico(codigoHospital, codigoEnfermaria, paciente);
             }
             
             // buscar o medico selecionado
-//            Medico medico = ((MedicoComboModel)campoMedicoAtribuido.getModel()).getMedicoSelecionado();
-//            ((Medico)app.getProfissionalSaude(codigoHospital, codigoEnfermaria, medico.getCodigo())).getPacientes().put(paciente.getCodigo(), paciente);
+            Medico medico = ((MedicoComboModel) campoMedicoAtribuido.getModel()).getMedicoSelecionado(campoMedicoAtribuido.getSelectedIndex());
+            
+            // adiciona o paciente, se ainda nao estiver na lista
+            medico.getPacientes().put(paciente.getCodigo(), paciente);
 
-                    fechar();
+            fechar();
             
         } catch (Exception ex) {
             mostrarAviso(ex.getMessage());

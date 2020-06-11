@@ -53,7 +53,7 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
         getTabTabela().setTitleAt(0, "Equipamentos");
         getTabTabela().add(new TabelaProfissionalSaude(app, serializacao, hospitalSelecionado, enfermariaSelecionada));
         getTabTabela().setTitleAt(1, "Profissionais de Saúde");
-        getTabTabela().add(new TabelaPaciente(app, serializacao, hospitalSelecionado, enfermariaSelecionada, null));
+        getTabTabela().add(new TabelaPaciente(app, serializacao, hospitalSelecionado, enfermariaSelecionada));
         getTabTabela().setTitleAt(2, "Pacientes");
         getTabTabela().setVisible(true);
         redesenharTabela();

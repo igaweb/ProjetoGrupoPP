@@ -2,6 +2,7 @@ package frontend.model.filtros;
 
 import backend.Aplicacao;
 import backend.entidades.Medico;
+import backend.entidades.Paciente;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.swing.ComboBoxModel;
@@ -96,15 +97,27 @@ public class MedicoComboModel implements ComboBoxModel<String> {
         
     }
     
-    public Medico getMedicoSelecionado() {
+    public Medico getMedicoSelecionado(int index) {
         Medico medico;
         try {
-            String codigoMedico = (String) getSelectedItem();
-            medico = lista.get(codigoMedico);
+            medico = lista.get(medicoCodigoList[index]);
         } catch (Exception e) {
             medico = null;
         }
         
         return medico;
     }
+    
+    public void setMedicoSelecionado(Paciente paciente) {
+        selectedItem = null;
+        
+        for (Map.Entry<String, Medico> entry : lista.entrySet()) {
+            Medico medico = (Medico) entry.getValue();
+            if(medico.getPacientes().containsKey(paciente.getCodigo())) {
+                selectedItem = medico.getNome();
+                break;
+            }
+        }
+    }
+
 }
