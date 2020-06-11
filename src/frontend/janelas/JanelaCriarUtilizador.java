@@ -250,11 +250,8 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
 
                 utilizador.setPassword(novaPassword);
                 managerUtilizador.editar(utilizador);
-
-                fechar();
             }
             fechar();
-            mostrarAviso("Utilizadro criado com sucesso!");
         } catch (Exception ex) {
             mostrarAviso(ex.getMessage());
         }
