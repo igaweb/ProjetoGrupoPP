@@ -15,8 +15,8 @@ public class PacienteComboModel implements ComboBoxModel<String> {
     private String[] pacienteCodigoList;
     private String selectedItem;
 
-    public PacienteComboModel(Aplicacao app, String codigoHospital, String codigoEnfermaria) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException {
-        this.lista = app.getManagerPaciente(codigoHospital, codigoEnfermaria).getLista();
+    public PacienteComboModel(Aplicacao app, String codigoHospital, String codigoEnfermaria, boolean pacientesAtivos) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException {
+        this.lista = getLista(app.getManagerPaciente(codigoHospital, codigoEnfermaria).getLista(), pacientesAtivos);
 
         inicializar();
     }
@@ -111,5 +111,27 @@ public class PacienteComboModel implements ComboBoxModel<String> {
 
     public void setPacienteSelecionado(Paciente paciente) {
         selectedItem = paciente == null ? null : paciente.getNome();
+    }
+
+    private TreeMap<String, Paciente> getLista(TreeMap<String, Paciente> listaInicial, boolean pacientesAtivos) {
+        if(pacientesAtivos) {
+            TreeMap<String, Paciente> novaLista = new TreeMap<String, Paciente>();
+            TreeMap<String, Paciente> listaTemporaria = listaInicial;
+            
+            for (Map.Entry<String, Paciente> entry : listaInicial.entrySet()) {
+                Paciente paciente = (Paciente) entry.getValue();
+
+                // se este paciente já tiver alta, não aparece na combo
+                if(paciente.getDataSaida() != null){
+                    continue;
+                }
+                
+                novaLista.put(paciente.getCodigo(), paciente);
+            }
+            
+            return novaLista;
+        } else {
+            return listaInicial;
+        }
     }
 }

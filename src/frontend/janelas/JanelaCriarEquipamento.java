@@ -37,6 +37,8 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
         this.codigoEnfermaria = codigoEnfermaria;
 
         initComponents();
+        
+        comboNomePaciente.setModel(new PacienteComboModel(app, codigoHospital, codigoEnfermaria, true));
 
         //Indica que a janela deve ser modal ou seja,
         //bloqueia a execução do programa até que a janela seja fechada
@@ -112,7 +114,6 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
         labelNomePaciente.setText("Nome do Paciente :");
 
         try {
-            comboNomePaciente.setModel(new PacienteComboModel(app, codigoHospital, codigoEnfermaria));
         } catch (Exception e) {
             System.out.println(e);
         }
