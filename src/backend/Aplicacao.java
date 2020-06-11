@@ -15,6 +15,7 @@ import backend.managers.ManagerHospital;
 import backend.managers.ManagerPaciente;
 import backend.managers.ManagerProfissionalSaude;
 import java.io.Serializable;
+import java.util.Map;
 import java.util.TreeMap;
 
 public class Aplicacao implements Serializable {
@@ -185,6 +186,29 @@ public class Aplicacao implements Serializable {
         camas[camaIndex] = true;
         getEnfermaria(codigoHospital, codigoEnfermaria).setCamas(camas);
     } 
+
+    /**
+     * Pôr o(s) equipamento(s) que o paciente enviado pudesse estar a usar como livres
+     *  @param codigoHospital 
+     *  @param codigoEnfermaria 
+     *  @param paciente 
+     */
+    public void setEquipamentosLivre(String codigoHospital, String codigoEnfermaria, Paciente paciente) throws HospitalNaoExistenteException, EnfermariaNaoExistenteException, Exception {
+        
+        try {
+            Enfermaria enfermaria = getEnfermaria(codigoHospital, codigoEnfermaria);
+            TreeMap<String, EntidadeBase> equipamentos = enfermaria.getEquipamentos();
+
+            for (Map.Entry<String, EntidadeBase> entry : equipamentos.entrySet()) {
+                Equipamento equipamento = (Equipamento) entry.getValue();
+                if(equipamento.getPaciente() != null && equipamento.getPaciente().getCodigo().equals(paciente.getCodigo())) {
+                    equipamento.setPaciente(null);
+                }
+            }
+        } catch (Exception ex){
+            throw ex;
+        }
+    }
 
     public static class HospitalNaoExistenteException extends Exception {
 

@@ -353,9 +353,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
                         .addGap(20, 20, 20)
                         .addComponent(labelDetalhe, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(contentor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGap(0, 0, 0))))
+                    .addComponent(contentor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -545,7 +543,10 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
                     Paciente paciente = ((Paciente) getEntidadeSelecionada(tabelaPane, key));
                     Integer camaIndex = paciente.getCama();
                     manager.remover(paciente);
+                    //libertar o paciente da cama ocupada
                     app.setCamaLivre(hospitalSelecionado, enfermariaSelecionada, camaIndex);
+                    // libertar possiveis equipamentos utilizados pelo paciente
+                    app.setEquipamentosLivre(hospitalSelecionado, enfermariaSelecionada, paciente);
                 } catch (Exception ex) {
                     mostrarAviso("Ocorreu um erro ao tentar remover a(s) linha(s) selecionada(s): " + ex.getMessage());
                     error = true;
@@ -575,10 +576,6 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         }
             
         try {
-            // manager. editar(paciente....)
-            // mostrarAviso de sucesso, senao...
-            // ( tudo num try catch) e no catch um mostraAviso (ex.getMessage)
-            
             Paciente paciente = (Paciente)app.getPaciente(hospitalSelecionado, enfermariaSelecionada, getCodigoSelecionado(tabelaSelecionada));
             
             if (paciente.getDataSaida() != null){
@@ -592,19 +589,22 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
             int mes = dataSaida.get(Calendar.MONTH) + 1;
             int ano = dataSaida.get(Calendar.YEAR);
             String dataSaidaStr = String.valueOf(dia + "/" + mes + "/" + ano);
-
+            
             paciente.setDataSaida(dataSaidaStr);
             ManagerPaciente manager = app.getManagerPaciente(hospitalSelecionado, enfermariaSelecionada);
             manager.editar(paciente);
-            
             //libertar o paciente da cama ocupada
             app.setCamaLivre(hospitalSelecionado, enfermariaSelecionada, paciente.getCama());
+            // libertar possiveis equipamentos utilizados pelo paciente
+            app.setEquipamentosLivre(hospitalSelecionado, enfermariaSelecionada, paciente);
 
             atualizar();
             mostrarAviso("Operaçao efetuada com sucesso");
 
+        } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException ex) {
+            mostrarAviso(ex.getMessage());
         } catch (Exception ex) {
-             mostrarAviso(ex.getMessage());
+             mostrarAviso("Erro interno!");
         }
     }
 
@@ -741,6 +741,10 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
      * Métodos auxiliares genéricos
      */
     protected void mostrarAviso(String aviso) {
+        if(aviso.trim().isEmpty()){
+            aviso = "Ocorreu um erro de sistema";
+        }
+        
         JOptionPane.showMessageDialog(rootPane, aviso);
     }
 
