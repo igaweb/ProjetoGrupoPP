@@ -26,10 +26,12 @@ public class ManagerPaciente extends ManagerBase implements IManager {
         this.lista = lista;
     }
 
-    public void adicionar(String nome, String localidade, int cama, Integer estado, String dataEntrada) throws Exception {
+    public Paciente adicionar(String nome, String localidade, int cama, Integer estado, String dataEntrada) throws Exception {
         Paciente paciente = new Paciente(null, nome, localidade, cama, estado, dataEntrada, null);
         
         adicionar(paciente);
+        
+        return paciente;
     }
 
     /*

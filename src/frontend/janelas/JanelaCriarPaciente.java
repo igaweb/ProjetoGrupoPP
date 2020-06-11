@@ -285,8 +285,8 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
             if(operacao.equals(ManagerPaciente.OPERACAO_ADICIONAR)){
                 Integer cama = app.getCamaDisponivel(codigoHospital, codigoEnfermaria);
                 String dataEntradaStr = String.valueOf(dia + "/" + mes + "/" + ano);     
-                managerPaciente.adicionar(nome, localidade, cama, estado, dataEntradaStr);
-                 app.setCamaOcupada(codigoHospital, codigoEnfermaria, cama);
+                paciente = managerPaciente.adicionar(nome, localidade, cama, estado, dataEntradaStr);
+                app.setCamaOcupada(codigoHospital, codigoEnfermaria, cama);
             } else if(operacao.equals(ManagerPaciente.OPERACAO_EDITAR)){
                 // buscar o valor inserido na data de saída              
                 
