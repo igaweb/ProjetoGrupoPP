@@ -20,7 +20,7 @@ public class Homepage extends javax.swing.JFrame implements ICallerJanelaCriarIn
 
         initComponents();
         //Força a maximização da janela
-//        this.setExtendedState(Homepage.MAXIMIZED_BOTH);    
+        this.setExtendedState(Homepage.MAXIMIZED_BOTH);    
 
         //O processo de fecho da janela será controlado pelo programa
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
