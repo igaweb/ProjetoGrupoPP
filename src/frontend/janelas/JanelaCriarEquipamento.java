@@ -97,16 +97,21 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
 @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         botaoGuardar = new javax.swing.JButton();
         labelNomePaciente = new javax.swing.JLabel();
         comboNomePaciente = new javax.swing.JComboBox<>();
-        jLabelNomeEquipamento = new javax.swing.JLabel();
+        labelNomeEquipamento = new javax.swing.JLabel();
         campoNomeEquipamento = new javax.swing.JTextField();
         labelTipoEquipamento = new javax.swing.JLabel();
         comboTipoEquipamento = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
+        layout.columnWidths = new int[] {0, 10, 0, 10, 0, 10, 0};
+        layout.rowHeights = new int[] {0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0};
+        getContentPane().setLayout(layout);
 
         botaoGuardar.setText("Guardar");
         botaoGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -119,10 +124,28 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
                 botaoGuardarActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 13;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        getContentPane().add(botaoGuardar, gridBagConstraints);
 
-        labelNomePaciente.setText("Nome do Paciente :");
+        labelNomePaciente.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelNomePaciente.setText("Paciente Associado");
+        labelNomePaciente.setMaximumSize(new java.awt.Dimension(0, 0));
+        labelNomePaciente.setMinimumSize(new java.awt.Dimension(150, 25));
+        labelNomePaciente.setPreferredSize(new java.awt.Dimension(150, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.ipadx = 34;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        getContentPane().add(labelNomePaciente, gridBagConstraints);
 
         try {
+            comboNomePaciente.setMaximumSize(new java.awt.Dimension(200, 25));
+            comboNomePaciente.setMinimumSize(new java.awt.Dimension(200, 25));
+            comboNomePaciente.setPreferredSize(new java.awt.Dimension(200, 25));
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -131,73 +154,70 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
                 comboNomePacienteActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.ipadx = 93;
+        gridBagConstraints.ipady = -5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        getContentPane().add(comboNomePaciente, gridBagConstraints);
 
-        jLabelNomeEquipamento.setText("Nome do Equipamento : ");
+        labelNomeEquipamento.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelNomeEquipamento.setText("Nome");
+        labelNomeEquipamento.setMaximumSize(new java.awt.Dimension(0, 0));
+        labelNomeEquipamento.setMinimumSize(new java.awt.Dimension(150, 25));
+        labelNomeEquipamento.setPreferredSize(new java.awt.Dimension(150, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.ipady = 19;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        getContentPane().add(labelNomeEquipamento, gridBagConstraints);
 
+        campoNomeEquipamento.setMaximumSize(new java.awt.Dimension(200, 25));
+        campoNomeEquipamento.setMinimumSize(new java.awt.Dimension(200, 25));
+        campoNomeEquipamento.setPreferredSize(new java.awt.Dimension(200, 25));
         campoNomeEquipamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoNomeEquipamentoActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        getContentPane().add(campoNomeEquipamento, gridBagConstraints);
+        campoNomeEquipamento.getAccessibleContext().setAccessibleName("");
+        campoNomeEquipamento.getAccessibleContext().setAccessibleDescription("");
 
-        labelTipoEquipamento.setText("Tipo de equipamento:");
+        labelTipoEquipamento.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelTipoEquipamento.setText("Tipo de equipamento");
+        labelTipoEquipamento.setMaximumSize(new java.awt.Dimension(0, 0));
+        labelTipoEquipamento.setMinimumSize(new java.awt.Dimension(150, 25));
+        labelTipoEquipamento.setPreferredSize(new java.awt.Dimension(150, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.ipadx = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        getContentPane().add(labelTipoEquipamento, gridBagConstraints);
 
         comboTipoEquipamento.setModel(new TipoEquipamentoComboModel());
+        comboTipoEquipamento.setMaximumSize(new java.awt.Dimension(200, 25));
+        comboTipoEquipamento.setMinimumSize(new java.awt.Dimension(200, 25));
+        comboTipoEquipamento.setPreferredSize(new java.awt.Dimension(200, 25));
         comboTipoEquipamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboTipoEquipamentoActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(226, 226, 226)
-                .addComponent(botaoGuardar)
-                .addContainerGap(28, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabelNomeEquipamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(labelNomePaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(labelTipoEquipamento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(comboTipoEquipamento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(comboNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(35, Short.MAX_VALUE))
-                    .addComponent(campoNomeEquipamento)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNomeEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoNomeEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelTipoEquipamento)
-                    .addComponent(comboTipoEquipamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(97, 97, 97)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelNomePaciente)
-                    .addComponent(comboNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addComponent(botaoGuardar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        campoNomeEquipamento.getAccessibleContext().setAccessibleName("");
-        campoNomeEquipamento.getAccessibleContext().setAccessibleDescription("");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.ipadx = 93;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        getContentPane().add(comboTipoEquipamento, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -227,7 +247,7 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
     private javax.swing.JTextField campoNomeEquipamento;
     private javax.swing.JComboBox<String> comboNomePaciente;
     private javax.swing.JComboBox<String> comboTipoEquipamento;
-    private javax.swing.JLabel jLabelNomeEquipamento;
+    private javax.swing.JLabel labelNomeEquipamento;
     private javax.swing.JLabel labelNomePaciente;
     private javax.swing.JLabel labelTipoEquipamento;
     // End of variables declaration//GEN-END:variables

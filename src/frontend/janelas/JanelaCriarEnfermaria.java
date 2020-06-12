@@ -73,174 +73,106 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        filtros = new javax.swing.JPanel();
-        tipoEnfermariaPane = new javax.swing.JPanel();
-        labelTipo = new javax.swing.JLabel();
-        campoEnfermariaTipo = new javax.swing.JComboBox<>();
-        nomePane = new javax.swing.JPanel();
         labelNome = new javax.swing.JLabel();
         campoNome = new javax.swing.JTextField();
-        labelTitulo = new javax.swing.JLabel();
-        nCamasPane1 = new javax.swing.JPanel();
+        labelTipo = new javax.swing.JLabel();
+        campoEnfermariaTipo = new javax.swing.JComboBox<>();
         labelNcamas = new javax.swing.JLabel();
         campoNCamas = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        botaoGuardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
+        layout.columnWidths = new int[] {0, 10, 0, 10, 0, 10, 0};
+        layout.rowHeights = new int[] {0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0};
+        getContentPane().setLayout(layout);
 
-        labelTipo.setText("Tipo");
-
-        campoEnfermariaTipo.setModel(new TipoEnfermariaComboModel());
-        campoEnfermariaTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoEnfermariaTipoActionPerformed(evt);
-            }
-        });
-
+        labelNome.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelNome.setText("Nome");
+        labelNome.setAlignmentY(0.0F);
+        labelNome.setPreferredSize(new java.awt.Dimension(150, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        getContentPane().add(labelNome, gridBagConstraints);
 
+        campoNome.setMinimumSize(new java.awt.Dimension(200, 25));
+        campoNome.setPreferredSize(new java.awt.Dimension(200, 25));
         campoNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoNomeActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        getContentPane().add(campoNome, gridBagConstraints);
 
-        javax.swing.GroupLayout nomePaneLayout = new javax.swing.GroupLayout(nomePane);
-        nomePane.setLayout(nomePaneLayout);
-        nomePaneLayout.setHorizontalGroup(
-            nomePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(nomePaneLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(labelNome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        nomePaneLayout.setVerticalGroup(
-            nomePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nomePaneLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(nomePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelNome)
-                    .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6))
-        );
+        labelTipo.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelTipo.setText("Tipo");
+        labelTipo.setPreferredSize(new java.awt.Dimension(150, 25));
+        labelTipo.setRequestFocusEnabled(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        getContentPane().add(labelTipo, gridBagConstraints);
 
-        javax.swing.GroupLayout tipoEnfermariaPaneLayout = new javax.swing.GroupLayout(tipoEnfermariaPane);
-        tipoEnfermariaPane.setLayout(tipoEnfermariaPaneLayout);
-        tipoEnfermariaPaneLayout.setHorizontalGroup(
-            tipoEnfermariaPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tipoEnfermariaPaneLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(labelTipo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campoEnfermariaTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(tipoEnfermariaPaneLayout.createSequentialGroup()
-                .addComponent(nomePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        tipoEnfermariaPaneLayout.setVerticalGroup(
-            tipoEnfermariaPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tipoEnfermariaPaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(nomePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 26, Short.MAX_VALUE)
-                .addGroup(tipoEnfermariaPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campoEnfermariaTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelTipo)))
-        );
+        campoEnfermariaTipo.setModel(new TipoEnfermariaComboModel());
+        campoEnfermariaTipo.setMinimumSize(new java.awt.Dimension(200, 25));
+        campoEnfermariaTipo.setPreferredSize(new java.awt.Dimension(200, 25));
+        campoEnfermariaTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoEnfermariaTipoActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        getContentPane().add(campoEnfermariaTipo, gridBagConstraints);
 
-        labelTitulo.setText(getTitle());
-
-        labelNcamas.setText("Número de camas:");
+        labelNcamas.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelNcamas.setText("Número de camas");
+        labelNcamas.setPreferredSize(new java.awt.Dimension(150, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        getContentPane().add(labelNcamas, gridBagConstraints);
 
         campoNCamas.setText("0");
+        campoNCamas.setMinimumSize(new java.awt.Dimension(50, 25));
+        campoNCamas.setPreferredSize(new java.awt.Dimension(50, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        getContentPane().add(campoNCamas, gridBagConstraints);
 
-        javax.swing.GroupLayout nCamasPane1Layout = new javax.swing.GroupLayout(nCamasPane1);
-        nCamasPane1.setLayout(nCamasPane1Layout);
-        nCamasPane1Layout.setHorizontalGroup(
-            nCamasPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(nCamasPane1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(labelNcamas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campoNCamas, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
-        );
-        nCamasPane1Layout.setVerticalGroup(
-            nCamasPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, nCamasPane1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(nCamasPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelNcamas)
-                    .addComponent(campoNCamas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6))
-        );
-
-        javax.swing.GroupLayout filtrosLayout = new javax.swing.GroupLayout(filtros);
-        filtros.setLayout(filtrosLayout);
-        filtrosLayout.setHorizontalGroup(
-            filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(filtrosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tipoEnfermariaPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nCamasPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(filtrosLayout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(labelTitulo)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        filtrosLayout.setVerticalGroup(
-            filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filtrosLayout.createSequentialGroup()
-                .addComponent(labelTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(tipoEnfermariaPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(nCamasPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jButton1.setText("Guardar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        botaoGuardar.setText("Guardar");
+        botaoGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                botaoGuardarMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jButton1MouseEntered(evt);
+                botaoGuardarMouseEntered(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botaoGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botaoGuardarActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(filtros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(filtros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        getContentPane().add(botaoGuardar, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -249,35 +181,30 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoEnfermariaTipoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        adicionarOuEditar();
-    }//GEN-LAST:event_jButton1MouseClicked
-
     private void campoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_campoNomeActionPerformed
 
-    private void jButton1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseEntered
+    private void botaoGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoGuardarMouseClicked
+        adicionarOuEditar();
+    }//GEN-LAST:event_botaoGuardarMouseClicked
+
+    private void botaoGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoGuardarMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1MouseEntered
+    }//GEN-LAST:event_botaoGuardarMouseEntered
+
+    private void botaoGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoGuardarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botaoGuardar;
     private javax.swing.JComboBox<String> campoEnfermariaTipo;
     private javax.swing.JTextField campoNCamas;
     private javax.swing.JTextField campoNome;
-    private javax.swing.JPanel filtros;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel labelNcamas;
     private javax.swing.JLabel labelNome;
     private javax.swing.JLabel labelTipo;
-    private javax.swing.JLabel labelTitulo;
-    private javax.swing.JPanel nCamasPane1;
-    private javax.swing.JPanel nomePane;
-    private javax.swing.JPanel tipoEnfermariaPane;
     // End of variables declaration//GEN-END:variables
 
     private void adicionarOuEditar() {
