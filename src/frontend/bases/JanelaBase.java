@@ -180,8 +180,9 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         getContentPane().add(botaoDetalhe, gridBagConstraints);
 
-        tabTabela.setMinimumSize(new java.awt.Dimension(650, 200));
+        tabTabela.setMinimumSize(new java.awt.Dimension(750, 200));
         tabTabela.setPreferredSize(null);
+        tabTabela.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;

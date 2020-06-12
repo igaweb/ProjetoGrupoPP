@@ -54,6 +54,7 @@ public abstract class TabelaBase extends javax.swing.JPanel implements ICallerJa
 
         setPreferredSize(null);
 
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setMinimumSize(new java.awt.Dimension(1000, 23));
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
