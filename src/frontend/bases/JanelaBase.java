@@ -48,9 +48,10 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
 
     /**
      * Janela que serve de base para todas as janelas de listagem
+     *
      * @param app
      * @param serializacao
-     * @param tituloJanela 
+     * @param tituloJanela
      */
     public JanelaBase(Aplicacao app, Serializacao serializacao, String tituloJanela) {
         this.app = app;
@@ -58,13 +59,12 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
 
         initComponents();
 
-        
         //Não permite o redimensionamento da janela
         this.setResizable(false);
-        
+
         //Mostra a centralização da janela
         this.setLocationRelativeTo(null);
-        
+
         // começar por pôr todos os botoes invisiveis
         esconderBotoes();
 
@@ -552,7 +552,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
                 } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException ex) {
                     mostrarAviso(ex.getMessage());
                 } catch (Exception ex) {
-                    mostrarAviso("Ocorreu um erro ao tentar remover a(s) linha(s) selecionada(s)" + (ex.getMessage()== null ? "" : ": " + ex.getMessage()));
+                    mostrarAviso("Ocorreu um erro ao tentar remover a(s) linha(s) selecionada(s)" + (ex.getMessage() == null ? "" : ": " + ex.getMessage()));
                     error = true;
                     break;
                 }
@@ -566,34 +566,45 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
             mostrarAviso("Operação executada com sucesso");
         }
     }
-    
+
     private void darAltaPaciente() {
+        try {
+            if (app.getManagerProfissionalSaude(hospitalSelecionado, enfermariaSelecionada).getMedicos() == null || app.getManagerProfissionalSaude(hospitalSelecionado, enfermariaSelecionada).getMedicos().size() == 0) {
+                mostrarAviso("Não existem médicos nesta enfermaria! \nAdicione primeiro um médico.");
+                return;
+            }
+        } catch (Aplicacao.EnfermariaNaoExistenteException | Aplicacao.HospitalNaoExistenteException e) {
+            mostrarAviso(e.getMessage());
+        }
+
         ITable tabelaSelecionada = ((TabelaBase) getTabTabela().getSelectedComponent());
         if (tabelaSelecionada instanceof TabelaPaciente) {
             try {
                 validarSeExisteSelecao(true);
             } catch (Exception e) {
                 mostrarAviso(e.getMessage());
+                return;
             }
         } else {
             mostrarAviso("Tem de selecionar um paciente!");
+            return;
         }
-            
+
         try {
-            Paciente paciente = (Paciente)app.getPaciente(hospitalSelecionado, enfermariaSelecionada, getCodigoSelecionado(tabelaSelecionada));
-            
-            if (paciente.getDataSaida() != null){
-               mostrarAviso("O paciente ja teve alta"); 
-               return;
+            Paciente paciente = (Paciente) app.getPaciente(hospitalSelecionado, enfermariaSelecionada, getCodigoSelecionado(tabelaSelecionada));
+
+            if (paciente.getDataSaida() != null) {
+                mostrarAviso("O paciente ja teve alta");
+                return;
             }
-            
+
             //inserir data de saida
             Calendar dataSaida = Calendar.getInstance();
             int dia = dataSaida.get(Calendar.DAY_OF_MONTH);
             int mes = dataSaida.get(Calendar.MONTH) + 1;
             int ano = dataSaida.get(Calendar.YEAR);
             String dataSaidaStr = String.valueOf(dia + "/" + mes + "/" + ano);
-            
+
             paciente.setDataSaida(dataSaidaStr);
             ManagerPaciente manager = app.getManagerPaciente(hospitalSelecionado, enfermariaSelecionada);
             manager.editar(paciente);
@@ -605,7 +616,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException ex) {
             mostrarAviso(ex.getMessage());
         } catch (Exception ex) {
-             mostrarAviso("Erro interno!");
+            mostrarAviso("Erro interno!");
         }
     }
 
@@ -697,12 +708,12 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
 
     protected void remover(ITable tabelaPane) {
         JTable tabela = tabelaPane.getTabela();
-        
-        if(tabelaPane instanceof TabelaPaciente) {
+
+        if (tabelaPane instanceof TabelaPaciente) {
             removerPaciente();
             return;
         }
-        
+
         try {
             validarSeExisteSelecao(tabela, true);
         } catch (Exception e) {
@@ -742,10 +753,10 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
      * Métodos auxiliares genéricos
      */
     protected void mostrarAviso(String aviso) {
-        if(aviso.trim().isEmpty()){
+        if (aviso.trim().isEmpty()) {
             aviso = "Ocorreu um erro de sistema";
         }
-        
+
         JOptionPane.showMessageDialog(rootPane, aviso);
     }
 
@@ -805,11 +816,10 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     }
 
     /**
-     * 
+     *
      * @param tabelaPane
-     * @return 
+     * @return
      */
-    
     public IManager getManager(ITable tabelaPane) {
 
         try {
@@ -835,10 +845,9 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
-    
     public JButton getBotaoCriar() {
         return botaoCriar;
     }
@@ -959,7 +968,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
 
     /**
      * Libertar camas, equipamentos e o paciente da lista do seu médico
-     * @param paciente 
+     * @param paciente
      */
     private void libertarPaciente(Paciente paciente) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException, Exception {
 
