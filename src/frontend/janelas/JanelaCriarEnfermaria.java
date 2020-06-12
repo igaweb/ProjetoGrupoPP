@@ -62,6 +62,8 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
             int nCamas = enfermaria.getCamas().length;
             campoNome.setText(enfermaria.getNome());
             campoNCamas.setText(nCamas + "");
+            labelNcamas.setVisible(false);
+            campoNCamas.setVisible(false);
         }
     }
 
