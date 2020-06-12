@@ -1,9 +1,3 @@
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package frontend.janelas;
 
 import backend.interfaces.ICallerJanelaCriarInterface;
@@ -13,10 +7,6 @@ import backend.managers.ManagerEnfermaria;
 import frontend.model.filtros.TipoEnfermariaComboModel;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author iga
- */
 public class JanelaCriarEnfermaria extends javax.swing.JDialog {
 
     private ICallerJanelaCriarInterface janela;
@@ -26,7 +16,7 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
     private Enfermaria enfermaria;
 
     /**
-     * 
+     * Janela para adicionar ou editar uma enfermaria
      * @param janela
      * @param app
      * @param codigoHospital
