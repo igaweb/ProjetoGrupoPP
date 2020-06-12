@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package frontend.janelas;
 
 import backend.Aplicacao;
@@ -11,10 +6,6 @@ import backend.interfaces.ICallerJanelaCriarInterface;
 import backend.managers.ManagerHospital;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author iga
- */
 public class JanelaCriarHospital extends javax.swing.JDialog {
 
     private ICallerJanelaCriarInterface janela;
@@ -24,12 +15,11 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
     private Hospital hospital;
 
     /**
-     * 
+     * Janela para adicionar ou editar um hospital
      * @param janela
      * @param app
      * @param codigoHospital 
      */
-    
     public JanelaCriarHospital(ICallerJanelaCriarInterface janela, Aplicacao app, String codigoHospital) {
         this.janela = janela;
         this.app = app;
@@ -215,7 +205,6 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
             }
 
             fechar();
-            this.getOwner().firePropertyChange("tabela", 0, 0);
         } catch (Exception ex) {
             mostrarAviso(ex.getMessage());
         }
