@@ -16,6 +16,7 @@ public class TabelaHospital extends TabelaBase {
      */
     public TabelaHospital(Aplicacao app, Serializacao serializacao) throws Exception {
         super(app, serializacao);
+        
         setOrdenacao();
     }
     
@@ -26,7 +27,6 @@ public class TabelaHospital extends TabelaBase {
     @Override
     public AbstractTableModel criarModeloTabela() {
         String[] nomeColunas = {"Código", "Nome", "Localidade", "Enfermarias"};
-        ArrayList dados = app.getManagerHospital().getListaArray();
 
         return new AbstractTableModel() {
             @Override
@@ -37,7 +37,7 @@ public class TabelaHospital extends TabelaBase {
             @Override
             public int getRowCount() {
                 //Retorna o número de linhas que a tabela deverá ter
-                return dados.size();
+                return app.getManagerHospital().getListaArray().size();
             }
 
             @Override
@@ -57,7 +57,7 @@ public class TabelaHospital extends TabelaBase {
                 Hospital hospital;
                 try {
                     
-                    hospital = (Hospital) dados.get(rowIndex);
+                    hospital = (Hospital) app.getManagerHospital().getListaArray().get(rowIndex);
                     switch (columnIndex) {
                         case 0:
                             return hospital.getCodigo();
