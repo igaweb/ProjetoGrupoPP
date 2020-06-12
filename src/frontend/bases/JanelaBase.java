@@ -115,8 +115,8 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(0, 0));
-        setPreferredSize(new java.awt.Dimension(700, 390));
-        setSize(new java.awt.Dimension(700, 390));
+        setPreferredSize(new java.awt.Dimension(800, 390));
+        setSize(new java.awt.Dimension(800, 390));
         java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
         layout.columnWidths = new int[] {0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0};
         layout.rowHeights = new int[] {0, 10, 0, 10, 0, 10, 0, 10, 0};
