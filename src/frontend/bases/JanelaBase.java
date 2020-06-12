@@ -527,15 +527,6 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     }
 
     private void removerPaciente() {
-        try {
-            if (app.getManagerProfissionalSaude(hospitalSelecionado, enfermariaSelecionada).getMedicos() == null || app.getManagerProfissionalSaude(hospitalSelecionado, enfermariaSelecionada).getMedicos().size() == 0) {
-                mostrarAviso("Não existem médicos nesta enfermaria! \nAdicione primeiro um médico.");
-                return;
-            }
-        } catch (Aplicacao.EnfermariaNaoExistenteException | Aplicacao.HospitalNaoExistenteException e) {
-            mostrarAviso(e.getMessage());
-        }
-
         ITable tabelaPane = ((ITable) getTabTabela().getComponentAt(tabPacienteIndex));
 
         try {
