@@ -109,7 +109,6 @@ public class MedicoComboModel implements ComboBoxModel<String> {
     }
     
     public void setMedicoSelecionado(Paciente paciente) {
-        selectedItem = null;
         
         for (Map.Entry<String, Medico> entry : lista.entrySet()) {
             Medico medico = (Medico) entry.getValue();
