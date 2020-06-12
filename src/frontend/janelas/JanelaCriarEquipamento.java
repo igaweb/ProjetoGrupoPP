@@ -157,8 +157,6 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 10;
-        gridBagConstraints.ipadx = 93;
-        gridBagConstraints.ipady = -5;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         getContentPane().add(comboNomePaciente, gridBagConstraints);
 
@@ -215,7 +213,6 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.ipadx = 93;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         getContentPane().add(comboTipoEquipamento, gridBagConstraints);
 

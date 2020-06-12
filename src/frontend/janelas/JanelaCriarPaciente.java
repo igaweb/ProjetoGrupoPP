@@ -73,178 +73,150 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        filtros = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        nCamasPane = new javax.swing.JPanel();
+        labelNome = new javax.swing.JLabel();
+        labelLocalidade = new javax.swing.JLabel();
         campoPacienteLocalidade = new javax.swing.JTextField();
         campoPacienteNome = new javax.swing.JTextField();
         campoPacienteEstado = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        labelMedico = new javax.swing.JLabel();
+        labelEstado = new javax.swing.JLabel();
         campoMedicoAtribuido = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        botaoGuardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(500, 250));
+        setMinimumSize(new java.awt.Dimension(350, 0));
+        java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
+        layout.columnWidths = new int[] {0, 10, 0, 10, 0, 10, 0};
+        layout.rowHeights = new int[] {0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0};
+        getContentPane().setLayout(layout);
 
-        filtros.setPreferredSize(new java.awt.Dimension(500, 500));
+        labelNome.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelNome.setText("Nome");
+        labelNome.setMaximumSize(new java.awt.Dimension(150, 25));
+        labelNome.setMinimumSize(new java.awt.Dimension(150, 25));
+        labelNome.setPreferredSize(new java.awt.Dimension(150, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        getContentPane().add(labelNome, gridBagConstraints);
 
-        jLabel1.setText(getTitle());
+        labelLocalidade.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelLocalidade.setText("Localidade");
+        labelLocalidade.setMaximumSize(new java.awt.Dimension(150, 25));
+        labelLocalidade.setMinimumSize(new java.awt.Dimension(150, 25));
+        labelLocalidade.setPreferredSize(new java.awt.Dimension(150, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        getContentPane().add(labelLocalidade, gridBagConstraints);
 
-        jLabel6.setText("Nome:");
-        jLabel6.setPreferredSize(new java.awt.Dimension(75, 15));
-
-        jLabel7.setText("Localidade:");
-        jLabel7.setPreferredSize(new java.awt.Dimension(60, 15));
-
-        javax.swing.GroupLayout nCamasPaneLayout = new javax.swing.GroupLayout(nCamasPane);
-        nCamasPane.setLayout(nCamasPaneLayout);
-        nCamasPaneLayout.setHorizontalGroup(
-            nCamasPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 180, Short.MAX_VALUE)
-        );
-        nCamasPaneLayout.setVerticalGroup(
-            nCamasPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 22, Short.MAX_VALUE)
-        );
-
+        campoPacienteLocalidade.setMaximumSize(new java.awt.Dimension(200, 25));
+        campoPacienteLocalidade.setMinimumSize(new java.awt.Dimension(200, 25));
+        campoPacienteLocalidade.setPreferredSize(new java.awt.Dimension(200, 25));
         campoPacienteLocalidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoPacienteLocalidadeActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        getContentPane().add(campoPacienteLocalidade, gridBagConstraints);
+
+        campoPacienteNome.setMaximumSize(new java.awt.Dimension(200, 25));
+        campoPacienteNome.setMinimumSize(new java.awt.Dimension(200, 25));
+        campoPacienteNome.setPreferredSize(new java.awt.Dimension(200, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        getContentPane().add(campoPacienteNome, gridBagConstraints);
 
         campoPacienteEstado.setModel(new EstadoPacienteComboModel());
+        campoPacienteEstado.setMaximumSize(new java.awt.Dimension(200, 25));
+        campoPacienteEstado.setMinimumSize(new java.awt.Dimension(200, 25));
+        campoPacienteEstado.setPreferredSize(new java.awt.Dimension(200, 25));
         campoPacienteEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoPacienteEstadoActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        getContentPane().add(campoPacienteEstado, gridBagConstraints);
 
-        jLabel2.setText("Medico:");
-        jLabel2.setMaximumSize(new java.awt.Dimension(60, 15));
-        jLabel2.setPreferredSize(new java.awt.Dimension(60, 15));
+        labelMedico.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelMedico.setText("Medico");
+        labelMedico.setMaximumSize(new java.awt.Dimension(150, 25));
+        labelMedico.setMinimumSize(new java.awt.Dimension(150, 25));
+        labelMedico.setPreferredSize(new java.awt.Dimension(150, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        getContentPane().add(labelMedico, gridBagConstraints);
 
-        jLabel4.setText("Estado:");
-        jLabel4.setPreferredSize(new java.awt.Dimension(40, 15));
+        labelEstado.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        labelEstado.setText("Estado");
+        labelEstado.setMaximumSize(new java.awt.Dimension(150, 25));
+        labelEstado.setMinimumSize(new java.awt.Dimension(150, 25));
+        labelEstado.setPreferredSize(new java.awt.Dimension(150, 25));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        getContentPane().add(labelEstado, gridBagConstraints);
 
+        campoMedicoAtribuido.setMaximumSize(new java.awt.Dimension(200, 25));
+        campoMedicoAtribuido.setMinimumSize(new java.awt.Dimension(200, 25));
+        campoMedicoAtribuido.setPreferredSize(new java.awt.Dimension(200, 25));
         campoMedicoAtribuido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoMedicoAtribuidoActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        getContentPane().add(campoMedicoAtribuido, gridBagConstraints);
 
-        jButton1.setText("Guardar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        botaoGuardar.setText("Guardar");
+        botaoGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                botaoGuardarMouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botaoGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botaoGuardarActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout filtrosLayout = new javax.swing.GroupLayout(filtros);
-        filtros.setLayout(filtrosLayout);
-        filtrosLayout.setHorizontalGroup(
-            filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(filtrosLayout.createSequentialGroup()
-                .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(filtrosLayout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(jLabel1))
-                    .addComponent(nCamasPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(filtrosLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(filtrosLayout.createSequentialGroup()
-                                .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(120, 120, 120)
-                                .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(campoPacienteNome, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(campoPacienteLocalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton1)))
-                            .addGroup(filtrosLayout.createSequentialGroup()
-                                .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(116, 116, 116)
-                                .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(campoPacienteEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filtrosLayout.createSequentialGroup()
-                                        .addComponent(campoMedicoAtribuido, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(203, 203, 203)))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        filtrosLayout.setVerticalGroup(
-            filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filtrosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(4, 4, 4)
-                .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(campoPacienteNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campoPacienteLocalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(filtrosLayout.createSequentialGroup()
-                        .addComponent(campoPacienteEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoMedicoAtribuido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(filtrosLayout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(47, 47, 47)
-                .addGroup(filtrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(filtrosLayout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(nCamasPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1))
-                .addGap(71, 71, 71))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(filtros, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(filtros, javax.swing.GroupLayout.PREFERRED_SIZE, 253, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        getContentPane().add(botaoGuardar, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botaoGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoGuardarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botaoGuardarActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void botaoGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botaoGuardarMouseClicked
         adicionarOuEditar();
-    }//GEN-LAST:event_jButton1MouseClicked
-
-    private void campoMedicoAtribuidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoMedicoAtribuidoActionPerformed
-
-    }//GEN-LAST:event_campoMedicoAtribuidoActionPerformed
+    }//GEN-LAST:event_botaoGuardarMouseClicked
 
     private void campoPacienteEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoPacienteEstadoActionPerformed
         // TODO add your handling code here:
@@ -254,19 +226,20 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoPacienteLocalidadeActionPerformed
 
+    private void campoMedicoAtribuidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoMedicoAtribuidoActionPerformed
+
+    }//GEN-LAST:event_campoMedicoAtribuidoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botaoGuardar;
     private javax.swing.JComboBox<String> campoMedicoAtribuido;
     private javax.swing.JComboBox<String> campoPacienteEstado;
     private javax.swing.JTextField campoPacienteLocalidade;
     private javax.swing.JTextField campoPacienteNome;
-    private javax.swing.JPanel filtros;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel nCamasPane;
+    private javax.swing.JLabel labelEstado;
+    private javax.swing.JLabel labelLocalidade;
+    private javax.swing.JLabel labelMedico;
+    private javax.swing.JLabel labelNome;
     // End of variables declaration//GEN-END:variables
 
     private void adicionarOuEditar() {
@@ -302,6 +275,11 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
             
             // buscar o medico selecionado
             Medico medico = ((MedicoComboModel) campoMedicoAtribuido.getModel()).getMedicoSelecionado(campoMedicoAtribuido.getSelectedIndex());
+            
+            if(medico ==null) {
+                mostrarAviso("Não existem médicos");
+                return;
+            }
             
             // adiciona o paciente, se ainda nao estiver na lista
             medico.getPacientes().put(paciente.getCodigo(), paciente);
