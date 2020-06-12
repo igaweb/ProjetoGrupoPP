@@ -52,6 +52,10 @@ public abstract class TabelaBase extends javax.swing.JPanel implements ICallerJa
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
 
+        setPreferredSize(null);
+
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(1000, 23));
+
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -71,6 +75,8 @@ public abstract class TabelaBase extends javax.swing.JPanel implements ICallerJa
             }
         });
         tabela.setColumnSelectionAllowed(true);
+        tabela.setMinimumSize(new java.awt.Dimension(1000, 48));
+        tabela.setPreferredSize(null);
         tabela.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tabelaMouseClicked(evt);

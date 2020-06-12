@@ -89,17 +89,15 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        contentor = new javax.swing.JPanel();
-        botoes = new javax.swing.JPanel();
         botaoCriar = new javax.swing.JButton();
         botaoEditar = new javax.swing.JButton();
         botaoRemover = new javax.swing.JButton();
         botaoDetalhe = new javax.swing.JButton();
-        tabs = new javax.swing.JPanel();
         tabTabela = new javax.swing.JTabbedPane();
         labelDetalhe = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        menuBar1 = new javax.swing.JMenuBar();
         menuEquipamento = new javax.swing.JMenu();
         menuNovoEquipamento = new javax.swing.JMenuItem();
         menuEditarEquipamento = new javax.swing.JMenuItem();
@@ -116,6 +114,13 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         menuDarAlta = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(0, 0));
+        setPreferredSize(new java.awt.Dimension(650, 390));
+        setSize(new java.awt.Dimension(1000, 335));
+        java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
+        layout.columnWidths = new int[] {0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0};
+        layout.rowHeights = new int[] {0, 10, 0, 10, 0, 10, 0, 10, 0};
+        getContentPane().setLayout(layout);
 
         botaoCriar.setText("Criar");
         botaoCriar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -128,6 +133,11 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
                 botaoCriarActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        getContentPane().add(botaoCriar, gridBagConstraints);
 
         botaoEditar.setText("Editar");
         botaoEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -135,6 +145,11 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
                 botaoEditarActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        getContentPane().add(botaoEditar, gridBagConstraints);
 
         botaoRemover.setText("Remover");
         botaoRemover.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -147,6 +162,11 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
                 botaoRemoverActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        getContentPane().add(botaoRemover, gridBagConstraints);
 
         botaoDetalhe.setText("Detalhe");
         botaoDetalhe.addActionListener(new java.awt.event.ActionListener() {
@@ -154,71 +174,35 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
                 botaoDetalheActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        getContentPane().add(botaoDetalhe, gridBagConstraints);
 
-        javax.swing.GroupLayout botoesLayout = new javax.swing.GroupLayout(botoes);
-        botoes.setLayout(botoesLayout);
-        botoesLayout.setHorizontalGroup(
-            botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(botoesLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(botaoCriar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoEditar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoDetalhe)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 348, Short.MAX_VALUE)
-                .addComponent(botaoRemover)
-                .addGap(20, 20, 20))
-        );
-        botoesLayout.setVerticalGroup(
-            botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(botaoCriar)
-                .addComponent(botaoDetalhe)
-                .addComponent(botaoEditar)
-                .addComponent(botaoRemover))
-        );
-
-        javax.swing.GroupLayout tabsLayout = new javax.swing.GroupLayout(tabs);
-        tabs.setLayout(tabsLayout);
-        tabsLayout.setHorizontalGroup(
-            tabsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        tabsLayout.setVerticalGroup(
-            tabsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabTabela, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout contentorLayout = new javax.swing.GroupLayout(contentor);
-        contentor.setLayout(contentorLayout);
-        contentorLayout.setHorizontalGroup(
-            contentorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentorLayout.createSequentialGroup()
-                .addGroup(contentorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(contentorLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(contentorLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        contentorLayout.setVerticalGroup(
-            contentorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentorLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tabs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        tabTabela.setMinimumSize(new java.awt.Dimension(650, 200));
+        tabTabela.setPreferredSize(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        getContentPane().add(tabTabela, gridBagConstraints);
 
         labelDetalhe.setBackground(new java.awt.Color(255, 255, 255));
         labelDetalhe.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         labelDetalhe.setForeground(new java.awt.Color(0, 153, 255));
-        labelDetalhe.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         labelDetalhe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        labelDetalhe.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        labelDetalhe.setMaximumSize(new java.awt.Dimension(650, 80));
+        labelDetalhe.setPreferredSize(new java.awt.Dimension(650, 80));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(0, 18, 0, 18);
+        getContentPane().add(labelDetalhe, gridBagConstraints);
 
         menuEquipamento.setText("Equipamentos");
 
@@ -251,7 +235,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         });
         menuEquipamento.add(menuRemoverEquipamento);
 
-        jMenuBar1.add(menuEquipamento);
+        menuBar1.add(menuEquipamento);
 
         menuProfissionalSaude.setText("Profissionais de Saúde");
 
@@ -297,7 +281,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         });
         menuProfissionalSaude.add(menuRemoverProfissionalSaude);
 
-        jMenuBar1.add(menuProfissionalSaude);
+        menuBar1.add(menuProfissionalSaude);
 
         menuPaciente.setText("Paciente");
 
@@ -343,31 +327,9 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
         });
         menuPaciente.add(menuDarAlta);
 
-        jMenuBar1.add(menuPaciente);
+        menuBar1.add(menuPaciente);
 
-        setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(labelDetalhe, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20))
-                    .addComponent(contentor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(labelDetalhe, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(contentor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        setJMenuBar(menuBar1);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -465,10 +427,8 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     private javax.swing.JButton botaoDetalhe;
     private javax.swing.JButton botaoEditar;
     private javax.swing.JButton botaoRemover;
-    private javax.swing.JPanel botoes;
-    private javax.swing.JPanel contentor;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel labelDetalhe;
+    private javax.swing.JMenuBar menuBar1;
     private javax.swing.JMenuItem menuDarAlta;
     private javax.swing.JMenuItem menuEditarEquipamento;
     private javax.swing.JMenuItem menuEditarPaciente;
@@ -484,7 +444,6 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     private javax.swing.JMenuItem menuRemoverPaciente;
     private javax.swing.JMenuItem menuRemoverProfissionalSaude;
     private javax.swing.JTabbedPane tabTabela;
-    private javax.swing.JPanel tabs;
     // End of variables declaration//GEN-END:variables
 
     @Override
