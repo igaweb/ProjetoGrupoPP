@@ -22,8 +22,6 @@ import frontend.tabelas.TabelaProfissionalSaude;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -49,18 +47,27 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
     private final int tabPacienteIndex = 2;
 
     /**
-     * 
+     * Janela que serve de base para todas as janelas de listagem
      * @param app
      * @param serializacao
      * @param tituloJanela 
      */
-     
     public JanelaBase(Aplicacao app, Serializacao serializacao, String tituloJanela) {
         this.app = app;
         this.serializacao = serializacao;
 
         initComponents();
 
+        //Indica que a janela deve ser modal ou seja,
+        //bloqueia a execução do programa até que a janela seja fechada
+        this.setModal(true);    
+        
+        //Não permite o redimensionamento da janela
+        this.setResizable(false);
+        
+        //Mostra a centralização da janela
+        this.setLocationRelativeTo(null);
+        
         // começar por pôr todos os botoes invisiveis
         esconderBotoes();
 
@@ -132,7 +139,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
             }
         });
 
-        botaoRemover.setText("Remover linha");
+        botaoRemover.setText("Remover");
         botaoRemover.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 botaoRemoverMouseClicked(evt);
@@ -212,7 +219,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
 
         labelDetalhe.setBackground(new java.awt.Color(255, 255, 255));
         labelDetalhe.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
-        labelDetalhe.setForeground(new java.awt.Color(153, 153, 153));
+        labelDetalhe.setForeground(new java.awt.Color(0, 153, 255));
         labelDetalhe.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         labelDetalhe.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
@@ -354,7 +361,7 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
                         .addGap(20, 20, 20)
                         .addComponent(labelDetalhe, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20))
-                    .addComponent(contentor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addComponent(contentor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
