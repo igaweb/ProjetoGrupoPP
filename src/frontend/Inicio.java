@@ -7,6 +7,7 @@ import backend.entidades.Utilizador;
 import frontend.janelas.JanelaLogin;
 import java.util.Scanner;
 import java.util.TreeMap;
+import javax.swing.JOptionPane;
 
 public class Inicio {
 
@@ -20,17 +21,25 @@ public class Inicio {
         //       Scanner scanner = new Scanner(System.in);
         Aplicacao aplicacao = serializacao.carregar();
 
-        // //////////////////////////dummy object:
-        TreeMap<String, Utilizador> users = new TreeMap();
-        users.put("user", new Utilizador("user", "1234"));
-        users.put("admin", new Administrador("admin", "admin"));
-        //aplicacao.getManagerUtilizador().setLista(users);
+        Homepage gui;
+        if(aplicacao.getManagerUtilizador().getLista() == null || aplicacao.getManagerUtilizador().getLista().size() == 0) {
+            
+            TreeMap<String, Utilizador> users = new TreeMap();
+            users.put("admin", new Administrador("admin", "admin"));
+            aplicacao.getManagerUtilizador().setLista(users);
+            serializacao.guardar(aplicacao);
+            
+            aplicacao.setUtilizadorAutenticado(new Administrador("admin", "admin"));
+            
+            gui = new Homepage(aplicacao, serializacao);
+            gui.mostrarAvisoInicializacao();
+        } else {
+            // login
+            JanelaLogin janelaLogin = new JanelaLogin(aplicacao, serializacao);
+            janelaLogin.setVisible(true);
+            gui = new Homepage(aplicacao, serializacao);
+        }
 
-        // login
-        JanelaLogin janelaLogin = new JanelaLogin(aplicacao, serializacao);
-        janelaLogin.setVisible(true);
-        
-        Homepage gui = new Homepage(aplicacao, serializacao);
         gui.setVisible(true);
     }
 }

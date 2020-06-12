@@ -8,7 +8,6 @@ import frontend.janelas.JanelaCriarUtilizador;
 import javax.swing.JOptionPane;
 import backend.interfaces.ICallerJanelaCriarInterface;
 import frontend.janelas.JanelaListaHospital;
-import frontend.janelas.JanelaLogin;
 
 public class Homepage extends javax.swing.JFrame implements ICallerJanelaCriarInterface {
 
@@ -191,6 +190,13 @@ public class Homepage extends javax.swing.JFrame implements ICallerJanelaCriarIn
     private java.awt.PopupMenu popupMenu1;
     // End of variables declaration//GEN-END:variables
 
+    public void mostrarAvisoInicializacao() {
+        String aviso ="Bem vindo/a!\n";
+        aviso += "O seu login é admin / admin.\nPode alterar a password em Iniciar > Editar Perfil.\n";
+        aviso += "Crie novos utilizadores em Administrador > Gerir Utilizadores.";
+        mostrarAviso(aviso);
+    }
+    
     private void listarHospitais() {
         // chama a janela da listagem das enfermarias do hospital selecionado
         String titutlo = "Listagem Hospitais";
