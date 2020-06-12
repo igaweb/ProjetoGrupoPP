@@ -18,15 +18,6 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog implements ICa
     private ManagerUtilizador managerUtilizador;
     protected String operacao;
 
-    public String getOperacao() {
-        return operacao;
-    }
-
-    public void setOperacao(String operacao) {
-        this.operacao = operacao;
-    }
-    private static final String ERRO_REMOVER_UTILIZADOR = "ERRO_REMOVER_UTILIZADOR";
-
     /**
      * 
      * @param app
@@ -38,6 +29,16 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog implements ICa
         this.serializacao = serializacao;
 
         initComponents();
+
+        //Não permite o redimensionamento da janela
+        this.setResizable(false);
+
+        //Mostra a centralização da janela
+        this.setLocationRelativeTo(null);
+
+        //Indica que a janela deve ser modal ou seja,
+        //bloqueia a execução do programa até que a janela seja fechada
+        this.setModal(true);
 
         this.modeloTabela = criarModeloTabela();
         tabela.setModel(modeloTabela);
@@ -98,16 +99,18 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog implements ICa
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        contentor = new javax.swing.JPanel();
-        botoes = new javax.swing.JPanel();
         botaoCriar = new javax.swing.JButton();
         botaoRemover = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
+        layout.columnWidths = new int[] {0, 10, 0, 10, 0, 10, 0};
+        layout.rowHeights = new int[] {0, 10, 0, 10, 0, 10, 0};
+        getContentPane().setLayout(layout);
 
         botaoCriar.setText("Criar");
         botaoCriar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -120,6 +123,11 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog implements ICa
                 botaoCriarActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        getContentPane().add(botaoCriar, gridBagConstraints);
 
         botaoRemover.setText("Remover linha");
         botaoRemover.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -127,25 +135,13 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog implements ICa
                 botaoRemoverMouseClicked(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        getContentPane().add(botaoRemover, gridBagConstraints);
 
-        javax.swing.GroupLayout botoesLayout = new javax.swing.GroupLayout(botoes);
-        botoes.setLayout(botoesLayout);
-        botoesLayout.setHorizontalGroup(
-            botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(botoesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(botaoCriar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botaoRemover))
-        );
-        botoesLayout.setVerticalGroup(
-            botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(botoesLayout.createSequentialGroup()
-                .addGroup(botoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botaoCriar)
-                    .addComponent(botaoRemover))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(454, 200));
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -174,60 +170,15 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog implements ICa
         jScrollPane1.setViewportView(tabela);
         tabela.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout contentorLayout = new javax.swing.GroupLayout(contentor);
-        contentor.setLayout(contentorLayout);
-        contentorLayout.setHorizontalGroup(
-            contentorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(contentorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(contentorLayout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(botoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        contentorLayout.setVerticalGroup(
-            contentorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(botoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(contentor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(contentor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        getContentPane().add(jScrollPane1, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -251,9 +202,6 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog implements ICa
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoCriar;
     private javax.swing.JButton botaoRemover;
-    private javax.swing.JPanel botoes;
-    private javax.swing.JPanel contentor;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
@@ -312,6 +260,15 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog implements ICa
             }
         }
     }
+
+    public String getOperacao() {
+        return operacao;
+    }
+
+    public void setOperacao(String operacao) {
+        this.operacao = operacao;
+    }
+    private static final String ERRO_REMOVER_UTILIZADOR = "ERRO_REMOVER_UTILIZADOR";
 
     /*
      * Métodos auxiliares genéricos
