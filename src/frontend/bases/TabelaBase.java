@@ -131,6 +131,12 @@ public abstract class TabelaBase extends javax.swing.JPanel implements ICallerJa
     
     @Override
     public int getLinhaSelecionada() {
-        return tabela.getRowSorter().convertRowIndexToModel(tabela.getSelectedRow());
+        int linha;
+        try {
+            linha = tabela.getRowSorter().convertRowIndexToModel(tabela.getSelectedRow());
+        } catch (Exception e) {
+            linha = -1;
+        }
+        return linha;
     }
 }
