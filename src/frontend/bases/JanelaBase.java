@@ -58,9 +58,6 @@ public abstract class JanelaBase extends javax.swing.JDialog implements ICallerJ
 
         initComponents();
 
-        //Indica que a janela deve ser modal ou seja,
-        //bloqueia a execução do programa até que a janela seja fechada
-        this.setModal(true);    
         
         //Não permite o redimensionamento da janela
         this.setResizable(false);
