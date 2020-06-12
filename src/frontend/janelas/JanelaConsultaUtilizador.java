@@ -19,7 +19,7 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog implements ICa
     protected String operacao;
 
     /**
-     * 
+     * Janela de listagem de Utilizadores
      * @param app
      * @param serializacao 
      */
