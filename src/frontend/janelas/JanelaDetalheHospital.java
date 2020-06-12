@@ -13,14 +13,13 @@ public class JanelaDetalheHospital extends JanelaBase {
     private Hospital hospitalSelecionadoObj;
     
     /**
-     * 
+     * Janela de detalhe do hospital selecionado, listagem e manipulação de enfermarias
      * @param app
      * @param serializacao
      * @param tituloJanela
      * @param hospitalSelecionado
      * @throws Exception 
      */
-    
     public JanelaDetalheHospital(Aplicacao app, Serializacao serializacao, String tituloJanela, String hospitalSelecionado) throws Exception {
         super(app, serializacao, tituloJanela);
         
@@ -68,8 +67,10 @@ public class JanelaDetalheHospital extends JanelaBase {
         try {
             JanelaCriarEnfermaria janela = new JanelaCriarEnfermaria(this, app, hospitalSelecionado, getCodigoSelecionado(((ITable) getTabTabela().getSelectedComponent())));
             janela.setVisible(true);
-        } catch (Exception ex) { 
+        } catch (NenhumaLinhaSelecionadaException ex) {
             mostrarAviso(ex.getMessage());
+        } catch (Exception e) {
+            mostrarAviso("");
         }
         
     }
@@ -88,9 +89,8 @@ public class JanelaDetalheHospital extends JanelaBase {
             janela.setVisible(true);
         } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException | NenhumaLinhaSelecionadaException ex) {
             mostrarAviso(ex.getMessage());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            mostrarAviso("Ocorre um erro no sistema");
+        } catch (Exception e) {
+            mostrarAviso("");
         }
         
     }

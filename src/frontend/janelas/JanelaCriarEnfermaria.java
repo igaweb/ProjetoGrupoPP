@@ -319,7 +319,7 @@ public class JanelaCriarEnfermaria extends javax.swing.JDialog {
     }
     
     private void fechar() {
-        // fehca a janela atual
+        // fecha a janela atual
         dispose();
         
         // atualiza os dados alterados na listagem

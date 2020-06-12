@@ -4,31 +4,41 @@ import frontend.tabelas.TabelaHospital;
 import frontend.bases.JanelaBase;
 import backend.Aplicacao;
 import backend.Serializacao;
-import backend.interfaces.IManager;
 import backend.interfaces.ITable;
+import javax.swing.JTable;
 
 public class JanelaListaHospital extends JanelaBase {
 
     /**
-     * 
+     * Janela de listagem e manipulação de hospitais
      * @param app
      * @param serializacao
      * @param tituloJanela
      * @throws Exception 
      */
-    
     public JanelaListaHospital(Aplicacao app, Serializacao serializacao, String tituloJanela) throws Exception {
         super(app, serializacao, tituloJanela);
 
         getBotaoCriar().setVisible(true);
         getBotaoDetalhe().setVisible(true);
 
+        setTextoDetalhe();
+        
         getTabTabela().add(new TabelaHospital(app, serializacao));
         getTabTabela().setTitleAt(0, "Hospitais");
         getTabTabela().setVisible(true);
         redesenharTabela();
     }
 
+    @Override
+    public void setTextoDetalhe() {
+        String detalhe = "<html>";
+        detalhe += "<b>Lista de hospitais</b>";
+        detalhe += "</html>";
+        
+        getLabelDetalhe().setText(detalhe);
+    }
+    
     @Override
     public void adicionar() {
         try {
@@ -47,7 +57,7 @@ public class JanelaListaHospital extends JanelaBase {
         } catch (NenhumaLinhaSelecionadaException ex) {
             mostrarAviso(ex.getMessage());
         } catch (Exception e) {
-            e.printStackTrace();
+            mostrarAviso("");
         }
                 
     }
@@ -66,11 +76,15 @@ public class JanelaListaHospital extends JanelaBase {
             janelaConsulta.setVisible(true);
         } catch (Aplicacao.HospitalNaoExistenteException | Aplicacao.EnfermariaNaoExistenteException | NenhumaLinhaSelecionadaException ex) {
             mostrarAviso(ex.getMessage());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            mostrarAviso("Ocorre um erro no sistema");
+        } catch (Exception e) {
+            mostrarAviso("");
         }
         
+    }
+    
+    @Override
+    public JTable getTabelaSelecionada() {
+        return ((ITable) getTabTabela().getComponentAt(0)).getTabela();
     }
     
     public int getLinhaSelecionada() {

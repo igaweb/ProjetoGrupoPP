@@ -219,7 +219,10 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
     }
 
     private void fechar() {
+        // fecha a janela atual
         dispose();
+        
+        // atualiza os dados alterados na listagem
         janela.atualizar();
     }
     /*
