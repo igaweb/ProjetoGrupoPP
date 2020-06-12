@@ -13,7 +13,7 @@ public class TabelaEnfermaria extends TabelaBase {
     private Hospital hospitalSelecionadoObj;
 
     /**
-     * 
+     * Cria a tabela com a listagem de enfermarias de um hospital
      * @param app
      * @param serializacao
      * @param hospitalSelecionado
@@ -30,8 +30,9 @@ public class TabelaEnfermaria extends TabelaBase {
         setOrdenacao();
     }
 
-    /*
+    /**
      * Cria o modelo com os dados necessários para configurar a tabela, tanto na estrutura como o seu conteudo
+     * @return 
      */
     @Override
     public AbstractTableModel criarModeloTabela() {

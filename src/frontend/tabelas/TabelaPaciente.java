@@ -20,16 +20,15 @@ public class TabelaPaciente extends TabelaBase {
     private Medico medicoAssociado;
     
     /**
-     * 
+     * Cria a tabela com a listagem de pacientes de uma enfermaria
      * @param app
-     * @param serializacao 
+     * @param serializacao
      * @param hospitalSelecionado
      * @param enfermariaSelecionada
      * @throws backend.Aplicacao.HospitalNaoExistenteException
      * @throws backend.Aplicacao.EnfermariaNaoExistenteException
      * @throws backend.Aplicacao.ProfissionalSaudeNaoExistenteException 
      */
-    
     public TabelaPaciente(Aplicacao app, Serializacao serializacao, String hospitalSelecionado, String enfermariaSelecionada) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException, Aplicacao.ProfissionalSaudeNaoExistenteException  {
         super(app, serializacao);
         
@@ -43,9 +42,10 @@ public class TabelaPaciente extends TabelaBase {
         setOrdenacao();
     }
     
-    /*
+    /**
      * Cria o modelo com os dados necessários para configurar a tabela, tanto na estrutura como o seu conteudo
-    */
+     * @return 
+     */
     @Override
     public AbstractTableModel criarModeloTabela() {
         String[] nomeColunas = {"Código", "Nome", "Localidade", "Cama", "Estado","Medico", "Data Entrada", "Data Saida"};

@@ -10,7 +10,7 @@ import javax.swing.table.AbstractTableModel;
 public class TabelaHospital extends TabelaBase {
 
     /**
-     * Creates new form JanelaConsultaEnfermaria
+     * Cria a tabela com a listagem de hospitais
      * @param app
      * @param serializacao
      */
@@ -19,9 +19,10 @@ public class TabelaHospital extends TabelaBase {
         setOrdenacao();
     }
     
-    /*
+    /**
      * Cria o modelo com os dados necessários para configurar a tabela, tanto na estrutura como o seu conteudo
-    */
+     * @return 
+     */
     @Override
     public AbstractTableModel criarModeloTabela() {
         String[] nomeColunas = {"Código", "Nome", "Localidade", "Enfermarias"};
