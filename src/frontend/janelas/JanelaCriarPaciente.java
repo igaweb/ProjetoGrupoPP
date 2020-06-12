@@ -50,7 +50,6 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
         if(codigoPaciente == null) {
             operacao = ManagerPaciente.OPERACAO_ADICIONAR;
             setTitle("Adicionar Paciente");
-            
             // se estamos a adicionar, nao pedimos a data de saída          
         } else {
             operacao = ManagerPaciente.OPERACAO_EDITAR;
@@ -61,7 +60,6 @@ public class JanelaCriarPaciente extends javax.swing.JDialog {
             campoPacienteEstado.setSelectedIndex(paciente.getEstado());  
             MedicoComboModel medicoComboModel = (MedicoComboModel) campoMedicoAtribuido.getModel();
             medicoComboModel.setMedicoSelecionado(paciente);
-            
         }
     }
 
