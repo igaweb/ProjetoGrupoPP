@@ -64,6 +64,12 @@ public class JanelaListaHospital extends JanelaBase {
 
     @Override
     public void detalhe() {
+        try {
+            validarSeExisteSelecao(false);
+        } catch (NenhumaLinhaSelecionadaException ex) {
+            mostrarAviso(ex.getMessage());
+        }
+        
         // buscar o codigo do hospital para enviar para a listagem de enfermarias
         int rowIndex = getLinhaSelecionada();
         
