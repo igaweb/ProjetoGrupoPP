@@ -5,6 +5,10 @@ import backend.interfaces.IEntidade;
 
 public class Equipamento extends EntidadeBase implements IEntidade {
 
+     /**
+      * 
+      */
+    
     private Integer tipo;
     private Paciente paciente;
     

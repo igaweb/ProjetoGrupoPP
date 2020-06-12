@@ -9,6 +9,10 @@ public class EstadoPacienteComboModel implements ComboBoxModel<String> {
     private String[] comboList;
     private String selectedItem;
 
+     /**
+      * 
+      */
+    
     public EstadoPacienteComboModel() {
         inicializar();
     }

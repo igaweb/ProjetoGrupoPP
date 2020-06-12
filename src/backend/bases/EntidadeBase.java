@@ -10,6 +10,10 @@ public abstract class EntidadeBase implements Serializable, IEntidade {
     protected String codigo;
     protected String nome;
     
+     /**
+      * 
+      */
+    
     public EntidadeBase() {
     }
     

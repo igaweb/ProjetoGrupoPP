@@ -6,6 +6,10 @@ import java.util.TreeMap;
 
 public class Hospital extends EntidadeBase implements IEntidade {
 
+     /**
+      * 
+      */
+    
     private String nome;
     private String localidade;
     private TreeMap<String, EntidadeBase> enfermarias = new TreeMap();

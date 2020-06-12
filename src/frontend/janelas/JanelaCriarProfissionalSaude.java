@@ -19,7 +19,7 @@ public class JanelaCriarProfissionalSaude extends javax.swing.JDialog {
     private boolean isMedico;
     
     /**
-     * 
+     * janela que cria ou edita profissionais de saude
      * @param janela
      * @param app
      * @param codigoHospital

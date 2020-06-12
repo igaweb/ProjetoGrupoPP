@@ -8,6 +8,10 @@ import java.util.UUID;
 
 public abstract class ManagerBase implements Serializable, IManager {
 
+     /**
+      * 
+      */
+    
     private static final long serialVersionUID = 1L;
 
     private static final String PREFIXO_CODIGO = "-";
@@ -40,6 +44,7 @@ public abstract class ManagerBase implements Serializable, IManager {
     /*
      * Método para validar se os campos da classe estão bem preenchidos
      */
+    
     @Override
     public boolean validarCampos(EntidadeBase entidade) throws ValidacaoEntidadeException {
         if (entidade == null) {

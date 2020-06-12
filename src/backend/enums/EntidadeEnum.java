@@ -1,6 +1,11 @@
 package backend.enums;
 
 public enum EntidadeEnum {
+     
+     /**
+      * 
+      */
+    
     HOSPITAL,
     ENFERMARIA,
     EQUIPAMENTO,

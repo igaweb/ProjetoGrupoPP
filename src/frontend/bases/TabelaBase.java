@@ -9,6 +9,10 @@ import javax.swing.table.AbstractTableModel;
 
 public abstract class TabelaBase extends javax.swing.JPanel implements ICallerJanelaCriarInterface, ITable {
 
+     /**
+      * 
+      */
+    
     protected final Aplicacao app;
     protected final Serializacao serializacao;
     
@@ -21,7 +25,7 @@ public abstract class TabelaBase extends javax.swing.JPanel implements ICallerJa
     protected String enfermariaSelecionada;
     
     /**
-     * 
+     * base das listagens das entidades
      * @param app
      * @param serializacao 
      */

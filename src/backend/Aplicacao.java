@@ -70,7 +70,7 @@ public class Aplicacao implements Serializable {
     }
 
    /**
-    * 
+    *  estrutura da aplicacao
     * @param codigoHospital
     * @param codigoEnfermaria
     * @return

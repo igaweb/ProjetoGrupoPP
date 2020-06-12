@@ -12,7 +12,7 @@ public class JanelaLogin extends javax.swing.JDialog {
     private final Serializacao serializacao;
 
     /**
-     * 
+     * login dos utilizadores
      * @param app
      * @param serializacao 
      */

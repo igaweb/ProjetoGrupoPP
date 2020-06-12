@@ -13,7 +13,12 @@ public class Conteudos {
 
     public Conteudos() {
     }
-
+    
+    /**
+     * listas 
+    * @return 
+    */
+    
     public static String[] getEstadosPaciente() {
         return estadosPaciente;
     }

@@ -14,6 +14,10 @@ import javax.swing.table.AbstractTableModel;
 
 public class TabelaPaciente extends TabelaBase {
 
+     /**
+      * 
+      */
+    
     private Hospital hospitalSelecionadoObj;
     private Enfermaria enfermariaSelecionadaObj;
     

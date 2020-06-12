@@ -10,7 +10,11 @@ import backend.interfaces.ICallerJanelaCriarInterface;
 import frontend.janelas.JanelaListaHospital;
 
 public class Homepage extends javax.swing.JFrame implements ICallerJanelaCriarInterface {
-
+ 
+    /**
+     * 
+     */
+    
     private static Aplicacao app;
     private static Serializacao serializacao;
 

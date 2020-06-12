@@ -10,6 +10,10 @@ import javax.swing.event.ListDataListener;
 
 public class MedicoComboModel implements ComboBoxModel<String> {
 
+     /**
+      * 
+      */
+    
     private TreeMap<String, Medico> lista;
     private String[] medicoList;
     private String[] medicoCodigoList;

@@ -8,6 +8,10 @@ import java.util.TreeMap;
 
 public class ManagerHospital extends ManagerBase implements IManager {
     
+     /**
+      * 
+      */
+    
     private static final String PREFIXO_CODIGO = "HO-";
 
     private static final String ERRO_FALTA_LOCALIDADE = "ERRO_FALTA_LOCALIDADE";

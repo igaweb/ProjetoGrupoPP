@@ -5,6 +5,10 @@ import backend.interfaces.IEntidade;
 
 public class Utilizador extends EntidadeBase implements IEntidade{
 
+     /**
+      * 
+      */
+    
     private static final long serialVersionUID = 1L;
     
     protected String password;

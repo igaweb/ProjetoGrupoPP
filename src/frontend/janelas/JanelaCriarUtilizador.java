@@ -26,7 +26,7 @@ public class JanelaCriarUtilizador extends javax.swing.JDialog {
     private Utilizador utilizador;
 
     /**
-     * 
+     * janela que cria e edita utilizadores
      * @param janela
      * @param app
      * @param serializacao

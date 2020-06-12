@@ -9,6 +9,10 @@ import javax.swing.event.ListDataListener;
 
 public class PacienteComboModel implements ComboBoxModel<String> {
 
+     /**
+      * 
+      */
+    
     private Aplicacao app;
     private TreeMap<String, Paciente> lista;
     private String[] pacienteList;

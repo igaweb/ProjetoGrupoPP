@@ -28,7 +28,7 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
     
     
     /**
-     * 
+     * janela que cria ou edita equipamentos
      * @param janela
      * @param app
      * @param codigoHospital
@@ -38,6 +38,7 @@ public class JanelaCriarEquipamento extends javax.swing.JDialog {
      * @throws backend.Aplicacao.EnfermariaNaoExistenteException
      * @throws backend.Aplicacao.EquipamentoNaoExistenteException 
      */
+    
     public JanelaCriarEquipamento(ICallerJanelaCriarInterface janela, Aplicacao app, String codigoHospital, String codigoEnfermaria, String codigoEquipamento) throws Aplicacao.HospitalNaoExistenteException, Aplicacao.EnfermariaNaoExistenteException, Aplicacao.EquipamentoNaoExistenteException {
         this.janela = janela;
         this.app = app;

@@ -6,7 +6,11 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Paciente extends EntidadeBase implements IEntidade {
-
+ 
+    /**
+     * 
+     */
+    
     private String localidade;
     private int cama;
     private Integer estado;

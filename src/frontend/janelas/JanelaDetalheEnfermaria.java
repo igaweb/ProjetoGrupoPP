@@ -23,7 +23,7 @@ public class JanelaDetalheEnfermaria extends JanelaBase {
     private Enfermaria enfermariaSelecionadaObj;
 
     /**
-     * 
+     * janela de destalhe enfermarias
      * @param app
      * @param serializacao
      * @param tituloJanela

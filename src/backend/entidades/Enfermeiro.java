@@ -2,6 +2,10 @@ package backend.entidades;
 
 public class Enfermeiro extends ProfissionalSaude {
 
+     /**
+      * 
+      */
+    
     public Enfermeiro() {
     }
 

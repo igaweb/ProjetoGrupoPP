@@ -6,6 +6,12 @@ import backend.bases.ManagerBase;
 
 public interface IManager {
     
+     /**
+      * interface para os managers das entidades
+      * @param entidade
+      * @throws Exception 
+      */
+    
     public void adicionar(EntidadeBase entidade)throws Exception;
     public void editar(EntidadeBase entidade)throws Exception;
     public void remover(EntidadeBase entidade)throws Exception;

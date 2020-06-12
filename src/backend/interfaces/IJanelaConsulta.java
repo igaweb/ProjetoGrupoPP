@@ -1,6 +1,10 @@
 package backend.interfaces;
 
 public interface IJanelaConsulta {
+     
+     /**
+      * 
+      */
     
     public void adicionar();
     public void editar();

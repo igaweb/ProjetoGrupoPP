@@ -14,6 +14,7 @@ public class TabelaHospital extends TabelaBase {
      * @param app
      * @param serializacao
      */
+    
     public TabelaHospital(Aplicacao app, Serializacao serializacao) throws Exception {
         super(app, serializacao);
         

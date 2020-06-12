@@ -20,6 +20,7 @@ public class JanelaDetalheHospital extends JanelaBase {
      * @param hospitalSelecionado
      * @throws Exception 
      */
+    
     public JanelaDetalheHospital(Aplicacao app, Serializacao serializacao, String tituloJanela, String hospitalSelecionado) throws Exception {
         super(app, serializacao, tituloJanela);
         

@@ -5,6 +5,10 @@ import backend.interfaces.IEntidade;
 import java.util.TreeMap;
 
 public class Enfermaria extends EntidadeBase implements IEntidade{
+     
+    /**
+     * 
+     */
     
     private Integer tipo;
     private Boolean[] camas;

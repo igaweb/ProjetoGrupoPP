@@ -17,7 +17,7 @@ public class JanelaConsultaUtilizador extends javax.swing.JDialog implements ICa
     private AbstractTableModel modeloTabela;
     private ManagerUtilizador managerUtilizador;
     protected String operacao;
-
+    
     /**
      * Janela de listagem de Utilizadores
      * @param app

@@ -15,6 +15,12 @@ public class EnfermariaComboModel implements ComboBoxModel<String> {
     private String[] enfermariaCodigosList;
     private String selectedItem;
 
+     /**
+      * 
+      * @param app
+      * @param codigoHospital 
+      */
+    
     public EnfermariaComboModel(Aplicacao app, String codigoHospital) {
         this.lista = app.getManagerEnfermaria(codigoHospital).getLista();
         

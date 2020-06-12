@@ -9,9 +9,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /**
- *
+ * guarda os dados 
  * @author Bruno Ferreira (bruno@dsi.uminho.pt)
  */
+
 public class Serializacao {
 
     private final File ficheiro;

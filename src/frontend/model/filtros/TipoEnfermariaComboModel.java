@@ -6,6 +6,10 @@ import javax.swing.event.ListDataListener;
 
 public class TipoEnfermariaComboModel implements ComboBoxModel<String> {
 
+     /**
+      * 
+      */
+    
     private String[] comboList;
     private String selectedItem;
 

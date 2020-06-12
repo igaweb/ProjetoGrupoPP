@@ -11,7 +11,15 @@ public class Login {
     public Login(Aplicacao aplicacao, String user, String password) {
         this.aplicacao = aplicacao;
     }
-
+    
+/**
+* login dos utilizadores
+* @param user
+* @param password
+* @return
+* @throws Exception 
+*/
+    
     public Utilizador validarLogin(String user, String password) throws Exception {
         
         if(user == null || user.trim().isEmpty()) {

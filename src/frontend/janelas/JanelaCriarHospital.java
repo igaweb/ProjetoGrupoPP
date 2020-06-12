@@ -20,6 +20,7 @@ public class JanelaCriarHospital extends javax.swing.JDialog {
      * @param app
      * @param codigoHospital 
      */
+    
     public JanelaCriarHospital(ICallerJanelaCriarInterface janela, Aplicacao app, String codigoHospital) {
         this.janela = janela;
         this.app = app;

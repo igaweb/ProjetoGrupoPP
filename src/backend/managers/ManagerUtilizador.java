@@ -8,7 +8,11 @@ import backend.Aplicacao;
 import java.util.TreeMap;
 
 public class ManagerUtilizador extends ManagerBase implements IManager {
-
+ 
+    /**
+     * 
+     */
+    
     private static final long serialVersionUID = 1L;
 
     private static final String PREFIXO_CODIGO = "UT-";

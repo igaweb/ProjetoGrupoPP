@@ -5,6 +5,10 @@ import java.util.TreeMap;
 
 public class Medico extends ProfissionalSaude {
 
+     /**
+      * 
+      */
+    
     private String especialidade;
     private TreeMap<String, EntidadeBase> pacientes = new TreeMap();
 
