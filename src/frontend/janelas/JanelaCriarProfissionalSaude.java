@@ -124,7 +124,7 @@ public class JanelaCriarProfissionalSaude extends javax.swing.JDialog {
         campoNomeProfissionalSaude.setPreferredSize(new java.awt.Dimension(150, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         getContentPane().add(campoNomeProfissionalSaude, gridBagConstraints);
 
@@ -144,7 +144,7 @@ public class JanelaCriarProfissionalSaude extends javax.swing.JDialog {
         campoEspecialidadeProfissionalSaude.setPreferredSize(new java.awt.Dimension(150, 25));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         getContentPane().add(campoEspecialidadeProfissionalSaude, gridBagConstraints);
 
